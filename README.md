@@ -32,6 +32,6 @@ The pre-commit hooks are installed as part of the `make init` command.
 ## CI and preview
 
 This documentation is built with GitHub Actions. The `main` branch reflects the `in-kind-program.lsst.io` site.
-Previews of branches are also built and deployed at https://in-kind-program'.lsst.io/v.
+Previews of branches are also built and deployed at https://in-kind-program.lsst.io/v.
 
 For more information about writing Rubin user guides, see the [Documenteer documentation](https://documenteer.lsst.io/guides/index.html).
