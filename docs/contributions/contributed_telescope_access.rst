@@ -8,7 +8,7 @@ Unless otherwise noted, this time will be made available via the NOIRLab Time Al
 
 Summary Table
 =============
- 
+
 .. table:: Contributed Telescopes.
 
 +-------------------------------------------+-------------------------------------------+-------------------------------------+-------------------------+----------------+---------------------------+--------------+
@@ -54,29 +54,29 @@ SER-SAG-S1
 Two nights per month are available on the 1.4 Milankovic Telescope located at Astronomical Station Vidojevica near Prokuplje, Serbia.
 Optical Imaging is available with the Andor iKon-L 936 CCD and the following filters: Johnson B, V, R, I, L, filters and Hα , Hα continuum and SII.
 This facility offers AEON compatibility and is available for target of opportunity observations. Observations are taken in service mode.
-Raw data will be available within 24 hours and fully reduced and calibrated data within 72 hours. This contribution was first made available in Semester 2025A and is expected to be available for a total of 10 years. 
+Raw data will be available within 24 hours and fully reduced and calibrated data within 72 hours. This contribution was first made available in Semester 2025A and is expected to be available for a total of 10 years.
 
 SWE-STK-S3
 ----------
 70 hours of observing time on the Nordic Optical Telescope (NOT) is available for supernova classification using the ALFOSC instrument.
 NOT is a 2.56m telescope located on La Palma, Spain. The Alhambra Faint Object Spectrograph and Camera, ALFOSC, offers low/medium spectroscopy.
 Successful PIs will be able to submit ToO triggers of potential SNe for classification.  Fully reduced spectra will be uploaded to WISeREP/TNS within 48 hours of observation.
-This contribution was first made available in Semester 2025A and is expected to be available for a total of 4 semesters. 
- 
+This contribution was first made available in Semester 2025A and is expected to be available for a total of 4 semesters.
+
 Available in Future Semester
-These facilities are expected to be available starting in 2026A. 
+These facilities are expected to be available starting in 2026A.
 
 ESP-IAC-S1 and ESP-BCM-S5
 -------------------------
 Roughly two nights per semester will be available at the Gran Telescope Canaries (GTC). The GTC is a 10.4 meter Optical/NIR telescope in La Palma, Spain.
-The GTC has a wide suite of instrumentation. In-kind access to the GTC will not be allocated via the NOIRLab TAC, but a special process to be announced at a later date. 
+The GTC has a wide suite of instrumentation. In-kind access to the GTC will not be allocated via the NOIRLab TAC, but a special process to be announced at a later date.
 This contribution is expected to be available for ten years from the starting semester.
 
 JAP-JPG-S1
 ----------
 Five nights per year will be available on the 8.2 meter Subaru Telescope in Hawaii, USA.
 Subaru has a wide range of instrumentation, including the new Prime Focus Spectrograph.
-This contribution is expected to be available for 10 years from the starting semester. 
+This contribution is expected to be available for 10 years from the starting semester.
 
 KOR-KAS-S2
 ----------
@@ -109,9 +109,10 @@ ITA-INA-S18
 -----------
 35 pre-allocated nights per year will be available at the 2.6 meter VLT Survey Telescope at Paranal, Chile for imaging observations.
 20 hours of open-shutter time per year will be available at the twin 8.4 telescopes at the Large Binocular Telescope Observatory with the suite of imaging and spectroscopy instrumentation available.
-This contribution is expected to be available through FY2034.  
+This contribution is expected to be available through FY2034.
 
 TUR-AKD-S1
 ----------
 23 nights per year will be available at the T100 and RTT150 telescopes at the TÜBITAK National Observatory in southern Türkiye.
-This contribution is expected to be available for 10 years from the first semester of availability. 
+This contribution is expected to be available for 10 years from the first semester of availability.
+
