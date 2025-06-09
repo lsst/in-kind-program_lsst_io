@@ -6,7 +6,7 @@ Contributed Computer Resources
 
 Independent Data Access Centers (IDACs) and Scientific Processing Centers (SPCs)
 ================================================================================
-One of the goals of the In-Kind Program is to augment the available resources for data- and compute-intensive use cases for the Rubin community.  
+One of the goals of the In-Kind Program is to augment the available resources for data- and compute-intensive use cases for the Rubin community.
 IDACs and SPCs, following 'the guidelines laid out by Rubin Observatory <https://rtn-003.lsst.io>'_, will provide significant computing, storage, data, and experience for such use cases.
 
 What kinds of contributed computing resources will be available?
@@ -58,9 +58,12 @@ What data and services will be available?
 
 What are some potential uses of contributed computing resources?
 ----------------------------------------------------------------
-The virtual workshop Supporting Computational Science with Rubin LSST, held in March 2023, featured discussion of a significant number of use cases submitted by members of the science community.  Links to the use cases, presentations, recordings, notes, and background material are available 'on the workshop web page <https://project.lsst.org/meetings/rubin-idacs/documents>'_.
+The virtual workshop Supporting Computational Science with Rubin LSST, held in March 2023, featured discussion of a significant number of use cases submitted by members of the science community.
+Links to the use cases, presentations, recordings, notes, and background material are available 'on the workshop web page <https://project.lsst.org/meetings/rubin-idacs/documents>'_.
 
-IDACs are considering a range of specific use cases, including time series analyses, solar system occultation predictions, and development of photometric redshift training sets, as well as general use. IDACs are also following the development of the use cases identified in the workshop '"From Data to Software to Science with the Rubin Observatory LSST" <https://arxiv.org/pdf/2208.02781.pdf>'_, and may adopt some of these as a basis for specific datasets and services.
+IDACs are considering a range of specific use cases, including time series analyses, solar system occultation predictions, and development of photometric redshift training sets, as well as general use.
+IDACs are also following the development of the use cases identified in the workshop '"From Data to Software to Science with the Rubin Observatory LSST" <https://arxiv.org/pdf/2208.02781.pdf>'_,
+and may adopt some of these as a basis for specific datasets and services.
 
 When will IDACs and SPCs be available to the community?
 -------------------------------------------------------
