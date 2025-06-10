@@ -1,8 +1,8 @@
 .. _contributed-telescope-access:
 
-=============================
-Contributed Telesceope Access
-=============================
+============================
+Contributed Telescope Access
+============================
 
 
 This page lists the facilities expected to be made available via the Vera C. Rubin Observatory In-kind Program.
