@@ -1,4 +1,4 @@
-
+.. _contributed_computer_resources:
 
 Contributed Computer Resources
 ==============================
