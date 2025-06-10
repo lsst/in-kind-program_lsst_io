@@ -1,3 +1,6 @@
+.. _contributed_telescope_access:
+
+=============================
 Contributed Telesceope Access
 =============================
 
