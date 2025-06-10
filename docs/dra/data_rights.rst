@@ -38,4 +38,4 @@ They are available to meet during IPC office hours, and can provide letters of s
 if funding is delayed by the DRA process, is that some of the in-kind contributions have to also be delayed, but we will work with the programs to find ways to make sure that they can still,
 in the end, contribute enough that they earn the LSST data rights that their communities need.
 
- 
+
