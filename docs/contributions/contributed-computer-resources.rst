@@ -18,7 +18,7 @@ Who has proposed computing resource contributions?
 The table below lists the IDACs and SPCs expected to be active during Rubin Operations.
 
 
-.. table:: IDACs and SPCs.
+.. table:: IDACs and SPCs
 
    +--------------------+------------------------------+------------------------------------------------------------------------------------+
    | Program            | Type                         | Contacts                                                                           |
