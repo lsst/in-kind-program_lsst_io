@@ -12,6 +12,6 @@ Contributions
    :titlesonly:
    :caption: Contents
 
-   contributions/contributed-computer-resources
-   contributions/contributed-evaluation-committee
-   contributions/contributed-telescope-access
+   contributed-computer-resources
+   contributed-evaluation-committee
+   contributed-telescope-access
