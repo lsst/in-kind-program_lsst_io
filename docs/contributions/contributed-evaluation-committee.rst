@@ -1,4 +1,4 @@
-.. _contributed_evaluation_committee:
+.. _contributed-evaluation-committee:
 
 =======================================
 Contribution Evaluation Committee (CEC)
