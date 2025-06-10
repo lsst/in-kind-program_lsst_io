@@ -5,7 +5,8 @@ General Pool
 ============
 
 General pool software contributions are those where directable developer effort has been offered without an associated recipient group defined ahead of time.
-This pool of effort can be drawn on by any recipient group who have needs or gaps within their infrastructure or analysis software plans that are not covered by the current in-kind or other contributions.
+This pool of effort can be drawn on by any recipient group who have needs or gaps within their
+infrastructure or analysis software plans that are not covered by the current in-kind or other contributions.
 Normally recipient group(s) request general pooled software development effort for specific tasks.
 Note that such requests may come from either a single or multiple recipient groups who would benefit from the proposed development.
 Recipient groups can be either Rubin teams or LSST Science Collaborations. Further information is available on the In-kind Program Handbook.
@@ -89,7 +90,8 @@ I have also recently started coding in CUDA C, and I use machine learning method
 
 Argentina (ARG-OIA-S2)
 
-I have been working as a scientific software developer and consultant since 2018, specifically in the area of astronomy at the Institute of Theoretical and Experimental Astronomy (IATE) in Córdoba, Argentina.
+I have been working as a scientific software developer and consultant since 2018, specifically in the area of astronomy at the Institute of
+Theoretical and Experimental Astronomy (IATE) in Córdoba, Argentina.
 In my position as support staff, I work with researchers, undergraduate and graduate students helping them with the computational aspects of astronomy, including code development,
 optimization and parallelization in addition to debugging, compiling and refactoring projects.
 Furthermore, I provide advice and technical assistance regarding the appropriate hardware for each case as well as training according to our researchers’ needs.
@@ -99,7 +101,7 @@ In the past years, I have participated -and continue to do so- in projects invol
 such as the VISTA Variables in the Vía Láctea Survey (VVV) and I was also involved in the development of an image reduction pipeline.
 Thanks to these projects, I feel comfortable with third party libraries such as NumPy, Matplotlib, AstroPy, HealPy, CCDProc, with SQL databases and writing unit tests with pytest.
 Moreover, I really enjoy visualising data.
- 
+
 **Marco Rocchietti**
 
 Argentina (ARG-OIA-S2)
