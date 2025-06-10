@@ -1,4 +1,4 @@
-.. _data_rights:
+.. _data-rights:
 
 
 ===========
