@@ -9,7 +9,7 @@ in return for making a set of in-kind contributions that expand the resources av
 
 For more details on the definition of LSST data rights, the distinction between PIs and JAs, and so on, please see the Rubin Data Policy, document RDO-13.
 See the Programs page for the current list of in-kind programs and the contributions they are making.
-The current list of LSST Data Rights Holders (DRHs) and their PI/JA status is maintained by Rubin and visible on its own page at https://www.lsst.org/scientists/international-drh-list.
+The current list of LSST Data Rights Holders (DRHs) and their PI/JA status is maintained by Rubin and visible on its own page at NOTE: ADD LINK.
 
 DRA Status
 ----------
