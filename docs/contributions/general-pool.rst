@@ -109,7 +109,7 @@ I mostly provide assistance in the configuration, optimization and compilation o
 I am also an Adjunct Professor at the National University of Córdoba (Argentina) teaching in the programming laboratories of subjects such as Algorithms and Data Structures 1 and 2,
 Operating Systems at the Faculty of Mathematics, Physics and Computer Science.
 
-I mainly develop software related to scientific computing using Python as the main language. 
+I mainly develop software related to scientific computing using Python as the main language.
 My projects are related to the Computer Vision area and work with libraries such as OpenCV, Numpy, matplotlib, sklearn and a brief experience with pytorch for modelling neural networks.
 Also for academic purposes I have made developments in C and Haskell for the courses where I work as a teacher.
 
