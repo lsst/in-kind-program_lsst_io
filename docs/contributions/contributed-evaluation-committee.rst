@@ -59,7 +59,7 @@ Find Out More
 
 Read the `CEC's Charge <https://project.lsst.org/groups/cec/charge>`_
 
-Catch up with where the CEC is in its work on the `Updates page https://project.lsst.org/groups/cec/updates>`_
+Catch up with where the CEC is in its work on the `Updates page <https://project.lsst.org/groups/cec/updates>`_
 
 Contact the Committee via any of its members, or its current Chair, Phil Marshall
 
