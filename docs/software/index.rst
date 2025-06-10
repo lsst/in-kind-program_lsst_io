@@ -11,4 +11,4 @@ Software
    :titlesonly:
    :caption: Contents
 
-   software-consultancy/index
+   software-consultancy
