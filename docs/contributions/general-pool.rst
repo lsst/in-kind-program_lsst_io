@@ -44,8 +44,8 @@ Any potential proposers should discuss their ideas with the main contact for a r
 
 A selection of allocted pool resources are listed here.
 
-Project,	Recipient Group,	Contributor
----------------------------------------
+Project, Recipient Group, Contributor
+-------------------------------------
 
 - Interactive Visualizations/Plotting,	Rubin Survey Scheduling Team,	Australia AAL
 
