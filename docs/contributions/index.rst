@@ -1,3 +1,5 @@
+.. _contributions:
+
 #############
 Contributions
 #############
@@ -10,6 +12,6 @@ Contributions
    :titlesonly:
    :caption: Contents
 
-   contributed-computer-resources/index
-   contributed-evaluation-committee/index
-   contributed-telescope-access/index
+   contributions/contributed-computer-resources
+   contributions/contributed-evaluation-committee
+   contributions/contributed-telescope-access
