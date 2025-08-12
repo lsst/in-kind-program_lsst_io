@@ -1,9 +1,9 @@
-.. _data-rights:
+.. _placeholder:
 
 
-===========
-Data Rights
-===========
+=================
+Place Holder page
+=================
 
 Under the Rubin LSST In-kind Contribution Program, participating international programs (outside the US and Chile) each earn,
 for a specified number of Principal Investigators (PIs) and Junior Associates (JAs), the right to access LSST data during its 2-year proprietary period,
