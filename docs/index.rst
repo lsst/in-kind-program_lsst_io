@@ -10,5 +10,5 @@ In-Kind Program
    :caption: Contents
 
    contributions/index
-   dra/index
+   placeholder/index
    software/index
