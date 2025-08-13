@@ -12,7 +12,7 @@ Contributions
    :titlesonly:
    :caption: Contents
 
-   contributed-computer-resources
-   contributed-telescope-access
+   contributed-computer-resources.rst
+   contributed-telescope-access.rst
    data_sets/index.rst
 
