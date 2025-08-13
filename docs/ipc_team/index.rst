@@ -4,7 +4,7 @@
 IPC Team
 ########
 
-— Blurb about contributions. —
+— Blurb about ipc team. —
 
 
 .. toctree::
