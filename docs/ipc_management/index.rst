@@ -12,7 +12,3 @@ Recipients
    :titlesonly:
    :caption: Contents
 
-   contributed-computer-resources
-   contributed-evaluation-committee
-   contributed-telescope-access
-   general-pool
