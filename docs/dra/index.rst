@@ -9,4 +9,4 @@ DRA
    :titlesonly:
    :caption: Contents
 
-   data-rights
+   placeholder
