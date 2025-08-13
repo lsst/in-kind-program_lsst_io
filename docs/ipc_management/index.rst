@@ -12,5 +12,4 @@ IPC Management
 
    contributions/index.rst
    recipients/index.rst
-   data_sets/index.rst
 
