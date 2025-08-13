@@ -7,13 +7,13 @@ In-Kind Program
    :titlesonly:
    :caption: Contents
 
-   ipc_management/index   
+   ipc_management/index
    deliverables/index
    ipc_team/index
 
 43 teams outside the US and Chile are making in-kind contributions to Rubin Observatory and LSST Science in return for LSST data rights.
 The International Data Rights Holder list contains all those nominated by international programs for LSST data rights.
-Find out more about this large international collaboration below and at the links in the sidebar. 
+Find out more about this large international collaboration below and at the links in the sidebar.
 
 In addition, we have compiled an extensive list of In-kind Program FAQs and you can also browse the LSST community forum using the in-kind tag: https://community.lsst.org/tag/in-kind.
 
@@ -41,7 +41,4 @@ How to interact with IPC team
 =============================
 
 How to contact, timeline for contributions, timeline for recipients, FAQ.
-
-
-
 
