@@ -1,10 +1,10 @@
-.. _recipients:
+.. _ipc_management:
 
-##########
-Recipients
-##########
+##############
+IPC Management
+##############
 
-— Blurb about contributions. —
+— Blurb about ipc management. —
 
 
 .. toctree::
@@ -12,3 +12,5 @@ Recipients
    :titlesonly:
    :caption: Contents
 
+   contributions/index.rst
+   recipients/index.rst
