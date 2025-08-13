@@ -7,6 +7,7 @@ In-Kind Program
    :titlesonly:
    :caption: Contents
 
+   ipc_management/index   
    contributions/index
    dra/index
    software/index
