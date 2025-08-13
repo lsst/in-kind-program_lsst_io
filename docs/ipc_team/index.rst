@@ -14,4 +14,3 @@ IPC Team
    contributed-evaluation-committee.rst
 
 
-  
