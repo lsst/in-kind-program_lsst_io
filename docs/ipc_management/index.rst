@@ -1,10 +1,18 @@
-Software
-— Blurb about managing IPC programs. —
+.. _recipients:
+
+##########
+Recipients
+##########
+
+— Blurb about contributions. —
+
 
 .. toctree::
    :maxdepth: 2
    :titlesonly:
    :caption: Contents
 
-   contributions/index.rst
-   recipients/index.rst
+   contributed-computer-resources
+   contributed-evaluation-committee
+   contributed-telescope-access
+   general-pool
