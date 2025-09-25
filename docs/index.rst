@@ -14,3 +14,4 @@ In-Kind Program
    software/index
    contributors/index
    recipients/index
+   scientist/index
