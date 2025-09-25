@@ -1,7 +1,7 @@
 ############
 General Pool
 ############
-  
+
 General pool software contributions are those where directable developer effort has been offered without an associated recipient group defined ahead of time.
 This pool of effort can be drawn on by any recipient group who have needs or gaps within their infrastructure or analysis software plans that are not covered by the current in-kind or other contributions.
 Normally recipient group(s) request general pooled software development effort for specific tasks.
