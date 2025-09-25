@@ -15,3 +15,4 @@ Contributors
    general-pool
    contributed-datasets
    contributed-telescopes
+   contributed-resources
