@@ -9,6 +9,8 @@ In-Kind Program
    :titlesonly:
    :caption: Contents
 
-   contributions/index
-   dra/index
-   software/index
+
+   contributors/index
+   recipients/index
+   scientists/index
+   about/index
