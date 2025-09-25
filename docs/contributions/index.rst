@@ -1,5 +1,0 @@
-#############
-Contributions
-#############
-
-— Blurb about contributions. —
