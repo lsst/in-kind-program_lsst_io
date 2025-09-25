@@ -13,3 +13,4 @@ In-Kind Program
    dra/index
    software/index
    contributors/index
+   recipients/index
