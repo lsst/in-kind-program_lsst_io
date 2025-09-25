@@ -11,3 +11,4 @@ Contributors
 
    program-managers
    contribution-leads
+   software-consultancy
