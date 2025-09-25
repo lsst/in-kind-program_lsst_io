@@ -79,7 +79,7 @@ Time will be available at facilities located at the University of Canterbury Ōt
 Approximately 10 nights per semester will be available on the MOA 1.8 meter telescope, and roughly 200 equivalent hours will be available in the November - February period on the 1.0 meter telescope.
 This contribution is expected to be available for 10 years from the first semester of availability.
 
-  
+
 TAI-NCU-S1
 Twenty nights per semester will be available at the Trans-Pacific Two-Meter Telescope located at San Pedro Martir, Mexico.
 This project is expected to undergo first light and commissioning in 2025. The contribution is expected to be available for 10 years from the first semester of availability.
