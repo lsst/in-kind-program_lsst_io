@@ -10,7 +10,6 @@ In-Kind Program
    :caption: Contents
 
 
-   dra/index
    software/index
    contributors/index
    recipients/index
