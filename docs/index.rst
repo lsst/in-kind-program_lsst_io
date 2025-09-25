@@ -15,3 +15,4 @@ In-Kind Program
    contributors/index
    recipients/index
    scientists/index
+   about/index
