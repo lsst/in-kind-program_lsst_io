@@ -10,7 +10,6 @@ In-Kind Program
    :caption: Contents
 
 
-   software/index
    contributors/index
    recipients/index
    scientists/index
