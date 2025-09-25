@@ -1,5 +1,0 @@
-###
-DRA
-###
-
-— Blurb about DRA. —
