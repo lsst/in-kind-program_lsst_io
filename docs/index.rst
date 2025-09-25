@@ -12,3 +12,4 @@ In-Kind Program
    contributions/index
    dra/index
    software/index
+   contributors/index
