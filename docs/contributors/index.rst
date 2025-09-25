@@ -14,3 +14,4 @@ Contributors
    software-consultancy
    general-pool
    contributed-datasets
+   contributed-telescopes
