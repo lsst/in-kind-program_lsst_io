@@ -7,25 +7,48 @@ One of the goals of the In-Kind Program is to augment the available resources fo
 IDACs and SPCs, following the guidelines laid out by Rubin Observatory, will provide significant computing, storage, data, and experience for such use cases.
 
 What kinds of contributed computing resources will be available?
+================================================================
+
 IDACs and SPCs will collectively provide access to CPUs, data storage, databases, and GPUs.
 
 Who has proposed computing resource contributions?
+==================================================
+
 The table below lists the IDACs and SPCs expected to be active during Rubin Operations.
 
-Program	Type	Contacts
-United Kingdom	Data Facility (Full IDAC)	Bob Mann, George Beckett
-Argentina	Lite IDAC	Mariano Dominguez, Diego Garcia
-Australia	Lite IDAC	Jarrod Hurley, Sarah Brough, Stuart Ryder
-Brazil	Lite IDAC	Carlos Adean, Luiz Da Costa, Julia Gschwend
-Canada	Lite IDAC	Stephen Gwyn, Renée Hložek, Wes Fraser
-Croatia	SPC	Tomislav Jurkić, Lovro Palaversa
-Denmark	Lite IDAC	Christa Gall, Radek Wojtak, Hans Kjeldsen
-Japan	Lite IDAC (x2)	Hisanori Furusawa, Naoki Yasuda, Masahiro Takada, Satoshi Miyazaki, Yutaka Komiyama
-Mexico	Lite IDAC	Octavio Valenzuela, Luis Arturo Areña-López
-Poland	Lite IDAC	Krzysztof Nawrocki, Agniezka Pollo, Pawel̷ Pietrukowicz
-Slovenia	Lite IDAC	Andrej Filipčič, Andreja Gomboc
-Spain	Lite IDAC	Cristóbal Padilla, Ramon Miquel, Nacho Sevilla
-South Korea	Lite IDAC	Chang Hee Ree, Narae Hwang, Byeong-Gon Park
+
+.. table:: IDACs
+
+
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Program       |Type                     |Contacts                                                                           |
++==============+=========================+===================================================================================|
+|United Kingdom|Data Facility (Full IDAC)|Bob Mann, George Beckett                                                           |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Argentina     |Lite IDAC                |Mariano Dominguez, Diego Garcia                                                    |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Australia     |Lite IDAC                |Jarrod Hurley, Sarah Brough, Stuart Ryder                                          |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Brazil        |Lite IDAC                |Carlos Adean, Luiz Da Costa, Julia Gschwend                                        |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Canada        |Lite IDAC                |Stephen Gwyn, Renée Hložek, Wes Fraser                                             |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Croatia       |SPC                      |Tomislav Jurkić, Lovro Palaversa                                                   |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Denmark       |Lite IDAC                |Christa Gall, Radek Wojtak, Hans Kjeldsen                                          |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Japan         |Lite IDAC (x2)           |Hisanori Furusawa, Naoki Yasuda, Masahiro Takada, Satoshi Miyazaki, Yutaka Komiyama|
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Mexico        |Lite IDAC                |Octavio Valenzuela, Luis Arturo Areña-López                                        |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Poland        |Lite IDAC                |Krzysztof Nawrocki, Agniezka Pollo, Pawel, Pietrukowicz                            |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Slovenia      |Lite IDAC                |Andrej Filipčič, Andreja Gomboc                                                    |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|Spain         |Lite IDAC                |Cristóbal Padilla, Ramon Miquel, Nacho Sevilla                                     |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
+|South Korea   |Lite IDAC                |Chang Hee Ree, Narae Hwang, Byeong-Gon Park                                        |
++--------------+-------------------------+-----------------------------------------------------------------------------------+
 
 
 What data and services will be available?
