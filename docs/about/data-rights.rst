@@ -13,6 +13,7 @@ that expand the resources available to the US astronomy and HEP communities.
 
 
 DRA Status
+==========
 
 Each international in-kind program will hold a formal “data rights agreement” (DRA) with either one or both of the Rubin Managing Organizations,
 SLAC and AURA (or in the case of France and the UK, DOE). This agreement will capture the terms and conditions of the collaboration between the program and Rubin,
@@ -49,4 +50,4 @@ A program's LSST data rights will be finalized upon execution of its associated 
 This list will be refreshed annually: we’ll be in touch with each international in-kind program’s Program Manager to get those updates.
 
 
-Click here to access the data as a Google Sheet
+Click here to access the data as a `Google Sheet <https://docs.google.com/spreadsheets/d/1VXbISTr9a7h63nfv5aVCGH0H-7tVWNieFo2Nu1ExKoY/edit?usp=sharing>`_.
