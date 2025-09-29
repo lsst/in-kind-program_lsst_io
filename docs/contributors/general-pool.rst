@@ -9,26 +9,42 @@ Note that such requests may come from either a single or multiple recipient grou
 Recipient groups can be either Rubin teams or LSST Science Collaborations. Further information is available on the In-kind Program Handbook.
 
 Contributions and Developers
+============================
+
 General Pool resources have been offered by the folliowing programs and are listed with the skills of the developers available.
 
-Program	Started	Notes and Skills
++--------------+---------+----------------------------------------------------------------------------------+
+|Program       |Started  |Notes and Skills                                                                  |
++==============+=========+==================================================================================+
+|Argentina OIA |Yes      |C/C++, Python, Fortran, SQL databases, Software debugging and testing,            |
+|              |         |Docker and containerization, Data modeling, Data visualization, git, astronomy,   |
+|              |         |Algorithm development, Data management, GIT, Machine Learning, Computer Vision    |
++--------------+---------+----------------------------------------------------------------------------------+
+|Australia AAL |Yes      |C/C++, Python, Java, Javascript, Node.js/React, SQL databases,                    |
+|              |         |noSQL databases, Software debugging and testing, Docker and containerization,     |
+|              |         |Algorithm development, RESTful APIs, Data management,                             |
+|              |         |Project management, Virtual Observatory implementation, CI/CD, Mobile             |
+|              |         |technologies, Full stack development, Project management, UI/UX                   |
++--------------+---------+----------------------------------------------------------------------------------+
+|Canada        |post     |TBA                                                                               |
+|              |2026     |                                                                                  |
++--------------+---------+----------------------------------------------------------------------------------+
+|Germany MPIA  |TBA      |TBA                                                                               |
++--------------+---------+----------------------------------------------------------------------------------+
+|Hungary       |Yes      |C/C++, Python, Software debugging and testing, Algorithm development,             |
+|Konkoly       |         |Data modeling, Image processing, Data modeling, Data visualization,               |
+|              |         |Virtual Observatory implementation, +basic machine learning, deep learning        |
++--------------+---------+----------------------------------------------------------------------------------+
+|India IIA     |2024     |TBA                                                                               |
++--------------+---------+----------------------------------------------------------------------------------+
+|Spain         |Yes      |C/C++, Python, Java, noSQL databases, Software debugging and testing,             |
+|Barcelona/    |         |Docker and containerization, Javascript, RESTful APIs                             |
+|Madrid        |         |                                                                                  |
++--------------+---------+----------------------------------------------------------------------------------+
 
-Argentina OIA	Yes	C/C++, Python, Fortran, SQL databases, Software debugging and testing, Docker and containerization, Data modeling, Data visualization, git, astronomy,
-Algorithm development, Data management, GIT, Machine Learning, Computer Vision
 
-
-Australia AAL	Yes	C/C++, Python, Java, Javascript, Node.js/React, SQL databases, noSQL databases, Software debugging and testing, Docker and containerization, Algorithm development, RESTful APIs, Data management,
-Project management, Virtual Observatory implementation, CI/CD, Mobile technologies, Full stack development, Project management, UI/UX,Canada	post 2026	TBA
-
-Germany MPIA	TBA	TBA
-
-Hungary Konkoly	Yes	C/C++, Python, Software debugging and testing, Algorithm development, Data modeling, Image processing, Data modeling, Data visualization, Virtual Observatory implementation,
-+basic machine learning, deep learning
-
-India IIA	2024	TBA
-
-Spain Barcelona/Madrid	Yes	C/C++, Python, Java, noSQL databases, Software debugging and testing, Docker and containerization, Javascript, RESTful APIs
 Applications and Current Allocations
+====================================
 
 General pool resources can be applied for all year round. Any potential proposers should discuss their ideas with the main contact for a recipient group before applying.
 The link to the application form is ls.st/ikc-gp
@@ -42,10 +58,16 @@ Targeted Identification of Low Signal-to-Noise Detections of Solar System Object
 Community science software developer	Rubin Community Science Team	Spain BCM
 Assistance to build a Strong Lensing Database for Rubin	Strong Lensing Science Collaboration & DESC SL Topical Team	Australia AAL
 Contribution to commissioning (FIG)	SIT-Com team	Spain BCM
+
+
 Developer Profiles
+------------------
+
 Some of the developers in the general pool have provided a short profile.
 
 Cristobal Pio Garcia
+--------------------
+
 Spain (ESP-BCM-S4)
 
 I work as Software Engineer at IFAE being part of a multidisciplinary team that gives solutions to all the engineering challenges which IFAE leads or which participate inI feel
@@ -54,14 +76,20 @@ this goes from desktop to web environment applications and from low to high leve
 also collaborating with other institutes I worked on the camera control for the LST inside the CTA project (North Site), the instrumented baffle for VIRGO experiment and finally some control for
 different devices on the neutrinos experiment at T2K.
 
+
 Tamás Kovács
+------------
+
 Hungary (HUN-KON-S1)
 
 I have been a member of the extragalactic research group for 2 years at the Eötvös University, Budapest, Hungary and am currently a senior research fellow.
 My primary interest is dynamical astronomy on different scales from solar system to exoplanets and galactic dynamics. I also work on the morphological characterization of well-resolved spiral galaxies.
 My preferred languages for work are C and python, but sometimes I also use MATLAB. I have also recently started coding in CUDA C, and I use machine learning method 'reservoir computing' for signal processing.
 
+
 Carolina Villalón
+-----------------
+
 Argentina (ARG-OIA-S2)
 
 I have been working as a scientific software developer and consultant since 2018, specifically in the area of astronomy at the Institute of Theoretical and Experimental Astronomy (IATE) in Córdoba,
@@ -72,7 +100,10 @@ In the past years, I have participated -and continue to do so- in projects invol
 and I was also involved in the development of an image reduction pipeline. Thanks to these projects, I feel comfortable with third party libraries such as NumPy, Matplotlib, AstroPy, HealPy,
 CCDProc, with SQL databases and writing unit tests with pytest. Moreover, I really enjoy visualising data.
 
+
 Marco Rocchietti
+----------------
+
 Argentina (ARG-OIA-S2)
 
 Since December 2022 I have been working at the Institute of Theoretical and Experimental Astronomy (IATE) supporting astronomers in the development of scientific software.
