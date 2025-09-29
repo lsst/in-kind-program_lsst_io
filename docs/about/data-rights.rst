@@ -13,6 +13,7 @@ The current list of LSST Data Rights Holders (DRHs) and their PI/JA status is ma
 
 
 DRA Status
+==========
 
 Each international in-kind program will hold a formal “data rights agreement” (DRA) with either one or both of the Rubin Managing Organizations,
 SLAC and AURA (or in the case of France and the UK, DOE). This agreement will capture the terms and conditions of the collaboration between the program and Rubin,
@@ -42,6 +43,8 @@ but we will work with the programs to find ways to make sure that they can still
 
 
 International Data Rights Holder's List
+=======================================
+
 Below is a view of the current, live, international data rights holder database.
 
 This list comprises all scientists who have provisional data rights because of their affiliation with an international in-kind contribution program.
