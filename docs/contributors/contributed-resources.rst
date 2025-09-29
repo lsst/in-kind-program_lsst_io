@@ -50,9 +50,13 @@ The table below lists the IDACs and SPCs expected to be active during Rubin Oper
 
 
 What data and services will be available?
+=========================================
+
 This spreadsheet reflects the current plans for the Rubin data, services, and potential use cases to be supported at indivudual IDACs.
 
 What are some potential uses of contributed computing resources?
+================================================================
+
 The virtual workshop Supporting Computational Science with Rubin LSST, held in March 2023, featured discussion of a significant number of use cases submitted by members of the science community.
 Links to the use cases, presentations, recordings, notes, and background material are available on the workshop web page.
 
@@ -61,8 +65,10 @@ IDACs are also following the development of the use cases identified in the work
 and may adopt some of these as a basis for specific datasets and services.
 
 When will IDACs and SPCs be available to the community?
+=======================================================
 
 As seen in this presentation, IDACs and SPCs are expected to start operations with the release of LSST DR1 sometime in 2026.
 
 Want to know more?
+==================
 The IDACs Coordination Group maintains a space on Community for discussion and sharing knowledge amongst IDACs and SPCs and their user communities. Join the conversation!
