@@ -19,7 +19,7 @@ Unless otherwise noted, this time will be made available via the NOIRLab Time Al
 |South African       |SAAO, South Africa   |Imaging and Spectroscopy |SZA-SAA-S1       |2026A     |25 hours/semester   |10 years     |
 |Large Telescope     |                     |                         |                 |          |                    |             |
 |(SALT) 9.2m         |                     |                         |                 |          |                    |             |
-|--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
++--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
 |Subaru              |Maunakea, USA        |Imaging and Spectroscopy |JAP-JPG-S1       |2026A     |5 nights/year       |10 years     |
 |Telescope 8.4m      |                     |                         |                 |          |                    |             |
 +--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
