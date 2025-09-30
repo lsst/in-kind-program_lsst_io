@@ -8,63 +8,63 @@ Unless otherwise noted, this time will be made available via the NOIRLab Time Al
 
 
 
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Facility            |Location             |Instrumentation          |In-kind          |First     |Time Available      |Duration     |
-|                    |                     |                         |Contribution ID  |Semester  |                    |             |
-+====================+=====================+=========================+=================+==========+====================+=============+
-|Gran Canary         | La Palma, Spain     |Imaging and Spectroscopy |ESP-BCM-S5,      |2026A     |2 nights/semester   |10 years     |
-|Telescope           |                     |                         |ESP-IAC-S1       |          |                    |             |
-|(GTC) 10.4m         |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|South African       |SAAO, South Africa   |Imaging and Spectroscopy |SZA-SAA-S1       |2026A     |25 hours/semester   |10 years     |
-|Large Telescope     |                     |                         |                 |          |                    |             |
-|(SALT) 9.2m         |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Subaru              |Maunakea, USA        |Imaging and Spectroscopy |JAP-JPG-S1       |2026A     |5 nights/year       |10 years     |
-|Telescope 8.4m      |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Large Binocular     |Mt. Graham, USA      |Imaging and Spectroscopy |ITA-INA-S18      |2026A     |20 hours            |through FY34 |
-|Telescope 2x8.4m    |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|VLT Survey          |Cerro Paranal, Chile |Imaging                  |ITA-INA-S18      |2026A     |35 nights/year      |through FY34 |
-|Telescope 2.6m      |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Nordic Optical      |La Palma, Spain      |Spectroscopic            |SWE-STK-S3       |2025A     |70 hours/semester   |2 years      |
-|Telescope 2.56m     |                     |classification of SNe    |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Trans-Pacific       |San Pedro Martir,    |TBA                      |TAI-NCU-S1       |TBA       |20 nights/semester  |10 years     |
-|Two-Meter           |Mexico               |                         |                 |          |                    |             |
-|Telescope 2m        |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Nishimura 1.8m      |Ōtehīwai Mt John     |Imaging                  |NZL-AUK-S1       |2026A     |10 nights/semester  |10 years     |
-|                    |Observatory,         |                         |                 |          |                    |             |
-|                    |New Zealand          |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Korean Microlensing |Cerro Tololo, Chile  |Imaging                  |KOR-KAS-S2       |2026A     |150 hours/semester  |5 years      |
-|Telescope 1.6m      |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Korean Microlensing |Siding Springs       |Imaging                  |KOR-KAS-S2       |2026A     |150 hours/semester  |5 years      |
-|Telescope 1.6m      |Observatory,         |                         |                 |          |                    |             |
-|                    |Australia            |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Korean Microlensing |SAAO, South Africa   |Imaging                  |KOR-KAS-S2       |2026A     |150 hours/semester  |5 years      |
-|Telescope 1.6m      |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Milankovic          |Astronomical Station |Imaging                  |SER-SAG-S2       |2025A     |2 nights/month      |10 years     |
-|Telescope 1.4m      |Vidojevca, Serbia    |                         |                 |          |                    |             |
-|Telescope 1.4m      |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|Various SAAO        |SAAO, South Africa   |Imaging and Spectroscopy |SZA-SAA-S4       |2026A     |26 hours/semester   |10 years     |
-|telescopes          |                     |                         |                 |          |                    |             |
-|1.9m - 1.0m         |                     |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|McLellan 1.0m       |Ōtehīwai Mt John     |Imaging                  |NZL-AUK-S1       |2026A     |200 equiv hours     |10 years     |
-|                    |Observatory,         |                         |                 |          |Nov - Feb           |             |
-|                    |New Zealand          |                         |                 |          |                    |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
-|RTT150 1.5m &       |TÜBITAK National     |Imaging                  |TUR-AKD-S1       |2026A     |23 nights/year      |10 years     |
-|T100 1.0m           |Observatory, Türkiye |                         |                 |          |total               |             |
-+--------------------+---------------------+-------------------------+-----------------+----------+--------------------+-------------+
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Facility            |Location             |Instrumentation          |In-kind          |First     |Time       |Duration |
+|                    |                     |                         |Contribution ID  |Semester  |Available  |         |
++====================+=====================+=========================+=================+==========+===========+=========+
+|Gran Canary         | La Palma, Spain     |Imaging and Spectroscopy |ESP-BCM-S5,      |2026A     |2 nights/  |10 years |
+|Telescope           |                     |                         |ESP-IAC-S1       |          |semester   |         |
+|(GTC) 10.4m         |                     |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|South African       |SAAO, South Africa   |Imaging and Spectroscopy |SZA-SAA-S1       |2026A     |25 hours/  |10 years |
+|Large Telescope     |                     |                         |                 |          |semester   |         |
+|(SALT) 9.2m         |                     |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Subaru              |Maunakea, USA        |Imaging and Spectroscopy |JAP-JPG-S1       |2026A     |5 nights/  |10 years |
+|Telescope 8.4m      |                     |                         |                 |          |year       |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Large Binocular     |Mt. Graham, USA      |Imaging and Spectroscopy |ITA-INA-S18      |2026A     |20 hours   |through  |
+|Telescope 2x8.4m    |                     |                         |                 |          |           |FY34     |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|VLT Survey          |Cerro Paranal, Chile |Imaging                  |ITA-INA-S18      |2026A     |35 nights/ |through  |
+|Telescope 2.6m      |                     |                         |                 |          |year       |FY34     |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Nordic Optical      |La Palma, Spain      |Spectroscopic            |SWE-STK-S3       |2025A     |70 hours/  |2 years  |
+|Telescope 2.56m     |                     |classification of SNe    |                 |          |semester   |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Trans-Pacific       |San Pedro Martir,    |TBA                      |TAI-NCU-S1       |TBA       |20 nights/ |10 years |
+|Two-Meter           |Mexico               |                         |                 |          |semester   |         |
+|Telescope 2m        |                     |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Nishimura 1.8m      |Ōtehīwai Mt John     |Imaging                  |NZL-AUK-S1       |2026A     |10 nights/ |10 years |
+|                    |Observatory,         |                         |                 |          |semester   |         |
+|                    |New Zealand          |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Korean Microlensing |Cerro Tololo, Chile  |Imaging                  |KOR-KAS-S2       |2026A     |150 hours/ |5 years  |
+|Telescope 1.6m      |                     |                         |                 |          |semester   |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Korean Microlensing |Siding Springs       |Imaging                  |KOR-KAS-S2       |2026A     |150 hours/ |5 years  |
+|Telescope 1.6m      |Observatory,         |                         |                 |          |semester   |         |
+|                    |Australia            |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Korean Microlensing |SAAO, South Africa   |Imaging                  |KOR-KAS-S2       |2026A     |150 hours/ |5 years  |
+|Telescope 1.6m      |                     |                         |                 |          |semester   |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Milankovic          |Astronomical Station |Imaging                  |SER-SAG-S2       |2025A     |2 nights/  |10 years |
+|Telescope 1.4m      |Vidojevca, Serbia    |                         |                 |          |month      |         |
+|Telescope 1.4m      |                     |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|Various SAAO        |SAAO, South Africa   |Imaging and Spectroscopy |SZA-SAA-S4       |2026A     |26 hours/  |10 years |
+|telescopes          |                     |                         |                 |          |semester   |         |
+|1.9m - 1.0m         |                     |                         |                 |          |           |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|McLellan 1.0m       |Ōtehīwai Mt John     |Imaging                  |NZL-AUK-S1       |2026A     |200 equiv  |10 years |
+|                    |Observatory,         |                         |                 |          |hours      |         |
+|                    |New Zealand          |                         |                 |          |Nov-Feb    |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
+|RTT150 1.5m &       |TÜBITAK National     |Imaging                  |TUR-AKD-S1       |2026A     |23 nights/ |10 years |
+|T100 1.0m           |Observatory, Türkiye |                         |                 |          |year total |         |
++--------------------+---------------------+-------------------------+-----------------+----------+-----------+---------+
 
 Now Available
 =============
