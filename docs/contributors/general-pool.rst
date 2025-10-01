@@ -51,13 +51,25 @@ The link to the application form is ls.st/ikc-gp
 
 A selection of allocted pool resources are listed here.
 
-Project	Recipient Group	Contributor
-Interactive Visualizations/Plotting	Rubin Survey Scheduling Team	Australia AAL
-Build support	Rubin Data Processing	Australia AAL
-Targeted Identification of Low Signal-to-Noise Detections of Solar System Objects	Solar System SC	Hungary KON
-Community science software developer	Rubin Community Science Team	Spain BCM
-Assistance to build a Strong Lensing Database for Rubin	Strong Lensing Science Collaboration & DESC SL Topical Team	Australia AAL
-Contribution to commissioning (FIG)	SIT-Com team	Spain BCM
+
++-------------------------------------+-------------------------------------+--------------+
+|Project                              |Recipient Group                      |Contributor   |
++=====================================+=====================================+==============+
+|Interactive Visualizations/Plotting  |Rubin Survey Scheduling Team         |Australia AAL |
++-------------------------------------+-------------------------------------+--------------+
+|Build support                        |Rubin Data Processing                |Australia AAL |
++-------------------------------------+-------------------------------------+--------------+
+|Targeted Identification of Low       |Solar System SC                      |Hungary KON   |
+|Signal-to-Noise Detections of        |                                     |              |
+|Solar System Objects                 |                                     |              |
++-------------------------------------+-------------------------------------+--------------+
+|Community science software developer |Rubin Community Science Team         |Spain BCM     |
++-------------------------------------+-------------------------------------+--------------+
+|Assistance to build a Strong         |Strong Lensing Science               |Australia AAL |
+|Lensing Database for Rubin           |Collaboration & DESC SL Topical Team |              |
++-------------------------------------+-------------------------------------+--------------+
+|Contribution to commissioning (FIG)  |SIT-Com team                         |Spain BCM     |
++-------------------------------------+-------------------------------------+--------------+
 
 
 Developer Profiles
