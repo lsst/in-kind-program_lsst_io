@@ -51,6 +51,7 @@ The link to the application form is ls.st/ikc-gp
 
 A selection of allocted pool resources are listed here.
 
+
 +-------------------------------------+-------------------------------------+--------------+
 |Project                              |Recipient Group                      |Contributor   |
 +=====================================+=====================================+==============+
@@ -59,7 +60,7 @@ A selection of allocted pool resources are listed here.
 |Build support                        |Rubin Data Processing                |Australia AAL |
 +-------------------------------------+-------------------------------------+--------------+
 |Targeted Identification of Low       |Solar System SC                      |Hungary KON   |
-|Signal-to-Noise Detections of        |                                     |              | 
+|Signal-to-Noise Detections of        |                                     |              |
 |Solar System Objects                 |                                     |              |
 +-------------------------------------+-------------------------------------+--------------+
 |Community science software developer |Rubin Community Science Team         |Spain BCM     |
@@ -69,6 +70,7 @@ A selection of allocted pool resources are listed here.
 +-------------------------------------+-------------------------------------+--------------+
 |Contribution to commissioning (FIG)  |SIT-Com team                         |Spain BCM     |
 +-------------------------------------+-------------------------------------+--------------+
+
 
 Developer Profiles
 ------------------
