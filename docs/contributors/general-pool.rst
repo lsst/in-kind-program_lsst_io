@@ -41,6 +41,8 @@ General Pool resources have been offered by the folliowing programs and are list
 |Barcelona/    |         |Docker and containerization, Javascript, RESTful APIs                             |
 |Madrid        |         |                                                                                  |
 +--------------+---------+----------------------------------------------------------------------------------+
+|              |         |                                                                                  |
++--------------+---------+----------------------------------------------------------------------------------+
 
 
 Applications and Current Allocations
