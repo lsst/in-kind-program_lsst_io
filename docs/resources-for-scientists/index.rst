@@ -4,4 +4,10 @@ Resources for Scientists
 
 — Blurb about Resources. —
 
-    documents
+  .. toctree::
+   :maxdepth: 2
+   :titlesonly:
+   :caption: Contents
+
+
+   documents
