@@ -12,3 +12,5 @@ Resources for Scientists
 
    documents
    viewing-contributions
+   reporting
+   in-kind-assemblies
