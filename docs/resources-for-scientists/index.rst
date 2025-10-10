@@ -11,3 +11,4 @@ Resources for Scientists
 
 
    documents
+   viewing-contributions
