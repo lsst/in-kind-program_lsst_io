@@ -10,7 +10,8 @@ In-Kind Program
    :caption: Contents
 
 
+   about/index
+   resources-for-scientists/index
    contributors/index
    recipients/index
    scientists/index
-   about/index
