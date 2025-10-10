@@ -11,7 +11,7 @@ In-Kind Program
 
 
    about/index
-   resources-for-scientist/index
+   resources-for-scientists/index
    contributors/index
    recipients/index
    scientists/index
