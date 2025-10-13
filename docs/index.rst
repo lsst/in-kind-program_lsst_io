@@ -15,3 +15,4 @@ In-Kind Program
    contribution-management/index
    recipients/index
    scientists/index
+   contributors/index
