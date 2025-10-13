@@ -10,3 +10,4 @@ Contribution Management
    :caption: Contents
 
    viewing-contributions
+   reporting
