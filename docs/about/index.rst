@@ -11,3 +11,4 @@ About
 
 
    data-rights
+   cec
