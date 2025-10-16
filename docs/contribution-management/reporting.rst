@@ -10,3 +10,9 @@ Reporting
 - Annual Evaluation
     - Annual Evaluation Live Form - for Contribution Leads to fill out: https://ls.st/ikc-ae
     - information for contribution leads for contributions undergoing the Annual Evaluation
+
+.. image:: contribution_cycle_2025-09-02.png
+   :alt: Contribution Cycle
+   :width: 600px
+   :align: center
+
