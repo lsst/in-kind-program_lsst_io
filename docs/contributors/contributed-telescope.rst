@@ -85,7 +85,7 @@ SWE-STK-S3
 70 hours of observing time on the `Nordic Optical Telescope <https://www.not.iac.es/instruments/>`_ (NOT) is available for supernova classification using the ALFOSC instrument.
 NOT is a 2.56m telescope located on La Palma, Spain.
 The Alhambra Faint Object Spectrograph and Camera, ALFOSC, offers low/medium spectroscopy. Successful PIs will be able to submit ToO triggers of potential SNe for classification.
-Fully reduced spectra will be uploaded to `WISeREP/TNS <https://www.wiserep.org/>`_ within 48 hours of observation.
+Fully reduced spectra will be uploaded to WISeREP/TNS within 48 hours of observation.
 This contribution was first made available in Semester 2025A and is expected to be available for a total of 4 semesters.
 
 
