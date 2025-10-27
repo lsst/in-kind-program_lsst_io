@@ -7,9 +7,10 @@ Under the Rubin LSST In-kind Contribution Program, participating international p
 and Junior Associates (JAs), the right to access LSST data during its 2-year proprietary period, in return for making a set of in-kind contributions
 that expand the resources available to the US astronomy and HEP communities.
 
-For more details on the definition of LSST data rights, the distinction between PIs and JAs, and so on, please see the Rubin Data Policy, document RDO-13.
+For more details on the definition of LSST data rights, the distinction between PIs and JAs, and so on, please see the Rubin Data Policy, document `RDO-13 <https://ls.st/RDO-13>`_.
 See the Programs page for the current list of in-kind programs and the contributions they are making.
-The current list of LSST Data Rights Holders (DRHs) and their PI/JA status is maintained by Rubin and shown below.
+The current list of LSST Data Rights Holders (DRHs) `Google Sheet <https://docs.google.com/spreadsheets/d/1VXbISTr9a7h63nfv5aVCGH0H-7tVWNieFo2Nu1ExKoY/edit?usp=sharing>`_ and
+their PI/JA status is maintained by Rubin and shown below.
 
 
 DRA Status
