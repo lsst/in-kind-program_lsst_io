@@ -13,8 +13,9 @@ and it will continue in this role throughout the LSST survey. The CEC will also 
 
 Current Committee Members
 =========================
-The committee is made up of representatives put forward by the 8 LSST Science Collaborations, the Science Collaborations Coordinator,
-and 5 at-large members nominated by the Rubin Observatory Science Advisory Committee, plus one of the Deputy Directors of Rubin Observatory Operations, who chairs the committee.
+The committee is made up of representatives put forward by the eight `LSST Science Collaborations <https://rubinobservatory.org/about/organization/collaborations>`_, the Science Collaborations Coordinator,
+and five at-large members nominated by the Rubin Observatory `Science Advisory Committee <https://rubinobservatory.org/for-scientists/committees-teams/science-advisory-committee>`_,
+plus one of the Deputy Directors of Rubin Observatory Operations, who chairs the committee.
 
 1. Will Clarkson (LSST Science Collaborations Coordinator, ex officio)
 2. Sebastian Hoenig (AGN Science Collaboration; alternate Paolo Coppi)
@@ -43,6 +44,6 @@ In practice, this means the Chair will invite observers to join CEC meetings to 
 Find Out More
 -------------
 
-- Read the CEC's Charge
-- Catch up with where the CEC is in its work on the Updates page
-- Contact the Committee via any of its members, or its current Chair, Phil Marshall
+- Read the `CEC's Charge <https://project.lsst.org/groups/cec/charge>`_
+- Catch up with where the CEC is in its work on the `Updates <https://project.lsst.org/groups/cec/updates>`_ page
+- Contact the Committee via any of its members, or its current Chair, `Phil Marshall <mailto:pjm@slac.stanford.edu>`_
