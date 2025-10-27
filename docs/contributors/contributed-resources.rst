@@ -61,7 +61,7 @@ The virtual workshop `Supporting Computational Science with Rubin LSST <https://
 Links to the use cases, presentations, recordings, notes, and background material are available on the `workshop web page <https://project.lsst.org/meetings/rubin-idacs/documents>`_.
 
 IDACs are considering a range of specific use cases, including time series analyses, solar system occultation predictions, and development of photometric redshift training sets, as well as general use.
-IDACs are also following the development of the use cases identified in the workshop `"From Data to Software to Science with the Rubin Observatory LSST" <https://arxiv.org/pdf/2208.02781.pdf>`_,
+IDACs are also following the development of the use cases identified in the workshop `"From Data to Software to Science with the Rubin Observatory LSST" <https://arxiv.org/pdf/2208.02781>`_,
 and may adopt some of these as a basis for specific datasets and services.
 
 When will IDACs and SPCs be available to the community?
