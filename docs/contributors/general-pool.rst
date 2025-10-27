@@ -6,7 +6,7 @@ General pool software contributions are those where directable developer effort 
 This pool of effort can be drawn on by any recipient group who have needs or gaps within their infrastructure or analysis software plans that are not covered by the current in-kind or other contributions.
 Normally recipient group(s) request general pooled software development effort for specific tasks.
 Note that such requests may come from either a single or multiple recipient groups who would benefit from the proposed development.
-Recipient groups can be either Rubin teams or LSST Science Collaborations. Further information is available on the In-kind Program Handbook.
+Recipient groups can be either Rubin teams or LSST Science Collaborations. Further information is available on the `In-kind Program Handbook <https://ls.st/rdo-041>`_.
 
 Contributions and Developers
 ============================
@@ -49,7 +49,7 @@ Applications and Current Allocations
 ====================================
 
 General pool resources can be applied for all year round. Any potential proposers should discuss their ideas with the main contact for a recipient group before applying.
-The link to the application form is ls.st/ikc-gp
+The link to the application form is `ls.st/ikc-gp <https://docs.google.com/forms/d/e/1FAIpQLSfj9qyZX5ZUyMcXd23mZWSsWZ3E9ZCaEuCydvto-MHZZmX4hg/viewform>`_.
 
 A selection of allocted pool resources are listed here.
 
