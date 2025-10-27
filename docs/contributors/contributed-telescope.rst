@@ -108,7 +108,7 @@ JAP-JPG-S1
 ----------
 
 Five nights per year will be available on the 8.2 meter `Subaru Telescope <https://subarutelescope.org/en/for_researchers/observation/index.html>`_ in Hawaii, USA.
-Subaru has a wide range of `instrumentation <https://subarutelescope.org/Instruments/index.html>`_, including the new Prime Focus Spectrograph.
+Subaru has a wide range of `Subaru telescope instrumentation <https://subarutelescope.org/Instruments/index.html>`_, including the new Prime Focus Spectrograph.
 This contribution is expected to be available for 10 years from the starting semester.
 
 
@@ -139,7 +139,7 @@ SZA-SAA-S1
 ----------
 
 25 hours per semester will be available on the 9.2 meter `South African Large Telescope <https://astronomers.salt.ac.za/>`_ located at South African Astronomical Observatory, South Africa.
-SALT has a wide range of `instrumentation <https://astronomers.salt.ac.za/instruments/>`_ available. This contribution is expected to be available for 10 years from the start of the first semester of availability.
+SALT has a wide range of `SALT instrumentation <https://astronomers.salt.ac.za/instruments/>`_ available. This contribution is expected to be available for 10 years from the start of the first semester of availability.
 
 
 SZA-SAA-S4
