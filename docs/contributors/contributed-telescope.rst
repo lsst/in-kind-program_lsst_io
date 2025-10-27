@@ -108,7 +108,7 @@ JAP-JPG-S1
 ----------
 
 Five nights per year will be available on the 8.2 meter `Subaru Telescope <https://subarutelescope.org/en/for_researchers/observation/index.html>`_ in Hawaii, USA.
-Subaru has a wide range of `instrumentation <https://subarutelescope.org/Observing/Instruments/index.html>`_, including the new Prime Focus Spectrograph.
+Subaru has a wide range of `instrumentation <https://subarutelescope.org/Instruments/index.html>`_, including the new Prime Focus Spectrograph.
 This contribution is expected to be available for 10 years from the starting semester.
 
 
@@ -123,7 +123,7 @@ This contribution is expected to be available for 5 years after the first semste
 NZL-AUK-S1
 ----------
 
-Time will be available at facilities located at the `University of Canterbury Ōtehīwai Mt John Observatory <https://wiki.canterbury.ac.nz/pages/viewpage.action?pageId=152307302>`_ in New Zealand.
+Time will be available at facilities located at the `University of Canterbury Ōtehīwai Mt John Observatory <https://ucdigitalsms.atlassian.net/wiki/>`_ in New Zealand.
 Approximately 10 nights per semester will be available on the MOA 1.8 meter telescope, and roughly 200 equivalent hours will be available in the November - February period on the 1.0 meter telescope.
 This contribution is expected to be available for 10 years from the first semester of availability.
 
@@ -161,5 +161,5 @@ the suite of imaging and spectroscopy instrumentation available. This contributi
 TUR-AKD-S1
 ----------
 
-23 nights per year will be available at the `T100 <https://tug.tubitak.gov.tr/en/teleskoplar/t100-telescope>`_ and `RTT150 <https://tug.tubitak.gov.tr/en/teleskoplar/rtt150-telescope-0>`_ telescopes
-at the TÜBITAK National Observatory in southern Türkiye. This contribution is expected to be available for 10 years from the first semester of availability.
+23 nights per year will be available at the T100 and RTT150 telescopes at the TÜBITAK National Observatory in southern Türkiye.
+This contribution is expected to be available for 10 years from the first semester of availability.
