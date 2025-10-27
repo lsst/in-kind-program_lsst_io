@@ -5,7 +5,7 @@ Resource Needs
 In preparation for operations and early science, Rubin Observatory would like to consider any outstanding resources needed by those within the Rubin Community to meet their goals.
 
 We are therefore issuing a rolling call for existing and prospective Recipient groups to identify opportunities for further in-kind contributions that are targeted to meet a specific need.
-These can be submitted through this simple web form.
+These can be submitted through this `simple web form <https://docs.google.com/forms/d/e/1FAIpQLSdj9_hkflb3zBrv2ZB_TRmrpkqYpBl8NZV0o2ix7YHlR2o7ZQ/viewform>`_.
 
 The needs can span any type of contribution listed in the in-kind handbook for contributions. e.g. developer time needed on a particular software infrastructure project,
 follow-up time on a particular class of telescope, a particular needed auxiliary dataset, specific types of computing resource, and so on.
