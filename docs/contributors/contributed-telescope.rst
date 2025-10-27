@@ -99,7 +99,7 @@ ESP-IAC-S1 and ESP-BCM-S5
 -------------------------
 
 Roughly two nights per semester will be available at the Gran Telescope Canaries (GTC).
-The GTC is a 10.4 meter Optical/NIR telescope in La Palma, Spain. The GTC has a wide suite of `instrumentation <https://www.gtc.iac.es/instruments/instrumentation.php>`_.
+The GTC is a 10.4 meter Optical/NIR telescope in La Palma, Spain. The GTC has a wide suite of instrumentation.
 In-kind access to the GTC will not be allocated via the NOIRLab TAC, but a special process to be announced at a later date.
 This contribution is expected to be available for ten years from the starting semester.
 
