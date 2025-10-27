@@ -37,3 +37,9 @@ Queries about the Resource Needs process or any posted need should be directed t
 
 
 Resource Needs Workflow
+
+.. image:: workflow.png
+   :alt: Resource Needs Workflow
+   :width: 600px
+   :align: center
+
