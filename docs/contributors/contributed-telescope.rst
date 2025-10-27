@@ -98,7 +98,7 @@ These facilities are expected to be available starting in 2026A.
 ESP-IAC-S1 and ESP-BCM-S5
 -------------------------
 
-Roughly two nights per semester will be available at the `Gran Telescope Canaries (GTC) <https://www.gtc.iac.es/GTChome.php>`_.
+Roughly two nights per semester will be available at the Gran Telescope Canaries (GTC).
 The GTC is a 10.4 meter Optical/NIR telescope in La Palma, Spain. The GTC has a wide suite of `instrumentation <https://www.gtc.iac.es/instruments/instrumentation.php>`_.
 In-kind access to the GTC will not be allocated via the NOIRLab TAC, but a special process to be announced at a later date.
 This contribution is expected to be available for ten years from the starting semester.
@@ -131,7 +131,7 @@ This contribution is expected to be available for 10 years from the first semest
 TAI-NCU-S1
 ----------
 
-Twenty nights per semester will be available at the `Trans-Pacific Two-Meter Telescope <https://www.astro.ncu.edu.tw/ncutwom/>`_ located at San Pedro Martir, Mexico.
+Twenty nights per semester will be available at the Trans-Pacific Two-Meter Telescope located at San Pedro Martir, Mexico.
 This project is expected to undergo first light and commissioning in 2025. The contribution is expected to be available for 10 years from the first semester of availability.
 
 
