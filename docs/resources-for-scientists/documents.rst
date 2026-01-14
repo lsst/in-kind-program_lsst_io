@@ -3,7 +3,7 @@ Documents
 #########
 
 
-- RDO-031 Handbook for In-kind Contribution Proposals
+- `RDO-031 Handbook for In-kind Contribution Proposals <ls.st/RDO-031>`_
     - Guidance for proposers of new, replacement or amended contributions.
 
 - RDO-041 Manual for In-kind Contributors and Recipients
