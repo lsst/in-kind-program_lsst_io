@@ -17,3 +17,11 @@ This list will be refreshed annually: we’ll be in touch with each internationa
 
    data-rights-policy
 
+.. raw:: html
+
+   <iframe
+       src="https://docs.google.com/spreadsheets/d/1VXbISTr9a7h63nfv5aVCGH0H-7tVWNieFo2Nu1ExKoY/edit?usp=sharing"
+       width="100%"
+       height="600">
+   </iframe>
+
