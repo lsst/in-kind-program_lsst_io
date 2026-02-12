@@ -10,6 +10,7 @@ The IPCs each have responsibilities over individual contributions (as "Contribut
 (i.e. the set of contributions from a country, institute, or consortium, as "Program IPC").
 See the Programs page for a live view of the current set of in-kind programs and contributions.
 
+
 +-------------------------------+------------------------------------------+
 |Name (affiliation)             |Responsibilities                          |
 +-------------------------------+------------------------------------------+
@@ -40,4 +41,3 @@ See the Programs page for a live view of the current set of in-kind programs and
 
 
 
- 
