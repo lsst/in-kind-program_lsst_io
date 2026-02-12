@@ -12,7 +12,6 @@ About
 
    contact-us
    coordinators
-   data-rights
    cec
 
 .. raw:: html
