@@ -9,5 +9,5 @@ Data Rights
    :titlesonly:
    :caption: Contents
 
+   data-rights
 
-   
