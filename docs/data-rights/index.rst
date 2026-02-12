@@ -9,6 +9,7 @@ Data Rights
    :caption: Contents
 
    data-rights-policy
+   cec
 
 
 Below is a view of the current, live, international data rights holder database.
