@@ -1,6 +1,6 @@
-###########
-Data Rights
-###########
+##################
+Data Rights Policy
+##################
 
 
 Under the Rubin LSST In-kind Contribution Program, participating international programs (outside the US and Chile) each earn, for a specified number of Principal Investigators (PIs)
