@@ -20,6 +20,7 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
 
 
    about/index
+   data-rights/index
    resources-for-scientists/index
    contribution-management/index
    recipients/index
