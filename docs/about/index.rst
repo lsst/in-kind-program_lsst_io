@@ -10,8 +10,9 @@ About
    :caption: Contents
 
 
-   data-rights
-   cec
+contact-us   
+data-rights
+cec
 
 .. raw:: html
 
