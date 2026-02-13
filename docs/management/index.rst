@@ -5,7 +5,6 @@ Management
 Information and resources for management of In-Kind contributions.
 
 
-**Contents**
 
 .. toctree::
    :maxdepth: 2
