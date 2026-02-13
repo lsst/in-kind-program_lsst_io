@@ -2,7 +2,7 @@
 Management
 ##########
 
-Information regarding management of In-Kind contributions.
+Information and resources for management of In-Kind contributions.
 
 
 **Contents**
