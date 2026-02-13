@@ -21,6 +21,6 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
 
    about/index
    data-rights/index
-   contribution-management/index
+   management/index
    recipients/index
    contributors/index
