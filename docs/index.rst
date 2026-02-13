@@ -19,7 +19,6 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
    :align: center
 
 
-**Contents**
 
 .. toctree::
    :maxdepth: 1
