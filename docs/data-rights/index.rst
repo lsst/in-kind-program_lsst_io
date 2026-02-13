@@ -8,7 +8,7 @@ Data Rights
    :titlesonly:
    :caption: Contents
 
-   data-rights-policy
+   data-rights-agreements
    cec
 
 
