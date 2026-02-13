@@ -11,8 +11,8 @@ Information and resources for management of In-Kind contributions.
    :titlesonly:
    :caption: Contents
 
-    programs
-    documents
-    reporting
-    viewing-contributions
-    in-kind-assemblies
+   programs
+   documents
+   reporting
+   viewing-contributions
+   in-kind-assemblies
