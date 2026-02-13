@@ -16,3 +16,4 @@ Information and resources for management of In-Kind contributions.
     documents
     reporting
     viewing-contributions
+    in-kind-assemblies
