@@ -2,7 +2,7 @@
 Data Rights
 ###########
 
-**Contents**
+
 
 .. toctree::
    :maxdepth: 2
