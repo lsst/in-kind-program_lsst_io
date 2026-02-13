@@ -13,8 +13,16 @@ Their work is facilitated by the Rubin IPC Team, which reports directly to the R
 
 If you have questions, please refer to the In-kind Program FAQs. You can also explore ongoing discussions and updates in the LSST Community Forum using the in-kind tag.
 
+.. image:: IKPOverview_0.png
+   :alt: Rubin In-Kind Program
+   :width: 600px
+   :align: center
+
+
+**Contents**
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :titlesonly:
    :caption: Contents
 
