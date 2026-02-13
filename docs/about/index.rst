@@ -6,7 +6,6 @@ The In-kind Program spans many varied contributions providing resources and supp
 The Rubin LSST Science Collaborations support the CEC and In-kind Program Coordination (IPC)
 teams in management of the In-kind contributions with their scientific expertise.
 
-**Contents**
 
 .. toctree::
    :maxdepth: 2
