@@ -2,7 +2,10 @@
 Management
 ##########
 
-— Blurb about contributions. —
+Information regarding management of In-Kind contributions.
+
+
+**Contents**
 
 .. toctree::
    :maxdepth: 2
