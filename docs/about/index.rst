@@ -10,8 +10,8 @@ About
    :caption: Contents
 
 
-   contact-us
    coordinators
+   contact-us
 
 
 .. raw:: html
