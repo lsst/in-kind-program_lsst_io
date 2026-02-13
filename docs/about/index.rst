@@ -12,7 +12,7 @@ About
 
    contact-us
    coordinators
-   cec
+
 
 .. raw:: html
 
