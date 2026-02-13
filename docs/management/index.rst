@@ -13,5 +13,6 @@ Information regarding management of In-Kind contributions.
    :caption: Contents
 
     programs
+    documents
     reporting
     viewing-contributions
