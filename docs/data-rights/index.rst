@@ -34,6 +34,8 @@ Click here to access the data as a `Google Sheet <https://docs.google.com/spread
 
 
 International LSST Data Rights Holders - Rubin Observatory
+
+
 .. raw:: html
 
    <iframe
