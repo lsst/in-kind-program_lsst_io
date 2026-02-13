@@ -9,5 +9,6 @@ Management
    :titlesonly:
    :caption: Contents
 
+    programs
     reporting
     viewing-contributions
