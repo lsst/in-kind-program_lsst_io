@@ -31,3 +31,4 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
    management/index
    recipients/index
    contributors/index
+   contribution-types/index
