@@ -21,7 +21,7 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :titlesonly:
    :caption: Contents
 
