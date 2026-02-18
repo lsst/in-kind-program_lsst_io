@@ -13,7 +13,8 @@ Welcome to the In-Kind Program.
 
    about/index
    data-rights/index
+   contribution-types/index
    management/index
    recipients/index
    contributors/index
-   contribution-types/index
+
