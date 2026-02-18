@@ -2,6 +2,8 @@
 In-Kind Program
 ###############
 
+Welcome to the In-Kind Program.
+
 
 .. toctree::
    :maxdepth: 2
