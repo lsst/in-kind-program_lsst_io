@@ -12,7 +12,4 @@ Contributors
    program-managers
    contribution-leads
    software-consultancy
-   general-pool
-   contributed-datasets
-   contributed-telescope
-   contributed-resources
+

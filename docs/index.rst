@@ -2,7 +2,8 @@
 In-Kind Program
 ###############
 
-— Blurb about the In-Kind Program. —
+Welcome to the In-Kind Program.
+
 
 .. toctree::
    :maxdepth: 2
@@ -11,8 +12,9 @@ In-Kind Program
 
 
    about/index
-   resources-for-scientists/index
-   contribution-management/index
+   data-rights/index
+   contribution-types/index
+   management/index
    recipients/index
-   scientists/index
    contributors/index
+
