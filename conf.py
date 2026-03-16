@@ -4,19 +4,9 @@ html_theme_options = {
     "use_social_cards": False,
 }
 
-linkcheck_ignore = [
-    r'https://astronomers\.salt\.ac\.za/.*',
-]
-
-linkcheck_ignore = [
-    r'https://vidojevica\.aob\.rs/.*'
-]
 
 linkcheck_ignore = [
     r'https://astronomers\.salt\.ac\.za/.*',
-]
-
-linkcheck_ignore = [
     r'https://vidojevica\.aob\.rs/.*',
 ]
 
