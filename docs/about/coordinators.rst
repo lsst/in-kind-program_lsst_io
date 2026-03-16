@@ -14,7 +14,7 @@ See the Programs page for a live view of the current set of in-kind programs and
 +-------------------------------+------------------------------------------+
 |Name (affiliation)             |Responsibilities                          |
 +-------------------------------+------------------------------------------+
-|Agnès Ferté (SLAC)             |Software contributions                    |
+|Tina Adair (SLAC)              |Software contributions                    |
 +-------------------------------+------------------------------------------+
 |Greg Madejski (SLAC)           |Community Science Team Liaison            |
 +-------------------------------+------------------------------------------+
@@ -26,9 +26,6 @@ See the Programs page for a live view of the current set of in-kind programs and
 +-------------------------------+------------------------------------------+
 |Knut Olsen (NOIRLab)           |Independent Data Access Centers &         |
 |                               |other computing resources                 |
-+-------------------------------+------------------------------------------+
-|Stephen Ridgway (NOIRLab)      |Telescope time and datasets               |
-|                               |contributions, NOIRLab CSDC Liaison       |
 +-------------------------------+------------------------------------------+
 |Susan Ridgway (NOIRLab)        |Software contributions                    |
 +-------------------------------+------------------------------------------+
