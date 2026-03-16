@@ -2,7 +2,7 @@
 In-Kind Program
 ###############
 
-Welcome to the In-Kind Program documentation site. 
+Welcome to the In-Kind Program documentation site.
 
 
 About
