@@ -7,3 +7,8 @@ html_theme_options = {
 linkcheck_ignore = [
     r'https://astronomers\.salt\.ac\.za/.*',
 ]
+
+linkcheck_ignore = [
+    r'https://vidojevica\.aob\.rs/.*'
+]
+
