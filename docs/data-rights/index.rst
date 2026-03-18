@@ -9,6 +9,7 @@ Data Rights
    :titlesonly:
    :caption: Data Rights
 
+   international-data-rights-holders   
    data-rights-agreements
    cec
 
