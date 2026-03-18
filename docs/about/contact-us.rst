@@ -5,8 +5,8 @@ Contact Us
 
 **By email**
 
-- **rubinobs dash jikh at noirlab dot edu**
-- Preferred method to contact any members of the IPC team
+- **rubinobs-inkind_at_noirlab .edu**
+- Preferred method to contact any members of the IPC team (please note, jikh_at_lst.org no longer works)._
 
 **Request a Meeting with one or more IPC team memebers**
 
