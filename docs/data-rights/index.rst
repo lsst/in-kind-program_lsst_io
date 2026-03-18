@@ -7,7 +7,7 @@ Data Rights
 .. toctree::
    :maxdepth: 2
    :titlesonly:
-   :caption: Contents
+   :caption: Data Rights
 
    data-rights-agreements
    cec
