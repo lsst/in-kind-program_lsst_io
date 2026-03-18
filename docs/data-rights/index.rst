@@ -5,11 +5,12 @@ Data Rights
 
 
 .. toctree::
+   :hidden
    :maxdepth: 2
    :titlesonly:
    :caption: Data Rights
 
-   international-data-rights-holders   
+   international-data-rights-holders
    data-rights-agreements
    cec
 
