@@ -5,7 +5,7 @@ Data Rights
 
 
 .. toctree::
-   :hidden
+   :hidden:
    :maxdepth: 2
    :titlesonly:
    :caption: Data Rights
