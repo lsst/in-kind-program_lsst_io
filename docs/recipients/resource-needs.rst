@@ -51,7 +51,7 @@ If you are interesed in responding to a Resource Need, please complete the `reso
 
    <iframe
        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQW_N5p3Uj_OGQycVJlHsdvCMZ65lZeOJbNxE74-gxyrh96OlCgOVK53Ba_tKY9G4z6ZZGCxAYnuZs4/pubhtml?gid=0&single=true&widget=true&headers=false"
-       width="100%"
+       width="80%"
        height="600">
    </iframe>
 
