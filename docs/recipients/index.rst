@@ -3,10 +3,10 @@ Recipients
 ##########
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
    :titlesonly:
-   :caption: Contents
-
+   :caption: Recipients
 
    resource-needs
 

@@ -5,9 +5,10 @@ Contribution Types
 — Blurb about contributions. —
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
    :titlesonly:
-   :caption: Contents
+   :caption: Contribution Types
 
    general-pool
    contributed-datasets

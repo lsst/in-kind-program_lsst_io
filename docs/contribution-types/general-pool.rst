@@ -79,16 +79,29 @@ Developer Profiles
 
 Some of the developers in the general pool have provided a short profile.
 
-Cristobal Pio Garcia
---------------------
 
-Spain (ESP-BCM-S4)
+Dr. Rekhesh Mohan
+-----------------
 
-I work as Software Engineer at IFAE being part of a multidisciplinary team that gives solutions to all the engineering challenges which IFAE leads or which participate inI feel
-comfortable developing in C/C++, Python, Java, Javascript, CSS and HTML. We have a lot experience developing Control Software using any language or framework,
-this goes from desktop to web environment applications and from low to high level programming.I helped developing the control software for PAU, an instrument for the WH Telescope fully developed at IFAE,
-also collaborating with other institutes I worked on the camera control for the LST inside the CTA project (North Site), the instrumented baffle for VIRGO experiment and finally some control for
-different devices on the neutrinos experiment at T2K.
+India (IND-IIA-S1)
+
+I am Rekhesh Mohan, Scientist-E at the Indian Institute of Astrophysics (IIA), Bangalore. I lead a research/Instrumentation group at IIA that designs and builds low cost small space payloads for Astronomy.
+In addition to this, I am the chairperson of Institute’s website management committee that oversee design and development of IIA’s website and other online portals.
+I am also the member of the web development team that is actively working on the modernization and improvements of the website. In the past, I have worked as the software lead for a UV space mission (TAUVEX),
+technical consultant for UVIT/AstroSat ground segment software, and later as the technical lead (India) for TMT Observatory Software.
+
+
+Dr. Vivek M.
+------------
+
+India (IND-IIA-S1)
+
+I am Dr. Vivek M., currently an Associate Professor at the Indian Institute of Astrophysics (IIA), Bangalore. I lead a research group focused on AGN, particularly quasar outflows,
+Broad Absorption Line (BAL) quasars, Narrow-Line Seyfert 1 galaxies, and AGN variability across multi-wavelength datasets.
+In addition to my research role, I have served as Facility Scientist-in-Charge of the 1.3-m JCBT telescope at Vainu Bappu Observatory of Indian Institute of Astrophysics.
+Previously, I have worked as the survey operations scientist for the eBOSS survey in SDSS-IV. Through this role, I gained extensive experience in survey operations and instrumentation challenges and contributed to resolving several operational issues.
+I am currently on sabbatical at the Astronomisches Rechen-Institut (ARI), Heidelberg, where I am collaborating on large spectroscopic survey science (SDSS-V and 4MOST) and AI-driven approaches to AGN physics.
+I am also actively involved in the 4MOST AGN survey and led the target selection for the Survey Program Validation phase of the project.
 
 
 Tamás Kovács
