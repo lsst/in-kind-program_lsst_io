@@ -45,7 +45,7 @@ Resource Needs Workflow
 
 
 
-If you are interesed in responding to a Resource Need, please complete the resource need response form. You will need the Resource need interim ID in the table below to complete the form.
+If you are interesed in responding to a Resource Need, please complete the `resource need response form <https://ls.st/ikc-rn-resp>`_. You will need the Resource need interim ID in the table below to complete the form.
 
 .. raw:: html
 
