@@ -26,9 +26,8 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
 .. toctree::
    :maxdepth: 1
 
-   mission
-   history
-   team
+   contact-us
+   coordinators
 
 .. raw:: html
 
