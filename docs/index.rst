@@ -15,8 +15,8 @@ Learn more about the Rubin In-Kind Program.
    :titlesonly:
 
    about/index
-   coordinators
-   contact-us
+   about/coordinators
+   about/contact-us
 
 Data Rights
 ===========
@@ -28,9 +28,9 @@ Information about Rubin Data Rights holders including the International Data Rig
    :titlesonly:
 
    data-rights/index
-   data-rights-agreements
-   international-data-rights-holders
-   cec
+   data-rights/data-rights-agreements
+   data-rights/international-data-rights-holders
+   data-rights/cec
 
 Contribution Types
 ==================
@@ -42,10 +42,10 @@ See what types of contributions are provided to the Rubin Observatory.
    :titlesonly:
 
    contribution-types/index
-   contributed-datasets
-   contributed-resources
-   contributed-telescope
-   general-pool
+   contribution-types/contributed-datasets
+   contribution-types/contributed-resources
+   contribution-types/contributed-telescope
+   contribution-types/general-pool
 
 In-Kind Program Management
 ==========================
@@ -57,11 +57,11 @@ Find useful management information.
    :titlesonly:
 
    management/index
-   documents
-   in-kind-assemblies
-   programs
-   reporting
-   viewing-contributions
+   management/documents
+   management/in-kind-assemblies
+   management/programs
+   management/reporting
+   management/viewing-contributions
 
 Recipients
 ==========
@@ -73,9 +73,9 @@ Discover various tools for recipients.
    :titlesonly:
 
    recipients/index
-   resource-needs
-   open-resource-needs
-   submit
+   recipients/resource-needs
+   recipients/open-resource-needs
+   recipients/submit
 
 Contributors
 ============
@@ -87,7 +87,7 @@ Find information useful for Rubin In-Kind contributors.
    :titlesonly:
 
    contributors/index
-   contribution-leads
-   program-managers
-   software-consultancy
+   contributors/contribution-leads
+   contributors/program-managers
+   contributors/software-consultancy
 
