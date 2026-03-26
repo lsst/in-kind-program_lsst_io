@@ -10,6 +10,7 @@ Recipients
 
    resource-needs
    open-resource-needs
+   submit
 
 The group for which the contribution is designed, and in which the contribution and the contributing team is “embedded”.
 The recipients are typically LSST science collaborations, Rubin Observatory teams, or Rubin’s operating partners (NOIRLab and SLAC).
