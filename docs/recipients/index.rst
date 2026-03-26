@@ -2,14 +2,6 @@
 Recipients
 ##########
 
-.. toctree::
-   :hidden:
-   :maxdepth: 2
-   :titlesonly:
-   :caption: Recipients
-
-   resource-needs
-   open-resource-needs
 
 The group for which the contribution is designed, and in which the contribution and the contributing team is “embedded”.
 The recipients are typically LSST science collaborations, Rubin Observatory teams, or Rubin’s operating partners (NOIRLab and SLAC).
@@ -86,4 +78,25 @@ Public Listing of Contacts for Rubin LSST In-kind Contribution : Recipients
 +--------------------------------------------------------------+-------------------------------------------------------+
 |Rubin Observatory IT                                          |Bob Blum                                               |
 +--------------------------------------------------------------+-------------------------------------------------------+
+
+
+
+
+.. raw:: html
+
+   <div class="subindex-toc-hidden">
+
+.. toctree::
+   :maxdepth: 1
+
+   resource-needs
+   open-resource-needs
+   submit
+   respond
+
+.. raw:: html
+
+   </div>
+
+
 

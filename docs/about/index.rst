@@ -19,14 +19,17 @@ If you have questions, please refer to the In-kind Program FAQs. You can also ex
    :align: center
 
 
+.. raw:: html
+
+   <div class="subindex-toc-hidden">
 
 .. toctree::
-   :hidden:
-   :maxdepth: 2
-   :titlesonly:
-   :caption: About
+   :maxdepth: 1
 
-   coordinators
    contact-us
+   coordinators
 
+.. raw:: html
+
+   </div>
 

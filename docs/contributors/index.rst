@@ -4,13 +4,19 @@ Contributors
 
 — Blurb about contributions. —
 
+
+.. raw:: html
+
+   <div class="subindex-toc-hidden">
+
 .. toctree::
-   :hidden:
-   :maxdepth: 2
-   :titlesonly:
-   :caption: Contributors
+   :maxdepth: 1
 
    program-managers
    contribution-leads
    software-consultancy
+
+.. raw:: html
+
+   </div>
 
