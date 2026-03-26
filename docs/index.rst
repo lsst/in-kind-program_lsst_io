@@ -15,8 +15,7 @@ Learn more about the Rubin In-Kind Program.
    :titlesonly:
 
    about/index
-   about/coordinators
-   about/contact-us
+
 
 Data Rights
 ===========
