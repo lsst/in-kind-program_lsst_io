@@ -92,6 +92,7 @@ Public Listing of Contacts for Rubin LSST In-kind Contribution : Recipients
    resource-needs
    open-resource-needs
    submit
+   respond
 
 .. raw:: html
 
