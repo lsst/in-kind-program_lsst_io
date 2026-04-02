@@ -11,7 +11,7 @@ The other recipient groups are referred to as secondary recipients.
 
 The table embedded below is a live view of the list of recipient contacts for the in-kind contributions defined in the Rubin IPC Team's tracking system -
 they can help you get started working with the contribution teams.
-Please email ** rubinobs dash jikh at noirlab dot edu** with any questions or corrections!
+Please email **rubin dash inkind at noirlab dot edu** with any questions or corrections!
 
 
 
