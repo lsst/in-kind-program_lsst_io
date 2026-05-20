@@ -33,7 +33,7 @@ A change to a program that would bring in a new country would need agency approv
 
 The Resource Needs form will remain open throughout the year as an ongoing “rolling call”. Outstanding needs will be advertised periodically here on community.lsst.org and at the regular in-kind assemblies.
 
-Queries about the Resource Needs process or any posted need should be directed to the Rubin In-kind Program Coordination Team at jikh at lsst dot org.
+Queries about the Resource Needs process or any posted need should be directed to the Rubin In-kind Program Coordination Team at rubin-inkind at noirlab dot edu.
 
 
 Resource Needs Workflow
