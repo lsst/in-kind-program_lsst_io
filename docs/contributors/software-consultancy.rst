@@ -9,4 +9,4 @@ Meet Greg Poole, an experienced and knowledgeable software consultant for the Ru
 facilitating software definition or understanding your software needs. Greg works at the Astronomy Data and Computing Services (ADACS) as a project scientist,
 he has extensive experience in bridging the astronomy community with High Performance Computing and softwares.
 
-Watch this video to learn more about Greg’s expertise. Please email jikh_at_lsst.org to meet with him about anything software related!
+Watch this video to learn more about Greg’s expertise. Please email rubin-inkind at noirlab dot edu to meet with him about anything software related!
