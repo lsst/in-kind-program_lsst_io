@@ -4,7 +4,7 @@ Programs
 
 
 The table embedded below is a live view of the approved in-kind contributions and programs as defined in the Rubin IPC Team's tracking system.
-Please email **rubinobs dash jikh at noirlab dot edu** with any questions or corrections!
+Please email **rubin-inkind at noirlab dot edu** with any questions or corrections!
 
 The table takes a few seconds to load.
 
