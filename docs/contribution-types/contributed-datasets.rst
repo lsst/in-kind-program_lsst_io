@@ -6,7 +6,7 @@ This webpage lists the complementary data sets expected to be made available to 
 For each contribution, the title, a summary, and the primary recipient of the contribution are provided.
 The majority of the contributions have not yet started, or are in an early phase. This information will be periodically updated as the datasets become available.
 
-Please email the in-kind helpdesk JIKH at lsst dot org if you have any questions about contributed datasets.
+Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have any questions about contributed datasets.
 
 
 **The LSST sources detected by eROSITA (GER-MPE-S3)**
