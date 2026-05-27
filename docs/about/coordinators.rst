@@ -1,5 +1,5 @@
 ####################
-In-Kind Coordinators
+In-Kind Program Coordinators
 ####################
 
 Who are the Rubin In-Kind Program Coordinators?
