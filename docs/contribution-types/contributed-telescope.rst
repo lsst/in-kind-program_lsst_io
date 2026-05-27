@@ -26,7 +26,7 @@ Unless otherwise noted, this time will be made available via the NOIRLab Time Al
 |Large Binocular     |Mt. Graham, USA      |Imaging and Spectroscopy |`ITA-INA-S18 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ITA-INA-S18>`_     |2026B     |20 hours   |through  |
 |Telescope 2x8.4m    |                     |                         |                                                                                                     |          |           |FY34     |
 +--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|VLT Survey          |Cerro Paranal, Chile |Imaging                  |`ITA-INA-S18 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ITA-INA-S18>`_     |2026B    |35 nights/ |through  |
+|VLT Survey          |Cerro Paranal, Chile |Imaging                  |`ITA-INA-S18 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ITA-INA-S18>`_     |2026B     |35 nights/ |through  |
 |Telescope 2.6m      |                     |                         |                                                                                                     |          |year       |FY34     |
 +--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
 |Nordic Optical      |La Palma, Spain      |Spectroscopic            |`SWE-STK-S3 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#SWE-STK-S3>`_       |2025A     |70 hours/  |2 years  |
