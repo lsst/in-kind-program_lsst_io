@@ -43,7 +43,7 @@ Primary Recipient: NOIRLab CSDC
 We propose to use 80 nights/year of VST time from 2026 until 2032 (with a possible extension to 2036) to execute a support survey with VST,
 to complement the LSST dataset improving the light curve sampling of transient and variable sources, and to deliver the data to the US/Chilean communities before they are made public.
 
-Primary Recipient: TBD
+Primary Recipient: DESC
 
 
 **Exploiting the synergy between LSST and VST to investigate the cosmos: the expansion rate and the geometry of the Universe measured through the time delays of strongly lensed variable sources. (ITA-INA-S28)**
@@ -51,7 +51,7 @@ Primary Recipient: TBD
 We propose to use 4620 hours (i.e., 577.5 nights) of VST time over 7 years to complement the LSST dataset improving the light curve sampling of transient
 and variable sources strongly lensed by galaxies and galaxy clusters, and to deliver the data to the US/Chilean communities before they are made public.
 
-Primary Recipient: TBD (TVS?)
+Primary Recipient: SLSC
 
 
 **Toward next-generation time-domain surveys (TIMEDOMES): VST monitoring of the LSST Deep Drilling Fields (ITA-INA-S29)**
@@ -59,7 +59,7 @@ Primary Recipient: TBD (TVS?)
 We propose to use 170 hours/year of VST time to execute a precursorsurvey with VST, to complement and extend in time the LSST dataset on 4 DDF,
 and to combine these observations with all archival data to deliver reduced images, catalogs and lightcurves lasting up to >10 years to the US/Chilean communities.
 
-Primary Recipient: TBD
+Primary Recipient: LSST AGN Science Collaboration
 
 
 **Subaru PFS spectroscopic follow-up survey of LSST transients in deep drilling field (JAP-JPG-S10)**
