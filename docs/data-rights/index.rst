@@ -3,34 +3,34 @@ Data Rights
 ###########
 
 
-Under the Rubin LSST In-kind Contribution Program, participating international programs (outside the US and Chile) each earn,
-for a specified number of Principal Investigators (PIs) and Junior Associates (JAs), the right to access LSST data during its 2-year proprietary period,
-in return for making a set of in-kind contributions that expand the resources available to the US astronomy and HEP communities.
+Under the Rubin LSST In‑Kind Contribution Program, participating international programs (outside the US and Chile) earn a specified number of Principal Investigator (PI) and Junior Associate (JA) data‑rights slots.
+These slots grant their holders access to LSST data during the two‑year proprietary period, in return for in‑kind contributions that expand the resources available to the US astronomy and High Energy Physics (HEP) communities.
 
-- For more details on the definition of LSST data rights, the distinction between PIs and JAs, and so on, please see the Rubin Data Policy, document `RDO-13 <https://ls.st/RDO-13>`_.
-- See the Programs page (add link) for the current list of in-kind programs and the contributions they are making.
-- The current list of LSST Data Rights Holders (DRHs) and their PI/JA status is maintained by Rubin and visible on its own page at https://in-kind-program.lsst.io/data-rights/international-data-rights-holders.html.
+- For more details on LSST data rights and the definitions of PIs and JAs, please see the `Rubin Data Policy (RDO‑13) <https://ls.st/RDO-13>`_.
+- See the `Programs page <https://in-kind-program.lsst.io/management/programs.html>`_ for the current list of in‑kind programs and their contributions.
+- Refer to the `Data Rights Holders page <https://in-kind-program.lsst.io/data-rights/international-data-rights-holders.html>`_ for the current list of LSST Data Rights Holders (DRHs) and their PI/JA status.
 
 ###################################
 Allocating and Managing Data Rights
 ###################################
 
-The allocation of PI and JA slots are entirely the responsibility of the Program Manager of a given In-kind program.
-Providing the data rights are awarded following the Data Rights Policy, this is entirely at the discretion of the Program Manaagers and Leads.
-Programs may differ in how their data rights are allocated. Plase contact the relence Program Manager and/or Program Lead for more information.
-The list of porgrams, with Leads and Managers is available on the `In-kind Programs <https://in-kind-program.lsst.io/management/programs.html>`_ page, please select the Programs tab in the embedded sheet.
-We have purposefully not included email addresses but ifyou have any trouble finding contact info, please messag rubin-inkind@noirlab.edu.
+The allocation of PI and JA slots is the responsibility of each program’s Program Manager and Program Lead, provided the allocations comply with the Rubin Data Rights Policy.
+Programs may differ in how they allocate their data-rights slots.
+A list of in-kind programs, including their Program Leads and Program Managers, is available on the `In-kind Programs <https://in-kind-program.lsst.io/management/programs.html>`_ page (see the Programs tab in the embedded sheet).
+Email addresses are not listed; if you need additional contact information, please email rubin-inkind@noirlab.edu.
 
-As described in the Rubin Data Policy, document `RDO-13 <https://ls.st/RDO-13>`_, as well as the definition of PI and JAs, it describes that JAs moving from a dat rights holding institute are eligible to retain their rights for a 2 year grace period.
+RDO‑13 specifies that Junior Associates who move from a data‑rights‑holding institution may retain their data rights for a two‑year Grace Period.
+Although the Grace Period text in RDO‑13 refers explicitly to US and Chilean early‑career researchers, international in‑kind programs are expected to apply the same two‑year period.
+This requirement is included in the data‑rights agreements for those programs.
 
-The Grace Period text in the data rights doc specifies US/Chilean ECRs explicitly, however, the expectation is that the international programs would reflect the 2-year period (this is included in data rights agreements) please see the following excerpt.
-So the 2-year grace period applies to all data rights holding programs.
+The following Grace Period rules apply to all data‑rights‑holding programs:
 
-- In the event that a PI or JA undergoes a change in their institutional affiliation to one outside the XXX-XXX program, that person will no longer be listed as one of the XXX-XXX data rights holders but they will retain data rights as an individual for a period of two (2) years from the time of the change (their “Grace Period”).
-- Grace Periods are contingent upon the aforesaid relocation being to an institution that is eligible to host researchers with Rubin data rights.
-- If a JA is promoted to a permanent position at a XXX-XXX program institute, they will also retain data rights under a corresponding 2-year Grace Period before transitioning to PI status.
-- Extension requests to the Grace Period may be made to the Data Policy Committee, as identified in the Rubin Data Policy.
-- Participants in the in-kind program are expected to abide by the Rubin codes of conduct.
+- Change of institution — If a PI or JA moves to an institution outside their in‑kind program, they will no longer be listed as a program data‑rights holder but will retain individual data rights for two years from the date of the move (their “Grace Period”).
+- Eligible institutions — Grace Periods apply only when the researcher relocates to an institution eligible to host Rubin data‑rights holders.
+- JA promotion — If a JA is promoted to a permanent position at an institution within their in‑kind program, they retain data rights under a two‑year Grace Period before transitioning to PI status.
+- Extensions — Requests to extend a Grace Period may be submitted to the Data Policy Committee, as described in RDO‑13.
+
+Participants in the In-Kind Program are expected to abide by the Rubin Observatory Codes of Conduct.
 
 
 .. raw:: html
