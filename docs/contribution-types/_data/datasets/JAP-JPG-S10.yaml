@@ -1,0 +1,39 @@
+contribution_id: JAP-JPG-S10
+title: Subaru PFS spectroscopic follow-up survey of LSST transients in deep drilling fields
+country: Japan
+institute: Japan Participation Group (JPG)  # institute full name inferred, flagged for confirmation
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Spectra]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Cosmology]  # backfilled guess -- ambiguous, could be Observational astronomy instead; flagged for review
+  uat_concepts: null
+
+curated:
+  primary_recipient: DESC
+  target_audience: null
+  summary: >
+    JPG will deliver the data products from the Subaru PFS spectroscopic
+    follow-up survey of LSST transients in drilling fields, to be ingested
+    into Kavli IPMU Lite IDAC.
+  wavelength_regime: [Optical, NIR]  # PFS covers optical through near-infrared
+  status_override: null

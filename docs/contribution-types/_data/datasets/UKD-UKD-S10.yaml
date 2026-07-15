@@ -1,0 +1,43 @@
+contribution_id: UKD-UKD-S10
+title: "Science Software development: spectroscopic classification of transients and 4MOST spectra"
+country: United Kingdom
+institute: LSST:UK
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Spectra]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Cosmology]  # backfilled guess -- ambiguous, could be Observational astronomy given the time-domain/transient focus; flagged for review
+  uat_concepts: null
+
+curated:
+  primary_recipient: DESC
+  target_audience: null
+  summary: >
+    To provide non-directable software development effort to the LSST
+    DESC for transient spectroscopic follow-up, developing software to
+    ensure successful scheduling and observation of transients and their
+    host galaxies by 4MOST, and the return of the transient types and
+    redshifts to the collaboration (through the Lasair broker, within
+    24hrs) and the final calibrated spectra as contributed data sets on
+    an annual basis.
+  wavelength_regime: [Optical]
+  status_override: null

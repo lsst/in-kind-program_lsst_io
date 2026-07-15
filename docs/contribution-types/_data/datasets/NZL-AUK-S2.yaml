@@ -1,0 +1,43 @@
+contribution_id: NZL-AUK-S2
+title: "The MOA Archive: two decades of Galactic Bulge and Magellanic Clouds photometry"
+country: New Zealand
+institute: Auckland
+
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Time-Series / Lightcurves, Imaging / Cutouts]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Galactic and extragalactic astronomy]  # relabeled to match the form's corrected 11 official top-level UAT branches
+  uat_concepts: null
+
+# --- fields only a human edits; the pull script never touches these ---
+curated:
+  primary_recipient: NOIRLab
+  target_audience: null
+  summary: >
+    The MOA archive will be ingested into a locally maintained server that
+    will provide image cutouts at the start of the LSST survey and machine
+    calibrated photometry 12 months after the beginning of the survey,
+    giving high cadence coverage of the Galactic Bulge and Magellanic
+    Clouds dating back to 2006.
+  wavelength_regime: [Optical]
+  status_override: null

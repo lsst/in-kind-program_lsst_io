@@ -1,0 +1,41 @@
+contribution_id: GER-MPE-S3
+title: The LSST sources detected by eROSITA
+country: Germany
+institute: MPE
+
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Value-Added Catalogs]  # backfilled guess, not from a real submission yet
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [High energy astrophysics]  # backfilled guess
+  uat_concepts: null
+
+# --- fields only a human edits; the pull script never touches these ---
+curated:
+  primary_recipient: LSST AGN Science Collaboration
+  target_audience: null
+  summary: >
+    MPE will generate and curate eROSITA-LSST value-added catalogs for the
+    AGN that the LSST collaboration will identify, using public eROSITA
+    data that MPE itself is responsible for.
+  wavelength_regime: [X-ray, Optical]
+  status_override: null

@@ -1,0 +1,41 @@
+contribution_id: ITA-INA-S29
+title: "Toward next-generation time-domain surveys (TIMEDOMES): VST monitoring of the LSST Deep Drilling Fields"
+country: Italy
+institute: INAF
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Imaging / Cutouts, Value-Added Catalogs, Time-Series / Lightcurves]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [High energy astrophysics]  # backfilled guess -- primary recipient is the AGN Science Collaboration
+  uat_concepts: null
+
+curated:
+  primary_recipient: LSST AGN Science Collaboration
+  target_audience: null
+  summary: >
+    We propose to use 170 hours/year of VST time to execute a precursor
+    survey with VST, to complement and extend in time the LSST dataset on
+    4 DDF, and to combine these observations with all archival data to
+    deliver reduced images, catalogs and lightcurves lasting up to >10
+    years to the US/Chilean communities.
+  wavelength_regime: [Optical]
+  status_override: null

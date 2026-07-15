@@ -1,0 +1,43 @@
+contribution_id: SWE-STK-S4
+title: "Supernova Lightcurves and low-resolution spectra for Full-sky Low-redshift Cosmography Complementing LSST"
+country: Sweden
+institute: Stockholm University
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Time-Series / Lightcurves, Spectra]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Cosmology]  # backfilled guess -- title explicitly says "cosmography"
+  uat_concepts: null
+
+curated:
+  primary_recipient: DESC
+  target_audience: null
+  summary: >
+    SU will provide online data file access (anticipated to be hosted at
+    NOIRLab) whereby it is possible for LSST users to download the
+    photometry and spectroscopy tables for each ZTF/ZTF-II SN (or the
+    entire set at once), as well as the ancillary information about the
+    host galaxy environment. We will provide machine readable files,
+    including standard formats used by lightcurve fitters (SALT2, SNooPy)
+    and FITS tables.
+  wavelength_regime: [Optical]
+  status_override: null

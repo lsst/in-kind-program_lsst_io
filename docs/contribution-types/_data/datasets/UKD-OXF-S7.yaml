@@ -1,0 +1,42 @@
+contribution_id: UKD-OXF-S7
+title: LSST-matched MIGHTEE data
+country: United Kingdom
+institute: University of Oxford
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Value-Added Catalogs, Imaging / Cutouts]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Galactic and extragalactic astronomy]  # updated -- the form's UAT list now has this branch, which is a direct fit for MIGHTEE's extragalactic HI/continuum survey
+  uat_concepts: null
+
+curated:
+  primary_recipient: NOIRLab CSDC
+  target_audience: null
+  summary: >
+    The activity offered by Oxford would involve installation of the
+    MIGHTEE Survey data at the UK DAC, and subsequently, joint work with
+    the LSST Science Collaborations in training photo-z (based on HI data
+    and the incorporation of radio continuum and polarisation data) as
+    well as user support for the LSST Science Community to facilitate the
+    use of the Survey data.
+  wavelength_regime: [Radio]
+  status_override: null

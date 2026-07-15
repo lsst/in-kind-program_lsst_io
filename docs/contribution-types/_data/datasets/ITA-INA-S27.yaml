@@ -1,0 +1,41 @@
+contribution_id: ITA-INA-S27
+title: A VST survey to support the Legacy Survey of Space and Time
+country: Italy
+institute: INAF
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Time-Series / Lightcurves, Imaging / Cutouts]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Cosmology]  # backfilled guess
+  uat_concepts: null
+
+curated:
+  primary_recipient: DESC
+  target_audience: null
+  summary: >
+    We propose to use 80 nights/year of VST time from 2026 until 2032 (with
+    a possible extension to 2036) to execute a support survey with VST, to
+    complement the LSST dataset improving the light curve sampling of
+    transient and variable sources, and to deliver the data to the
+    US/Chilean communities before they are made public.
+  wavelength_regime: [Optical]
+  status_override: null
