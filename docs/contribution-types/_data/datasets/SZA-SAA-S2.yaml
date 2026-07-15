@@ -1,0 +1,39 @@
+contribution_id: SZA-SAA-S2
+title: MeerKAT high-level data products and services for LSST
+country: South Africa
+institute: South African Astronomical Observatory (SAA)  # institute full name inferred, flagged for confirmation
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Imaging / Cutouts, Value-Added Catalogs]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Galactic and extragalactic astronomy]  # updated -- the form's UAT list now has this branch, a direct fit given the Galaxies Science Collaboration recipient
+  uat_concepts: null
+
+curated:
+  primary_recipient: Galaxies Science Collaboration
+  target_audience: null
+  summary: >
+    South Africa will produce reduced high-level data products (images and
+    catalogs) and services for MeerKAT data, as endorsed by the Galaxies
+    Science Collaboration, integrated into the Rubin Science Platform.
+  wavelength_regime: [Radio]
+  status_override: null

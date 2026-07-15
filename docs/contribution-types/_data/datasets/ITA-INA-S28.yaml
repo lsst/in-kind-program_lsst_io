@@ -1,0 +1,41 @@
+contribution_id: ITA-INA-S28
+title: "Exploiting the synergy between LSST and VST: the expansion rate and geometry of the Universe measured through time delays of strongly lensed variable sources"
+country: Italy
+institute: INAF
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Time-Series / Lightcurves, Imaging / Cutouts]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Cosmology]  # backfilled guess -- strong-lensing time-delay cosmography
+  uat_concepts: null
+
+curated:
+  primary_recipient: SLSC
+  target_audience: null
+  summary: >
+    We propose to use 4620 hours (i.e., 577.5 nights) of VST time over 7
+    years to complement the LSST dataset improving the light curve
+    sampling of transient and variable sources strongly lensed by galaxies
+    and galaxy clusters, and to deliver the data to the US/Chilean
+    communities before they are made public.
+  wavelength_regime: [Optical]
+  status_override: null

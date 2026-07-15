@@ -1,0 +1,39 @@
+contribution_id: JAP-JPG-S12
+title: Contribution to the LSST photo-z calibration with the PFS-SSP galaxy evolution dataset
+country: Japan
+institute: Japan Participation Group (JPG)  # institute full name inferred, flagged for confirmation
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Spectra, Machine Learning Training Sets]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Cosmology]  # backfilled guess
+  uat_concepts: null
+
+curated:
+  primary_recipient: DESC
+  target_audience: null
+  summary: >
+    JPG will deliver the data products of PFS-SSP, based upon approval
+    from the PFS-SSP team, to the LSST community for photo-z calibration
+    and training datasets.
+  wavelength_regime: [Optical, NIR]
+  status_override: null

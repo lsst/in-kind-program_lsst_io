@@ -1,0 +1,39 @@
+contribution_id: ITA-INA-S16
+title: "The Son of X-Shooter contribution to Rubin: 2,000 spectra for Machine Learning light curve classification"
+country: Italy
+institute: INAF
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Spectra, Machine Learning Training Sets]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Observational astronomy]  # backfilled guess -- ambiguous, SOXS spans UV-NIR and is used for transient classification; flagged for review
+  uat_concepts: null
+
+curated:
+  primary_recipient: TVS
+  target_audience: null
+  summary: >
+    INAF will deliver 2,000 spectra obtained with SOXS from LSST targets.
+    Deliverables are the entire data acquired for the targets, including
+    1-D extracted spectra and spectral classification.
+  wavelength_regime: [Optical, NIR]  # ambiguous -- SOXS technically spans UV to NIR, flagged for review
+  status_override: null

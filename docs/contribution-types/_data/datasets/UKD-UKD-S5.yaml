@@ -1,0 +1,41 @@
+contribution_id: UKD-UKD-S5
+title: "Science Software development: Near infrared data fusion"
+country: United Kingdom
+institute: LSST:UK
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Value-Added Catalogs, Imaging / Cutouts]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Observational astronomy]  # backfilled guess -- ambiguous, this is a generic pipeline/data-fusion effort with no stated science case; flagged for review
+  uat_concepts: null
+
+curated:
+  primary_recipient: NOIRLab CSDC
+  target_audience: null
+  summary: >
+    LSST:UK will provide joint LSST+VISTA near infra-red catalogues
+    produced using the LSST Stack and access to VISTA survey images as a
+    dataset contribution, as well as an implementation of the LSST Stack
+    pipeline reconfigured to jointly process LSST pixels with external
+    survey pixels.
+  wavelength_regime: [Optical, NIR]
+  status_override: null

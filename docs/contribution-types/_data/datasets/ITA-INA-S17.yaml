@@ -1,0 +1,41 @@
+contribution_id: ITA-INA-S17
+title: A Cluster Spectroscopy Hub for galaxy cluster science with LSST
+country: Italy
+institute: INAF
+
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Spectra, Imaging / Cutouts]  # backfilled guess
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Galactic and extragalactic astronomy]  # updated after Steve corrected the form's UAT list to the real 11 top-level branches -- galaxy cluster science fits this better than Cosmology
+  uat_concepts: null
+
+curated:
+  primary_recipient: NOIRLab CSDC
+  target_audience: null
+  summary: >
+    We propose to share a vast spectroscopic database on galaxy clusters,
+    complemented with physical metadata and other imaging (ground-based and
+    HST) data-products, with the LSST community, effectively creating a
+    Cluster Spectroscopy Hub for the exploitation of LSST data for a range
+    of cluster science cases.
+  wavelength_regime: [Optical]  # ambiguous -- includes some HST imaging, which could add UV/NIR; flagged for review
+  status_override: null

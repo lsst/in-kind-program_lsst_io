@@ -1,0 +1,41 @@
+contribution_id: ISR-UST-S2
+title: ULTRASAT all-sky UV maps
+country: Israel
+institute: UST
+
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
+form_data:
+  submitted: false
+  email: null
+  name: null
+  target_audience: null
+  contribution_summary: null
+  version: null
+  data_type: [Imaging / Cutouts]  # backfilled guess, not from a real submission yet
+  data_volume: null
+  data_schema_link: null
+  hosting_location: null
+  access_url: null
+  access_mechanisms: []
+  authentication: null
+  generation_methods: null
+  validation_limitations: null
+  tutorials_docs: null
+  support_channel: null
+  citation: null
+  maintenance_plan: null
+  maintenance_notes: null
+  final_report: null
+  uat_category: [Observational astronomy]  # backfilled guess -- ambiguous, flagged for review
+  uat_concepts: null
+
+# --- fields only a human edits; the pull script never touches these ---
+curated:
+  primary_recipient: NOIRLab CSDC
+  target_audience: null
+  summary: >
+    Rubin community will have access to the ULTRASAT all-sky map produced in
+    the first six-months of operation for at least 12 months prior to the
+    public data release.
+  wavelength_regime: [UV]
+  status_override: null
