@@ -161,3 +161,324 @@ jinja_contexts = {
     "contributed_datasets": _load_contributed_datasets(),
 }
 
+
+# ============================================================================
+# Contributed Telescope Access page data loading
+#
+# Each facility record lives as a YAML file in
+# docs/contribution-types/_data/telescopes/<contribution-id>-<slug>.yaml.
+# Unlike the datasets page, there is no external intake pipeline for
+# telescope facility data -- the In-kind coordinator is the sole source of
+# truth, so there is no form_data/curated split here, just a flat schema.
+# This loader reads all records, derives hemisphere/map-marker position from
+# coordinates, groups sibling records that share a contribution_id, and
+# exposes everything to contributed-telescope.rst via sphinx_jinja.
+# ============================================================================
+
+_APERTURE_BAND_LABELS = {
+    "small": "< 2m",
+    "medium": "2-8m",
+    "large": "> 8m",
+}
+
+
+def _aperture_band(aperture_str):
+    """Bucket a free-text aperture string (e.g. "2 x 8.4m", "1.9m-1.0m")
+    into a coarse band using the largest diameter mentioned, since that's
+    the figure that matters most for feasibility at a glance."""
+    if not aperture_str:
+        return None
+    numbers = [float(n) for n in re.findall(r"\d+\.?\d*", aperture_str)]
+    if not numbers:
+        return None
+    largest = max(numbers)
+    if largest < 2:
+        return "small"
+    if largest <= 8:
+        return "medium"
+    return "large"
+
+
+def _resolution_bin(r_min, r_max):
+    """Bucket a spectral-resolution range into a filter bin whose label
+    states the real R boundary explicitly (never "low"/"medium"/"high" on
+    their own), since different subdisciplines draw that line differently.
+    Uses the midpoint of the range when both bounds are given."""
+    if r_min is None and r_max is None:
+        return None
+    values = [v for v in (r_min, r_max) if v is not None]
+    midpoint = sum(values) / len(values)
+    if midpoint < 1000:
+        return "r-lt-1000", "R < 1,000"
+    if midpoint < 5000:
+        return "r-1000-5000", "1,000 <= R < 5,000"
+    return "r-gte-5000", "R >= 5,000"
+
+
+def _to_marker_xy(latitude, longitude):
+    """Equirectangular projection onto a 0-1000 x 0-500 canvas (matches the
+    world-outline SVG's viewBox in _static/). (0,0) is the top-left corner
+    of the map, i.e. 180 deg W, 90 deg N."""
+    x = (longitude + 180) / 360 * 1000
+    y = (90 - latitude) / 180 * 500
+    return round(x, 1), round(y, 1)
+
+
+def _offset_clustered_markers(records):
+    """Facilities that render at (near-)identical pixels on the map --
+    either because they share a site (SAAO's cluster, Mt John's two
+    telescopes) or because two nearby-but-distinct sites round to the same
+    pixel at this map scale (GTC and NOT are both on La Palma but not at
+    the exact same coordinates) -- get spread within ~6px of each other in
+    a small deterministic circle so they don't fully overlap. Grouped by
+    *rendered* position, not raw lat/long, since that's what actually
+    matters for legibility; precise on-mountain placement isn't meaningful
+    for discovery either way."""
+    by_pixel = {}
+    for r in records:
+        key = (round(r["marker_x"]), round(r["marker_y"]))
+        by_pixel.setdefault(key, []).append(r)
+    for group in by_pixel.values():
+        if len(group) < 2:
+            continue
+        for i, r in enumerate(group):
+            angle = 2 * 3.14159265 * i / len(group)
+            r["marker_x"] = round(r["marker_x"] + 6 * _cos(angle), 1)
+            r["marker_y"] = round(r["marker_y"] + 6 * _sin(angle), 1)
+
+
+def _cos(x):
+    import math
+    return math.cos(x)
+
+
+def _sin(x):
+    import math
+    return math.sin(x)
+
+
+_STATUS_SORT_ORDER = {"available": 0, "future_semester": 1, "tba": 2}
+_SIBLING_CONSISTENCY_FIELDS = (
+    "summary", "time_available", "duration", "status", "tac_process",
+)
+
+
+def _load_contributed_telescopes():
+    data_dir = (
+        Path(__file__).parent
+        / "docs"
+        / "contribution-types"
+        / "_data"
+        / "telescopes"
+    )
+    records = []
+    all_instrumentation = set()
+    all_wavelengths = set()
+    resolution_bins_present = {}
+
+    for path in sorted(data_dir.glob("*.yaml")):
+        with path.open(encoding="utf-8") as f:
+            record = yaml.safe_load(f) or {}
+        record = _normalize_strings(record)
+
+        contribution_id = record.get("contribution_id")
+        contribution_ids = (
+            contribution_id if isinstance(contribution_id, list) else [contribution_id]
+        )
+        record["contribution_ids"] = contribution_ids
+
+        facility_slug = _slugify(record.get("facility", ""))
+        record["facility_slug"] = facility_slug
+        record["slug"] = path.stem
+
+        latitude = record.get("latitude")
+        longitude = record.get("longitude")
+        record["hemisphere"] = (
+            "Northern" if (latitude or 0) >= 0 else "Southern"
+        )
+        if latitude is not None and longitude is not None:
+            mx, my = _to_marker_xy(latitude, longitude)
+            record["marker_x"], record["marker_y"] = mx, my
+
+        aperture_band = _aperture_band(record.get("aperture"))
+        record["aperture_band"] = aperture_band
+
+        instrumentation = record.get("instrumentation") or []
+        wavelengths = record.get("wavelength_regime") or []
+        all_instrumentation.update(instrumentation)
+        all_wavelengths.update(wavelengths)
+
+        res_bin = _resolution_bin(
+            record.get("spectral_resolution_min"),
+            record.get("spectral_resolution_max"),
+        )
+        if res_bin:
+            record["resolution_bin"], record["resolution_bin_label"] = res_bin
+            resolution_bins_present[res_bin[0]] = res_bin[1]
+        else:
+            record["resolution_bin"] = None
+            record["resolution_bin_label"] = None
+
+        status = record.get("status", "tba")
+        tokens = [
+            f"status-{_slugify(status)}",
+            f"hemisphere-{_slugify(record['hemisphere'])}",
+        ]
+        if aperture_band:
+            tokens.append(f"aperture-{aperture_band}")
+        tokens += [f"instr-{_slugify(v)}" for v in instrumentation]
+        tokens += [f"wl-{_slugify(v)}" for v in wavelengths]
+        if record["resolution_bin"]:
+            tokens.append(f"res-{record['resolution_bin']}")
+        if record.get("multiplex") is True:
+            tokens.append("multiplex-yes")
+        for cid in contribution_ids:
+            if cid:
+                tokens.append(f"cid-{_slugify(cid)}")
+        record["filter_tokens"] = " ".join(tokens)
+
+        search_parts = [
+            record.get("facility", ""),
+            record.get("site", "") or "",
+            record.get("country", "") or "",
+            record.get("summary", "") or "",
+            *instrumentation,
+            *(record.get("instrument_names") or []),
+            *contribution_ids,
+        ]
+        record["search_text"] = " ".join(p for p in search_parts if p).lower()
+
+        records.append(record)
+
+    # Group sibling records sharing a contribution_id (KMTNet's 3 sites,
+    # Mt John's 2 telescopes, VST/LBT) for the "also available under this
+    # contribution" cross-link, and warn at build time if fields that
+    # should be authored identically across siblings have drifted --
+    # catches copy/paste mistakes before they render as inconsistent cards.
+    by_cid = {}
+    for r in records:
+        for cid in r["contribution_ids"]:
+            if cid:
+                by_cid.setdefault(cid, []).append(r)
+
+    try:
+        from sphinx.util import logging as sphinx_logging
+        logger = sphinx_logging.getLogger(__name__)
+    except Exception:
+        logger = None
+
+    for cid, group in by_cid.items():
+        if len(group) < 2:
+            continue
+        for r in group:
+            siblings = [
+                {
+                    "facility": s["facility"],
+                    "site": s.get("site"),
+                    "slug": s["slug"],
+                    # When siblings share the same facility name (KMTNet's
+                    # three near-identical sites), the site is the only
+                    # thing that actually distinguishes them in a
+                    # cross-link list -- append it whenever a name
+                    # collision would otherwise make two links read
+                    # identically.
+                    "label": (
+                        f"{s['facility']} ({s['site']})"
+                        if s.get("site") and any(
+                            o["facility"] == s["facility"] and o["slug"] != s["slug"]
+                            for o in group
+                        )
+                        else s["facility"]
+                    ),
+                }
+                for s in group
+                if s["slug"] != r["slug"]
+            ]
+            r.setdefault("siblings", [])
+            for s in siblings:
+                if s not in r["siblings"]:
+                    r["siblings"].append(s)
+        for field in _SIBLING_CONSISTENCY_FIELDS:
+            values = {r.get(field) for r in group}
+            if len(values) > 1 and logger is not None:
+                logger.warning(
+                    "[telescope-data] sibling records under contribution_id "
+                    f"'{cid}' disagree on '{field}': "
+                    f"{ {r['slug']: r.get(field) for r in group} }"
+                )
+
+    for r in records:
+        r.setdefault("siblings", [])
+
+    _offset_clustered_markers([r for r in records if "marker_x" in r])
+
+    records.sort(
+        key=lambda r: (
+            _STATUS_SORT_ORDER.get(r.get("status"), 99),
+            r.get("facility", ""),
+        )
+    )
+    search_index = {r["slug"]: r["search_text"] for r in records}
+
+    return {
+        "telescopes": records,
+        "all_instrumentation": sorted(all_instrumentation),
+        "all_wavelengths": sorted(all_wavelengths),
+        "all_resolution_bins": sorted(resolution_bins_present.items()),
+        "all_aperture_bands": [
+            (k, v) for k, v in _APERTURE_BAND_LABELS.items()
+        ],
+        "slugify": _slugify,
+        "search_index_json": json.dumps(search_index),
+    }
+
+
+def _load_contributed_opportunities():
+    data_dir = (
+        Path(__file__).parent
+        / "docs"
+        / "contribution-types"
+        / "_data"
+        / "opportunities"
+    )
+    today = datetime.date.today()
+    records = []
+    for path in sorted(data_dir.glob("*.yaml")):
+        with path.open(encoding="utf-8") as f:
+            record = yaml.safe_load(f) or {}
+        record = _normalize_strings(record)
+        record["slug"] = path.stem
+
+        visible_until = record.get("visible_until")
+        if isinstance(visible_until, str):
+            visible_until = datetime.date.fromisoformat(visible_until)
+        record["is_visible"] = visible_until is None or today <= visible_until
+
+        milestones = record.get("milestones") or []
+        upcoming = [
+            m for m in milestones
+            if isinstance(m.get("date"), (datetime.date, str))
+        ]
+
+        def _milestone_date(m):
+            d = m.get("date")
+            if isinstance(d, str):
+                return datetime.date.fromisoformat(d)
+            return d
+
+        future_milestones = [m for m in upcoming if _milestone_date(m) >= today]
+        record["next_milestone_date"] = (
+            min((_milestone_date(m) for m in future_milestones), default=None)
+        )
+        records.append(record)
+
+    visible_records = [r for r in records if r["is_visible"]]
+    visible_records.sort(
+        key=lambda r: (r["next_milestone_date"] is None, r["next_milestone_date"])
+    )
+
+    return {"opportunities": visible_records}
+
+
+jinja_contexts["contributed_telescopes"] = _load_contributed_telescopes()
+jinja_contexts["contributed_opportunities"] = _load_contributed_opportunities()
