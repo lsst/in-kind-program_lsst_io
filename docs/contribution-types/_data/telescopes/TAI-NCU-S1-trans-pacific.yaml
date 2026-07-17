@@ -1,0 +1,35 @@
+contribution_id: TAI-NCU-S1
+facility: Trans-Pacific Two-Meter Telescope
+aperture: 2m
+country: Mexico
+site: San Pedro Martir
+latitude: 31.029
+longitude: -115.486
+instrumentation:
+- Imaging
+instrument_names: []
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: null
+too_capable: null
+observing_mode: queue
+contacts: []
+first_semester: TBA
+time_available: 20 nights/semester
+duration: 10 years
+status: future_semester
+tac_process: default
+external_links:
+- label: Home
+  url: https://www.astro.ncu.edu.tw/ncutwom/
+summary: NCU is providing approximately 40 nights per year for 10 years on the 2-meter Trans-Pacific
+  Telescope at San Pedro Martir, Mexico, for dedicated follow-up imaging observations complementing
+  LSST data. Observations are queue-mode (no travel required); standard calibration data are
+  taken nightly by on-site staff. Raw data are available within 24 hours and fully reduced/calibrated
+  data within 48 hours, with photometric catalogs available on request. NCU intends to conform
+  to AEON standards, but procedures are not yet established -- this project is still pre-first-light.
+  A user helpdesk is currently under development.

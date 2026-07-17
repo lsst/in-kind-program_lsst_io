@@ -1,0 +1,42 @@
+contribution_id: SER-SAG-S2
+facility: Milanković Telescope 1.4m
+aperture: 1.4m
+country: Serbia
+site: Astronomical Station Vidojevica
+latitude: 43.141
+longitude: 21.524
+instrumentation:
+- Imaging
+instrument_names:
+- Andor iKon-L 936 CCD
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: true
+too_capable: true
+observing_mode: service
+contacts:
+- name: Maša Lakićević
+  email: mlakicevic@aob.rs
+first_semester: 2025A
+time_available: 2 nights/month
+duration: 10 years
+status: available
+tac_process: default
+external_links:
+- label: Telescope page
+  url: https://vidojevica.aob.rs/index.php?option=com_content&view=article&id=40&Itemid=249
+- label: Station page
+  url: https://vidojevica.aob.rs/index.php?option=com_content&view=article&id=8&Itemid=35
+- label: Andor iKon-L 936 CCD
+  url: https://vidojevica.aob.rs/index.php?option=com_content&view=article&id=21&Itemid=28
+summary: Two nights per month are available on the 1.4m Milanković Telescope located at the
+  Astronomical Station Vidojevica near Prokuplje, Serbia. Optical imaging is available with
+  the Andor iKon-L 936 CCD and Johnson B, V, R, I, L filters plus H-alpha, H-alpha continuum,
+  and SII. This facility offers AEON compatibility and is available for target-of-opportunity
+  observations; observations are taken in service mode. Raw data are available within 24 hours
+  and fully reduced/calibrated data within 72 hours. This contribution was first made available
+  in Semester 2025A.

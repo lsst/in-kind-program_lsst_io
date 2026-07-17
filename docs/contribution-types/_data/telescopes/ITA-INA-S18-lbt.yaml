@@ -1,0 +1,52 @@
+contribution_id: ITA-INA-S18
+facility: Large Binocular Telescope (LBT)
+aperture: 2 x 8.4m
+country: USA
+site: Mt. Graham
+latitude: 32.701
+longitude: -109.889
+instrumentation:
+- Imaging
+- Spectroscopy
+instrument_names:
+- LBC
+- MODS
+- LUCI
+- PEPSI
+wavelength_regime:
+- Optical
+- NIR
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: false
+too_capable: true
+observing_mode: service
+contacts:
+- name: Felice Cusano
+  email: felice.cusano@inaf.it
+- name: LBT-Italia (general)
+  email: lbt-italia@inaf.it
+first_semester: 2026B
+time_available: 20 hours/year (open-shutter, within INAF blocks)
+duration: through FY2034
+status: available
+tac_process: default
+external_links:
+- label: Home
+  url: https://www.lbto.org/
+- label: Instruments
+  url: https://scienceops.lbto.org/instruments/
+- label: Data archive
+  url: http://archive.lbto.org
+- label: SIPGI reduction pipeline
+  url: https://pandora.lambrate.inaf.it/sipgi/
+summary: 20 hours of open-shutter time per year will be available at the twin 8.4m Large Binocular
+  Telescope Observatory, within INAF's reserved observing blocks, with the suite of facility
+  imaging and spectroscopy instrumentation available (only facility instruments are offered).
+  Observations are carried out in service mode by INAF staff; programs requiring a strictly
+  fixed cadence cannot be supported. ToOs are executed within the INAF blocks; exceptionally
+  urgent triggers need approval from the other LBT partners. Raw/calibration data are available
+  immediately at archive.lbto.org with a 1-year proprietary period. This contribution is expected
+  to be available through FY2034.

@@ -1,0 +1,38 @@
+contribution_id: KOR-KAS-S2
+facility: Korean Microlensing Telescope Network (KMTNet)
+aperture: 1.6m
+country: Chile
+site: Cerro Tololo
+latitude: -30.169
+longitude: -70.804
+instrumentation:
+- Imaging
+instrument_names: []
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: true
+too_capable: true
+observing_mode: queue
+contacts:
+- name: Min-Su Shin
+  email: msshin@kasi.re.kr
+first_semester: 2026A
+time_available: 150 hours/semester
+duration: 5 years
+status: available
+tac_process: default
+external_links:
+- label: Network home
+  url: https://kmtnet.kasi.re.kr/kmtnet-eng/
+- label: AEON access info
+  url: https://kmtnet.kasi.re.kr/aeon
+summary: 'Roughly 150 hours per semester will be available on each of the telescopes of the
+  Korean Microlensing Telescope Network, 1.6 meter optical imaging telescopes located in Cerro
+  Tololo (Chile), Siding Spring Observatory (Australia), and SAAO (South Africa). AEON is
+  available for all KMTNet observations, in two modes: 30 minutes at the start or end of every
+  night, or pre-allocated AEON nights. This contribution is expected to be available for 5
+  years after the first semester.'

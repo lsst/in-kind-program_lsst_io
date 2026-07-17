@@ -1,0 +1,32 @@
+contribution_id: NZL-AUK-S1
+facility: McLellan 1.0m
+aperture: 1.0m
+country: New Zealand
+site: Mt John Observatory
+latitude: -43.986
+longitude: 170.465
+instrumentation:
+- Imaging
+instrument_names: []
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: true
+too_capable: true
+observing_mode: null
+contacts: []
+first_semester: TBA
+time_available: 200 equivalent hours (Nov-Feb)
+duration: 10 years
+status: future_semester
+tac_process: default
+external_links:
+- label: Mt John Observatory wiki
+  url: https://wiki.canterbury.ac.nz/pages/viewpage.action?pageId=152307302
+summary: Roughly 200 equivalent hours will be available in the November-February period on
+  the 1.0 meter McLellan telescope at the University of Canterbury's Ōtehīwai Mt John Observatory
+  in New Zealand. This contribution is expected to be available for 10 years from the first
+  semester of availability.

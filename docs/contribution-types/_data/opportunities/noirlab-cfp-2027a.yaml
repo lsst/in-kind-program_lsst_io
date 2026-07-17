@@ -1,0 +1,17 @@
+id: noirlab-cfp-2027a
+title: NOIRLab Call for Proposals -- Semester 2027A
+kind: general_cfp
+related_contribution_ids: []
+summary: The standard NOIRLab Time Allocation Process call for the 2027A semester, which governs
+  most contributed telescope time on this page, is expected to open around September 1, 2026.
+  Check back here or the NOIRLab proposals page for the confirmed date and the Rubin in-kind
+  facilities section once it's published.
+milestones:
+- label: Call for Proposals opens (expected)
+  date: '2026-09-01'
+  approximate: true
+links:
+- label: NOIRLab Call for Proposals
+  url: https://noirlab.edu/science/observing-noirlab/proposals/call-for-proposals
+contact: null
+visible_until: '2026-10-15'

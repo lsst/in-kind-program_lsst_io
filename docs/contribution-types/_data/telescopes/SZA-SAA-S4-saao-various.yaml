@@ -1,0 +1,35 @@
+contribution_id: SZA-SAA-S4
+facility: Various SAAO telescopes (1.9m-1.0m)
+aperture: 1.9m-1.0m
+country: South Africa
+site: SAAO, Sutherland
+latitude: -32.376
+longitude: 20.81
+instrumentation:
+- Imaging
+- Spectroscopy
+instrument_names: []
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: true
+too_capable: true
+observing_mode: null
+contacts: []
+first_semester: TBA
+time_available: 26 hours/semester
+duration: 10 years
+status: future_semester
+tac_process: default
+external_links:
+- label: 1.0m
+  url: https://www.saao.ac.za/astronomers/1-0m/
+- label: 1.9m
+  url: https://www.saao.ac.za/astronomers/1-9m/
+summary: Approximately 26 hours per semester will be available on a network of telescopes
+  at the South African Astronomical Observatory, including the 1.0 meter and 1.9 meter facilities.
+  This contribution is expected to be available for 10 years from the start of the first semester
+  of availability.

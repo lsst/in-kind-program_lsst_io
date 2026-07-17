@@ -1,0 +1,48 @@
+contribution_id:
+- ESP-BCM-S5
+- ESP-IAC-S1
+facility: Gran Telescopio Canarias (GTC)
+aperture: 10.4m
+country: Spain
+site: La Palma (Roque de los Muchachos Observatory)
+latitude: 28.756
+longitude: -17.892
+instrumentation:
+- Imaging
+- Spectroscopy
+instrument_names:
+- OSIRIS+
+- EMIR
+- MEGARA
+- HiPERCAM
+wavelength_regime:
+- Optical
+- NIR
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: true
+field_of_view: null
+aeon: false
+too_capable: true
+observing_mode: null
+contacts:
+- name: Steven Margheim
+  email: steven.margheim@noirlab.edu
+  note: in-kind allocation process/eligibility questions; technical instrument questions go
+    to the GTC website or submission portal
+first_semester: TBA
+time_available: 2 nights/semester
+duration: 10 years
+status: future_semester
+tac_process: special
+external_links:
+- label: Home
+  url: https://www.gtc.iac.es/GTChome.php
+- label: Instrumentation
+  url: https://www.gtc.iac.es/instruments/instrumentation.php
+summary: Roughly two nights per semester will be available at the Gran Telescopio Canarias
+  (GTC), a 10.4 meter Optical/NIR telescope in La Palma, Spain, contributed jointly via ESP-BCM-S5
+  (Barcelona-Madrid) and ESP-IAC-S1 (IAC). In-kind access to the GTC is not allocated via
+  the NOIRLab TAC, but via a dedicated Letter-of-Intent + Spanish TAC co-PI process (see the
+  featured opportunity above when a call is open). This contribution is expected to be available
+  for ten years from the starting semester.
