@@ -6,9 +6,7 @@ related_contribution_ids:
 - ESP-IAC-S1
 summary: A special allocation of ~2 nights/semester on the 10.4m Gran Telescopio Canarias
   (GTC) is available to the US and Chilean community via a Letter-of-Intent + Spanish TAC
-  co-PI process. LoIs are capped at 3x the available allocation; Cosmology proposals are typically
-  paired with the Barcelona-Madrid LSST groups, all other disciplines with the IAC, though
-  pairing depends on demand and staff availability.
+  co-PI process.
 milestones:
 - label: Letters of Intent due
   date: '2026-08-07'
