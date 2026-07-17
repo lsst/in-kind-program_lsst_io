@@ -16,6 +16,16 @@ html_theme_options = {
 linkcheck_ignore = [
     r'https://astronomers\.salt\.ac\.za/.*',
     r'https://vidojevica\.aob\.rs/.*',
+    # WISeREP (linked from the NOT facility card) returns 403 to
+    # non-browser user agents, including sphinx's linkcheck bot -- the
+    # link itself is valid, it's just blocking automated requests.
+    r'https://www\.wiserep\.org/.*',
+    # GTC and the INAF SIPGI proposal tool (linked from the GTC and LBT
+    # facility cards) both serve incomplete SSL certificate chains --
+    # real, reachable sites that browsers tolerate but Python's ssl
+    # module rejects with CERTIFICATE_VERIFY_FAILED in CI.
+    r'https://www\.gtc\.iac\.es/.*',
+    r'https://pandora\.lambrate\.inaf\.it/.*',
 ]
 
 
@@ -289,7 +299,14 @@ def _load_contributed_telescopes():
 
         facility_slug = _slugify(record.get("facility", ""))
         record["facility_slug"] = facility_slug
-        record["slug"] = path.stem
+        # Normalized (lowercase, hyphenated) so this exact string can be used
+        # interchangeably as a CSS class token (`:class-item:` values are run
+        # through docutils' class-name normalizer, which lowercases and
+        # hyphenates automatically -- if `slug` weren't pre-normalized here,
+        # the card's `slug-<slug>` class would silently end up spelled
+        # differently than the raw `data-slug` attribute on the table row
+        # and map marker, breaking search/highlight/scroll-to-card matching.
+        record["slug"] = _slugify(path.stem)
 
         latitude = record.get("latitude")
         longitude = record.get("longitude")
@@ -398,6 +415,16 @@ def _load_contributed_telescopes():
             for s in siblings:
                 if s not in r["siblings"]:
                     r["siblings"].append(s)
+        # Only enforce agreement across siblings that are the *same*
+        # facility replicated at multiple sites (KMTNet's three near-
+        # identical telescopes, per Section 4 of the requirements doc).
+        # Siblings that are materially different facilities sharing a
+        # contribution_id purely for funding reasons (VST/LBT, McLellan/
+        # Nishimura) are expected to have their own distinct summary,
+        # time_available, etc. -- checking those would just be noise.
+        facility_names = {r.get("facility") for r in group}
+        if len(facility_names) > 1:
+            continue
         for field in _SIBLING_CONSISTENCY_FIELDS:
             values = {r.get(field) for r in group}
             if len(values) > 1 and logger is not None:
@@ -420,6 +447,18 @@ def _load_contributed_telescopes():
     )
     search_index = {r["slug"]: r["search_text"] for r in records}
 
+    # Each record's own slug (from its filename) is its unique anchor --
+    # contribution_id is NOT unique per card (KMTNet's three sibling
+    # records all share KOR-KAS-S2), so anything that needs to link to
+    # "the card(s) for this contribution" -- like the opportunities
+    # banner -- looks it up here rather than anchoring directly on the
+    # contribution_id.
+    cid_to_slugs = {}
+    for r in records:
+        for cid in r["contribution_ids"]:
+            if cid:
+                cid_to_slugs.setdefault(cid, []).append(r["slug"])
+
     return {
         "telescopes": records,
         "all_instrumentation": sorted(all_instrumentation),
@@ -430,6 +469,7 @@ def _load_contributed_telescopes():
         ],
         "slugify": _slugify,
         "search_index_json": json.dumps(search_index),
+        "cid_to_slugs": cid_to_slugs,
     }
 
 
@@ -482,3 +522,9 @@ def _load_contributed_opportunities():
 
 jinja_contexts["contributed_telescopes"] = _load_contributed_telescopes()
 jinja_contexts["contributed_opportunities"] = _load_contributed_opportunities()
+# The opportunities banner cross-links to facility cards by contribution_id,
+# but anchors are per-card slugs (see cid_to_slugs above) -- shared here so
+# that lookup works from the separate contributed_opportunities context too.
+jinja_contexts["contributed_opportunities"]["cid_to_slugs"] = (
+    jinja_contexts["contributed_telescopes"]["cid_to_slugs"]
+)
