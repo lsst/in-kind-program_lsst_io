@@ -1,0 +1,34 @@
+id: gtc-2026b-special-call
+title: GTC Observing Time Opportunity for the US and Chilean Community
+kind: special_call
+related_contribution_ids:
+- ESP-BCM-S5
+- ESP-IAC-S1
+summary: A special allocation of ~2 nights/semester on the 10.4m Gran Telescopio Canarias
+  (GTC) is available to the US and Chilean community via a Letter-of-Intent + Spanish TAC
+  co-PI process. LoIs are capped at 3x the available allocation; Cosmology proposals are typically
+  paired with the Barcelona-Madrid LSST groups, all other disciplines with the IAC, though
+  pairing depends on demand and staff availability.
+milestones:
+- label: Letters of Intent due
+  date: '2026-08-07'
+- label: Matchmaking & feasibility notifications
+  date: '2026-08-31'
+  approximate: true
+- label: GTC Call for Proposals opens
+  date: '2026-09-01'
+- label: Spanish TAC submission deadline
+  date: '2026-10-01'
+links:
+- label: Full announcement
+  url: https://community.lsst.org/t/gtc-observing-time-opportunity-for-the-us-and-chilean-community/12233
+- label: LoI submission portal
+  url: https://lsst.ice.csic.es/
+- label: Official Announcement of Opportunity (PDF)
+  url: https://community.lsst.org/uploads/short-url/d2UEv88IgQXxlDY42eGCG0visIK.pdf
+contact:
+  name: Steven Margheim
+  email: steven.margheim@noirlab.edu
+  note: eligibility, general process, program opportunities -- technical instrument questions
+    go to the GTC website or submission-portal contacts instead
+visible_until: '2026-10-01'

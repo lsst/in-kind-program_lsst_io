@@ -1,0 +1,45 @@
+contribution_id: JAP-JPG-S1
+facility: Subaru Telescope
+aperture: 8.2m
+country: USA
+site: Maunakea
+latitude: 19.825
+longitude: -155.478
+instrumentation:
+- Imaging
+- Spectroscopy
+instrument_names:
+- HSC
+- PFS
+wavelength_regime:
+- Optical
+- NIR
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: true
+field_of_view: null
+aeon: false
+too_capable: false
+observing_mode: mixed
+contacts:
+- name: Yusei Koyama
+  email: koyama@naoj.org
+- name: Yousuke Utsumi
+  email: yousuke.utsumi@nao.ac.jp
+first_semester: 2026A
+time_available: 5 nights/year (2-3 nights/semester)
+duration: 10 years
+status: available
+tac_process: default
+external_links:
+- label: Observing info
+  url: https://subarutelescope.org/en/for_researchers/observation/index.html
+- label: Instrumentation
+  url: https://subarutelescope.org/Observing/Instruments/index.html
+summary: 'A total of 2-3 nights per semester (5 nights per year on average) will be available
+  on the 8.2-meter Subaru Telescope in Hawaii, USA. All instruments offered for open use under
+  Subaru''s common-use policy are available; HSC and PFS are primarily queue mode, all other
+  instruments are classical mode. Proposers must use the Gemini Phase-I Tool (PIT), not the
+  standard NOIRLab dashboard. Note: while Subaru operations may technically support ToO, the
+  Rubin community has better ToO access via Gemini North, so this contribution isn''t positioned
+  that way. This contribution is expected to be available for 10 years from the starting semester.'

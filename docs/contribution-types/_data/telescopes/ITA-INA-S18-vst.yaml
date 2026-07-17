@@ -1,0 +1,46 @@
+contribution_id: ITA-INA-S18
+facility: VLT Survey Telescope (VST)
+aperture: 2.6m
+country: Chile
+site: Cerro Paranal
+latitude: -24.627
+longitude: -70.404
+instrumentation:
+- Imaging
+instrument_names:
+- OmegaCAM
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: false
+too_capable: true
+observing_mode: service
+contacts:
+- name: Felice Cusano
+  email: felice.cusano@inaf.it
+- name: VST (general)
+  email: vst@inaf.it
+first_semester: 2026B
+time_available: 35 nights/year
+duration: through FY2034
+status: available
+tac_process: default
+external_links:
+- label: Home (INAF)
+  url: https://vst.inaf.it/home
+- label: OmegaCAM instrument page
+  url: https://www.eso.org/sci/facilities/paranal/instruments/omegacam.html
+- label: Astro-WISE reduction environment
+  url: https://www.astro-wise.org/portal/
+- label: Data-reduction training sessions
+  url: https://vst.inaf.it/user-support/learning-sessions-for-data-reduction
+summary: 35 pre-allocated nights per year will be available at the 2.6 meter VLT Survey Telescope
+  at Paranal, Chile, for imaging observations. ToO requests can typically be accommodated
+  on a ~24-hour timescale, subject to instrument availability. Observations are carried out
+  in service mode by INAF staff; programs requiring a strictly fixed cadence cannot be supported.
+  Raw data are available via the ESO Science Archive as soon as ingested, with a 1-year proprietary
+  period. The standard reduction environment is Astro-WISE. This contribution is expected
+  to be available through FY2034.

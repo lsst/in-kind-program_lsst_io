@@ -1,0 +1,40 @@
+contribution_id: SWE-STK-S3
+facility: Nordic Optical Telescope (NOT)
+aperture: 2.56m
+country: Spain
+site: La Palma (Roque de los Muchachos Observatory)
+latitude: 28.757
+longitude: -17.885
+instrumentation:
+- Spectroscopy
+instrument_names:
+- ALFOSC
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: false
+too_capable: true
+observing_mode: queue
+contacts:
+- name: Jesper Sollerman
+  email: jesper@astro.su.se
+first_semester: 2025A
+time_available: 70 hours/semester
+duration: 2 years (4 semesters)
+status: available
+tac_process: default
+external_links:
+- label: Instrumentation
+  url: https://www.not.iac.es/instruments/
+- label: WISeREP/TNS
+  url: https://www.wiserep.org/
+summary: 70 hours of observing time on the Nordic Optical Telescope (NOT) is available for
+  supernova classification using the ALFOSC instrument (low/medium resolution spectroscopy).
+  Successful PIs can submit Soft-ToO triggers for classification and follow-up of transients,
+  primarily supernovae -- triggers should be sent the afternoon before observation; this is
+  a next-available-night mechanism, not a hard interrupt. Fully reduced spectra are uploaded
+  to WISeREP/TNS within 48 hours of observation with no proprietary period. This contribution
+  was first made available in Semester 2025A.

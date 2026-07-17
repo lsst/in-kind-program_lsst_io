@@ -1,0 +1,42 @@
+contribution_id: SZA-SAA-S1
+facility: South African Large Telescope (SALT)
+aperture: 9.2m
+country: South Africa
+site: SAAO, Sutherland
+latitude: -32.376
+longitude: 20.81
+instrumentation:
+- Imaging
+- Spectroscopy
+instrument_names: []
+wavelength_regime:
+- Optical
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: false
+too_capable: true
+observing_mode: null
+contacts:
+- name: SALT Help Desk (general queries)
+  email: salthelp@salt.ac.za
+  note: individual contacts from past CfPs are not used here as they go stale quickly
+first_semester: 2026A
+time_available: 25 hours/semester
+duration: 10 years
+status: available
+tac_process: default
+external_links:
+- label: Home
+  url: https://astronomers.salt.ac.za/
+- label: Instrumentation
+  url: https://astronomers.salt.ac.za/instruments/
+- label: Call document
+  url: https://astronomers.salt.ac.za/proposals/
+- label: Simulation tools
+  url: https://astronomers.salt.ac.za/software/
+summary: 25 hours per semester will be available on the 9.2 meter South African Large Telescope
+  located at the South African Astronomical Observatory, South Africa. SALT has a wide range
+  of instrumentation available. This contribution is expected to be available for 10 years
+  from the start of the first semester of availability.
