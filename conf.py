@@ -16,6 +16,10 @@ html_theme_options = {
 linkcheck_ignore = [
     r'https://astronomers\.salt\.ac\.za/.*',
     r'https://vidojevica\.aob\.rs/.*',
+    # WISeREP (linked from the NOT facility card) returns 403 to
+    # non-browser user agents, including sphinx's linkcheck bot -- the
+    # link itself is valid, it's just blocking automated requests.
+    r'https://www\.wiserep\.org/.*',
 ]
 
 
