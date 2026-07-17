@@ -109,8 +109,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           <select id="ikt-filter-status">
             <option value="">All</option>
             <option value="status-available">Available</option>
-            <option value="status-future_semester">Future semester</option>
-            <option value="status-tba">TBA</option>
+            <option value="status-future-semester">Future semester</option>
           </select>
         </label>
         <label>Hemisphere
@@ -135,6 +134,9 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <div class="ikt-map-wrap">
         <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map showing facility locations">
           <rect x="0" y="0" width="1000" height="500" fill="#eef2f0"></rect>
+          {% if world_outline_path %}
+          <path d="{{ world_outline_path }}" fill="#d7ded9" stroke="#c3ccc5" stroke-width="0.5"></path>
+          {% endif %}
           {% for t in telescopes %}
           {% if t.marker_x is not none %}
           <circle class="ikt-map-marker" data-slug="{{ t.slug }}" data-tokens="{{ t.filter_tokens }}"
@@ -166,7 +168,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td><button type="button" class="ikt-title-link" data-slug="{{ t.slug }}">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
-            <td>{% if t.status == 'available' %}<span class="ikt-badge ikt-badge-success">Available</span>{% elif t.status == 'future_semester' %}<span class="ikt-badge ikt-badge-warning">Future semester</span>{% else %}<span class="ikt-badge ikt-badge-muted">TBA</span>{% endif %}</td>
+            <td>{% if t.status == 'available' %}<span class="ikt-badge ikt-badge-success">Available</span>{% else %}<span class="ikt-badge ikt-badge-warning">Future semester</span>{% endif %}</td>
             <td>{{ t.aperture or 'TBA' }}</td>
           </tr>
           {% endfor %}
@@ -297,6 +299,6 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
              Also available under this contribution: {% for s in t.siblings %}`{{ s.label }} <#{{ s.slug }}>`_{{ ", " if not loop.last }}{% endfor %}
           {% endif %}
           +++
-          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'future_semester' %}:bdg-warning:`Future semester`{% else %}:bdg-muted:`TBA`{% endif %}
+          {% if t.status == 'available' %}:bdg-success:`Available`{% else %}:bdg-warning:`Future semester`{% endif %}
 
       {% endfor %}

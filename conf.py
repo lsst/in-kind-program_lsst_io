@@ -267,7 +267,23 @@ def _sin(x):
     return math.sin(x)
 
 
-_STATUS_SORT_ORDER = {"available": 0, "future_semester": 1, "tba": 2}
+def _load_world_outline_path():
+    """Read the `d` attribute out of docs/_static/world-outline.svg so it
+    can be inlined as a <path> inside the facility map's own <svg>, rather
+    than referenced by URL (which would need a build-relative path that's
+    fragile to compute correctly from inside a sphinx_jinja context). The
+    static file remains the single source of truth -- see its header
+    comment for provenance/licensing and how to regenerate it."""
+    path = (
+        Path(__file__).parent / "docs" / "_static" / "world-outline.svg"
+    )
+    if not path.exists():
+        return ""
+    match = re.search(r'<path\s+d="([^"]+)"', path.read_text(encoding="utf-8"))
+    return match.group(1) if match else ""
+
+
+_STATUS_SORT_ORDER = {"available": 0, "future_semester": 1}
 _SIBLING_CONSISTENCY_FIELDS = (
     "summary", "time_available", "duration", "status", "tac_process",
 )
@@ -336,7 +352,12 @@ def _load_contributed_telescopes():
             record["resolution_bin"] = None
             record["resolution_bin_label"] = None
 
-        status = record.get("status", "tba")
+        # Only two states are tracked ("available" / "future_semester") --
+        # a facility whose availability isn't confirmed yet is future
+        # semester by definition, so that's the safe default for a record
+        # that omits `status` rather than a separate "tba" bucket.
+        status = record.get("status", "future_semester")
+        record["status"] = status
         tokens = [
             f"status-{_slugify(status)}",
             f"hemisphere-{_slugify(record['hemisphere'])}",
@@ -470,6 +491,7 @@ def _load_contributed_telescopes():
         "slugify": _slugify,
         "search_index_json": json.dumps(search_index),
         "cid_to_slugs": cid_to_slugs,
+        "world_outline_path": _load_world_outline_path(),
     }
 
 
