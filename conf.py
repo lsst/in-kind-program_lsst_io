@@ -20,6 +20,12 @@ linkcheck_ignore = [
     # non-browser user agents, including sphinx's linkcheck bot -- the
     # link itself is valid, it's just blocking automated requests.
     r'https://www\.wiserep\.org/.*',
+    # GTC and the INAF SIPGI proposal tool (linked from the GTC and LBT
+    # facility cards) both serve incomplete SSL certificate chains --
+    # real, reachable sites that browsers tolerate but Python's ssl
+    # module rejects with CERTIFICATE_VERIFY_FAILED in CI.
+    r'https://www\.gtc\.iac\.es/.*',
+    r'https://pandora\.lambrate\.inaf\.it/.*',
 ]
 
 
