@@ -6,159 +6,297 @@ This page lists the facilities expected to be made available via the Vera C. Rub
 The information on this page is subject to change. Final information on resources, time availability, and other pertinent information will be provided as part of the `NOIRLab Call for Proposals <https://noirlab.edu/science/observing-noirlab/proposals>`_ each semester.
 Unless otherwise noted, this time will be made available via the NOIRLab Time Allocation Process.
 
+Use the filters, search, or map below to find facilities relevant to your science case.
 
+Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have any questions about contributed telescope access.
 
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Facility            |Location             |Instrumentation          |In-kind                                                                                              |First     |Time       |Duration |
-|                    |                     |                         |Contribution ID                                                                                      |Semester  |Available  |         |
-+====================+=====================+=========================+=====================================================================================================+==========+===========+=========+
-|Gran Canary         | La Palma, Spain     |Imaging and Spectroscopy |`ESP-BCM-S5 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ESP-IAC-S1>`_,      |TBA       |2 nights/  |10 years |
-|Telescope           |                     |                         |`ESP-IAC-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ESP-IAC-S1>`_       |          |semester   |         |
-|(GTC) 10.4m         |                     |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|South African       |SAAO, South Africa   |Imaging and Spectroscopy |`SZA-SAA-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#SZA-SAA-S1>`_       |2026A     |25 hours/  |10 years |
-|Large Telescope     |                     |                         |                                                                                                     |          |semester   |         |
-|(SALT) 9.2m         |                     |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Subaru              |Maunakea, USA        |Imaging and Spectroscopy |`JAP-JPG-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#JAP-JPG-S1>`_       |2026A     |5 nights/  |10 years |
-|Telescope 8.4m      |                     |                         |                                                                                                     |          |year       |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Large Binocular     |Mt. Graham, USA      |Imaging and Spectroscopy |`ITA-INA-S18 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ITA-INA-S18>`_     |2026B     |20 hours   |through  |
-|Telescope 2x8.4m    |                     |                         |                                                                                                     |          |           |FY34     |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|VLT Survey          |Cerro Paranal, Chile |Imaging                  |`ITA-INA-S18 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#ITA-INA-S18>`_     |2026B     |35 nights/ |through  |
-|Telescope 2.6m      |                     |                         |                                                                                                     |          |year       |FY34     |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Nordic Optical      |La Palma, Spain      |Spectroscopic            |`SWE-STK-S3 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#SWE-STK-S3>`_       |2025A     |70 hours/  |2 years  |
-|Telescope 2.56m     |                     |classification of SNe    |                                                                                                     |          |semester   |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Trans-Pacific       |San Pedro Martir,    |TBA                      |`TAI-NCU-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#TAI-NCU-S1>`_       |TBA       |20 nights/ |10 years |
-|Two-Meter           |Mexico               |                         |                                                                                                     |          |semester   |         |
-|Telescope 2m        |                     |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Nishimura 1.8m      |Ōtehīwai Mt John     |Imaging                  |`NZL-AUK-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#NZL-AUK-S1>`_       |TBA       |10 nights/ |10 years |
-|                    |Observatory,         |                         |                                                                                                     |          |semester   |         |
-|                    |New Zealand          |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Korean Microlensing |Cerro Tololo, Chile  |Imaging                  |`KOR-KAS-S2 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#KOR-KAS-S2>`_       |2026A     |150 hours/ |5 years  |
-|Telescope 1.6m      |                     |                         |                                                                                                     |          |semester   |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Korean Microlensing |Siding Springs       |Imaging                  |`KOR-KAS-S2 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#KOR-KAS-S2>`_       |2026A     |150 hours/ |5 years  |
-|Telescope 1.6m      |Observatory,         |                         |                                                                                                     |          |semester   |         |
-|                    |Australia            |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Korean Microlensing |SAAO, South Africa   |Imaging                  |`KOR-KAS-S2 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#KOR-KAS-S2>`_       |2026A     |150 hours/ |5 years  |
-|Telescope 1.6m      |                     |                         |                                                                                                     |          |semester   |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Milankovic          |Astronomical Station |Imaging                  |`SER-SAG-S2 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#SER-SAG-S1>`_       |2025A     |2 nights/  |10 years |
-|Telescope 1.4m      |Vidojevca, Serbia    |                         |                                                                                                     |          |month      |         |
-|Telescope 1.4m      |                     |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|Various SAAO        |SAAO, South Africa   |Imaging and Spectroscopy |`SZA-SAA-S4 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#SZA-SAA-S4>`_       |TBA       |26 hours/  |10 years |
-|telescopes          |                     |                         |                                                                                                     |          |semester   |         |
-|1.9m - 1.0m         |                     |                         |                                                                                                     |          |           |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|McLellan 1.0m       |Ōtehīwai Mt John     |Imaging                  |`NZL-AUK-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#NZL-AUK-S1>`_       |TBA       |200 equiv  |10 years |
-|                    |Observatory,         |                         |                                                                                                     |          |hours      |         |
-|                    |New Zealand          |                         |                                                                                                     |          |Nov-Feb    |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
-|RTT150 1.5m &       |TÜBITAK National     |Imaging                  |`TUR-AKD-S1 <https://www.lsst.org/scientists/in-kind-program/telescope-resources#TUR-AKD-S1>`_       |TBA       |23 nights/ |10 years |
-|T100 1.0m           |Observatory, Türkiye |                         |                                                                                                     |          |year total |         |
-+--------------------+---------------------+-------------------------+-----------------------------------------------------------------------------------------------------+----------+-----------+---------+
+.. jinja:: contributed_opportunities
 
-Now Available
-=============
+   {% if opportunities %}
+   .. raw:: html
 
-SER-SAG-S1
-----------
+      <style>
+        .ikt-opp-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .ikt-opp-card { border: 2px solid #1a5c33; border-radius: 0.75rem; padding: 1rem 1.25rem; background: #f3faf6; }
+        .ikt-opp-title { font-weight: 600; margin: 0 0 0.4em; }
+        .ikt-opp-milestones { list-style: none; margin: 0.6em 0; padding: 0; font-size: 0.9em; }
+        .ikt-opp-milestones li { padding: 0.15em 0; }
+        .ikt-opp-milestones .approx::after { content: " (approx.)"; color: #666; }
+        .ikt-opp-links a { margin-right: 1em; font-size: 0.9em; }
+      </style>
 
-Two nights per month are available on the `1.4 Milankovic Telescope <https://vidojevica.aob.rs/index.php?option=com_content&view=article&id=40&Itemid=249>`_ located at
-`Astronomical Station Vidojevica <https://vidojevica.aob.rs/index.php?option=com_content&view=article&id=8&Itemid=35>`_ near Prokuplje, Serbia.
-Optical Imaging is available with the `Andor iKon-L 936 CCD <https://vidojevica.aob.rs/index.php?option=com_content&view=article&id=21&Itemid=28>`_ and the following filters: Johnson B, V, R, I, L, filters and Hα ,
-Hα continuum and SII.
-This facility offers AEON compatibility and is available for target of opportunity observations. Observations are taken in service mode.
-Raw data will be available within 24 hours and fully reduced and calibrated data within 72 hours. This contribution was first made available in Semester 2025A and is expected to be available for a total of 10 years.
+      <div class="ikt-opp-row">
+      {% for opp in opportunities %}
+        <div class="ikt-opp-card" id="opp-{{ opp.slug }}">
+          <p class="ikt-opp-title">{{ opp.title }}</p>
+          <p>{{ opp.summary }}</p>
+          {% if opp.milestones %}
+          <ul class="ikt-opp-milestones">
+            {% for m in opp.milestones %}
+            <li{% if m.get('approximate') %} class="approx"{% endif %}><strong>{{ m.date }}</strong> &mdash; {{ m.label }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          <div class="ikt-opp-links">
+          {% for link in (opp.links or []) %}
+            <a href="{{ link.url }}">{{ link.label }}</a>
+          {% endfor %}
+          </div>
+          {% if opp.related_contribution_ids %}
+          <p style="font-size: 0.85em; color: #666; margin-top: 0.6em;">
+            Related facility:
+            {% for cid in opp.related_contribution_ids %}
+              {% for slug in (cid_to_slugs.get(cid) or []) %}<a href="#{{ slug }}">{{ cid }}</a> {% endfor %}
+            {% endfor %}
+          </p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      </div>
+   {% endif %}
 
-SWE-STK-S3
-----------
+.. jinja:: contributed_telescopes
 
-70 hours of observing time on the `Nordic Optical Telescope <https://www.not.iac.es/instruments/>`_ (NOT) is available for supernova classification using the ALFOSC instrument.
-NOT is a 2.56m telescope located on La Palma, Spain.
-The Alhambra Faint Object Spectrograph and Camera, ALFOSC, offers low/medium spectroscopy. Successful PIs will be able to submit ToO triggers of potential SNe for classification.
-Fully reduced spectra will be uploaded to WISeREP/TNS within 48 hours of observation.
-This contribution was first made available in Semester 2025A and is expected to be available for a total of 4 semesters.
+   .. raw:: html
 
+      <style>
+        .ikt-filterbar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+        .ikt-filterbar label { font-size: 0.9em; }
+        .ikt-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .ikt-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid #999; border-radius: 0.3em; font-size: 0.9em; }
+        .ikt-map-wrap { margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; background: #eef2f0; }
+        .ikt-map-marker { cursor: pointer; }
+        .ikt-map-marker:hover { stroke: #1a1a1a; stroke-width: 1.5; }
+        .ikt-telescopes-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+        .ikt-telescopes-table th, .ikt-telescopes-table td { text-align: left; padding: 0.5em 0.75em; border-bottom: 1px solid #ddd; }
+        .ikt-telescopes-table th { cursor: pointer; user-select: none; }
+        .ikt-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 1em; font-size: 0.85em; margin: 0 0.2em 0.2em 0; }
+        .ikt-badge-success { background: #d9f2e3; color: #1a5c33; }
+        .ikt-badge-muted { background: #e6e6e6; color: #555; }
+        .ikt-badge-warning { background: #fdeecb; color: #8a5a00; }
+        .ikt-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }
+        .ikt-title-link:hover { text-decoration: underline; }
+        .ikt-card.ikt-highlight .sd-card { outline: 3px solid #1a5c33; outline-offset: 2px; transition: outline-color 1.2s ease; }
+        .ikt-siblings { font-size: 0.85em; color: #555; margin-top: 0.6em; }
+      </style>
 
-JAP-JPG-S1
-----------
+      <div class="ikt-filterbar">
+        <label>Instrumentation
+          <select id="ikt-filter-instr">
+            <option value="">All</option>
+            {% for v in all_instrumentation %}<option value="instr-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Wavelength
+          <select id="ikt-filter-wl">
+            <option value="">All</option>
+            {% for v in all_wavelengths %}<option value="wl-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Resolution
+          <select id="ikt-filter-res">
+            <option value="">All</option>
+            {% for key, label in all_resolution_bins %}<option value="res-{{ key }}">{{ label }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Multiplex
+          <select id="ikt-filter-multiplex">
+            <option value="">All</option>
+            <option value="multiplex-yes">Yes</option>
+          </select>
+        </label>
+        <label>Status
+          <select id="ikt-filter-status">
+            <option value="">All</option>
+            <option value="status-available">Available</option>
+            <option value="status-future_semester">Future semester</option>
+            <option value="status-tba">TBA</option>
+          </select>
+        </label>
+        <label>Hemisphere
+          <select id="ikt-filter-hemisphere">
+            <option value="">All</option>
+            <option value="hemisphere-northern">Northern</option>
+            <option value="hemisphere-southern">Southern</option>
+          </select>
+        </label>
+        <label>Aperture
+          <select id="ikt-filter-aperture">
+            <option value="">All</option>
+            {% for key, label in all_aperture_bands %}<option value="aperture-{{ key }}">{{ label }}</option>{% endfor %}
+          </select>
+        </label>
+      </div>
 
-Five nights per year will be available on the 8.2 meter `Subaru Telescope <https://subarutelescope.org/en/for_researchers/observation/index.html>`_ in Hawaii, USA.
-Subaru has a wide range of `Subaru telescope instrumentation <https://subarutelescope.org/Instruments/index.html>`_, including the new Prime Focus Spectrograph.
-This contribution is expected to be available for 10 years from the starting semester.
+      <div class="ikt-actionbar">
+        <input type="text" id="ikt-search" placeholder="Search facilities, sites, instruments...">
+      </div>
 
+      <div class="ikt-map-wrap">
+        <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map showing facility locations">
+          <rect x="0" y="0" width="1000" height="500" fill="#eef2f0"></rect>
+          {% for t in telescopes %}
+          {% if t.marker_x is not none %}
+          <circle class="ikt-map-marker" data-slug="{{ t.slug }}" data-tokens="{{ t.filter_tokens }}"
+                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"
+                  fill="{{ '#1a5c33' if t.status == 'available' else '#8a5a00' }}"></circle>
+          {% endif %}
+          {% endfor %}
+        </svg>
+      </div>
 
-KOR-KAS-S2
-----------
+      <table class="ikt-telescopes-table" id="ikt-telescopes-table">
+        <thead>
+          <tr>
+            <th data-sort="facility">Facility</th>
+            <th data-sort="location">Location</th>
+            <th data-sort="instrumentation">Instrumentation</th>
+            <th data-sort="status">Status</th>
+            <th data-sort="aperture">Aperture</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in telescopes %}
+          <tr class="ikt-row" data-tokens="{{ t.filter_tokens }}"
+              data-facility="{{ t.facility }}"
+              data-location="{{ [t.site, t.country] | select | join(', ') }}"
+              data-instrumentation="{{ (t.instrumentation or []) | join(', ') }}"
+              data-status="{{ t.status }}"
+              data-aperture="{{ t.aperture or '' }}">
+            <td><button type="button" class="ikt-title-link" data-slug="{{ t.slug }}">{{ t.facility }}</button></td>
+            <td>{{ [t.site, t.country] | select | join(', ') }}</td>
+            <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
+            <td>{% if t.status == 'available' %}<span class="ikt-badge ikt-badge-success">Available</span>{% elif t.status == 'future_semester' %}<span class="ikt-badge ikt-badge-warning">Future semester</span>{% else %}<span class="ikt-badge ikt-badge-muted">TBA</span>{% endif %}</td>
+            <td>{{ t.aperture or 'TBA' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-Roughly 150 hours per semester will be available on each of the telescopes of the `Korean Microlensing Telescope Network <https://kmtnet.kasi.re.kr/kmtnet-eng/>`_.
-KMTNet consists of 1.6 meter optical imaging telescopes located in Cerro Tololo, Chile, Siding Springs Observatory, Australia, and South African Astronomical Observatory, South Africa.
-This contribution is expected to be available for 5 years after the first semster.
+      <script>
+      (function () {
+        var SEARCH_INDEX = {{ search_index_json }};
 
+        function matchesSearch(slug) {
+          var query = document.getElementById('ikt-search').value.trim().toLowerCase();
+          if (!query) { return true; }
+          var text = SEARCH_INDEX[slug] || '';
+          return text.indexOf(query) !== -1;
+        }
 
-SZA-SAA-S1
-----------
+        function setVisible(el, visible) {
+          if (visible) {
+            el.style.removeProperty('display');
+          } else {
+            el.style.setProperty('display', 'none', 'important');
+          }
+        }
 
-25 hours per semester will be available on the 9.2 meter `South African Large Telescope <https://astronomers.salt.ac.za/>`_ located at South African Astronomical Observatory, South Africa.
-SALT has a wide range of `SALT instrumentation <https://astronomers.salt.ac.za/instruments/>`_ available. This contribution is expected to be available for 10 years from the start of the first semester of availability.
+        function slugOfCard(card) {
+          var m = card.className.match(/\bslug-(\S+)/);
+          return m ? m[1] : '';
+        }
 
+        function applyFilters() {
+          var instr = document.getElementById('ikt-filter-instr').value;
+          var wl = document.getElementById('ikt-filter-wl').value;
+          var res = document.getElementById('ikt-filter-res').value;
+          var multiplex = document.getElementById('ikt-filter-multiplex').value;
+          var status = document.getElementById('ikt-filter-status').value;
+          var hemisphere = document.getElementById('ikt-filter-hemisphere').value;
+          var aperture = document.getElementById('ikt-filter-aperture').value;
+          var filters = [instr, wl, res, multiplex, status, hemisphere, aperture].filter(Boolean);
 
-ITA-INA-S18
------------
+          function matches(tokenStr, slug) {
+            var tokens = ' ' + tokenStr + ' ';
+            return filters.every(function (f) { return tokens.indexOf(' ' + f + ' ') !== -1; })
+              && matchesSearch(slug);
+          }
 
-35 pre-allocated nights per year will be available at the 2.6 meter `VLT Survey Telescope <https://www.eso.org/sci/facilities/paranal/telescopes/vst.html>`_ at Paranal, Chile for imaging observations.
-20 hours of open-shutter time per year will be available at the twin 8.4 telescopes at the `Large Binocular Telescope Observatory <https://www.lbto.org/>`_ with
-the suite of imaging and spectroscopy instrumentation available. This contribution is expected to be available through FY2034.
+          document.querySelectorAll('.ikt-row').forEach(function (row) {
+            setVisible(row, matches(row.getAttribute('data-tokens'), row.querySelector('.ikt-title-link').getAttribute('data-slug')));
+          });
+          document.querySelectorAll('.ikt-card').forEach(function (card) {
+            setVisible(card, matches(card.className, slugOfCard(card)));
+          });
+          document.querySelectorAll('.ikt-map-marker').forEach(function (marker) {
+            setVisible(marker, matches(marker.getAttribute('data-tokens'), marker.getAttribute('data-slug')));
+          });
+        }
 
+        ['ikt-filter-instr', 'ikt-filter-wl', 'ikt-filter-res', 'ikt-filter-multiplex', 'ikt-filter-status', 'ikt-filter-hemisphere', 'ikt-filter-aperture'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.addEventListener('change', applyFilters);
+        });
+        var searchInput = document.getElementById('ikt-search');
+        if (searchInput) { searchInput.addEventListener('input', applyFilters); }
 
-Available in a Future Semester
-============================
+        function scrollToCard(slug) {
+          var card = document.querySelector('.ikt-card.slug-' + CSS.escape(slug));
+          if (!card) { return; }
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          card.classList.add('ikt-highlight');
+          setTimeout(function () { card.classList.remove('ikt-highlight'); }, 1500);
+        }
 
+        document.querySelectorAll('.ikt-title-link').forEach(function (link) {
+          link.addEventListener('click', function () { scrollToCard(link.getAttribute('data-slug')); });
+        });
+        document.querySelectorAll('.ikt-map-marker').forEach(function (marker) {
+          marker.addEventListener('click', function () { scrollToCard(marker.getAttribute('data-slug')); });
+        });
 
+        var sortState = {};
+        document.querySelectorAll('#ikt-telescopes-table th[data-sort]').forEach(function (th) {
+          th.addEventListener('click', function () {
+            var key = th.getAttribute('data-sort');
+            var tbody = document.querySelector('#ikt-telescopes-table tbody');
+            var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var asc = !sortState[key];
+            sortState = {};
+            sortState[key] = asc;
+            rows.sort(function (a, b) {
+              var av = a.getAttribute('data-' + key) || '';
+              var bv = b.getAttribute('data-' + key) || '';
+              return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+            });
+            rows.forEach(function (r) { tbody.appendChild(r); });
+          });
+        });
+      })();
+      </script>
 
-ESP-IAC-S1 and ESP-BCM-S5
--------------------------
+   .. grid:: 1 1 2 2
+      :gutter: 2
 
-Roughly two nights per semester will be available at the Gran Telescope Canaries (GTC).
-The GTC is a 10.4 meter Optical/NIR telescope in La Palma, Spain. The GTC has a wide suite of instrumentation.
-In-kind access to the GTC will not be allocated via the NOIRLab TAC, but a special process to be announced at a later date.
-This contribution is expected to be available for ten years from the starting semester.
+      {% for t in telescopes %}
+      .. grid-item-card:: {{ t.facility }}
+          :class-item: ikt-card slug-{{ t.slug }} {{ t.filter_tokens }}
 
+          .. _{{ t.slug }}:
 
-NZL-AUK-S1
-----------
+          {{ t.aperture or 'TBA' }} — {{ [t.site, t.country] | select | join(', ') }}
+          ^^^
+          {% for v in (t.instrumentation or []) %}:bdg-light:`{{ v }}` {% endfor %}{% for v in (t.wavelength_regime or []) %}:bdg-light:`{{ v }}` {% endfor %}{% if t.aeon %}:bdg-success:`AEON` {% endif %}{% if t.too_capable %}:bdg-success:`ToO` {% endif %}{% if t.multiplex %}:bdg-light:`Multiplex` {% endif %}
 
-Time will be available at facilities located at the `University of Canterbury Ōtehīwai Mt John Observatory <https://ucdigitalsms.atlassian.net/wiki/>`_ in New Zealand.
-Approximately 10 nights per semester will be available on the MOA 1.8 meter telescope, and roughly 200 equivalent hours will be available in the November - February period on the 1.0 meter telescope.
-This contribution is expected to be available for 10 years from the first semester of availability.
+          {% if t.instrument_names %}**Instruments:** {{ t.instrument_names | join(', ') }}{% endif %}
 
+          **Contribution ID:** {{ t.contribution_ids | join(', ') }}
 
-TAI-NCU-S1
-----------
+          **First semester:** {{ t.first_semester or 'TBA' }}    **Time available:** {{ t.time_available or 'TBA' }}    **Duration:** {{ t.duration or 'TBA' }}
 
-Twenty nights per semester will be available at the Trans-Pacific Two-Meter Telescope located at San Pedro Martir, Mexico.
-This project is expected to undergo first light and commissioning in 2025. The contribution is expected to be available for 10 years from the first semester of availability.
+          {{ t.summary or '' }}
 
+          {% if t.contacts %}**Contact:** {% for c in t.contacts %}{{ c.name }} (`{{ c.email }} <mailto:{{ c.email }}>`_){{ ", " if not loop.last }}{% endfor %}{% endif %}
 
-SZA-SAA-S4
-----------
+          {% if t.external_links %}**Links:** {% for link in t.external_links %}`{{ link.label }} <{{ link.url }}>`__{{ ", " if not loop.last }}{% endfor %}{% endif %}
 
-Approximately 26 hours per semester will be available on a network of telescopes available at the South African Astronomical Observatory, South Africa.
-Telescopes will include the `1.0 meter <https://www.saao.ac.za/astronomers/1-0m/>`_ and `1.9 meter <https://www.saao.ac.za/astronomers/1-9m/>`_ facilities.
-This contribution is expected to be available for 10 years from the start of the first semester of availability.
+          {% if t.siblings %}
+          .. container:: ikt-siblings
 
+             Also available under this contribution: {% for s in t.siblings %}`{{ s.label }} <#{{ s.slug }}>`_{{ ", " if not loop.last }}{% endfor %}
+          {% endif %}
+          +++
+          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'future_semester' %}:bdg-warning:`Future semester`{% else %}:bdg-muted:`TBA`{% endif %}
 
-TUR-AKD-S1
-----------
-
-23 nights per year will be available at the T100 and RTT150 telescopes at the TÜBITAK National Observatory in southern Türkiye.
-This contribution is expected to be available for 10 years from the first semester of availability.
+      {% endfor %}
