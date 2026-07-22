@@ -3,7 +3,7 @@ Software Consultancy
 ####################
 
 Are you leading a software contribution or a general pool contribution for the Rubin Observatory or Rubin Science Collaborations? Do you need software developments for your
-Rubin work but are not sure exactly how to start or approach it? Are you managing or directng an in-kind software contribution but want advice on how to do that successfully?
+Rubin work but are not sure exactly how to start or approach it? Are you managing or directing an in-kind software contribution but want advice on how to do that successfully?
 
 Meet Greg Poole, an experienced and knowledgeable software consultant for the Rubin community who can help you with software development best practices,
 facilitating software definition or understanding your software needs. Greg works at the Astronomy Data and Computing Services (ADACS) as a project scientist,
