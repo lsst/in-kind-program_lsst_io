@@ -203,6 +203,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Additional recipients:** {{ (item.form_data.additional_recipient_groups or []) | join(', ') or 'None' }}
 
+          {% if item.form_data.software_name %}**Software:** {{ item.form_data.software_name }}{% endif %}
+
           .. raw:: html
 
              <div class="ikc-desc">{{ item.form_data.activity_description or 'TBD' }}</div>
