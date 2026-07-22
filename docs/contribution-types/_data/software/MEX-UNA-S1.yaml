@@ -1,0 +1,62 @@
+contribution_id: MEX-UNA-S1
+title: Science Pipeline Development in the LSST SL AND DE Science Collaboration (Joint)
+country: Mexico
+institute: UNAM
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Strong Lensing Science Collaboration
+  additional_recipient_groups:
+  - LSST Dark Energy Science Collaboration
+  activity_description: MEX-UNA subgroup will contribute directable software development effort
+    to SLSC-DESC jointly, with some focus on dark matter science cases whenever possible.
+    Contributions towards the DESC External Synergies and Dark Matter Analysis WGs are also
+    of our interest. The staff will work with SLSC-DESC to define needed software development
+    tasks, and carry them conjointly with the collaboration, reporting regularly on progress,
+    taking input from the rest of the collaboration, and so on. We anticipate the use of local
+    computing resources, which are already available at the University of Guanajuato and UNAM,
+    and we will work to increase local resources if needed. It is worth mentioning that the
+    MEX-UNA group is also proposing a lite IDAC, which could also be hosting SL data if there
+    is interest or need for it. In addition. for the DESC related work will make use of NERSC,
+    DESC primary computing center, in order to efficiently work in a collaborative manner
+    with other DESC members, and we make sure all developed code runs correctly. Regarding
+    code/software development, we will involve at least two other staff members, one at UNAM
+    and one at UG (to be identified), who are software engineers, that will provide support
+    to the core group. The group will have to develop some of the needed expertise, with the
+    time frame depending on the tasks assigned. To minimize the learning time process, the
+    staff will be actively participating in the SLSC-SCSC activities as early as possible,
+    and will take advantage of DESC and SCSL existing documentation, tools and tutorials.
+    Also, the group will be providing the effort in a progresive way, being the least amount
+    of effort in the first year and increasing it in subsequent years. Activities such as
+    validating, documenting or optimizing existing pieces of software within a broader development
+    team are suitable for the early stages, while well-defined software products could be
+    envisioned for later stages. Finally to engage within DESC and SLSC the team will join
+    the regular telecoms and activities of the SCs as well as to participate actively in all
+    their activities, and make use of their communication tools as well.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Gravitational lensing
+  - Strong gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,373 @@
+contribution_id: SER-SAG-S1
+title: Science Pipeline Development for analysis of variability of celestial sources in the
+  LSST AGN and TVS Science Collaboration
+country: Serbia
+institute: SAGNT
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST AGN Science Collaboration
+  additional_recipient_groups:
+  - LSST Transients and Variable Stars Science Collaboration
+  - Rubin Commissioning Team
+  - Rubin Telescope & Site Team
+  activity_description: The SER-SAG staff will contribute directable software development
+    in the general area of LSST AGN and TVS variability of celestial sources analysis, including,
+    but not limited to, the detection of AGN and TVS periodicity and reverberation mapping
+    from the LSST data products (primarily the Object catalogs and time series, and potentially
+    images).SER-SAG staff will work with the recipients of the AGN and TVS SC to define needed
+    software development tasks, and then carry out those tasks as an integral part of these
+    collaborations, reporting regularly on progress, taking input from the rest of the collaboration,
+    and supporting and training the collaboration’s members in the use of the code. We intend
+    to work flexibly with the recipients following their direction in developing and delivering
+    software products as required. Following the advice of AGN SC point of contact, the exact
+    shape of the directable contribution and a final decision on its endorsement would be
+    pending AGN SC consultation that could not be finished before the 25 September deadline.
+    The TVS SC values SER-SAG directable software efforts, and intends to offer endorsement
+    of SER-SAG proposal to the US agencies.We predict moderate amounts of local computing
+    resources for this work, which are already available at SER-SAG, and we will obtain additional
+    local resources if needed by application to the Institute of physics Belgrade high performance
+    computing center. Additionally we will use opportunities provided by Serbian Ministry
+    of Education Science and Technological development to apply for funds through their recurrent
+    triennial calls IDEJE (e.g. we will submit a proposal ExtraUniverse at the first call
+    with deadline Oct8,2020).Our directable-software contribution to the TVS and AGN SC may
+    move towards the development of an iterative modular classification system for variable
+    stars and transients based on machine learning algorithms. This idea is supported by Croatian,
+    Hungarian, Serbian and Slovenian institutions sharing joint interests and expertise in
+    time-domain astronomy and astrophysics and willing to commit resources towards its development.
+    We concentrate on using Rubin-provided user computing resources upon their availability
+    to optimize and fortify the code functions at the needed scale. The primary risk in this
+    work is in obtaining the needed skills in the Rubin tools and data products. To overcome
+    this, the SER-SAG staff will train early with any Rubin tutorials provided, and be active
+    participants in events associated with the Rubin “Data Previews”, all within the context
+    of the AGN and TVS SC.
+  submitted: true
+  email: andjelka.kovacevic@matf.bg.ac.rs
+  submitter_name: Andjelka Kovacevic
+  target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
+  software_name: QhX v0.2.1 (main inkind derivable), additional delierable QNPy-Latte 0.1.0
+  version: null
+  software_url: 'main inkind deliverable software QhX source repository: https://github.com/lionandjelka/QhX1,
+    SER-SAG-S1 GitHub organisation: https://github.com/LSST-SER-SAG-S1/QhX1, additional software
+    QNPy-Latte source repository: https://github.com/rajuaman1/QNPy_Latte, QNPy-Latte package
+    page: https://pypi.org/project/QNPy-Latte/, https://github.com/LSST-SER-SAG-S1/QNPy_Latte'
+  documentation: 'main software deliverable QhX documentation: https://lionandjelka.github.io/QhX1/
+    , QhX closeout software archive: https://doi.org/10.5281/zenodo.17980656, additional software
+    QNPy-Latte https://qnpy-latte.readthedocs.io/en/latest/'
+  verification_testing: 'Verification and validation of SER-SAG-S1 were carried out continuously
+    from FY22 to FY26, progressing from requirement-gathering and unit testing toward dataset
+    validation, operational deployment on Rubin data, and independent peer review. Throughout
+    this entire period (FY22–FY26), the contribution was presented and discussed regularly
+    at LSST AGN Science Collaboration main and subgroup meetings, TVS Science Collaboration
+    and TVS Software Task Force meetings, and at AGN SC conferences and LSST@Europe / regional
+    in-kind workshops, providing sustained external scrutiny of the software design, workflows,
+    and documentation. The year-by-year verification activities were as follows. FY22 — Requirements
+    capture, design review, and module-level testing. Verification type: recipient requirements
+    gathering, expert design review, unit/module testing. A requirements survey was circulated
+    to the TVS and AGN Science Collaborations (28 responses), and several recipients supplied
+    light-curve user cases that informed pipeline requirements. The Software Requirements
+    Document was reviewed with Rachel Street (TVS SC); the pipeline synopsis was shared with
+    Eric Bellm, Poshak Gandhi, and Michael Johnson; and Will Clarkson advised adopting the
+    Johnson et al. (2019) approach for quick assessment of cadence influence on detected periods,
+    that is incorporated and cited in the QhX software paper. Core modules (WWZ and superlet
+    wavelets, wavelet cross-correlation, 2D-heatmap integration, FWHM-based period uncertainties,
+    and significance via decoherence and bootstrap/GEV) were implemented and tested individually.
+    FY23 — Dataset validation and signal-injection testing. Verification type: validation
+    on simulated and observational data; injection–recovery testing. QhX and additional code
+    QNPy were validated on LSST AGN Data Challenge and Gaia quasar light curves during COST
+    Action MW-GAIA short-term scientific missions of Andjelka Kovacevic and Dragana Ilic with
+    the Croatia Participation Group (CPG, Ruđer Bošković Institute, Croatia), producing the
+    first numerical and visual period catalogues (10–500 day range). Artificial binary-merger
+    periodic signatures were injected after communication with Jessie Runnoe during LSST@Europe5,
+    to test recovery. Compatibility with the multiband Lomb–Scargle periodogram was demonstrated
+    in the peer-reviewed study of Fatović et al. (2023, AJ, 165, 138). The statistical robovetter
+    (stratification of reliable / medium / poor constrained periods, using significance, asymmetric
+    errors, and the IoU metric) was implemented and validated. FY24 — Integration testing,
+    public demonstration, and packaging. Verification type: integration/usability testing,
+    recipient-facing demonstration, release validation. QNPy v0.0.2 (with SOM integration)
+    was released (25 March 2024) and QhX issued its first public test release (8 April 2024),
+    including dynamic handling of arbitrary filter numbers (validated on a Gaia example) and
+    PEP 517 packaging. Following a Rubin in-kind reviewer recommendation, the team held a
+    virtual public demonstration of QhX and QNPy (4 April 2024) with tutorials, installation
+    guidance, and example workflows (recordings available), directly improving documentation
+    and user-facing materials. The pilot QNPy-Latte (attentive latent neural process) release
+    followed. Full QhX software requirements and design documentation were completed. FY25
+    — Continuous integration, benchmarking, and Rubin DP1 deployment. Verification type: automated
+    Continuous Integration / Continuous Deployment (CI/CD) testing, benchmark cross-validation,
+    operational deployment. The QhX codebase incorporated GitHub CI/CD workflows, automated
+    tests, static code analysis, and dynamic-filter validation, with subsequent ZTF and batch-processing
+    tests on the HPC BURA (University of Rijeka), HPC VEGA (University Nova Gorica, Slovenia)
+    and HPC AI Platform (Serbia) environments. QhX was then deployed on Rubin DP1 quasar light
+    curves after implementing the external-catalogue cross-match workflow (with Neven Caplar
+    LSDB) and catalogue-validation metrics; the project "First Catalog of Periodic AGN Candidates
+    from LSST DP1" was reviewed and approved by the AGN Science Collaboration Publication
+    Committee. An expert seminar on QhX and QNPy was delivered to the Astrophysics group of
+    Dr Maria Charisi at FORTH, Crete (May 2025), providing independent expert assessment.
+    FY26 — Catalogue validation, community data challenges, and peer review. Verification
+    type: end-to-end catalogue validation, blind community-challenge testing, independent
+    peer review. The DP1 QhX coherent/quasi-coherent AGN variability catalogue and web portal
+    were finalised, supported by an offline validation pipeline (schema and value-range checks
+    before promotion), 34 FEETS light-curve features, interactive 2D/3D diagnostics, a secured
+    ORCID-authenticated portal, and published technical documentation (Stanković Cerović et
+    al. 2025). The QNPy was exercised in recipient-defined community data challenges (AGN
+    SC Reverberation Mapping Data Challenge, results submitted April 2026), providing independent
+    blind tests. Independent external review was completed through publication of QhX in the
+    Journal of Open Source Software (Kovacevic et al 2026 JOSS), acceptance of the QNPy-Latte
+    paper in Astronomy & Astrophysics (Raju et al 2026 A&A accepted), and acceptance of QhX
+    DP1 catalogue study in ApJSS (Kovacevic et al 2026 ApJSS accepted). Recipient feedback
+    and resulting improvements. Feedback across FY22–FY26 was iterative, namely via discussions,
+    demonstrations, reviewer recommendations, and use-case testing. The feedback emphasised
+    clear documentation, reproducible notebooks, support for variable filter numbers, robust
+    handling of sparse/gappy/outlier-affected light curves, scalable parallel/batch processing,
+    and Rubin-oriented data-access compatibility. These were incorporated through expanded
+    documentation, public training materials, dynamic-filter support, outlier-handling routines,
+    CI/CD and automated tests, parallelisation, external-catalogue cross-matching, and the
+    DP1 catalogue deployment. We provide reviewer comments for QhX accepted in JOSS: https://github.com/openjournals/joss-reviews/issues/8163#issuecomment-3703916122
+    Also all AGN SC members comments are incorporated in the accepted paper of QhX in ApJSS.
+    We provide in full the Reviewer report on the QhX paper that is accepted in ApJSS (2026):
+    I recommend publication of "QhX Catalogue of Coherent and Quasi-Coherent AGN Variability
+    from Vera C. Rubin LSST DP1" by A.B. Kovacevic et al. for publication in The Astrophysical
+    Journal Supplement Series. The paper details an important framework and tools for the
+    robust investigation of the variability properties of AGN and other objects that researchers
+    will find indispensable in the exploration of the huge datasets LSST and other large survey
+    programs will furnish to the community. Independent academic use (PhD, Master''s, interdisciplinary
+    master courses and internship projects) provided additional tests of portability, reproducibility,
+    and usability outside the core team'
+  sharing_of_software: 'SER-SAG-S1 software was shared openly with the recipient community
+    throughout development (FY22–FY26), following an open-source-from-the-start model. All
+    codes were developed in public repositories, released through standard package indices,
+    accompanied by public documentation and tutorials, and advertised continuously through
+    the LSST AGN and TVS Science Collaborations. Throughout this period the packages were
+    announced on AGN SC and TVS SC Slack channels and mailing lists, and presented at AGN
+    SC main and subgroup meetings, the TVS Software Task Force, and at LSST@Europe and regional
+    in-kind workshops. The team participated virtually at the annual Rubin-wide community
+    meeting throughout the reporting period — the Rubin Observatory Project and Community
+    Workshop (PCW), renamed the Rubin Community Workshop (RCW) from 2024. The year-by-year
+    sharing activities were as follows. FY22 — Open repositories and early community advertisement.
+    Sharing type: public source repositories, direct recipient outreach, community presentation.
+    The QhX pipeline was developed openly under the LSST-SER-SAG GitHub organisation (periodicities,
+    cnp_agn repositories) and made visible to recipients from the outset. The contribution
+    was advertised directly to recipient groups via a survey to the TVS and AGN SCs (28 responses,
+    several returning their own light-curve user cases), and presented at the LINCC Tech Talks
+    (Nov 2022), the AGN SC Summer Workshop, the TVS Software Task Force in-kind workshop,
+    and the LSST@Europe 4 AGN SC parallel session, with a dedicated open forum on periodicity
+    mining (~50 LSST participants). FY23 — Shared catalogues, demonstration notebooks, and
+    published application. Sharing type: public demonstration notebooks, shared data products,
+    peer-reviewed publication. Pilot QhX notebooks for the AGN Data Challenge and Gaia QSO
+    workflows were released publicly for hands-on use, together with the first numerical and
+    visual period catalogues (10–500 days) produced during the MW-GAIA missions with the CPG
+    group. The QNPy application to the LSST AGN Data Challenge was published openly (Kovačević
+    et al. 2023, Universe, 9, 287), and the contribution was presented at LSST@Europe 5 (In-kind
+    session) and multiple international conferences. Kovačević presented the periodicity pipeline
+    at the LINCC Tech Talks (4 November 2022) from 33min https://www.youtube.com/watch?v=o_VEAwg_xK0
+    FY24 — Package releases, public training demo, and documentation. Sharing type: public
+    package releases (PyPI), live community training, released documentation. QNPy v0.0.2
+    was released on PyPI (25 March 2024); QhX issued its first public release on PyPI Test
+    (8 April 2024) and a dynamic-filter PyPI release; and the QNPy-Latte pilot was released
+    on PyPI/GitHub (rajuaman1/QNPy_Latte). Following a Rubin in-kind reviewer recommendation,
+    the team ran an open virtual demonstration of QhX and QNPy (4 April 2024) for LSST community
+    members and students, covering installation, tutorials, and example workflows, with recordings
+    made publicly available. Full software requirements, design documentation, and GitHub.io
+    documentation were published. All resources were consolidated under the public LSST-SER-SAG-S1
+    GitHub organisation, and the work was presented at the LSST AGN SC Summer Meeting (Torino)
+    and LSST@Europe6. FY25 — Peer-reviewed software release and operational catalogue sharing.
+    Sharing type: peer-reviewed open-source publication, CI/CD-backed public repository, shared
+    Rubin DP1 results. QhX completed Journal of Open Source Software review and was released
+    as a peer-reviewed, openly licensed (CC BY 4.0) package with CI/CD, automated tests, and
+    public documentation; QNPy-Latte was released on PyPI and submitted to A&A. First DP1
+    QhX results were shared with the community at the LSST Regional Workshop (Konkoly) and
+    the AGN SC parallel session at LSST@EU7 (Poznań), and reported at the AGN SC telecon and
+    the Fifth Rubin Science Workshop. The "First Catalog of Periodic AGN Candidates from LSST
+    DP1" was approved as an AGN SC project, making the results a shared collaboration product.
+    FY26 — Public catalogue portal, VO interoperability, and published outputs. Sharing type:
+    public web portal, Virtual Observatory services, peer-reviewed publications, public outreach.
+    The QhX Hub, an interactive, versioned, VO-compatible AGN variability catalogue, was made
+    available online with published technical documentation (Stanković Cerović et al. 2025),
+    accessible to Data Rights Holders via ORCID authentication, with programmatic access through
+    IVOA-compliant TAP and ConeSearch services (interoperable with TOPCAT and pyVO). The Hub
+    was presented to the AGN SC meeting, then at AGN SC 2026 Annual Conference (Crete) and
+    demonstrated publicly at the opening of the new Serbia AI Platform supercomputer. The
+    QNPy-Latte paper was accepted in A&A (2026, in production) and the QhX DP1 catalogue manuscript
+    was accepted to ApJSS (2026, in production), completing the open publication of the methods
+    and results. Community use. Beyond the core team, the software has been used and extended
+    by the wider community: in recipient-defined data challenges (AGN SC Reverberation Mapping
+    and Periodicity challenges, TVS TDE classification challenge); by external groups and
+    students through the public repositories and tutorials; and in postgraduate, Master''s,
+    PhD, and internship projects. The DP1 catalogue is an AGN SC-approved shared product available
+    to Data Rights Holders, and the peer-reviewed JOSS and ApJSS release ensures long-term,
+    citable community access. The 2D-hybrid method has also been adopted beyond astronomy
+    (e.g., VLF signal analysis), demonstrating uptake outside the original recipient domain.'
+  publications: 'Published papers/white papers 1.Čvorović-Hajdinjak, I., Kovačević, A. B.,
+    Ilić, D., Popović, L. Č., Dai, X., Jankov, I., Radović, V., Sánchez-Sáez, P., & Nikutta,
+    R. (2022). Conditional Neural Process for nonparametric modeling of active galactic nuclei
+    light curves. Astronomische Nachrichten, 343, e210103. https://doi.org/10.1002/asna.20210103
+    Foundational QNPy paper introducing conditional neural-process modelling for AGN light
+    curves. 2.Breivik, K., Connolly, A. J., Ford, K. E. S., Jurić, M., Mandelbaum, R., Miller,
+    A. A., Norman, D., Olsen, K., O’Mullane, W., Price-Whelan, A. M., et al. (2022). From
+    Data to Software to Science with the Rubin Observatory LSST. arXiv:2208.02781 [astro-ph.IM].
+    https://doi.org/10.48550/arXiv.2208.02781 Community white paper arising from the LINCC
+    workshop, outlining priority software needs for early Rubin science, including scalable
+    time-series analysis. 3. Kovačević, A. B., Radović, V., Ilić, D., Popović, L. Č., et al.
+    (2022). The LSST Era of Supermassive Black Hole Accretion Disk Reverberation Mapping.
+    The Astrophysical Journal Supplement Series, 262, 49. https://doi.org/10.3847/1538-4365/ac88ce
+    Scientific and simulation framework underpinning the photometric reverberation-mapping
+    applications developed in QNPy-Latte, and effects of cadences that were important for
+    development of QhX. 4.Kovačević, A. B., Ilić, D., Popović, L. Č., Radović, V., Jankov,
+    I., Yoon, I., Caplar, N., Čvorović-Hajdinjak, I., & Simić, S. (2021). On possible proxies
+    of AGN light-curves cadence selection in future time domain surveys. Monthly Notices of
+    the Royal Astronomical Society, 505, 5012–5028. https://doi.org/10.1093/mnras/stab1595
+    This peer-reviewed study established cadence-aware metrics for evaluating the recovery
+    of AGN time-domain observables, including photometric time lags, periodicity, and structure
+    functions, under LSST-like observing strategies. 5.Kovačević, A. B., Ilić, D., Popović,
+    L. Č., Andrić Mitrović, N., Nikolić, M., Pavlović, M. S., Čvorović-Hajdinjak, I., Knežević,
+    M., & Savić, Đ. V. (2023). Deep Learning of Quasar Lightcurves in the LSST Era. Universe,
+    9, 287. https://doi.org/10.3390/universe9060287 Application and validation of the QNPy
+    framework using the LSST AGN Science Collaboration Data Challenge. 6.Fatović, M., Palaversa,
+    L., Tisanić, K., Thanjavur, K., Ivezić, Ž., Kovačević, A. B., Ilić, D., & Popović, L.
+    Č. (2023). Detecting Long-period Variability in the SDSS Stripe 82 Standards Catalog.
+    The Astronomical Journal, 165, 138. https://doi.org/10.3847/1538-3881/acb596 Related QhX
+    validation and comparative work on long-period variability detection in survey time-series
+    data. 7.Kovačević, A. B. (2025). Two-Dimensional (2D) Hybrid Method: Expanding 2D Correlation
+    Spectroscopy (2D-COS) for Time Series Analysis. Applied Spectroscopy, 79, 91–104. https://doi.org/10.1177/00037028241241308
+    Methodological foundation of the nonlinear wavelet cross-correlation approach implemented
+    in QhX. 8.Čvorović-Hajdinjak, I. (2024). Modeling Quasar Variability through Self-Organizing
+    Map-Based Process. Serbian Astronomical Journal, 208, 17–27. https://doi.org/10.2298/SAJ2408017C
+    QNPy-related work demonstrating the role of Self-Organizing Maps in improving neural-process
+    modelling of quasar light curves. 9. Kovačević, A. B., Ilić, D., Tošić, M., Pavlović,
+    M., Raju, A., Nikolić, M., Simić, S., Čvorović-Hajdinjak, I., & Popović, L. Č. (2026).
+    QhX: A Python package for periodicity detection in red noise. Journal of Open Source Software,
+    11, 8163. https://doi.org/10.21105/joss.08163 Peer-reviewed software paper describing
+    the QhX package, its 2D period-period analysis, statistical validation, dynamic-filter
+    support, and large-scale processing capabilities. Accepted /in press papers 10.Raju, A.
+    N., Kovačević, A. B., Ilić, D., Tombesi, F., Popović, L. Č., Slezak, E., Sanchez-Saez,
+    P., Pavlović, M., Čvorović-Hajdinjak, I., Simić, S., & Savić, Đ. (2026). A Meta-Learning
+    Framework for Multitask Reverberation Mapping in Active Galactic Nuclei. Astronomy & Astrophysics,
+    accepted. https://arxiv.org/abs/2606.09665 Paper describing QNPy-Latte, combining Self-Organizing
+    Maps, Attentive Latent Neural Processes, and mixture-density modelling for light-curve
+    reconstruction, transfer-function recovery, and SMBH-parameter inference. 11. Fatović,
+    M., Kovačević, A. B., Ilić, D., & De Cicco, D. (2026). Testing period diagnostics on quasar
+    periodic candidates in the era of large surveys. Serbian Astronomical Journal, accepted
+    for publication. This paper applies QhX alongside multiband Lomb–Scargle and complementary
+    variability diagnostics to extended multi-survey light curves from SDSS, Pan-STARRS1,
+    DES, and ZTF. 12. Kovačević, A. B., Ilić, D., Meštrić, U., et al. (2026). QhX Catalogue
+    of Coherent and Quasi-Coherent AGN Variability from Vera C. Rubin LSST DP1. Manuscript
+    accepted at The Astrophysical Journal Supplement Series. Scientific application of QhX
+    to Rubin Data Preview 1, describing the multiband AGN variability catalogue and QhX Hub
+    infrastructure. Community technical note 13.Kovačević, A., Ilić, D., Jankov, I., Popović,
+    L. Č., Yoon, I., Radović, V., Caplar, N., & Čvorović-Hajdinjak, I. (2021). LSST AGN SC
+    Cadence Note: Two metrics on AGN variability observable. arXiv:2105.12420 [astro-ph.GA].
+    https://doi.org/10.48550/arXiv.2105.12420 . It provides a methodological basis for the
+    simulated AGN light curves and cadence-aware validation used in the SER-SAG-S1 QhX and
+    QNPy/QNPy-Latte development programme.'
+  acknowledgements: 1.This work makes use of the QhX (Quasar harmonic eXplorer) software (https://github.com/LSST-SER-SAG-S1/QhX1),
+    developed as a contribution to the Rubin community through the Rubin In-Kind program (Contribution
+    ID SER-SAG-S1). Users are asked to cite the QhX software paper (Kovačević et al. 2026,
+    Journal of Open Source Software, doi:10.21105/joss.08163, Kovačević et al. 2026,ApJSS
+    ) and the papers describing the underlying method (Kovačević et al. 2018, MNRAS, 475,
+    2051; Kovačević et al. 2019, ApJ, 871, 32;). 2.This work makes use of the QNPy-Latte software
+    (https://github.com/rajuaman1/QNPy_Latte), developed as a contribution to the Rubin community
+    through the Rubin In-Kind program (Contribution ID SER-SAG-S1). Users are asked to cite
+    the QNPy-Latte paper (Raju et al. 2026, Astronomy & Astrophysics; arXiv:2606.09665).
+  support: Github, Slack
+  maintenance_plan: Discrete future software releases
+  maintenance_notes: 'Planned maintenance and scientific application only (no substantial
+    new development): repository/release upkeep, bug fixing, dependency updates, and documentation/tutorial
+    maintenance for QhX, QNPy-Latte, and the QhX Hub; continued application to new Rubin data
+    releases with monitoring of completeness, reliability, and efficiency; user support, occasional
+    training, and support for collaborations; dissemination via publications, presentations,
+    and QhX Hub citizen-science activities. Estimated effort ~0.05–0.10 FTE. Thank you for
+    your time and the opportunity — kind greetings from Belgrade.'
+  further_development: 'The delivered contribution (main QhX, the DP1 QhX Hub, and QNPy-Latte)
+    is complete and fulfils its planned scope. Further developments: First, reprocessing the
+    full catalogue on progressively longer baselines (DP2 onward) to track the persistence,
+    phase stability, and secular drift of candidate signals and enable population-level studies
+    of coherent AGN variability. Second, deeper integration between QhX and QNPy-Latte and
+    with complementary spectroscopic, radio, and X-ray datasets, to link coherent optical
+    variability to black-hole mass, accretion state, and multi-wavelength behaviour. We anticipate
+    that near-future software development will enable this. Finally, adding citizen-science-oriented
+    portal features to the QhX Hub. These directions build directly on the completed contribution
+    and could be pursued in future Rubin data cycles, potentially as a follow-on or renewed
+    in-kind activity.'
+  other_feedback: We warmly thank the Rubin In-Kind Program team, the IPCs, and the AGN and
+    TVS Science Collaborations for their support, guidance, and feedback throughout this contribution.
+    It has been a privilege to contribute to the Rubin community, and we look forward to continuing
+    to support LSST science.
+  uat_category:
+  - Astronomy software
+  - Astrophysics
+  - Exoplanet astronomy
+  - Stellar astronomy
+  - Planetary science
+  - Solar system
+  uat_concepts: Active galactic nuclei16 --- Astroinformatics78 --- {Sky surveys}{1464}--Catalogues205
+    --- Astrostatistics1882 --- Light curves 918 --- {Period search}{1955}---{Photometry}{2168}---{Time
+    series analysis}{1916}}
+  associated_dataset:
+    submitted: true
+    data_type:
+    - Value-Added Catalogs
+    data_volume: The current QhX Hub is based on known quasars in LSST DP1. Of approximately
+      1,500 cross-matched quasars, 428 met the sampling criteria and form the analysed sample.
+      For these sources the Hub stores statistical results (object-level and per-band tables,
+      including light-curve features and coherence/vetting metrics) together with per-object
+      images and interactive plots. The current total data volume is of order a few hundred
+      megabytes, dominated by the image and interactive-plot products; it will scale with
+      successive LSST Data Releases.
+    data_schema_link: https://zenodo.org/records/18248330
+    hosting_location: It resides on data cloud machine at University of Kragujevac that is
+      obtained through TVS SC Kickstarter grant https://faculty.washington.edu/ivezic/lsst/LOI2022Plitvice/Simic_Regional_Storage_Support_for_LSST_Related_Science.pdf
+    access_url: https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php
+    access_mechanisms:
+    - TAP / Virtual Observatory Service
+    - API
+    - Web Portal / Interface
+    authentication: Rubin Data Rights verification (RSP authentication)
+    generation_methods: 'Generated with the QhX pipeline delivered under this contribution
+      (ID SER-SAG-S1): wavelet (WWZ) time–frequency analysis + 2D period–period cross-correlation
+      with statistical vetting (significance, period-error bounds, IoU). Input DP1 light curves
+      selected by cross-matching DP1 sources (via LSDB) with external AGN catalogues (DESI,
+      Quaia, MilliQuas, ZTF/QZO); products served through the QhX Hub. Software: https://github.com/LSST-SER-SAG-S1/QhX1
+      (Kovačević et al. 2026, JOSS, doi:10.21105/joss.08163), Catalogue: Kovačević et al.
+      2026 (ApJS, accepted). Docs: Cerovic et al 2026 doi:10.5281/zenodo.17914817.'
+    validation_limitations: 'QA in Kovačević et al. 2026 (ApJS, accepted): permutation significance,
+      cross-band IoU consistency, sinusoidal vetting (SN larger 1.5, phase-lag larger than
+      0.10), FDR control (Benjamini–Hochberg, none rejected); reliability via Dawid–Skene
+      (0.023) and alias-floor (0.975) purity. Limitations: prototype DP1 catalogue; 7-week
+      baseline, possible to infer day-scale only; strong diurnal aliasing (0.5, 1, 2 d); sample
+      g,r,i,z larger than 50 epochs (428 of1,456; u/y excluded); conservative (1 strong +
+      15 medium of 230); asymmetric baseline-limited period errors.'
+    tutorials_docs: Catalogue functioQhX Hub (https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php,
+      doi:10.5281/zenodo.17914817),
+    support_channel: agncatalogue.sersag@gmail.com.
+    citation: 'Citation. Users of the QhX AGN variability catalogue / QhX Hub should cite
+      the catalogue paper (Kovačević et al. 2026, ApJSS ) and its technical documentation
+      (Stanković Cerović et al. 2025, Zenodo, doi:10.5281/zenodo.17914817). Acknowledgement.
+      In addition to the citations above, please include: "This work makes use of data/software
+      products from the QhX contribution, developed as a contribution to the Rubin community
+      through the Rubin In-Kind program, with contribution ID SER-SAG-S1." License. The catalogue
+      data products are open-access; access to the full catalogue via the QhX Hub is granted
+      to Rubin Data Rights Holders on request (ORCID authentication), consistent with Rubin
+      data-rights policy.'
+    maintenance_plan: Discrete future Data Releases (e.g. DR2)
+    maintenance_notes: repository/release upkeep, bug fixing, dependency updates, and documentation/tutorial
+      maintenance, continued application to new Rubin data releases; user support and occasional
+      training; and dissemination through publications, presentations, and QhX Hub citizen-science
+      activities. Estimated effort ~0.05–0.10 FTE across the team.
+    final_report: The final/completion summary was included in the FY26 Q3 Quarterly Update
+      (June 2026), which reported completion of the QhX software and QhX Hub development (along
+      QNPy/Latte) and the transition to maintenance. It was also reflected in the FY25 Annual
+      Evaluation, which stated the contribution had delivered the fully operable pipeline
+      and entered the maintenance and deployment phase.
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astroinformatics
+  - Astronomy software
+  - High performance computing
+  - Machine learning
+  - Time domain astronomy
+  - Transient detection
+  - Variable stars
+  summary: null
+  status_override: null
+  related_contribution_ids:
+  - SER-SAG-S1

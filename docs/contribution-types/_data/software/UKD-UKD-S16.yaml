@@ -1,0 +1,67 @@
+contribution_id: UKD-UKD-S16
+title: Adler - Solar System Transient Classification
+country: UK
+institute: LSST:UK
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Solar System Science Collaboration
+  additional_recipient_groups: []
+  activity_description: LSST will discover ~6 million new Solar System small bodies, including
+    the comet that ESA’s Comet Inceptor mission will go to (Schwamb et al. 2018, IvezÍc et
+    al. 2019). With each planetesimal receiving hundreds of observations across six filters,
+    LSST will radically transform the view of our planetary system and usher in a revolution
+    for time domain Solar System science. LSST:UK will develop Adler, an open source python-based
+    LSST Solar System transient classifier, and incorporate Adler into Lasair, the UK’s LSST
+    transient alert broker (Smith et al. 2019). Rubin Observatory’s automated routines will
+    broadcast a “transient” alert for each new, variable, or moving source. Solar System bodies
+    are always changing in their apparent brightness (possibly spanning many magnitudes) as
+    they rotate and move closer to or further away from the Sun and Earth. It will be up to
+    the Rubin user community to identify the deviations from these trends to find the interesting
+    time domain Solar System phenomena in the LSST alert stream. Lasair will contextually
+    classify LSST astrophysical alerts using Sherlock (Smith et al. 2020) but current Lasair
+    development plans are for Solar System alerts to only be stored in a database. Adler will
+    utilise either the LSST alert stream through Lasair or the prompt data products available
+    on the Rubin Science Platform (RSP) and International Data Access Centres (IDACs) to identify
+    truly changing Solar System bodies. Adler will flag potential dynamically new comets and
+    interstellar objects first entering our Solar System, identify possible planetesimal collisions,
+    break up events, or the onset of cometary activity and cometary outbursts. Adler will
+    fit rotational light curves and phase curves and identify outlying photometric points;
+    Adler will also automatically flag suitable Comet Interceptor fly-by targets, and identify
+    cometary coma/tails, through multi-aperture photometry of the alert images and source
+    extendedness. This staff effort contribution has been developed jointly with SSSC. The
+    Edinburgh postdoc will develop the core small body/comet analysis functions, and the QUB
+    software developer postdoc will focus on Lasair integration and Adler user interface and
+    infrastructure. Adler’s core functionality achieves several of the key tasks in the SSSC’s
+    Software Roadmap (Schwamb et al. 2019). The SSSC supports this contribution and welcomes
+    the flexibility to use Adler on the RSP and IDACs for an individual small body or with
+    Lasair running automatically in bulk on all incoming Solar System alerts.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Solar system astronomy
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

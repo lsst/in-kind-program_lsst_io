@@ -1,0 +1,53 @@
+contribution_id: UKD-UKD-S8
+title: 'Science Software development: DESC operations'
+country: UK
+institute: LSST:UK
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: Zuntz is designing and implementing the catalogue-to-cosmology pipeline,
+    TXPipe, for the weak lensing and large-scale structure joint analysis, implementing (at
+    LSST scale) algorithms for data reduction and analysis from DM catalogues into two-point
+    measurements and other summary statistics. This has been identified as a key pipeline
+    in the DESC Science Roadmap. He has also written and is managing the infrastructure framework,
+    Ceci, for running the collected complete pipeline. This software was/is all written specifically
+    for the DESC.Perry will manage simulation data generation, storage, and analysis as a
+    key part of the data challenge simulation process. In both cases this activity is directable
+    by the collaboration; Zuntz reports to the analysis coordinator, providing quarterly reports
+    and annual plans, and Perry ultimately to the computing coordinator, with day-to-day coordination
+    by Zuntz. Computing for Zuntz's work on the lensing/clustering pipeline is available from
+    NERSC via DESC's allocation. Computing for Perry's work on the UK Grid is provided by
+    an existing GridPP grant. All software developed by the team will be public, in accordance
+    with the proposed DESC software policy.This proposal has been developed in consultation
+    with DESC. The past contribution FY19-FY20 has been endorsed by DESC.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,68 @@
+contribution_id: GER-CCL-S1
+title: Science Pipeline Development in the Dark Energy Science Collaboration
+country: Germany
+institute: GCCL
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: The GCCL will contribute directable software development efforts in
+    the general area of Dark Energy Consortium science analysis, working with DESC to define
+    needed software development tasks. We will carry out those tasks as an integral part of
+    the collaboration, reporting regularly on progress, taking input from the rest of the
+    collaboration, and supporting the collaboration’s members in the use of the code. Our
+    preference is for the GCCL directable effort to be mainly embedded within the DESC Photometric
+    Redshift working group, for example making a significant contribution to photometric redshift
+    calibration and quantifying and mitigating spectroscopic incompleteness. Given the wide
+    range of expertise at the GCCL, the group could also, however, contribute to the LSST
+    optical cluster detection algorithm and the quantification of the resulting selection
+    function, both key deliverables for the Cluster working group, in addition to contributing
+    to a wide range of different deliverables required for the weak lensing working group
+    and the theory-joint probes working group. We will work with DESC leadership to narrow
+    down this wide range of activities into a defined list of tasks based on their needs and
+    the skill profile of the postdocs and/or software engineers that will be recruited for
+    the start of FY22. With mutual agreement, the DESC may request a change of direction in
+    the future if the goals and resources available to the DESC require it. We have significant
+    funding to support the local computing that will be required to support this work. Based
+    on the requirements from the final defined list of tasks, a procurement exercise will
+    be undertaken to ensure that we have appropriate computing resources, in addition to our
+    already existing compute cluster. We will also use NERSC resources to ensure the code
+    we contribute runs well at NERSC such that DESC members outside the GCCL can easily collaborate
+    with the GCCL team.The primary risk associated with this work is in the recruitment and
+    retention of staff with relevant expertise and skills. This risk will be mitigated somewhat
+    by offering each new GCCL member hired for this role, the opportunity to use up to 50%
+    of their time to pursue their own research interests, over a full three-year position.
+    In addition we have a significant number of existing experienced GCCL fellows with strong
+    interests in DESC, whose efforts could be diverted to directable software development
+    effort, if the task is already in line with their scientific interests.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  - Photometric redshift
+  - Spectroscopy
+  summary: null
+  status_override: null
+  related_contribution_ids: []

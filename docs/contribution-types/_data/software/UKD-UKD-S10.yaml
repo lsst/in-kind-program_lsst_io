@@ -1,0 +1,71 @@
+contribution_id: UKD-UKD-S10
+title: 'Science Software development: spectroscopic classification of transients and 4MOST
+  spectra'
+country: UK
+institute: LSST:UK
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - LSST Transients and Variable Stars Science Collaboration
+  activity_description: 'TiDES, the Time Domain Extragalactic Survey, is a survey on the 4-metre
+    Multi-Object Spectrograph Telescope (4MOST) focused on the spectroscopic follow-up of
+    Rubin Observatory LSST extragalactic optical transients. We have 250,000 fibre-hours of
+    spectroscopy time available within the TiDES survey (2% of the total 4MOST fibres). With
+    this, we will obtain (i) spectroscopic observations of 35,000 live transients to iAB=22.5,
+    and (ii) follow-up of 70,000 transient host galaxies to obtain redshift measurements for
+    photometric classification and cosmological applications. We will contribute non-directable
+    software development effort to support developing TiDES into a contributed dataset to
+    DESC and TVS. We expect there to be between 5-10 live (i < 22.5 mag) extragalactic transients
+    per 4MOST field, and we will put a fibre on all these, effectively giving a magnitude
+    limited sample. We will work closely with the DESC SN Working Group to design a selection
+    function for the LSST transient stream to optimise the type Ia SN selection (including
+    host galaxies) for cosmology. We will implement the DESC agreed strategy within the Lasair
+    broker to select SNe with high quality LSST lightcurves (or other measured characteristics
+    as desired). We will provide immediate information, to DESC and TVS (and the whole US/Chilean
+    community) onWhich objects have fibres: DESC will primarily drive the selection function.
+    As it is a magnitude limited sample we also expect all the spectra to be of interest to
+    TVS. Through Lasair, we will highlight which targets will get a spectrum. Which targets
+    have been (successfully) observed : immediate meta-data on what has been observed, signal-to-noise
+    estimate of data.Rapid estimate of redshift and type from quick-look data – available
+    to all DESC, TVS and the US/Chilean community to help decide on other triggers.Full, staged,
+    data releases of fully calibrated data, accessible through the Lasair broker.The 4MOST
+    are ESO public survey data and the raw data are public in the ESO archive immediately.
+    However these data are not in scientifically accessible or useable form without deep knowledge
+    of the pipeline, fibre allocation processes and selection function. Hence we propose this
+    as a non-directable software contribution to ensure maximum scientific exploitation of
+    the data (in line with the Handbook’s guidance on public data). The DESC and TVS endorse
+    this contribution. We note the latter is on the condition that TVS members will be kept
+    informed in a timely manner of all information relevant to these surveys. This is our
+    plan, and we are happy to accept that condition.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Spectroscopy
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids:
+  - UKD-UKD-S10

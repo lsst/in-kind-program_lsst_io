@@ -1,0 +1,60 @@
+contribution_id: ITA-INA-S26
+title: 'Non-Directable SW contribution for the TVS SC: A Bridge from Gamma to Optical'
+country: Italy
+institute: INAF
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
+  additional_recipient_groups:
+  - LSST Stars Milky Way and Local Volume Science Collaboration
+  activity_description: 'The Italian National Institute for Astrophysics (INAF) and the Space
+    Science Data Center of the Italian Space Agency (SSDC-ASI) teams will contribute non-directable
+    software development effort in the specific area of LSST TVS analysis in a multi-frequency
+    and multi-messenger context to allow the maximum exploitation of the astrophysical information
+    contained in the data in a high-energy and very-high- energy field. The INAF and SSDC-ASI
+    team proposes to systematically analyze LSST data looking for time resolved optical counterparts
+    of high energy and very high energy sources present in catalogue of, or triggered by,
+    X-ray and gamma-ray satellites or Cherenkov telescopes, including low confidence alerts.
+    Validated results, cross-matched with catalogues hosted and managed by SSDC, will be immediately
+    available to the full LSST community, in a multiwavelength context and remotely accessible
+    through SSDC, for the early scientific exploitation. This project is well in line with
+    similar initiatives undertaken for space missions and for Cherenkov Telescopes already
+    carried on at SSDC within the framework of the general agreement between ASI and INAF
+    for carrying on scientific and technical activities in the center. The computing infrastructure
+    to be dedicated to this project will be provided by both INAF (ASTRI Data Center) and
+    SSDC. The service will be articulated in four different phases: 1) the selection of an
+    input catalog of high energy sources of interest; 2) LSST data retrieving and processing;
+    3) Multiwavelength analysis of the data; 4) Publishing results. The project will be active
+    during the whole LSST survey. Computing resources are already available at INAF/SSDC,
+    and we will work to secure additional local resources if needed. INAF will also provide
+    a dedicated postdoc grant to the project.The TVS SC and SWMLV SC have endorsed this proposed
+    contribution.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

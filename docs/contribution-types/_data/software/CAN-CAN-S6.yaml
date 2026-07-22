@@ -1,0 +1,63 @@
+contribution_id: CAN-CAN-S6
+title: Science Pipeline Development in the LSST AGN Science Collaboration
+country: Canada
+institute: LSST:Canada
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST AGN Science Collaboration
+  additional_recipient_groups: []
+  activity_description: The Canadian LSST consortium will contribute directable software development
+    effort for LSST AGN science analysis, in two general areas:Developing image stacking,
+    image differencing, and variable-source detection software components of the LSST Software
+    Stack that are optimized for detecting variability on longer timescales of weeks to months.
+    This software will be distinct from LSST’s transient detection pipeline, which is optimized
+    for detection of transients and variability on shorter timescales of days. This distinction
+    is crucial because AGN characteristically exhibit observed-frame optical continuum variability
+    on longer timescales than transients. For example, slow stochastic variability on timescales
+    of weeks from a faint AGN in a spatially-extended dwarf galaxy would be missed by the
+    standard transient detection pipeline in the LSST Software Stack, and its detection would
+    require stacking and subtraction of images taken over several weeks. Developing an AGN
+    alerts pipeline for detection and rapid notification of peculiar AGN variability activity,
+    such as outbursting or fading ‘changing-look AGN’. These objects puzzlingly exhibit a
+    wide variety of variability properties that do not seem to follow the well-known red-noise
+    variability of most AGN. The origin of these peculiar variability phenomena in both emission
+    and absorption and their relation to other types of nuclear variability (such as Tidal
+    Disruption Event flares) are unknown. The AGN alerts pipeline would use light curves from
+    the image differencing software described above to detect any peculiar variability in
+    real-time, based on modeling the temporal and spectral properties of the non-simultaneous
+    multi-band light curves that are updated as the data are obtained.This proposal has been
+    endorsed by the LSST AGN Science Collaboration. The dedicated staff will work with the
+    leadership of the AGN Science Collaboration to define needed software development tasks,
+    and will be embedded in the AGN collaboration. They will carry out those tasks as an integral
+    part of the collaboration, reporting regularly on progress, taking input from the rest
+    of the collaboration, and supporting the collaboration’s members in the use of the code.
+    The staff will use the CLASP computing resources if needed to complete these tasks.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astronomy software
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

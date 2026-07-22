@@ -1,0 +1,65 @@
+contribution_id: GER-LMU-S2
+title: Galaxy Cluster Analysis Infrastructure [near-term directable software development,
+  developed in consultation with LSST-DESC]
+country: Germany
+institute: LMU_Munich
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: We will contribute directable software development effort to DESC
+    in the general area of enabling cluster cosmology analyses. Under the direction of the
+    relevant members of the DESC leadership, and depending on the candidates hired for these
+    tasks, we propose to contribute to i) the development and testing of the multi-observable
+    cluster cosmology pipeline, ii) the simulation-based calibration of the relationship between
+    halo mass and the weak-lensing shear signal, accounting for all relevant sources of systematic
+    uncertainties, iii) the tools required for the construction of multi-wavelength cluster
+    catalogs, and iv) the development and implementation of emulators, with particular focus
+    on the cosmological emulators as defined in the DESC science roadmap. In consultation
+    with the relevant members of the DESC leadership--- presumably including the coordinators
+    of the Clusters, Weak Lensing, and Cosmology Simulations working groups--- we will work
+    to define needed software development tasks, and then carry out those tasks as an integral
+    part of the collaboration, reporting regularly on progress, taking input from the rest
+    of the collaboration, supporting the collaboration members in the use of the code, and
+    running the codes at scale to produce the required data products and results.We expect
+    the computational needs associated with our contributions to be provided at NERSC, DESC’s
+    primary computing center, but to also draw upon local resources owned by our group and
+    major computing resources in the Munich area to which we have guaranteed access (e.g.,
+    C2PAP at LRZ). This range of computing resources will support efficient development and
+    testing while allowing more extensive testing to ensure the codes function at the needed
+    scale.The primary risk associated with this work is in gaining the needed expertise in
+    the Rubin and DESC tools and data products and in understanding how best to apply them
+    in the context of cluster cosmology. To mitigate this, our group members will engage early
+    with the appropriate DESC working groups, analysis coordinators, and any available tutorial
+    and instruction resources. We wish to be active participants in the clusters, weak lensing,
+    and computing working groups and to establish fruitful scientific and technical exchange.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

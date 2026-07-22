@@ -1,0 +1,53 @@
+contribution_id: POL-NCB-S6
+title: Science Pipeline Development in the LSST AGN Collaboration
+country: Poland
+institute: NCBJ
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST AGN Science Collaboration
+  additional_recipient_groups: []
+  activity_description: NCBJ will contribute directable software development effort in the
+    general area of LSST AGN variability science analysis. We will focus on the general area
+    of multi-method time delay determination. Given the expertise of the local group led by
+    the Contribution Lead, and software skills of the postdoctoral fellow who will provide
+    the first stage of this contribution, an exemplary plan for the contributed effort could
+    involve development of a single LSST-adjusted front-end for different packages for quasar
+    lag-recovery methods available and being developed inside the AGN SC. NCBJ will work closely
+    with the AGN SC to define the directions for the development of the needed software, and
+    carry out those tasks as a part of the collaboration, defining milestones and reporting
+    progress. NCBJ will actively seek input from the rest of the collaboration and provide
+    consultations on the use of the new software. The software under development will be tested
+    locally, and subsequent versions will be assimilated into the LSST pipeline. The local
+    computing resources required are already at the group’s disposal and additional resources,
+    if and when needed, will be provided by NCBJ. To acquire the expertise necessary to use
+    the LSST pipeline and its products, Mr. S. Panda has attended a 2-month long LSST Stuck
+    Club program, and he conveyed the acquired knowledge to the rest of the group. NCBJ will
+    actively participate in forthcoming events associated with the Rubin 'Data Previews',
+    all within the context of AGN SC. This plan has been consulted with AGN Science Collaboration.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astronomy software
+  summary: null
+  status_override: null
+  related_contribution_ids: []

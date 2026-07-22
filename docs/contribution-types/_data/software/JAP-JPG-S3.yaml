@@ -1,0 +1,61 @@
+contribution_id: JAP-JPG-S3
+title: Serving Rubin Science Platform (Development and Support)
+country: Japan
+institute: JPG
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: Rubin SQuaRE Team
+  additional_recipient_groups:
+  - Rubin Community Science Team
+  activity_description: In this section, we describe human resources for operation and development
+    of RSP. The hardware resources for RSP are proposed as part of the computing facility
+    for the Lite IDAC, which is described in Section 4.If selected, NAOJ would secure 2 individuals
+    at a 0.5 FTE level each to support RSP (one for 4 years, and the other for 13 years).
+    One is a software engineer who is experienced with deployment of data analysis environments
+    using a combination of a container technology and a Jupyter-based interface over a Kubernetes-based
+    distributed computing system. This individual would contribute, for 4 years, some in development
+    of tools for user support such as a web application with expertise obtained through the
+    ongoing HSC-SSP, as well as deployment of the RSP software suite. The other one is a scientist
+    who will serve throughout 13 years of the survey period as user support to bridge LSST
+    users and NAOJ local support staff. As recommended in the Feedback letter, these two staff
+    would be associated with the Rubin Community Engagement team, and taking functional direction
+    from CE team leadership, while being able to interact well with the SPaRE team[i] that
+    will be evolving and maintaining the Rubin Science Platform. In addition, efforts for
+    software development by the above engineer is supposed to follow a collaborative framework
+    of “General pool of fully directable effort” guided in the Handbook, so that his/her contribution
+    time is fully considered for requesting LSST data rights. Those staff would cooperate
+    with the local support staff under the supervision of the same leading person for the
+    Lite IDAC. The computing system and software would be designed to serve moderate result
+    set support (50 simultaneous access, visualization for 10 million objects and result sets
+    of up to 0.1GB, or different requirements that would be suggested by CEC in the evaluation
+    onwards) as defined in the guideline (https://ldm-554.lsst.io/). Since we will host public
+    data products from HSC-SSP and the upcoming PFS survey in neighboring systems in NAOJ,
+    we would discuss an efficient way to provide access to those products for synergistic
+    work combining those data sets with LSST data.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Data visualization
+  summary: null
+  status_override: null
+  related_contribution_ids: []

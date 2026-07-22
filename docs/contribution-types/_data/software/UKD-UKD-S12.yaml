@@ -1,0 +1,62 @@
+contribution_id: UKD-UKD-S12
+title: 'Science Software development: Phases C and D'
+country: UK
+institute: LSST:UK
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: Rubin International Program Coordinator (Software Development)
+  additional_recipient_groups: []
+  activity_description: We propose to fund a cadre of directable software developers during
+    Phases C and D of the LUSC programme, running from April 2023 to March 2027 and April
+    2027 to March 2033, respectively; although the Phase D end-date will depend on when the
+    final data release appears. These developers will be physically located in UK universities
+    but functionally embedded within an appropriate Recipient Group, usually a Science Collaboration,
+    but, potentially, part of the Rubin Observatory operations team. Our nominal plan is for
+    7 full-time positions to be funded for the four years of Phase C (i.e. 28 staff years
+    in total) and a further six staff-years during Phase D, for a total contribution of 34
+    staff-years of directable effort, although the detailed profiling of this effort can be
+    negotiated. Our proposal is that bids for developer positions are developed by UK groups
+    in conjunction with a relevant Recipient Group, and, as for our Phase B DEV WPs, are assessed
+    by a panel that combines senior UK scientists and Rubin-nominated representatives, to
+    ensure that the selected projects both make best use of existing expertise within the
+    UK community and deliver high priority outputs to the Recipient Group. These bids should
+    include consideration of maintenance of software to be delivered, for which support can
+    be provided in Phase D. Projects selected by the panel would then be included in the LUSC
+    Phase C funding proposal to be submitted to the STFC Project Peer Review Panel (PPRP)
+    some time around April 2022; this would be a submission against an agreed funding line,
+    but all project grants are peer reviewed by PPRP. This timescale then necessitates the
+    start of the proposal preparation phase in Summer 2021 - i.e. as soon as this in-kind
+    package is agreed. Computational resources will be provided through IRIS (www.iris.ac.uk),
+    a collaboration between the providers and users of computing infrastructure for STFC-funded
+    astronomy, particle and nuclear physics projects; as an IRIS member, LSST:UK makes an
+    annual bid to secure IRIS resources for the coming year.STFC will require that all funded
+    teams report to an Oversight Committee, which will monitor progress against deliverables.
+    This has begun during LUSC Phase B, with a process based around six-monthly plans, so
+    we propose that this should be the mechanism through which funded staff are redirected,
+    with new six-monthly plans agreed between the Recipient Group and the local supervisor.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,49 @@
+contribution_id: ISR-UST-S1
+title: Joint ULTRASAT-LSST Transient Alerts
+country: Israel
+institute: ULTRASAT
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: Rubin Prompt Processing Group
+  additional_recipient_groups: []
+  activity_description: We propose a handshake mechanism whereby LSST alert brokers and the
+    ULTRASAT alert generator ping a designated server on the collaborating side, providing
+    coordinates and a time stamp, and receiving in return a formatted block that can be included
+    or appended to an outgoing alert, with the information described above. Communication
+    protocols will be set up between the relevant broker teams and the ULTRASAT Science Operations
+    Center (SOC). The connection between ULTRASAT and the AMPEL broker (operated by ULTRASAT
+    core team members at DESY) will be set up by the ULTRASAT team, ensuring at least one
+    operational joint broker by resources included fully in this proposal. For other brokers,
+    development effort needs to be undertaken on the broker side by the relevant broker teams,
+    but the ULTRASAT team will assign additional resources to support development on the broker
+    side with information and advice. As part of the periodic ULTRASAT data releases, ULTRASAT
+    UV light curves will be connected with LSST events (either transients or static sources
+    - e.g., for stellar flares). This will allow curators of LSST data to add the public ULTRASAT
+    light curves to the aggregated information about these LSST sources.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,65 @@
+contribution_id: ITA-INA-S2
+title: 'Directable SW contribution for the AGN SC: Simulations of high-z AGNs and galaxies
+  in the LSST survey'
+country: Italy
+institute: INAF
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST AGN Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'The INAF team will contribute to the AGN SC team with a directable
+    software development effort. This contribution might also be relevant for the Galaxies
+    SC. The aim is to help build an AGN mock catalog which will be used as input, together
+    with the galaxy mock catalog, to simulate LSST images. The AGN mock catalog at the desired
+    depth and with any chosen set of passbands, will be created using the state-of-the-art
+    prescriptions that match observations of AGN in the deep fields. The goal is to create
+    simulated LSST and Euclid FoVs by using GalSim (Rowe et al., 2015) or other tools defined
+    by the SC. Photometric catalogues of sources (AGN and galaxies) will then be extracted
+    from the simulated images in different bands and at different depths. We point out that
+    fluxes will be measured on the simulated images using real photometric software tools,
+    as opposed to being directly simulated in the mock catalog. The INAF proposers will work
+    with the Rubin Team to define needed software development and tasks on the base of Rubin
+    requirements or to implement specific tools, by following Rubin requests. They will also
+    carry out those tasks as an integral part of the AGN science collaboration, reporting
+    regularly on progress, taking input from the rest of the collaboration, and supporting
+    the collaboration’s members in the use of the proposed tool. This work has been weighed
+    against the AGN SC Roadmap document and the criteria outlined in the proposer’s handbook
+    and it has been accepted as a contribution by the AGN SC. Several AGN SC members (i.e.
+    Niel Brandt, Gordon Richards, Jan-Torge Schindler and Franz Bauer) have declared interest
+    and will be involved in the project.We anticipate needing modest amounts of local computing
+    to support this work and focus on using Rubin-provided user computing resources as they
+    become available to ensure the code functions at the needed scale. The local computing
+    resources are already available at INAF, and we will work to secure additional local resources
+    if needed. The primary risk associated with this work is in gaining the needed expertise
+    in the Rubin tools and data products, both for INAF team staff members and dedicated recruited
+    personnel: to mitigate this, the INAF team will engage early with any Rubin tutorials
+    provided, and look to be active participants in events associated with the Rubin “Data
+    Previews” within the context of the AGN SC.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astroinformatics
+  - Astronomy software
+  summary: null
+  status_override: null
+  related_contribution_ids: []

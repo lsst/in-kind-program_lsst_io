@@ -1,0 +1,60 @@
+contribution_id: POL-NCB-S3
+title: Science Pipeline Development in the LSST Galaxies Science Collaboration
+country: Poland
+institute: NCBJ
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Galaxies Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: 'POL-NCB will contribute directable software development effort in
+    the area of estimation of galaxy photometric redshifts and physical properties. NCBJ will
+    base its work on the g developing version of the CIGALE SED fitting tool and we will further
+    optimise it for the work with the LSST data: primarily object catalogs but potentially
+    also the images. This effort will be led in a close collaboration with the main members
+    of the international CIGALE team, embedded in the Galaxies SC, in particular Dr. Veronique
+    Buat, Dr. Denis Burgarella and Dr. Mederic Bouquien. We anticipate cross-correlating the
+    resultant catalogs with similar datasets obtained by other SCs. NCBJ staff will coordinate
+    the work with the Galaxies SC to define necessary precision of the estimated parameters
+    and possibly to include machine learning algorithms to fasten the process of analysis.
+    The resultant user-generated datasets: catalogs of galaxy photometric redshifts and galaxy
+    properties will be made accessible to the Galaxies SC and, with time, to the whole Rubin
+    Observatory community, via appropriate data access centers, among them the local IDAC
+    (S1). NCBJ anticipates usage of both local computing resources associated with IDAC in
+    CIŚ, and Rubin-provided user computing resources to support this work. The aforementioned
+    local computing resources are already available at NCBJ in CIŚ, and additional computing
+    resources will be added if and when needed. The primary risk associated with this work
+    is in gaining the needed expertise in the Rubin tools and data products: to mitigate this,
+    the NCBJ staff will engage early with any Rubin tutorials provided, and look to be active
+    participants in events associated with the Rubin “Data Previews”, all within the context
+    of the Galaxies SC.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Galaxies
+  - Machine learning
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []
