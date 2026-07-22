@@ -1,6 +1,6 @@
-############################
-Contributed Telescope Access
-############################
+################
+Telescope Access
+################
 
 This page lists the facilities expected to be made available via the Vera C. Rubin Observatory In-kind Program.
 The information on this page is subject to change. Final information on resources, time availability, and other pertinent information will be provided as part of the `NOIRLab Call for Proposals <https://noirlab.edu/science/observing-noirlab/proposals>`_ each semester.

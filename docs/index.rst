@@ -28,8 +28,8 @@ Information about Rubin Data Rights holders including the International Data Rig
 
    data-rights/index
 
-Contribution Types
-==================
+Contributions
+=============
 
 See what types of contributions are provided to the Rubin Observatory.
 
