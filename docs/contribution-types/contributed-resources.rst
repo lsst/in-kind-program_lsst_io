@@ -1,6 +1,6 @@
-###############################
-Contributed Computing Resources
-###############################
+###################
+Computing Resources
+###################
 
 Independent Data Access Centers (IDACs) and Scientific Processing Centers (SPCs)
 One of the goals of the In-Kind Program is to augment the available resources for data- and compute-intensive use cases for the Rubin community.

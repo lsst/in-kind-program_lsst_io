@@ -1,6 +1,6 @@
-####################
-Contributed Datasets
-####################
+########
+Datasets
+########
 
 The Vera C. Rubin Observatory In-Kind Program includes contributed datasets: complementary data products that international partners make available to the Rubin community in exchange for data rights.
 This page lists all current dataset contributions, helping the Rubin and NOIRLab community discover data relevant to their research.

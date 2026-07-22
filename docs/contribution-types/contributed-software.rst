@@ -1,6 +1,6 @@
-######################
-Contributed Software
-######################
+########
+Software
+########
 
 The Vera C. Rubin Observatory In-Kind Program includes contributed software: directable and non-directable software-development effort that international partners contribute to Rubin teams and LSST Science Collaborations.
 This page lists all current software-development contributions. General pool contributions -- directable effort offered without a recipient defined ahead of time -- are listed on the :doc:`general-pool` page instead.
