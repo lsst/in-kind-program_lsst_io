@@ -1,0 +1,88 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Argentina
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Argentina IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Argentina"
+slug: "argentina"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "La Plata"
+  institution: "Facultad de Ciencias Astronómicas (UNLP)"
+  lat: -34.908
+  lng: -57.953
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     false
+  solar_system_tables:  false
+  co_added_images:      false
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      null
+  free_storage_pb_years: 2
+  cpu_mhrs:              null
+  free_cpu_mhrs:         null
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  null
+  expected_local_users:  null
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  hipsdb tables for fast search and cross matching. image stamps DIA analysis. Mask and global properties maps for sample selection
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  user generated dataproducts, selected transients and variable data from follow-ups datasets
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Fast Correlation functions and cross-matching.
+  Voids and Systems of Galaxies detection and classification.
+  Streams and MW Satellite galaxies detection.
+  DIA algorithms for heterogeneous transient follow-ups.
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  []  # TODO: add at least one contact
+
+# === Free-text notes ======================================================
+notes: |
+

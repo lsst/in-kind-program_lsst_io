@@ -1,0 +1,83 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Mexico
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Mexico IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Mexico"
+slug: "mexico"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "Mexico City"
+  institution: "Universidad Nacional Autónoma de México (UNAM)"
+  lat: 19.3263
+  lng: -99.1762
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         true
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     false
+  solar_system_tables:  false
+  co_added_images:      true
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  false
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      20
+  free_storage_pb_years: 16
+  cpu_mhrs:              31
+  free_cpu_mhrs:         30.5
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  3.25
+  expected_local_users:  10
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  Lustre file system, PostgreSQL, exploring RSP as interface
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: ""
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  TBD
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  []  # TODO: add at least one contact
+
+# === Free-text notes ======================================================
+notes: ""

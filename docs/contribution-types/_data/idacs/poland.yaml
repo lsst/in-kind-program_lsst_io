@@ -1,0 +1,84 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Poland
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Poland IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Poland"
+slug: "poland"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "Poznań"
+  institution: "Poznań Supercomputing and Networking Center"
+  lat: 52.406
+  lng: 16.925
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     false
+  solar_system_tables:  false
+  co_added_images:      false
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      65
+  free_storage_pb_years: 57.3
+  cpu_mhrs:              56
+  free_cpu_mhrs:         54.8
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  6.5
+  expected_local_users:  26
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  Dedicated multipurpose science platform (Jupyter/SSH/UI on SLURM/Lustre using Docker Swarm/Singularity/CVMFS/Keycloak/OpenSearch/…)
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  Local copies of Gaia, OGLE, SDSS, Vipers, Akari, other catalogs
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Rubin-Gaia cross-match, Rubin-OGLE-ZTF cross-match along the Milky Way disk, Rubin-OGLE-VMC-DECam cross-match for Magellanic System, Preparation of a catalog of known variable stars in the Rubin sky, Construction of deep color-color and color-magnitude diagrams for Magellanic Clouds, Data from alerts for microlensing, LSST large-scale structure (LSS) analysis, Photometric Redshift estimation of galaxies from the LSST data, Quasar redshift estimation and brightness curves, photometric redshift (PZ) estimation of galaxies
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  []  # TODO: add at least one contact
+
+# === Free-text notes ======================================================
+notes: ""

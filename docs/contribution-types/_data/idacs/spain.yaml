@@ -1,0 +1,104 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Spain
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Spain IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Spain"
+slug: "spain"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "Barcelona"
+  institution: "Port d'Informació Científica (PIC) / IFAE"
+  lat: 41.5
+  lng: 2.111
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     false
+  solar_system_tables:  false
+  co_added_images:      false
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  false
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      7
+  free_storage_pb_years: 3.2
+  cpu_mhrs:              21
+  free_cpu_mhrs:         20.4
+  gpu_mhrs:              20
+  free_gpu_mhrs:         0.8
+  hosted_data_pb_years:  3.25
+  expected_local_users:  8
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  CosmoHub:
+  Web portal for interactive exploration and distribution of massive cosmological datasets
+  Full dataset plots (over all rows): May use sampling / Cone search tool / 1D histogram & 2D heatmap
+  TAP + ADQL interfaces in development
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  ~15 different projects (Gaia, DES, PAU, Euclid, DESI, COSMOS, KiDS, GLADE, CFHTLenS, ...)
+  including DESC DC2 (Object and Truth-match tables)
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Catalog validation / exploration / crossmatch
+  Large Scale Structure algorithms (photo-z, 2-point correlation functions, ...)
+  Galaxy simulations
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  - name:  "Jordi Delgado"
+    email: "jordidem@pic.es"
+    role:  "Technical contacts"
+  - name:  "Francesc Torradeflot"
+    email: "torradeflot@pic.es"
+    role:  "Technical contacts"
+  - name:  "Jorge Carretero"
+    email: "carretero@pic.es"
+    role:  "Programmatic contacts"
+  - name:  "Nacho Sevilla"
+    email: "ignacio.sevilla@ciemat.es"
+    role:  "Programmatic contacts"
+  - name:  "Pau Tallada"
+    email: "tallada@pic.es"
+    role:  "Programmatic contacts"
+
+# === Free-text notes ======================================================
+notes: ""

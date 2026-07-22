@@ -1,0 +1,92 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Brazil
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Brazil IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Brazil"
+slug: "brazil"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "Rio de Janeiro"
+  institution: "LIneA"
+  lat: -22.953
+  lng: -43.176
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     false
+  solar_system_tables:  false
+  co_added_images:      true
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      65
+  free_storage_pb_years: 65
+  cpu_mhrs:              56
+  free_cpu_mhrs:         54.8
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  6.5
+  expected_local_users:  26
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  LIneA Science Platform (LSP) with Jupyter notebooks, combining upgraded science server as deployed at NCSA with new user query (based on Daiquiri platform) and x-match service (based on LDSB); photo-z server, solar system portal, cluster analysis and visualization server (CANVAS); HPC cluster (Slurm, Open OnDemand); PostgreSQL.
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  Survey property maps (e.g. masks; depth); photo-z tables, spectroscopic redshift samples, training sets; cluster and stellar system candidate list updated with each DR;  regularly updated list of occultation events; SDSS and DES object catalogs; all-sky hips image
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Photo-z's; galaxy clusters; resolved stars; visualization; crossmatches; occultation events
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  - name:  "Carlos Adean"
+    email: "carlosadean@linea.org.br"
+    role:  "Technical contact"
+  - name:  "Luiz Da Costa"
+    email: "ldacosta@linea.org.br"
+    role:  "Programmatic contacts"
+  - name:  "Julia Gschwend"
+    email: "julia@linea.org.br"
+    role:  "Programmatic contacts"
+
+# === Free-text notes ======================================================
+notes: ""
