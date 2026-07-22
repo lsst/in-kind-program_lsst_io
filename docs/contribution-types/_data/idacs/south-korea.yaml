@@ -1,0 +1,85 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- South Korea
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the South Korea IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "South Korea"
+slug: "south-korea"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "Daejeon"
+  institution: "Korea Astronomy and Space Science Institute (KASI)"
+  lat: 36.398
+  lng: 127.388
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     false
+  solar_system_tables:  false
+  co_added_images:      true
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      7
+  free_storage_pb_years: 3.2
+  cpu_mhrs:              20
+  free_cpu_mhrs:         19.7
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  3.25
+  expected_local_users:  5
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  Rubin-dedicated hyperconverged infrastructure cluster to host Rubin Science Platform (Portal/Notebooks/APIs) and distributed PostgreSQL databases for object-lite catalog. Additional high-capacity object storage to serve coadded images.
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  user-generated data products
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: ""
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  - name:  "Chang Hee Ree"
+    email: "chr@kasi.re.kr"
+    role:  null
+
+# === Free-text notes ======================================================
+notes: ""

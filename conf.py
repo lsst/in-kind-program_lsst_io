@@ -744,3 +744,140 @@ def _collect_cross_page_titles(subdir_name):
 
 
 jinja_contexts["contributed_software"] = _load_contributed_software()
+
+
+# ============================================================================
+# APPEND THIS BLOCK TO conf.py (at the repo root), after the existing
+# `jinja_contexts["contributed_software"] = _load_contributed_software()` line.
+#
+# It reuses helpers already defined earlier in conf.py:
+#   _slugify, _normalize_strings, _to_marker_xy,
+#   _offset_clustered_markers, _load_world_outline_path
+# ============================================================================
+
+# ============================================================================
+# Contributed Computing Resources (IDAC / SPC) page data loading
+#
+# Each record lives as a YAML file in
+# docs/contribution-types/_data/idacs/<slug>.yaml. Like the telescopes page,
+# the In-kind coordinator is the source of truth (there is no external form
+# intake), so there is no form_data/curated split -- just a flat, hand-curated
+# schema. This loader reuses the equirectangular _to_marker_xy() projection and
+# the world-outline SVG from the telescopes loader above, sizes each marker by
+# its storage commitment, and exposes everything to contributed-resources.rst
+# via sphinx_jinja.
+# ============================================================================
+
+_IDAC_PRODUCT_LABELS = {
+    "object_table_subset": "Object Table (subset)",
+    "object_table": "Object Table",
+    "source_table": "Source Table",
+    "forced_source_table": "ForcedSource Table",
+    "dia_object_table": "DIAObject Table",
+    "dia_source_table": "DIASource Table",
+    "solar_system_tables": "Solar System Tables",
+    "co_added_images": "Co-added Images",
+    "visit_images": "Visit Images",
+    "difference_images": "Difference Images",
+    "template_images": "Template Images",
+    "other_data_products": "Other Data Products",
+}
+
+
+def _idac_marker_radius(storage, max_storage):
+    """Scale a marker radius by the square root of the storage commitment so
+    the map echoes the relative scale of each IDAC (bounded so the smallest
+    contributions stay clickable and the largest don't swamp the map)."""
+    if not storage or not max_storage:
+        return 4.0
+    return round(4.0 + 8.0 * (storage / max_storage) ** 0.5, 1)
+
+
+def _load_contributed_idacs():
+    data_dir = (
+        Path(__file__).parent
+        / "docs"
+        / "contribution-types"
+        / "_data"
+        / "idacs"
+    )
+    records = []
+    all_types = set()
+    all_products = set()
+
+    raw = []
+    for path in sorted(data_dir.glob("*.yaml")):
+        with path.open(encoding="utf-8") as f:
+            record = yaml.safe_load(f) or {}
+        record = _normalize_strings(record)
+        record["slug"] = _slugify(record.get("slug") or path.stem)
+        raw.append((path, record))
+
+    max_storage = max(
+        ((r.get("capacity") or {}).get("storage_pb_years") or 0) for _, r in raw
+    ) if raw else 0
+
+    for path, record in raw:
+        loc = record.get("location") or {}
+        lat, lng = loc.get("lat"), loc.get("lng")
+        if lat is not None and lng is not None:
+            record["marker_x"], record["marker_y"] = _to_marker_xy(lat, lng)
+        else:
+            record["marker_x"] = record["marker_y"] = None
+
+        cap = record.get("capacity") or {}
+        record["marker_r"] = _idac_marker_radius(cap.get("storage_pb_years"), max_storage)
+
+        idac_type = record.get("idac_type") or "IDAC"
+        record["idac_type"] = idac_type
+        all_types.add(idac_type)
+
+        products = record.get("data_products") or {}
+        hosted = [
+            _IDAC_PRODUCT_LABELS[k]
+            for k in _IDAC_PRODUCT_LABELS
+            if products.get(k)
+        ]
+        record["hosted_products"] = hosted
+        record["product_count"] = len(hosted)
+        record["product_total"] = len(_IDAC_PRODUCT_LABELS)
+        all_products.update(hosted)
+
+        # Space-separated CSS-safe tokens the page's filter script matches
+        # table rows, cards, and map markers against.
+        tokens = [f"type-{_slugify(idac_type)}", f"cid-{record['slug']}"]
+        tokens += [f"product-{_slugify(p)}" for p in hosted]
+        if cap.get("gpu_mhrs"):
+            tokens.append("has-gpu")
+        record["filter_tokens"] = " ".join(tokens)
+
+        search_parts = [
+            record.get("country", ""),
+            loc.get("city", "") or "",
+            loc.get("institution", "") or "",
+            idac_type,
+            record.get("software_services", "") or "",
+            record.get("use_cases", "") or "",
+            record.get("complementary_datasets", "") or "",
+            record.get("science_collaboration_agreements", "") or "",
+            *hosted,
+        ]
+        record["search_text"] = " ".join(p for p in search_parts if p).lower()
+        records.append(record)
+
+    _offset_clustered_markers([r for r in records if r.get("marker_x") is not None])
+    records.sort(key=lambda r: r.get("country", ""))
+    search_index = {r["slug"]: r["search_text"] for r in records}
+
+    return {
+        "idacs": records,
+        "all_types": sorted(all_types),
+        "all_products": sorted(all_products),
+        "product_labels": _IDAC_PRODUCT_LABELS,
+        "slugify": _slugify,
+        "search_index_json": json.dumps(search_index),
+        "world_outline_path": _load_world_outline_path(),
+    }
+
+
+jinja_contexts["contributed_idacs"] = _load_contributed_idacs()

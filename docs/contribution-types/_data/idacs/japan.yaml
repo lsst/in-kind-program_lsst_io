@@ -1,0 +1,86 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Japan
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Japan IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Japan"
+slug: "japan"
+idac_type: "Lite IDAC (x2)"
+
+location:
+  city:        "Mitaka, Tokyo"
+  institution: "National Astronomical Observatory of Japan (NAOJ) and Kavli IPMU"
+  lat: 35.675
+  lng: 139.541
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  true
+  dia_object_table:     false
+  dia_source_table:     true
+  solar_system_tables:  false
+  co_added_images:      true
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      46
+  free_storage_pb_years: 35.2
+  cpu_mhrs:              141
+  free_cpu_mhrs:         138.3
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  9.75
+  expected_local_users:  35
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  Jupyter+Kubernetes platform built on HSC-SSP uses. Other interfaces such as Xpra desktop access and filesharing are under development. Database options include Postgresql, Citus, MapReduce distributed DB
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  HSC and PFS data
+  How much and what types of Rubin data to be hosted: under discussion
+  PFS spectra of transient, host galaxies and photo-z training sample taken by other in-kind contribution
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Weak lensing cosmology, transients (incl. SNe), photo-z's, solar system sciences
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  []  # TODO: add at least one contact
+
+# === Free-text notes ======================================================
+notes: ""

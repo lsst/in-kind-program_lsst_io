@@ -1,0 +1,85 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- Denmark
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the Denmark IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "Denmark"
+slug: "denmark"
+idac_type: "Lite IDAC"
+
+location:
+  city:        "Copenhagen"
+  institution: "DARK / Niels Bohr Institute"
+  lat: 55.696
+  lng: 12.57
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         false
+  source_table:         false
+  forced_source_table:  false
+  dia_object_table:     false
+  dia_source_table:     true
+  solar_system_tables:  false
+  co_added_images:      true
+  visit_images:         false
+  difference_images:    false
+  template_images:      false
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      65
+  free_storage_pb_years: 11.7
+  cpu_mhrs:              280
+  free_cpu_mhrs:         265.8
+  gpu_mhrs:              1
+  free_gpu_mhrs:         0.5
+  hosted_data_pb_years:  53
+  expected_local_users:  60
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  TBD
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  Community-derived data products; Auxiliary data products relevant for transient + galaxy science such as SDSS, PS, WISE, VEXAS, KIDS, GALEX, Euclid
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Special emphasis on transients, cosmology, galaxies, dark matter (serving especially DESC, TVS, SLS); AI/ML applications
+  Rubin/Euclid joint processing
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  []  # TODO: add at least one contact
+
+# === Free-text notes ======================================================
+notes: ""

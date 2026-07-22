@@ -1,0 +1,93 @@
+# ============================================================================
+# Rubin IDAC Capabilities -- United Kingdom
+# ----------------------------------------------------------------------------
+# This file is the source of truth for what the public IDAC dashboard shows
+# about the United Kingdom IDAC. Open a pull request with any change you want
+# published. See data/SCHEMA.md for field definitions.
+# ============================================================================
+
+country: "United Kingdom"
+slug: "united-kingdom"
+idac_type: "Data Facility (Full IDAC)"
+
+location:
+  city:        "Edinburgh"
+  institution: "Royal Observatory / UK Data Facility"
+  lat: 55.923
+  lng: -3.187
+
+# === Rubin data products that will be hosted at this IDAC =================
+data_products:
+  object_table_subset:  true
+  object_table:         true
+  source_table:         true
+  forced_source_table:  true
+  dia_object_table:     true
+  dia_source_table:     true
+  solar_system_tables:  true
+  co_added_images:      true
+  visit_images:         true
+  difference_images:    false
+  template_images:      true
+  other_data_products:  true
+
+# === Rubin data releases stored at this IDAC ==============================
+# List the planned data releases, e.g. ["DP1", "DR1", "DR2"]. Leave [] if TBD.
+data_releases: []
+
+# === Capacity (integrated over the 13-year IDAC lifetime) =================
+capacity:
+  storage_pb_years:      2005
+  free_storage_pb_years: 10.9
+  cpu_mhrs:              61
+  free_cpu_mhrs:         41.1
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
+  hosted_data_pb_years:  1989
+  expected_local_users:  437
+
+# === Hardware architecture (FREE-TEXT, please fill in) ====================
+# e.g. "AMD EPYC 9654 (Genoa), 384 cores/node" / "NVIDIA H100 80GB SXM5"
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type:     ""
+  network:          ""
+
+# === Software services & platform =========================================
+software_services: |
+  Full RSP deployment
+  Options to exploit technologies from ‘nearby’ programmes – such as SKA, Euclid, and Gaia
+  Rucio for distributed data management (tbc); Ctrl-BPS/ Parsl/ Slurm – batch processing for  HPC (tbc)
+
+# === Complementary / auxiliary datasets ===================================
+complementary_datasets: |
+  LSST-VISTA fused products; crossmatch catalogues for topical surveys, Edinburgh Wide-field Astronomy Unit survey catalogues (via TAP)
+
+# === Science use cases this IDAC specializes in ===========================
+use_cases: |
+  Full range of science cases
+  Co-location with Lasair Community Broker for transient science
+
+# === Science Collaboration agreements made ===========================
+science_collaboration_agreements: ""
+
+# === Onboarding & documentation links (please fill in) ====================
+documentation:
+  - title: "Onboarding guide"
+    url:   ""
+  - title: "Science platform / user portal"
+    url:   ""
+
+# === Contacts =============================================================
+contacts:
+  - name:  "George Beckett"
+    email: "george.beckett@ed.ac.uk"
+    role:  null
+  - name:  "Mike Read"
+    email: "mar@roe.ac.uk"
+    role:  null
+
+# === Free-text notes ======================================================
+notes: |
+  Free CPU capacity does not include the UK Data Facility's significant resources for supporting database queries of full copy of catalog data
