@@ -1,0 +1,60 @@
+contribution_id: MEX-UNA-S5
+title: Science Pipeline Development in the Galaxies Science Collaboration
+country: Mexico
+institute: UNAM
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Galaxies Science Collaboration
+  additional_recipient_groups: []
+  activity_description: The MEX-UNA subgrup will provide a non-directable effort to the LSST
+    Galaxies SC in software development, with emphasis on morphological classification (and
+    eventually LSB) through the image analysis and Machine Learning algorithms. The group
+    has enough local computing support at IA-UNAM to develop this work, but as the scale of
+    the products work it might be necessary to use other SC resources, and we will make sure
+    that codes/software run in the main SC computing center.This proposal is divided in two
+    main sections:1- The automatic morphological classification of galaxies and the detection
+    of independent morphological structures like bars, rings, mergers of galaxies, etc. After
+    applying an adequate image processing following the techniques in Hernandez-Toledo et
+    al. (2010), and in combination with supervised/unsupervised CNN-based models (e.g. Alvarado-Gonzalez
+    et al. 2021), we will provide computational tools able to extract, almost in real time,
+    these structures, additionally to the morphological type of these galaxies, for the corresponding
+    analysis by the scientific community.2- The detection and classification of LSB structures,
+    focusing mainly on tidal debris. This project will be a continuation of Project 1, and
+    will be carried out according to the needs of the WG and the availability of deep images.
+    Once the development of Machine Learning algorithms, to detect specific structures of
+    galaxies, is done, they could be applied to detect tidal arms, tidal bridges and other
+    structures within the image and magnitudes limits. The results reached and software developed
+    will be available entirely to the collaboration, to use them with different scientific
+    purposes, and also to carry out improvements after comparisons with other groups, working
+    with the same interests but using different techniques. We would also be interested in
+    applying the described techniques towards synergetic efforts with other SCs, like SLSC.We
+    will be happy to extend our collaboration to other projects and share our experience if
+    that is of benefit to the Galaxies SC. The Galaxies SC have endorsed this proposed contribution.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Galaxies
+  - Machine learning
+  summary: null
+  status_override: null
+  related_contribution_ids: []

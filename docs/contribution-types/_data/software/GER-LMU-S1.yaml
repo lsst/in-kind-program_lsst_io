@@ -1,0 +1,59 @@
+contribution_id: GER-LMU-S1
+title: Calibration pipeline development for Weak Gravitational Lensing analyses in the LSST
+  Dark Energy Science Collaboration [near-term directable software development]
+country: Germany
+institute: LMU_Munich
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: 'Prof. Dr. Gruen’s team will contribute directable software development
+    effort in the general area of LSST Dark Energy science weak lensing analysis. Depending
+    on the candidate hired with the transition of the group to LMU, an on coordination with
+    the relevant DESC working groups, this could e.g. be in the area of image simulations
+    for weak lensing shear and photometric redshift calibration or other pipelines for photometric
+    redshift calibration purposes, or the correction of other weak lensing related systematics
+    in DESC observables. Team members will work with the DESC, particularly the WL, PZ, and
+    BL working groups, to define needed software development tasks. They will then carry out
+    those tasks as an integral part of the collaboration, reporting regularly on progress,
+    taking input from the rest of the collaboration, supporting the collaboration’s members
+    in the use of the code, and running the code at scale to produce the required calibrations
+    for DESC weak lensing science. We anticipate needing modest amounts of local computing
+    to support this work, and focus on using Rubin-provided user computing resources as they
+    become available to ensure the code functions at the needed scale. The aforementioned
+    local computing resources are already available at Munich, and we will work to secure
+    additional local resources if needed. The primary risk associated with this work is in
+    gaining the needed expertise in the Rubin tools and data products and connect and extend
+    them for the needs of weak lensing calibration: to mitigate this, staff will engage early
+    with DESC working groups, the DESC Spokespersons and Analysis Coordinators, any tutorials
+    and codes provided, and look to be active participants in the WL, PZ and BL working groups.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Gravitational lensing
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

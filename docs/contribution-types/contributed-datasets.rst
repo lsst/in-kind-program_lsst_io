@@ -190,6 +190,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       {% for ds in datasets %}
       {% if ds.status == 'available' %}
+      .. _ds-cid-{{ ds.cid_slug }}:
+
       .. grid-item-card:: {{ ds.title }}
           :class-item: ikc-card {{ ds.filter_tokens }}
 
@@ -219,6 +221,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           +++
           :bdg-success:`Available`
       {% else %}
+      .. _ds-cid-{{ ds.cid_slug }}:
+
       .. grid-item-card:: {{ ds.title }}
           :class-item: ikc-card {{ ds.filter_tokens }}
 

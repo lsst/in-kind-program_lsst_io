@@ -1,0 +1,59 @@
+contribution_id: ITA-INA-S14
+title: Directable SW contribution for the
+country: Italy
+institute: INAF
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'The INAF team will contribute directable software development effort
+    in the general area of DESC Galaxy Clusters and Simulations working group, in Projects
+    and areas that could also include the creation of an infrastructure to generate, store
+    and make fully accessible to the LSST Collaboration simulations and mocks of the LSST
+    survey, the characterization of optimal filter algorithms for the identification of galaxy
+    clusters in LSST data, the development and validation of software for galaxy cluster mass
+    modelling and scaling relations. The INAF proposers will work with the DESC Team to define
+    needed software development and tasks aimed at tailoring/integrating any existing product
+    on the base of DESC requirements or to implement specific tools from scratch, by following
+    DESC requests and shared with the DESC in GitHub community repositories. They also carry
+    out those tasks as an integral part of the collaboration, reporting regularly on progress,
+    taking input from the rest of the collaboration, and supporting the collaboration’s members
+    in the use of the proposed tool. We anticipate needing local computing to support this
+    work and focus on using DESC-provided user computing resources as they become available
+    to ensure the code functions at the needed scale. The aforementioned local computing resources
+    are already available at INAF, and we will work to secure additional local resources if
+    needed. The INAF proposers will actively work to ensure that all the developed software
+    will also run smoothly at NERSC, DESC’s primary computing host.The primary risk associated
+    with this work is in gaining the needed expertise in the DESC tools and data products,
+    both for INAF team staff members and dedicated recruited personnel: to mitigate this,
+    the INAF team will engage early with any DESC tutorials provided, and look to be active
+    participants in events associated with the Rubin “Data Previews”, all within the context
+    of the DESC.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  summary: null
+  status_override: null
+  related_contribution_ids: []

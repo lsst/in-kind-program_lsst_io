@@ -1,0 +1,71 @@
+contribution_id: NED-UTR-S2
+title: Science Pipeline Development for astrophysical systematics for the LSST DESC Science
+  Collaboration
+country: Netherlands
+institute: Utrecht
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'Chisari’s group will commit 1 FTE-yr non-directable effort towards
+    DESC software pipelines: continuing the development of CCL, ensuring smooth integration
+    to the combined-probes likelihood pipeline, and assessing and providing models for astrophysical
+    systematics (mainly intrinsic alignments) for the successful extraction of cosmological
+    information from weak gravitational lensing with LSST, in the spirit of the DESC Science
+    Roadmap[2] (Chapter 5). Implementation of new intrinsic alignment models in CCL. Currently,
+    CCL incorporates the NLA & standard perturbation theory models (up to one-loop) of intrinsic
+    alignments. Neither can describe the smallest scale alignments, where most of the dark
+    energy information is encoded. The EFT approach we proposed in Vlah, Chisari & Schmidt
+    (2020) incorporates all possible physical contributions to the alignment signal to third
+    order. The modelling on fully nonlinear scales can only be tackled via the halo model,
+    which we have refined in Fortuna et al. (incl. Chisari, 2020) based on recent KiloDegree
+    Survey observations (Georgiou et al., 2019a and 2019b, incl. Chisari). We will implement
+    these models in CCL and perform various validations against our previous results following
+    standard DESC procedure as documented in the CCL paper (Chisari et al., LSST DESC, 2019).
+    Definition of mitigation strategy for LSST. The Theory and Joint Probes (TJP) working
+    group is at the moment constructing the likelihood pipeline for inference of cosmological
+    parameters (“Firecrown”) and an official forecasting code (“Augur”) aimed to carry out
+    assessment of the impact of systematics and modelling choices. Following similar procedure
+    as in the DESC science requirements document, we will use these LSST DESC forecasting
+    and likelihood tools to determine expected cosmological parameter biases in Ωm, σ8, w0,
+    wa depending on the model adopted, knowledge of priors, and the scales utilized for the
+    analysis. We will also work with the collaboration in determining the trade-off with other
+    systematics parameters. The aim will be to demonstrate the robustness of cosmological
+    analyses with LSST.We anticipate the need to make use of the DESC NERSC allocation for
+    these projects, though the usage will in general be minimal compared to the typical investment
+    of the allocation (i.e. no simulations or data processing are needed within our activities).
+    We will report on progress regularly at TJP telecons and collaboration meetings, and invite
+    collaboration through sprint activities.Due to funding limitations (see 2.4.1), we envisage
+    the effort to be non-directable. Nevertheless, we will take into account CCL development
+    status and priorities, and seek feedback from the working group to ensure the contribution
+    is timely and meaningful. Other areas where we can contribute and which have been discussed
+    with LSST DESC leads are: the modelling of baryonic physics and general maintenance of
+    TJP pipelines.The LSST DESC has endorsed this contribution.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

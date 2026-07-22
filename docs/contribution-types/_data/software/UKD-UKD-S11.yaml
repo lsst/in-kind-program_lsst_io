@@ -1,0 +1,64 @@
+contribution_id: UKD-UKD-S11
+title: 'Science Software development: photometric redshift estimation and DESC related software
+  development'
+country: UK
+institute: LSST:UK
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: This directable staff effort contribution has been developed jointly
+    with DESC. We will contribute directable software development effort to the DESC primary
+    science analysis, including but not limited to robust photo-z solutions, modelling and
+    validation of photometric redshift sample distribution, their uncertainties and how these
+    impact the DESC cosmological parameter pipelines. As directable effort within DESC we
+    will model statistical and systematic uncertainties in weak lensing and clustering signals,
+    as well as propagation of these uncertainties, especially their spatial variation across
+    the survey, into cosmological likelihoods. Joachimi and Lahav will work with relevant
+    members of the DESC Management Team and Working Group conveners to define needed software
+    development tasks, and then carry out those tasks as an integral part of the collaboration,
+    reporting regularly on progress, taking input from the rest of the collaboration, and
+    supporting the collaboration’s members in the use of the code. Joachimi and Lahav have
+    also joined Rubin’s Photometric Redshift Coordination Group and will work with this Team
+    to define additional benefits of the proposed work for LSST’s users beyond the DESC remit.
+    The work will make use of DESC’s computing resources, HPC facilities at UCL, as well as
+    UK ‘s IRIS computing dedicated to LSST (as part of the UK’s IDAC, see S3), all of which
+    are already available or are part of this in-kind proposal. Note that Joachimi’s PhD student
+    is currently road-testing GridPP facilities for DESC photo-z applications. The primary
+    risk associated with this work is the timely hiring of qualified personnel. This will
+    be mitigated by fast-tracking the funding line of this proposal if and when successful.
+    Moreover, we have ample experience recruiting highly qualified staff for infrastructure
+    work in galaxy surveys, and are currently gaining experience with COVID-era hires and
+    work models. We will also invite additional DESC management personnel onto the recruitment
+    panel.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

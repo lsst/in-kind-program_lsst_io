@@ -1,0 +1,62 @@
+contribution_id: POL-NCB-S4
+title: Science Pipeline Development in the LSST Dark Energy Science Collaboration
+country: Poland
+institute: NCBJ
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: NCBJ will contribute directable software development effort in the
+    general area of LSST large-scale structure (LSS) analysis. This may include selection
+    and photometric redshift (PZ) estimation of galaxies from the LSST data products (primarily
+    the Object catalogs, but potentially also the images). Polish consortium staff will work
+    with the DESC leadership to identify software infrastructure priorities within LSS and
+    PZ, whether self-contained or as part of broader development efforts. NCBJ will take advantage
+    of the relevant successful developments in the Kilo-Degree Survey (KiDS) collaboration,
+    where the Contribution Lead Dr. Maciej Bilicki has been (co-)leading analyses of a similar
+    type. NCBJ will then carry out the identified tasks as an integral part of the collaboration,
+    reporting regularly on progress, taking input from the rest of the collaboration, and
+    supporting the collaboration’s members in the use of the codes. NCBJ intends to achieve
+    integration with DESC collaborative software efforts using DESC tools and tutorials, and
+    will engage with DESC Data Challenges as well as Rubin Data Previews. The codes will be
+    shared in DESC Community GitHub repositories, to ensure that all DESC members can access
+    them as they are developed. The codes will be prepared to run at NERSC to allow DESC members
+    to engage with the efforts more broadly. The resultant user-generated datasets will be
+    made available to the DESC and, with time, to the whole Rubin Observatory community, via
+    appropriate data access centers, among them the local IDAC (S1).We anticipate using both
+    local computing resources, in particular those associated with the IDAC in CIŚ, and Rubin-provided
+    ones to support this work. The aforementioned local resources are already available at
+    NCBJ in CIŚ, and additional ones will be added if needed. In particular, NCBJ plans to
+    invest into local GPU workstations for the proposed deep-learning developments. In the
+    future, this type of new equipment is aimed to be integrated with the emerging national
+    node for Independent Data Access Center (IDAC).
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

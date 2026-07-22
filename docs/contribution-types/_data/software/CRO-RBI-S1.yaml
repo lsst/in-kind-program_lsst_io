@@ -1,0 +1,64 @@
+contribution_id: CRO-RBI-S1
+title: Science Analysis Infrastructure Effort
+country: Croatia
+institute: RBI
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
+  additional_recipient_groups:
+  - Rubin International Program Coordinator (Software Development)
+  activity_description: 'Software development effort would be provided by the two of the institutions
+    participating in CPG: RBI and HO. In both cases a postdoctoral researcher would be hired,
+    in order to provide directable software development effort. Whether the contribution will
+    be in the terms of general pooled effort or directable software effort embedded in the
+    TVS SC will depend on the outcome of the selection procedure. In either case the selected
+    candidates will provide no less than 0.5 FTE/year. This approach is motivated by a risk
+    that we have identified and its mitigation strategy: we do not expect that many software
+    engineers with PhDs (ideally working full time on LSST software development) or astronomy
+    postdocs (working part time on software development) will be applying to the positions
+    that we will be advertising. By advertising a more flexible scheme, we hope to attract
+    a larger talent pool and ultimately select better candidates. We have already requested
+    TVS SC Justice, Equity, Diversity, and Inclusion (JEDI) group to act as advisors in order
+    to help us select the best candidates and ensure fairness throughout the hiring procedure.
+    We would like to extend the same invitation to any relevant group or committee at the
+    LSST-wide level.As the efforts are directable, we would work with the relevant LSST groups
+    to define the exact kind of the needed software development tasks, carry out those tasks,
+    report regularly on the progress, take input from the rest of the collaboration and support
+    collaboration members in the use of the code. Presently it is difficult to assess the
+    local hardware requirements, but we do note that significant computing resources are offered
+    as the second part of our contributions (CRO-RBI-2) and that it would be logical to make
+    use of these resources. TVS SC endorsement has been received for these contributions.In
+    case of the general pooled software development effort to either the LSST science collaborations
+    or Rubin Observatory teams, CPG staff will work with the Rubin International Program Coordinators
+    (and through them, the CEC) to identify a suitable recipient group, work with that group
+    to define needed software development tasks, and then carry out those tasks as an integral
+    part of the group, reporting regularly on progress, taking input from the rest of the
+    group, and supporting the group’s members in the use of the code.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

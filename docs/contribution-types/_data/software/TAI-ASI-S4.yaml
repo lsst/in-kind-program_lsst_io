@@ -1,0 +1,61 @@
+contribution_id: TAI-ASI-S4
+title: Non-Directable Software Development for the Galaxy SC
+country: Taiwan
+institute: ASIAA
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Galaxies Science Collaboration
+  additional_recipient_groups: []
+  activity_description: We propose to provide a non-directable software development contribution
+    to the Galaxies SC based on our expertise and experience in scientific code development.
+    Such software development contributions will be provided through professional efforts
+    by two senior astronomers at ASIAA, Dr. Bau-Ching Hsieh (Specialist, equivalent of permanent
+    staff scientist) and Dr. Hung-Yu Jian (Support Scientist), both equipped with relevant
+    skill sets and a track record of developing software for use in extragalactic astronomy
+    and cosmology. Both Dr. Hsieh and Dr. Jian have highly advanced skills and two decades
+    of experience in fortran coding for scientific software development. Dr. Hsieh developed
+    the Direct Empirical Photometric (DEmP; Hsieh & Yee 2014, ApJ, 792, 102) code, an empirical
+    polynomial fitting machine learning algorithm for photometric-redshift estimation that
+    is designed to minimize systematic biases associated with conventional empirical fitting
+    methods. The DEmP code is one of photo-z estimation algorithms implemented into the HSC
+    pipeline (Tanaka et al. 2018, PASJ, 70, S9), and it has been extensively used for a wide
+    range of HSC extragalactic science cases. Its performance is consistently among the best
+    of the algorithms used in the HSC-SSP. We emphasize that, in its current setting, DEmP
+    meets all requirements set in “Roadmap to Photometric Redshifts for the LSST Object Catalog”
+    except for the code language (fortran).Dr. Jian has long-standing experience in writing
+    codes and developing algorithms for analyzing large data sets from the Pan-STARRS (Jian
+    et al. 2017, ApJ, 845, 74) and HSC-SSP (Jian et al. 2018, PASJ, 70, 23; Jian et al. 2020,
+    ApJ, 894, 125). Most importantly, Dr. Jain has written a cluster detection code in fortran
+    called pFOF (Probability Friends-Of-Friends; Jian et al. 2014, 788, 109) that can be applied
+    to data coming from the LSST, taking photo-z of galaxies as the main input.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Galaxies
+  - Galaxy clusters
+  - Machine learning
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -37,3 +37,4 @@ curated:
     Science Collaboration, integrated into the Rubin Science Platform.
   wavelength_regime: [Radio]
   status_override: null
+  related_contribution_ids: [SZA-SAA-S2]  # cross-link to the matching Contributed Software page card

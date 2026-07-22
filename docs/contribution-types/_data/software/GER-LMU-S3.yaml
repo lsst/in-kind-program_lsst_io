@@ -1,0 +1,63 @@
+contribution_id: GER-LMU-S3
+title: Cluster Line of Sight Simulation Software (near-term directable software development)
+country: Germany
+institute: LMU_Munich
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: Stella Seitz’s group will contribute directible software development
+    which aims to support LSST cluster weak lensing analyses and derived cosmological constraints.
+    Since we have expertise in generating realistic cluster lines of sights and rendering
+    the according photometric-morphological catalogues into image simulations we find it likely
+    that our effort is directed by the Survey Simulations and the Clusters WGs. To specify
+    our contribution, we will consult the relevant members of DESC leadership regarding the
+    WG priorities and we will then develop a work plan via mutual agreement. Since cluster
+    weak lensing analyses are interconnected to the BL, the PZ, the WL, the SSim, and TJP
+    WGs we expect that our team members will interact with all the aforementioned WGs to optimally
+    fulfill the software development tasks.In case our group is directed in a way that involves
+    producing image simulations, we would like to ensure that they are processible with Rubin's
+    LSST Science Pipelines. For that reason we would like to (where appropriate and beneficial
+    to the success of the work) use and may be update existing collaboration tools, like imsim,
+    which produces galaxy images adapted to the LSST telescope and survey conditions.We will
+    carry out the software development as an integral part of the collaboration, reporting
+    regularly on progress, taking input from our colleagues and supporting the collaboration’s
+    members in the use of the code. We have secured the needed amounts of local computing
+    for this work, but will be keen on using DESC computing resources (at NERSC) as they become
+    available to us, to ensure that the code functions at the needed scale. In addition, to
+    ensure that DESC members have read access during all stages of code development we plan
+    to host any code development on DESC GitHub.The primary risk associated with this work
+    is to find high level experts familiar with the complex subject. Since we have such a
+    skilled person in our group now (until summer 2023) we would like to contribute our FTE
+    at the earliest time possible (see below).
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,67 @@
+contribution_id: ITA-INA-S6
+title: 'Directable SW contribution for the Galaxies SC: Tools for the measurement of surface
+  brightness fluctuations on LSST data'
+country: Italy
+institute: INAF
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Galaxies Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'Our team will contribute directable software development effort in
+    the general area of Rubin data science analysis and exploration, with a focus on the measurement
+    of SBF. We will work with the Galaxies SC to better identify the needed software development
+    tasks, and then carry out those tasks as an integral part of the collaboration. A key
+    characteristic of any deliverable for our contribute will be the automation, because of
+    the large number of potential targets (any relatively smooth galaxy within ~100Mpc), and
+    of the lengthy and complex procedures to measure SBF.The software efforts will be oriented
+    toward (some of) the following contributes: A detection filter for identifying suitable
+    targets for SBF measurement; A fast and automated procedure to model the brightness profiles
+    of extended galaxies; Tools for automated treating all sources contaminating the SBF signal:
+    dust, foreground stars, background galaxies, globular clusters host in the target galaxy;Automated
+    analysis of the power-spectrum residual frame for the final measure of SBF; Validating
+    the SBF distance estimates on test data (real/simulations);Running the measurement on
+    the data releases, delivery of catalogs to the collaboration, preparing data for the public
+    release.The areas of interest delineated above cover most of the needs for SBF measurement
+    assuming that the tools for deriving some of the other key quantities (e.g. galaxy colors,
+    PSF models, etc.) will be available from Rubin''s data management, or other science collaborations.
+    However, if needed, our team could participate in validating or developing such tools.
+    The primary risk associated with this work is in the quality of the SBF signal: any geometric
+    correlation between pixels introduced during the data reduction stage might badly affect
+    the SBF. Hence, we consider of key importance an early testing stage on data processed
+    with a reduction pipeline similar to the one to be used for the LSST (e.g. HSC-SSP data),
+    or on simulated images. A second risk is the automation of the procedures, which we foresee
+    will require to choose where to place the compromise between quality and quantity (many
+    unsupervised measurements vs less supervised ones). To mitigate these risks, the team
+    will engage early with the DM team to include the SBF detection in the standard measurement
+    pipeline (assuming it is fast enough).We anticipate needing modest amounts of local computing
+    to support this work, during the first stages of the project, in part already available.
+    Other resources will be acquired via national or local funding.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Galaxies
+  - Galaxy clusters
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,64 @@
+contribution_id: UKD-UKD-S17
+title: Galaxy Clustering Infrastructure
+country: UK
+institute: LSST:UK
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - LSST Galaxies Science Collaboration
+  activity_description: 'This directable staff effort contribution has been developed jointly
+    with DESC and GSC. This contribution will focus on providing infrastructure for the treatment
+    of one of the biggest sources of systematic uncertainty for galaxy clustering: the non-cosmological
+    modulation of galaxy density caused by Galactic and observational sky contaminants (e.g.,
+    dust extinction, stars, PSF fluctuations). The proposed work is timely and impactful:
+    it will be developed in conjunction with other lensing/clustering infrastructure work
+    as part of the LSST:UK in-kind contribution, and validated on early Rubin data, addressing
+    multiple deliverables in the GSC and DESC Science Roadmaps. It will result in long term,
+    accumulating gains, affecting multiple science cases as systematics mitigation methods
+    will be needed throughout Rubin.The work will be carried out in four stages:Stage 1 (FY24-25):
+    Standard contaminant mapping and cleaning methods. LSST:UK will make a full implementation
+    of standard contaminant mapping and cleaning methods in the existing DESC analysis pipeline
+    (TXPipe). This includes mapping of survey depth and contaminant moments, linear deprojection,
+    random catalog generation.Stage 2 (FY25-26): Source injection infrastructure. LSST:UK
+    will implement Source Injection (SI) methods, adding mock objects to images and reprocessing
+    them to characterise system responses. LSST:UK will implement the significant software
+    infrastructure to inject and process fake sources, and to process the resulting catalogs
+    with TXPipe.Stage 3 (FY26-27): Optimal data cuts and robust clustering measurements. LSST:UK
+    will develop software to produce robust GC measurements using SI, in order to recommend
+    optimal quality and sky cuts, produce catalog weights and cleaned overdensity maps, and
+    compute diagnostics (e.g. signal-systematic correlations).Stage 4 (FY27): Clustering data
+    products from DR1 and DR2. LSST:UK will apply the new infrastructure to DR1 and DR2 data,
+    to test and compare standard SI decontamination methods. LSST:UK will generate vital products
+    for any clustering measurements made by the DESC and the GSC: random catalogs, masks,
+    systematic maps.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

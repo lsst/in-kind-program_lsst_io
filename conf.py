@@ -550,3 +550,152 @@ jinja_contexts["contributed_opportunities"] = _load_contributed_opportunities()
 jinja_contexts["contributed_opportunities"]["cid_to_slugs"] = (
     jinja_contexts["contributed_telescopes"]["cid_to_slugs"]
 )
+
+
+# ============================================================================
+# Contributed Software page data loading
+#
+# Each software-contribution record lives as a YAML file in
+# docs/contribution-types/_data/software/<contribution-id>.yaml, split into
+# a `form_data` section (owned by scripts/sync_software_contributions.py;
+# safe to overwrite) and a `curated` section (hand-edited only; the sync
+# script never touches it) -- same split as the Contributed Datasets page.
+# General Pool contributions are not part of this dataset at all (they have
+# their own page); every record here is Directable or Non-directable.
+# ============================================================================
+
+def _software_status(record):
+    curated = record.get("curated") or {}
+    if curated.get("status_override"):
+        return curated["status_override"]
+    return "delivered" if (record.get("form_data") or {}).get("submitted") else "pending"
+
+
+def _resolve_related_titles(related_ids, *page_lookups):
+    """page_lookups is a sequence of (page_html_filename, {contribution_id: title})
+    pairs, checked in order, so the returned dicts know which page to link to."""
+    resolved = []
+    for rid in related_ids or []:
+        title = None
+        page_url = None
+        for page_html, lookup in page_lookups:
+            if rid in lookup:
+                title = lookup[rid]
+                page_url = page_html
+                break
+        resolved.append({
+            "contribution_id": rid,
+            "title": title or rid,
+            "slug": _slugify(rid),
+            "page_url": page_url,
+        })
+    return resolved
+
+
+def _load_contributed_software():
+    data_dir = (
+        Path(__file__).parent
+        / "docs"
+        / "contribution-types"
+        / "_data"
+        / "software"
+    )
+    dataset_titles = _collect_cross_page_titles("datasets")
+    telescope_titles = _collect_cross_page_titles("telescopes")
+
+    records = []
+    all_categories = set()
+    all_uat = set()
+    all_recipients = set()
+
+    for path in sorted(data_dir.glob("*.yaml")):
+        with path.open(encoding="utf-8") as f:
+            record = yaml.safe_load(f) or {}
+        record = _normalize_strings(record)
+        form_data = record.setdefault("form_data", {}) or {}
+        curated = record.setdefault("curated", {}) or {}
+
+        status = _software_status(record)
+        record["status"] = status
+
+        category = form_data.get("category") or "Unknown"
+        # Real UAT answers from a team's own form submission take
+        # precedence over the sync script's keyword-guessed curated tags.
+        uat_keywords = form_data.get("uat_category") or curated.get("uat_keywords") or []
+        primary_recipient = form_data.get("primary_recipient_group") or ""
+
+        all_categories.add(category)
+        all_uat.update(uat_keywords)
+        if primary_recipient:
+            all_recipients.add(primary_recipient)
+
+        cid_slug = _slugify(record.get("contribution_id", ""))
+        record["cid_slug"] = cid_slug
+        record["last_updated"] = _last_updated(path)
+        record["uat_keywords"] = uat_keywords
+        record["related"] = _resolve_related_titles(
+            curated.get("related_contribution_ids"),
+            ("contributed-datasets.html", dataset_titles),
+            ("contributed-telescope.html", telescope_titles),
+        )
+
+        tokens = [
+            f"status-{_slugify(status)}",
+            f"cid-{cid_slug}",
+            f"cat-{_slugify(category)}",
+        ]
+        if primary_recipient:
+            tokens.append(f"recipient-{_slugify(primary_recipient)}")
+        tokens += [f"uat-{_slugify(v)}" for v in uat_keywords]
+        record["filter_tokens"] = " ".join(tokens)
+
+        search_parts = [
+            record.get("title", ""),
+            form_data.get("activity_description", "") or "",
+            primary_recipient,
+            *(form_data.get("additional_recipient_groups") or []),
+            *uat_keywords,
+        ]
+        record["search_text"] = " ".join(search_parts).lower()
+
+        records.append(record)
+
+    records.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
+    search_index = {r["cid_slug"]: r["search_text"] for r in records}
+    return {
+        "software": records,
+        "all_categories": sorted(all_categories),
+        "all_uat": sorted(all_uat),
+        "all_recipients": sorted(all_recipients),
+        "slugify": _slugify,
+        "search_index_json": json.dumps(search_index),
+    }
+
+
+def _collect_cross_page_titles(subdir_name):
+    """contribution_id -> title/facility lookup for a sibling _data folder,
+    used to label the Contributed Software page's "Also see" cross-links
+    without needing that page's full loader context. contribution_id may be
+    a scalar or, on the Telescopes page, a list shared by sibling records."""
+    data_dir = (
+        Path(__file__).parent
+        / "docs"
+        / "contribution-types"
+        / "_data"
+        / subdir_name
+    )
+    out = {}
+    if not data_dir.exists():
+        return out
+    for path in sorted(data_dir.glob("*.yaml")):
+        with path.open(encoding="utf-8") as f:
+            record = yaml.safe_load(f) or {}
+        cid = record.get("contribution_id")
+        cids = cid if isinstance(cid, list) else [cid]
+        for c in cids:
+            if c:
+                out[c] = record.get("title") or record.get("facility") or c
+    return out
+
+
+jinja_contexts["contributed_software"] = _load_contributed_software()

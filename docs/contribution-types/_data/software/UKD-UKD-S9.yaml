@@ -1,0 +1,67 @@
+contribution_id: UKD-UKD-S9
+title: 'Science Software development: Cross-matching'
+country: UK
+institute: LSST:UK
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
+  additional_recipient_groups:
+  - LSST Stars Milky Way and Local Volume Science Collaboration
+  activity_description: The depth of the LSST survey represents an almost unique challenge
+    to attempts to cross-match the catalogues to other surveys, because of the combination
+    of depth and point-spread function. The LSST is deeper than any ground-based survey to
+    date, yet the Rubin observatory is still limited by ground-based seeing. As a result the
+    number of stars per point-spread function is very large. At the most basic level this
+    means that traditional matching by (say) a 2” proximity match will get confused. As an
+    example, roughly half the galactic plane within -90 < l < 90 and |b|< 10 reaches a density
+    of sources such that in a single visit that there will (on average) be one random match
+    per 2” circle. Hence as the survey becomes deeper this problem will spread out of the
+    plane until by full depth it is even having a small effect on high latitude fields. This
+    problem can be overcome by using the uncertainties in the astrometry to show whether sources
+    are truly co-incident, but requires a fully Bayesian approach which takes into account
+    the local stellar density (see Sutherland & Saunders 1992MNRAS.259..413S). However, there
+    is also a second more subtle problem which affects the astrometric uncertainties and means
+    one cannot simply use the uncertainties from image centroiding. This is that the stellar
+    densities at magnitudes below the survey detection limit are so high that undetected stars
+    affect the centroids. These effects are significant, but can be modelled (Wilson & Naylor
+    2017MNRAS.468.2517W). Finally, photometric information can also be used to assess whether
+    a match is likely (Wilson & Naylor 2018MNRAS.473.5570W). This proposal is to make cross-matches
+    between the LSST and the VISTA, VPHAS, WISE and Spitzer surveys using these up-to-date
+    techniques available to astronomers both as a software package and tables of matches.
+    The work is endorsed by the TVS SC, hence we are proposing this as non-directable effort.
+    An endorsement has been requested from SMWLV, and we have engaged with the Rubin Crowded
+    Field Coordination Group.We have LSST:UK funding in place to write the software, validate
+    it against Hyper Suprime-Cam data and integrate it into the UK IDAC. During operations
+    the software could be run either on the UK IDAC, or be part of the standard release pipeline,
+    producing cross-match tables between the entirety of the LSST and the other surveys. The
+    compute time required to build the tables will be provided through the UK IDAC computing
+    resource as described in S3.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

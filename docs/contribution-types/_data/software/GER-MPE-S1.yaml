@@ -1,0 +1,63 @@
+contribution_id: GER-MPE-S1
+title: Photometric redshift tuned for AGN
+country: Germany
+institute: MPE
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST AGN Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: MPE will contribute directable software development efforts in the
+    area of photo-z computation for AGN identified by the AGN SC using LSST data (via e.g.
+    colors, time variability), or other means (X-rays, radio, MIR etc) combined with LSST.
+    A non negligible fraction of sources that LSST will detect are AGN and a dedicated effort
+    to compute their photo-z will be needed. MPE staff will work with the AGN SC to define
+    the required software development tasks, and then carry out the development. The software
+    to be developed will not be part of any existing infrastructure, but rather a tool made
+    available to the LSST SC and possibly to the entire community. It will be possible to
+    use the tool also on catalogs of galaxies not known to host an AGN. The comparison between
+    the traditional photo-z for galaxies and photo-z for AGN will ensure that peculiar sources
+    are flagged, which may help the scientific output of other SCs. We have reached out to
+    the primary contacts for GAL and DE SCs, who are interested in exploring how this work
+    could benefit their collaborations. We will also contact the SLSC and the TVS SC as they
+    may also be interested in the work. We will liaise with Rubin’s photo-z Coordination Group
+    as needed.MPE will provide regular progress reports on this work to the AGN SC as primary
+    recipients. The software will be fully documented and initial support will be provided
+    for collaboration members in its use. We anticipate needing modest amounts of local computing
+    to support this work, and focus on using Rubin-provided user computing resources as they
+    become available to ensure the code functions at the required scale. The primary risk
+    associated with this work is in gaining the needed expertise in the VRO tools and data
+    products. To mitigate this, the MPE staff will engage early with any Rubin tutorials provided,
+    and look to be active participants in events associated with the Rubin “Data Previews”,
+    all within the context of the AGN SC, of which the Proposal Lead is already an active
+    member.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astroinformatics
+  - Astronomy software
+  - Photometric redshift
+  - Radio astronomy
+  summary: null
+  status_override: null
+  related_contribution_ids: []

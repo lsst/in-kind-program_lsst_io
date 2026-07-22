@@ -1,0 +1,88 @@
+contribution_id: NED-UTR-S5
+title: Construction and maintenance of AGN catalogs to enable early science with LSST alerts
+country: Netherlands
+institute: Utrecht
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
+  additional_recipient_groups:
+  - NOIRLab CSDC
+  activity_description: We will provide contributed datasets and non-directable software development
+    in the area of AGN identification. The first deliverable is a catalog, which will be ready
+    by the start of transient alert science operations (i.e., when sufficient reference images
+    have been constructed, which are needed to extract alerts from the difference image).
+    Our deadline is much earlier compared to the timeline of catalog production by the AGN
+    SC. This faster timescale is motivated by the needs of TVS to have a catalog of known
+    AGN ready as soon as the stream of alerts starts in earnest. This means this first catalog
+    will be constructed from non-LSST data products. We will work closely with Rubin Observatory
+    staff to embed the catalog into the collaboration infrastructure for alert filtering.
+    The catalog will be made available to all members of the LSST collaboration by incorporating
+    this into NOIRLab. We will advertise and distribute the catalog to the LSST brokers, focusing
+    first on the brokers that most directly serve the US and Chile communities (i.e., ANTARES,
+    ALeRCE). The TVS collaboration has reviewed and endorsed this proposal and requested that
+    we start the process of broker integration as soon as possible (with a prototype catalog).
+    The TVS collaboration acknowledges that this proposed in-kind contribution could “serve
+    as a blueprint for future catalogs and their integration in the discovery of new transients”.
+    During the first year of Rubin alert operations, we will update the known AGN catalog
+    by including Rubin observations from the year prior. At this point, we will have access
+    to time series data from Rubin LSST, which allows us to select AGN based on their variability
+    in LSST data. We will write software that can identify low-level AGN variability in the
+    difference images, using a model that simultaneously fits for variability in all filters.
+    This will yield a valued-added catalog of variability-selected AGN. This effort is complementary
+    to the planned activities of the AGN SC as listed in their Roadmap (and confirmed via
+    recent conversations with active members of the group). The AGN SC current priority is
+    a more theoretical approach (compiling “ground-truth samples”), and is generally focussed
+    on the Deep Drilling fields and measurements based on the total flux. In contrast, this
+    proposed in-kind contribution has a more compressed timeline, is focussed on the full-sky
+    and uses the difference image flux. The AGN SC is aware of this proposal but saw no need
+    for formal endorsement because the science application of the deliverables is strongly
+    geared for the TVS collaboration. However, we will of course coordinate closely with the
+    AGN SC, making sure the lessons learned from our early catalogs are shared. Their in-kind
+    contribution coordinator (Sebastian Hoenig) noted that “Coordinating on the variability
+    selection would absolutely be welcome and appreciated”. The need for early AGN catalogs
+    cannot be overstated, but is often overlooked, which is exactly why we believe this proposed
+    in-kind contribution will be very helpful to increase the (early) scientific output from
+    Rubin Observatory. The need for this catalog is often overlooked because current optical
+    transients surveys (e.g., ASASSN, ZTF) are finding events in much brighter galaxies at
+    lower redshift compared to what will be the yield of LSST. These low-redshifts make AGN
+    identification relatively easy. This might have led to a false sense of security on the
+    efficiency of machine-learning based classifiers for LSST transients (eg, AGN variability
+    was not included in the first set of simulations of the Rubin Observatory transient sky
+    in the PLAsTiCC classification challenge). For the fainter galaxies that dominante the
+    LSST alerts, AGN selection will be more challenging compared to our experience with current
+    surveys. In addition, at the larger distance of LSST alerts, separating AGN flares from
+    off-nuclear events (e.g., supernovae) is also more challenging because the former subtend
+    a larger fraction of the galaxy. By building the best-possible AGN catalog and making
+    this available before the alert stream gets up to full speed, we will avoid a scramble
+    of duplicate efforts from TVS members. The TVS has endorsed this contribution.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astroinformatics
+  - Astronomy software
+  - Supernovae
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

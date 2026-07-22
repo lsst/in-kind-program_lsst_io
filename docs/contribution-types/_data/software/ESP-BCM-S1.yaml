@@ -1,0 +1,52 @@
+contribution_id: ESP-BCM-S1
+title: Contribution of Directable Software Development Effort to DESC Computing Infrastructure
+  Operations team
+country: Spain
+institute: BCN_MAD
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: BCN-MAD will contribute directable effort to the Dark Energy Science
+    Collaboration in the form of focused planning, development and deployment of test cases
+    and procedures for ongoing and planned Data Challenges of DESC, adapting to, reinforcing
+    or repurposing current efforts in this area from scattered groups and researchers. Long
+    term planning will start in October 2020 so that these tests can eventually be reworked
+    into tests for Data Management products within the context of DESC, as commissioning data
+    becomes available, even feeding back into this process where applicable. The fact that
+    the Contribution Lead is applying also for some effort in the Project’s commissioning
+    team can be of great value for both contributions and synergistic.The proposed contribution
+    lead would adapt to any other tasks within the context of Computing Infrastructure for
+    DESC. The detailed work plan will be developed in consultation with the relevant members
+    of the DESC leadership. Regular reporting would be made as planned by DESC. The Contribution’s
+    Lead group at CIEMAT has direct access to moderate computing resources, which are considered
+    sufficient, as in principle most of the development and execution will be done in the
+    NERSC environment. The Contribution Lead has already access and experience working with
+    the DESC environment at NERSC.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  summary: null
+  status_override: null
+  related_contribution_ids: []

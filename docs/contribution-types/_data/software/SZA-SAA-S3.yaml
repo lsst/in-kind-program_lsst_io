@@ -1,0 +1,66 @@
+contribution_id: SZA-SAA-S3
+title: Planning and Infrastructure for the LSST Dark Energy Science Collaboration
+country: South Africa
+institute: SAAO
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: As the Rubin Observatory will detect millions of transients each night,
+    automatic photometric classification has arisen as a critical requirement for the success
+    of the survey. Dark energy constraints rely on a relatively pure sample of type Ia supernova
+    light curves. Lochner developed one of the first machine learning based supernova classification
+    codes called snmachine, in response to this requirement for the DESC supernova pipeline
+    (see key product SupernovaType on page 117 of the DESC Science Roadmap), as a software
+    development effort guided by the supernova working group. snmachine continues to be actively
+    developed by Lochner and her collaborators, is available to all DESC members and will
+    be made publicly available on publication of the final release paper. While this important
+    contribution was made when Lochner was out of South Africa and so cannot count towards
+    our in-kind contribution, it is mentioned because part of our contribution will be the
+    continued development, improvement and maintenance of snmachine in collaboration with
+    the DESC Supernova Working Group. Future improvements could include optimising the software
+    specifically for LSST data, implementing new features and algorithms and integrating snmachine
+    with broader supernova analysis pipelines.The other component of our contribution concerns
+    observing strategy infrastructure work. The observing strategy of the LSST survey impacts
+    many science cases and the Project has been engaging with the community to develop metrics
+    to help analyse different simulated observing strategies. Lochner has been co-leading
+    efforts to write these metrics for the various cosmology probes. She is also developing
+    a suite of high level tools to visualise the impact of observing strategy on cosmology
+    which will be made publicly available and will continue to serve the DESC throughout the
+    survey as observing strategy gets adjusted. The maintenance of both projects will be done
+    by Lochner and collaborators (not listed on this proposal) and so does not require additional
+    resources. The ongoing maintenance and development effort will be guided by DESC input
+    in terms of which project is higher priority and what additional features are required.DESC
+    has endorsed this contribution in an email exchange between Phil Marshall and Rachel Mandelbaum
+    (spokesperson of DESC).
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Machine learning
+  - Supernovae
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

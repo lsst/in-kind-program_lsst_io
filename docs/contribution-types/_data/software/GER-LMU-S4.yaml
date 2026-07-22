@@ -1,0 +1,62 @@
+contribution_id: GER-LMU-S4
+title: 'Cluster Finding and Likelihood: development and validation [near-term directable software
+  development]'
+country: Germany
+institute: LMU_Munich
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: Prof. Dr. Weller’s team will contribute directable software development
+    effort in the general area of LSST Dark Energy science cluster cosmology analysis. Depending
+    on the candidates hired and on coordination with the relevant DESC working group, this
+    could e.g. be in the area of defining the likelihood and cluster selection function or
+    validating the cluster finder with additional data and complementary finders or implementing
+    cluster clustering as a probe under consideration of the full covariance. To specify our
+    contribution, we will consult the relevant members of DESC leadership regarding the WG
+    priorities and we will then develop a work plan via mutual agreement. Team members will
+    work with the DESC, particularly the CL, LSS and TJP working groups, to define needed
+    software development tasks. They will then carry out those tasks as an integral part of
+    the collaboration, reporting regularly on progress, taking input from the rest of the
+    collaboration and supporting the collaboration’s members in the use of the code. The Postdocs
+    will make use of standard DESC software tools/tutorials to help them to get engaged with
+    the DESC activities and procedures.We anticipate needing modest amounts of local computing
+    to support this work, and focus on using Rubin-provided user computing resources as they
+    become available to ensure the code functions at the needed scale. The aforementioned
+    local computing resources are already available at Munich, also by preferential access
+    to the local computing centers like for example the Leibniz Supercomputing Centre via
+    the Excellence Cluster Origins structure. However, the primary platform for the development
+    and implementation of the software tools will be NERSC as DESC's primary computing center.
+    The primary risk associated with this work is the availability of realistic galaxy cluster
+    catalogs to calibrate the cluster selection function. This can be mitigated with the staff
+    to closely collaborate with the simulations group of LSST-DESC to ensure the useful development
+    of simulations.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  summary: null
+  status_override: null
+  related_contribution_ids: []

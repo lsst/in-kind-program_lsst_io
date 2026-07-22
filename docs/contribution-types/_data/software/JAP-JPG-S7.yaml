@@ -1,0 +1,61 @@
+contribution_id: JAP-JPG-S7
+title: Software for calibrating the covariance matrix for large-scale structure probes
+country: Japan
+institute: JPG
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: The JPG covariance team led by Masahiro Takada (Kavli IPMU) wants
+    to contribute non-directable software development effort in the specific area of covariance
+    work for large-scale structure probes (weak lensing and galaxy clustering) in the DESC
+    science cases, in close collaboration with the Theory and Joint Probes (TJP) working group
+    of DESC collaboration. The JPG team will run cosmological N-body simulations (especially
+    the so-called separate universe simulations) and develop the emulator package/tools allowing
+    for computation of the response functions for matter-matter, matter-galaxy and galaxy-galaxy
+    correlation functions for an input set of parameters (cosmology, halo occupation distribution,
+    separations and redshift), which can be used to calibrate the super-sample covariance
+    contribution of LSS clustering observables. The JPG covariance developers will work closely
+    with the DESC TJP working group in this software development task, carrying out the work
+    as an integral part of the collaboration, reporting regularly on progress, taking inputs
+    from the rest of the collaboration, and supporting the collaboration’s members in the
+    use of the emulator code/tools. We will use in-house computer resources at Kavli IPMU
+    ,and/or super-computing resources at National Astronomical Observatory of Japan to which
+    the JPG covariance team members have access, to run needing cosmological N-body simulations
+    and develop the code/emulator tools. The JPG covariance team will engage with the DESC
+    TJP tasks/collaboration as soon as possible, once this proposal is approved. We will provide
+    the emulator package/tools in the format specified by the DESC TJP collaboration. The
+    representative of JPG covariance team, Masahiro Takada, has been discussing with DESC
+    TJP co-chairs on this proposed contribution, and we will define specific tasks/work packages
+    of the proposed contributions so that the contribution is smoothly integrated with the
+    existing efforts and software. DESC endorses this contribution, 'Software for calibrating
+    the covariance matrix for large-scale structure probes'.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

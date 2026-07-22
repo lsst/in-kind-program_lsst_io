@@ -1,0 +1,69 @@
+contribution_id: SZA-SAA-S2
+title: MeerKAT high-level data products and services for LSST
+country: South Africa
+institute: SAAO
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Galaxies Science Collaboration
+  additional_recipient_groups:
+  - NOIRLab CSDC
+  activity_description: We will produce high-level data products from public MeerKAT data,
+    and any MeerKAT observing programs submitted on behalf of the LSST Galaxies SC. The MeerKAT
+    archive is making visibility data available for all projects after a 1-year proprietary
+    period, but the size and format of the visibility data (TBs per observation) makes it
+    a significant challenge to reduce these to data products suitable for scientific analysis.
+    Although the archival data will be public, the large field of view of MeerKAT means that
+    the data are extremely unlikely to be fully exploited, leaving a lot of scope for serendipitous
+    discoveries using the combination of LSST and MeerKAT data. The MeerKAT data processing
+    will be handled by South Africa, building on software pipelines that are at an advanced
+    stage of development, to produce a homogeneous contributed dataset potentially consisting
+    of thousands of square degrees of science-quality radio continuum images and catalogs
+    to the US and Chilean communities. The data processing itself will be done using high
+    performance computing facilities in South Africa, at the University of KwaZulu-Natal (for
+    prototyping) and the Centre for High Performance Computing. As MeerKAT data are lower
+    resolution (8' at L-band) than the LSST data, we will develop the tools and services to
+    optimally match them to the LSST catalogs. While the traditional 'likelihood ratio' technique
+    may work for point sources, we will need to develop new algorithms to automatically associate
+    multiple component radio sources (jets etc.) to the correct LSST counterparts (and deal
+    with the much higher source density of LSST images). This will be done under the direction
+    of the Galaxies SC, and the tools developed for this may be used as part of a broader
+    effort to optimally use similar multi-wavelength data with LSST. All the software developed
+    for this contribution will be made publicly available under free software licenses.While
+    the MeerKAT data processing challenge is large, the final MeerKAT data products will be
+    relatively small (at most 10 Tb of images and 30 Gb of catalogs, containing tens of millions
+    of objects), and Knut Olsen has confirmed that NOIRLab will host these data in the US
+    IDAC. We will provide all necessary support and documentation for this dataset and associated
+    software over the lifetime of LSST. The Galaxies Science Collaboration endorses the creation
+    of high-level data products from the MeerKAT science archive to facilitate LSST galaxy
+    evolution science.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Galaxies
+  - High performance computing
+  - Radio astronomy
+  summary: null
+  status_override: null
+  related_contribution_ids:
+  - SZA-SAA-S2

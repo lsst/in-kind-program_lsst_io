@@ -1,0 +1,66 @@
+contribution_id: ITA-INA-S25
+title: 'Non-Directable SW contribution for the [MWLW] SC: Population models of the LSST stellar
+  content'
+country: Italy
+institute: INAF
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Stars Milky Way and Local Volume Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'We will perform large-scale simulations of the stellar content of
+    LSST, based on the latest version of the TRILEGAL population synthesis code. Each simulation
+    is a big catalog of stellar fundamental parameters (masses, ages, metallicities, radii,
+    coordinates, distance, extinction, proper motions, etc), together with photometry in LSST
+    and Gaia filters, for ~19e9 stars in the Milky Way and Magellanic Clouds, down to the
+    r~27.5 mag limit of stacked LSST images.- A first version of these simulations was used
+    to support two Cadence Optimization white papers and the case for developing static crowded
+    field photometry in the context of the SMWLV Science Collaboration. It was partially made
+    available in the NOAO/ASTRO Data Lab in 2019.- A second version of the simulation, significantly
+    more complete and including more information about variability and binaries, is now being
+    finalised. Its density maps were already incorporated in MAF (lsst_sims tag sims_w_2020_05)
+    as an alternative to previous star count models derived from the Galfast code. - We will
+    provide at least 3 other releases of the simulations, in the 2001-2026 period, with complete
+    versions being uploaded to NOIR Data Lab, and ''summary maps'' (e.g., stellar densities
+    as a function of color-magnitude and for different sub-samples of stars) being added to
+    MAF and to any other LSST software where it might become useful. Every new release will
+    take into account improved calibrations of the model parameters coming from many ongoing
+    surveys and later from LSST data itself.- We will keep a database of python notebooks
+    and a helpdesk to help the LSST community to use these simulations for any other goals.-
+    From 2021 on, releases will include additional, newly simulated data: light curves for
+    variables such as Cepheids and RR Lyrae, long period variables (LPVs), and eclipsing binaries,
+    more detailed treatment of interstellar+circumstellar dust, extended non-adiabatic pulsation
+    models (linear and non-linear, in 5 modes) for LPVs and semiregulars.- Other ongoing/planned
+    improvements and tools may be provided on a best-effort basis, like for instance stellar
+    models with a detailed treatment of interstellar+circumstellar dust and fast rotation,
+    tools to identify the best-fit parameters of Milky Way models (in collaboration with the
+    Brazilian team at Linea, who is submitting a separated in-kind request), the space-resolved
+    star-formation history of nearby galaxies, etc. This is a non-directable in-kind contribution
+    endorsed by the SMWLV Collaboration. S25'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Variable stars
+  summary: null
+  status_override: null
+  related_contribution_ids: []
