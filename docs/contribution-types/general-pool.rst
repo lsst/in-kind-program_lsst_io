@@ -11,7 +11,7 @@ Recipient groups can be either Rubin teams or LSST Science Collaborations. Furth
 Contributions and Developers
 ============================
 
-General Pool resources have been offered by the folliowing programs and are listed with the skills of the developers available.
+General Pool resources have been offered by the following programs and are listed with the skills of the developers available.
 
 +--------------+---------+----------------------------------------------------------------------------------+
 |Program       |Started  |Notes and Skills                                                                  |
@@ -51,7 +51,7 @@ Applications and Current Allocations
 General pool resources can be applied for all year round. Any potential proposers should discuss their ideas with the main contact for a recipient group before applying.
 The link to the application form is `ls.st/ikc-gp <https://docs.google.com/forms/d/e/1FAIpQLSfj9qyZX5ZUyMcXd23mZWSsWZ3E9ZCaEuCydvto-MHZZmX4hg/viewform>`_.
 
-A selection of allocted pool resources are listed here.
+A selection of allocated general pool resources are listed here.
 
 
 +-------------------------------------+-------------------------------------+--------------+
