@@ -26,6 +26,11 @@ linkcheck_ignore = [
     # module rejects with CERTIFICATE_VERIFY_FAILED in CI.
     r'https://www\.gtc\.iac\.es/.*',
     r'https://pandora\.lambrate\.inaf\.it/.*',
+    # SER-SAG-S1 (QhX AGN catalogue, linked from both the Datasets and
+    # Software cards) serves an expired SSL certificate -- real,
+    # reachable site that browsers tolerate but Python's ssl module
+    # rejects with CERTIFICATE_VERIFY_FAILED in CI.
+    r'https://ser-sag\.pmf\.kg\.ac\.rs.*',
 ]
 
 
