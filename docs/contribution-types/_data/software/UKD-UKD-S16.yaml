@@ -35,6 +35,12 @@ form_data:
     Software Roadmap (Schwamb et al. 2019). The SSSC supports this contribution and welcomes
     the flexibility to use Adler on the RSP and IDACs for an individual small body or with
     Lasair running automatically in bulk on all incoming Solar System alerts.
+  timeline: 'FY23-FY24: Jamie Robinson [Edinburgh] (postdoc, 1 FTE)/Steph Merritt [QUB] (postdoc,
+    1 FTE); FY24/25: Adler 1.0 release: Development of core small body/comet functions analysing
+    Solar System alert data with Lasair front-end and back-end integration; FY24-FY25: 2.0
+    FTE Postdoc staff years of effort ; FY25/26 Adler 2.0: Multi-year functionality added
+    with Lasair integration, comparing phase curves from different years, brightness/activity
+    between perihelion passage, and incorporating data releases/multi-year prompt data products.'
   submitted: false
   email: null
   submitter_name: null

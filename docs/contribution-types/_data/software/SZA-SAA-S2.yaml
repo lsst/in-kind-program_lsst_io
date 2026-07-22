@@ -36,6 +36,17 @@ form_data:
     software over the lifetime of LSST. The Galaxies Science Collaboration endorses the creation
     of high-level data products from the MeerKAT science archive to facilitate LSST galaxy
     evolution science.
+  timeline: 'FY22-FY23: Development of MeerKAT processing pipeline to produce the contributed
+    dataset; development of services (sophisticated cross matching; cutouts; overlays, etc.)
+    that can be deployed within the Rubin Science Platform (effort throughout this period:
+    0.2 FTE/yr from contribution lead, 0.5 FTE/yr from skilled postdoc [to be hired]).FY23-FY25:
+    Routine processing of MeerKAT data as it becomes available; initial deployment at NOIRLab;
+    regular updates to products hosted at NOIRLab to match up with the LSST Data Release schedule
+    (effort throughout this period: 0.2 FTE/yr from contribution lead; effort for FY23-24:
+    0.5 FTE/yr from skilled postdoc [to be hired]; we will seek additional postdoc support
+    every 3-year funding cycle).FY25-FY34: Ongoing support and maintenance of software, services,
+    and data products (effort throughout this period: 0.2 FTE/yr and/or as required by the
+    contribution lead, who is happy to provide long term support).'
   submitted: false
   email: null
   submitter_name: null

@@ -28,6 +28,19 @@ form_data:
     ApJ, 894, 125). Most importantly, Dr. Jain has written a cluster detection code in fortran
     called pFOF (Probability Friends-Of-Friends; Jian et al. 2014, 788, 109) that can be applied
     to data coming from the LSST, taking photo-z of galaxies as the main input.
+  timeline: 'FY22: Dr. Bau-Ching Hsieh (0.5 FTE), Dr. Hung-Yu Jian (0.5 FTE)FY23: Dr. Bau-Ching
+    Hsieh (0.5 FTE for DR1 and DR2), Dr. Hung-Yu Jian (0.4 FTE for DR1 and DR2)FY24: Dr. Bau-Ching
+    Hsieh (0.1 FTE), Dr. Hung-Yu Jian (0.1 FTE to further optimize the cluster detection parameters)FY25:
+    Dr. Bau-Ching Hsieh (0.1 FTE), Dr. Hung-Yu Jian (0.1 FTE: if Rubin-Euclid dataset is available,
+    a new cluster catalog would be generated; otherwise the efforts would be concentrated
+    on clusters in Deep Drilling fields, as well as to refine the membership assignment) FY26:
+    Dr. Bau-Ching Hsieh (0.1 FTE)FY27: Dr. Bau-Ching Hsieh (0.1 FTE)FY28: Dr. Bau-Ching Hsieh
+    (0.1 FTE), Dr. Hung-Yu Jian (0.1 FTE: if Rubin-Roman dataset is available, a new cluster
+    catalog would be generated; otherwise the effort would be an update of cluster catalog
+    based on much deeper data than DR3/DR4)FY29: Dr. Bau-Ching Hsieh (0.1 FTE)FY30: Dr. Bau-Ching
+    Hsieh (0.1 FTE)FY31: Dr. Bau-Ching Hsieh (0.1 FTE)FY32: Dr. Bau-Ching Hsieh (0.1 FTE),
+    Dr. Hung-Yu Jian (0.1 FTE)In total, Dr. Hsieh will contribute 1.9 FTE, while Dr. Jian
+    will contribute 1.3 FTE, over 11 years.'
   submitted: false
   email: null
   submitter_name: null

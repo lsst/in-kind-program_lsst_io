@@ -36,6 +36,9 @@ form_data:
     producing cross-match tables between the entirety of the LSST and the other surveys. The
     compute time required to build the tables will be provided through the UK IDAC computing
     resource as described in S3.
+  timeline: 'FY20: Dr. Tom Wilson (postdoc, 0.8 FTE).FY21: Dr. Tom Wilson (postdoc 1.0 FTE)FY22:
+    Dr. Tom Wilson (postdoc 0.7 FTE)FY23-FY35: Potential contribution of software maintenance
+    effort and running.'
   submitted: false
   email: null
   submitter_name: null

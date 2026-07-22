@@ -576,6 +576,43 @@ def _software_status(record):
     return "delivered" if (record.get("form_data") or {}).get("submitted") else "pending"
 
 
+_URL_RE = re.compile(r"https?://[^\s,]+")
+_FY_RE = re.compile(r"\bFY(\d{2})\b")
+
+
+def _extract_links(text):
+    """Split a free-text field like 'QhX source repository: <url>, package
+    page: <url>' into individual (label, url) pairs. Team-submission form
+    answers routinely list several URLs in one text blob rather than a
+    single clean link; this pulls each one out with whatever label text
+    preceded it so the card can render real clickable links instead of an
+    unlinked wall of text."""
+    if not text:
+        return []
+    links = []
+    for segment in text.split(","):
+        segment = segment.strip()
+        match = _URL_RE.search(segment)
+        if not match:
+            continue
+        url = match.group(0).rstrip(".,;)")
+        label = segment[: match.start()].strip(" :")
+        links.append({"label": label or url, "url": url})
+    return links
+
+
+def _approx_start_fy(timeline_text):
+    """Best-effort 'start' signal pulled from the proposal spreadsheet's
+    free-text Timeline column -- those are FTE-by-fiscal-year narratives
+    (e.g. 'FY21: ... FY22: ...'), not a clean date, so this only ever
+    surfaces the first FY mentioned as a rough indicator, never a precise
+    start date."""
+    if not timeline_text:
+        return None
+    match = _FY_RE.search(timeline_text)
+    return f"FY{match.group(1)}" if match else None
+
+
 def _resolve_related_titles(related_ids, *page_lookups):
     """page_lookups is a sequence of (page_html_filename, {contribution_id: title})
     pairs, checked in order, so the returned dicts know which page to link to."""
@@ -638,6 +675,9 @@ def _load_contributed_software():
         record["cid_slug"] = cid_slug
         record["last_updated"] = _last_updated(path)
         record["uat_keywords"] = uat_keywords
+        record["software_links"] = _extract_links(form_data.get("software_url"))
+        record["documentation_links"] = _extract_links(form_data.get("documentation"))
+        record["approx_start"] = _approx_start_fy(form_data.get("timeline"))
         record["related"] = _resolve_related_titles(
             curated.get("related_contribution_ids"),
             ("contributed-datasets.html", dataset_titles),

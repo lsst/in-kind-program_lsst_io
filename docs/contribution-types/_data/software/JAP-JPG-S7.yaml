@@ -30,6 +30,10 @@ form_data:
     of the proposed contributions so that the contribution is smoothly integrated with the
     existing efforts and software. DESC endorses this contribution, 'Software for calibrating
     the covariance matrix for large-scale structure probes'.
+  timeline: '3-4Q of FY21: postdoc (0.25 FTE), Dr. Masahiro Takada FY22: postdoc (0.5 FTE),
+    Dr. Masahiro Takada FY23: postdoc (0.5 FTE), Dr. Masahiro TakadaComputing resources: 15M
+    CPU hours during FY21-23 (equivalent to 0.5 FTE)FY24-FY35: potential continued contribution
+    of development/maintenance effort (envisioned as 0.25 FTE in total)'
   submitted: false
   email: null
   submitter_name: null

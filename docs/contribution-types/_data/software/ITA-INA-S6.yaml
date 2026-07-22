@@ -36,6 +36,9 @@ form_data:
     pipeline (assuming it is fast enough).We anticipate needing modest amounts of local computing
     to support this work, during the first stages of the project, in part already available.
     Other resources will be acquired via national or local funding.'
+  timeline: FY25:New hire (postdoc, 1.0 FTE) + staff researcher (0.2 FTE) FY26:New hire (postdoc,
+    1.0 FTE) + staff researcher (0.2 FTE) FY27:New hire (postdoc, 1.0 FTE) + staff researcher
+    (0.2 FTE)
   submitted: false
   email: null
   submitter_name: null

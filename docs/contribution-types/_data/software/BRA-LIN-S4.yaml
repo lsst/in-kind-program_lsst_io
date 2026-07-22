@@ -58,6 +58,12 @@ form_data:
     using the computer clusters already available in LIneA''s datacenter. The remaining resources
     are dependent on the approval and subsequent implementation of the Brazilian IDAC, so
     the risk associated with this work is coupled with the IDAC project''s success.'
+  timeline: 'FY21: Design phase - total 0.95 FTEDr. Julia Gschwend (scientist, 0.25 FTE)Mr.
+    Cristiano Singulani (software developer, 0.5 FTE)Mr. Carlos Adean (system analyst, 0.2
+    FTE)FY22-FY24: Development phase - total 2.85 FTEDr. Julia Gschwend (postdoc, 0.25 FTE)Mr.
+    Cristiano Singulani (software developer, 0.5 FTE)Mr. Carlos Adean (system analyst, 0.2
+    FTE)FY25-FY34: Operation phase (until after DR10) - total 4 FTEDr. Julia Gschwend (postdoc,
+    0.2 FTE)Mr. Cristiano Singulani (software developer, 0.2 FTE)'
   submitted: false
   email: null
   submitter_name: null

@@ -22,6 +22,8 @@ form_data:
     of LSST’s Lite IDACs. The BCN-MAD team has engaged the Rubin data environment already
     through one of its team members (see Contribution 1), which would transfer the needed
     knowledge to members of this new team locally.
+  timeline: 'FY23-FY24 (est): technical postdoc hired for 0.5 FTE effort, with support from
+    staff specialists in the field.'
   submitted: false
   email: null
   submitter_name: null
