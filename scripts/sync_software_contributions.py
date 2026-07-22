@@ -136,41 +136,73 @@ def load_contributions(path):
 
 
 # --- read the shared Google Form export ---------------------------------
+#
+# The form asks "Maintenance Plan & Updates" and "Describe any planned
+# updates or maintenance" TWICE -- once for the software section (columns
+# 17-18) and again for the dataset section (columns 34-35). csv.DictReader
+# keys rows by header name, so it silently collapses each duplicate pair to
+# whichever column comes last, which quietly overwrote the software-specific
+# answer with the dataset one. Reading by fixed position instead of by
+# header name sidesteps that entirely.
+FORM_COLUMNS = [
+    "timestamp", "email", "contribution_id", "submitter_name", "target_audience",
+    "software_name", "contribution_summary", "version", "deliverable_type",
+    "software_url", "documentation", "verification_testing", "sharing_of_software",
+    "publications", "acknowledgements", "support",
+    "sw_maintenance_plan", "sw_maintenance_notes", "further_development", "other_feedback",
+    "data_products_expected", "data_type", "data_volume", "data_schema_link",
+    "hosting_location", "access_url", "access_mechanisms", "authentication",
+    "generation_methods", "validation_limitations", "tutorials_docs", "support_channel",
+    "citation", "ds_maintenance_plan", "ds_maintenance_notes", "final_report",
+    "uat_category", "uat_concepts",
+]
+
 
 def load_form_responses(path):
-    """Return the latest Software-deliverable response per Contribution ID."""
+    """Return the latest Software-deliverable response per Contribution ID,
+    plus the set of Contribution IDs among *those Software-labeled* responses
+    (for the unmatched-response warning in sync() -- Datasets-labeled
+    responses are a different page's concern and are never expected to
+    appear in this spreadsheet, so they're excluded from that check)."""
     if path is None:
-        return {}
+        return {}, set()
     with open(path, newline="", encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
+        rows = list(csv.reader(f))
+    header = rows[0]
+    if len(header) != len(FORM_COLUMNS):
+        raise ValueError(
+            f"form CSV has {len(header)} columns, expected {len(FORM_COLUMNS)} -- "
+            "the form likely changed; update FORM_COLUMNS to match before re-running."
+        )
     responses = {}
-    for row in rows:
-        if row.get("Contribution deliverable type", "").strip() != "Software":
+    software_ids = set()
+    for raw in rows[1:]:
+        row = dict(zip(FORM_COLUMNS, raw))
+        cid = row["contribution_id"].strip()
+        if not cid or row["deliverable_type"].strip() != "Software":
             continue
-        cid = row.get("Contribution ID", "").strip()
-        if not cid:
-            continue
+        software_ids.add(cid)
         # Later rows (later timestamps) win if a team resubmits.
         responses[cid] = row
-    return responses
+    return responses, software_ids
 
 
 DATASET_FIELD_MAP = {
-    "Data Type": "data_type",
-    "Total Data Volume & Scale": "data_volume",
-    "Data Schema / Data Dictionary Link": "data_schema_link",
-    "Hosting Location": "hosting_location",
-    "Access URL or DOI": "access_url",
-    "Access Mechanisms": "access_mechanisms",
-    "Authentication & Access Restrictions": "authentication",
-    "Generation Methods": "generation_methods",
-    "Validation Status & Known Limitations": "validation_limitations",
-    "Tutorials, Examples, & Documentation": "tutorials_docs",
-    "Community Support Channel": "support_channel",
-    "Citation and Acknowledgment": "citation",
-    "Maintenance Plan & Updates": "maintenance_plan",
-    "Describe any planned updates or maintenance": "maintenance_notes",
-    "Final report": "final_report",
+    "data_type": "data_type",
+    "data_volume": "data_volume",
+    "data_schema_link": "data_schema_link",
+    "hosting_location": "hosting_location",
+    "access_url": "access_url",
+    "access_mechanisms": "access_mechanisms",
+    "authentication": "authentication",
+    "generation_methods": "generation_methods",
+    "validation_limitations": "validation_limitations",
+    "tutorials_docs": "tutorials_docs",
+    "support_channel": "support_channel",
+    "citation": "citation",
+    "ds_maintenance_plan": "maintenance_plan",
+    "ds_maintenance_notes": "maintenance_notes",
+    "final_report": "final_report",
 }
 LIST_VALUED_DATASET_FIELDS = {"data_type", "access_mechanisms"}
 
@@ -180,14 +212,9 @@ def split_list(value):
 
 
 def build_associated_dataset(response):
-    if normalize_ws(response.get("Were any data products expected as part of this contribution?", "")) != "Yes":
+    if normalize_ws(response.get("data_products_expected", "")) != "Yes":
         return None
     out = {"submitted": True}
-    # DATASET_FIELD_MAP has two Google Form columns sharing the label
-    # "Maintenance Plan & Updates" / "Describe any planned updates or
-    # maintenance" with the software section above -- DictReader only keeps
-    # the last column of a repeated header, which for this form is the
-    # dataset-section instance, so this direct lookup is correct here.
     for form_col, out_key in DATASET_FIELD_MAP.items():
         value = normalize_ws(response.get(form_col))
         if out_key in LIST_VALUED_DATASET_FIELDS:
@@ -199,25 +226,25 @@ def build_associated_dataset(response):
 
 def merge_form_response(record, response):
     record["submitted"] = True
-    record["email"] = normalize_ws(response.get("Email Address"))
-    record["submitter_name"] = normalize_ws(response.get("Name (first last)"))
-    record["target_audience"] = normalize_ws(response.get("Target Audience"))
-    record["software_name"] = normalize_ws(response.get("Software/Package/Dataset Name"))
-    record["version"] = normalize_ws(response.get("Version of the Software/Package/Dataset "))
-    record["software_url"] = normalize_ws(response.get("Software URL"))
-    record["documentation"] = normalize_ws(response.get("Documentation"))
-    record["verification_testing"] = normalize_ws(response.get("Verification and testing"))
-    record["sharing_of_software"] = normalize_ws(response.get("Sharing of the software"))
-    record["publications"] = normalize_ws(response.get("Publications"))
-    record["acknowledgements"] = normalize_ws(response.get("Acknowledgements text"))
-    record["support"] = normalize_ws(response.get("Support"))
-    record["maintenance_plan"] = normalize_ws(response.get("Maintenance Plan & Updates"))
-    record["maintenance_notes"] = normalize_ws(response.get("Describe any planned updates or maintenance"))
-    record["further_development"] = normalize_ws(response.get("Further development"))
-    record["other_feedback"] = normalize_ws(response.get("Any other feedback"))
-    uat_category = split_list(response.get("Unified Astronomy Thesaurus (UAT) Category"))
+    record["email"] = normalize_ws(response.get("email"))
+    record["submitter_name"] = normalize_ws(response.get("submitter_name"))
+    record["target_audience"] = normalize_ws(response.get("target_audience"))
+    record["software_name"] = normalize_ws(response.get("software_name"))
+    record["version"] = normalize_ws(response.get("version"))
+    record["software_url"] = normalize_ws(response.get("software_url"))
+    record["documentation"] = normalize_ws(response.get("documentation"))
+    record["verification_testing"] = normalize_ws(response.get("verification_testing"))
+    record["sharing_of_software"] = normalize_ws(response.get("sharing_of_software"))
+    record["publications"] = normalize_ws(response.get("publications"))
+    record["acknowledgements"] = normalize_ws(response.get("acknowledgements"))
+    record["support"] = normalize_ws(response.get("support"))
+    record["maintenance_plan"] = normalize_ws(response.get("sw_maintenance_plan"))
+    record["maintenance_notes"] = normalize_ws(response.get("sw_maintenance_notes"))
+    record["further_development"] = normalize_ws(response.get("further_development"))
+    record["other_feedback"] = normalize_ws(response.get("other_feedback"))
+    uat_category = split_list(response.get("uat_category"))
     record["uat_category"] = uat_category or None
-    record["uat_concepts"] = normalize_ws(response.get("Specific UAT Concepts"))
+    record["uat_concepts"] = normalize_ws(response.get("uat_concepts"))
     record["associated_dataset"] = build_associated_dataset(response)
 
 
@@ -281,7 +308,13 @@ def write_yaml(path, data):
 def sync(contributions_csv, form_responses_csv):
     SOFTWARE_DIR.mkdir(parents=True, exist_ok=True)
     contributions = load_contributions(contributions_csv)
-    form_responses = load_form_responses(form_responses_csv)
+    form_responses, form_response_ids = load_form_responses(form_responses_csv)
+
+    unmatched = sorted(form_response_ids - set(contributions))
+    if unmatched:
+        print(f"WARNING: {len(unmatched)} Software-labeled form response(s) reference a "
+              f"Contribution ID not found in the spreadsheet (typo, or a General Pool "
+              f"contribution that's out of scope here) -- skipped: {', '.join(unmatched)}")
 
     dataset_titles = collect_existing_ids(DATASETS_DIR)
     telescope_titles = collect_existing_ids(TELESCOPES_DIR)

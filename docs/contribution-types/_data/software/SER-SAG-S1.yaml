@@ -268,11 +268,14 @@ form_data:
     through the Rubin In-Kind program (Contribution ID SER-SAG-S1). Users are asked to cite
     the QNPy-Latte paper (Raju et al. 2026, Astronomy & Astrophysics; arXiv:2606.09665).
   support: Github, Slack
-  maintenance_plan: Discrete future Data Releases (e.g. DR2)
-  maintenance_notes: repository/release upkeep, bug fixing, dependency updates, and documentation/tutorial
-    maintenance, continued application to new Rubin data releases; user support and occasional
-    training; and dissemination through publications, presentations, and QhX Hub citizen-science
-    activities. Estimated effort ~0.05–0.10 FTE across the team.
+  maintenance_plan: Discrete future software releases
+  maintenance_notes: 'Planned maintenance and scientific application only (no substantial
+    new development): repository/release upkeep, bug fixing, dependency updates, and documentation/tutorial
+    maintenance for QhX, QNPy-Latte, and the QhX Hub; continued application to new Rubin data
+    releases with monitoring of completeness, reliability, and efficiency; user support, occasional
+    training, and support for collaborations; dissemination via publications, presentations,
+    and QhX Hub citizen-science activities. Estimated effort ~0.05–0.10 FTE. Thank you for
+    your time and the opportunity — kind greetings from Belgrade.'
   further_development: 'The delivered contribution (main QhX, the DP1 QhX Hub, and QNPy-Latte)
     is complete and fulfils its planned scope. Further developments: First, reprocessing the
     full catalogue on progressively longer baselines (DP2 onward) to track the persistence,
