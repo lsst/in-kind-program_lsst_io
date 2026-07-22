@@ -32,7 +32,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         .ikc-desc { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0.4em; }
         .ikc-desc.ikc-expanded { -webkit-line-clamp: unset; display: block; overflow: visible; }
         .ikc-expand-btn { border: none; background: none; color: #1a5c33; font-size: 0.85em; padding: 0; cursor: pointer; margin-bottom: 0.6em; }
-        .ikc-also-see { display: block; background: #e6e6e6; color: #333; font-size: 0.85em; padding: 0.3em 0.7em; border-radius: 1em; margin-top: 0.5em; text-decoration: none; }
+        .ikc-also-see { display: inline-block; background: #e6e6e6; color: #333; font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 0.5em; text-decoration: none; }
         .ikc-also-see:hover { background: #d9d9d9; }
       </style>
 
@@ -212,7 +212,12 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {% for rel in item.related %}
           {% if rel.page_url %}
-          `Also see: {{ rel.title }} ({{ rel.contribution_id }}) → <{{ rel.page_url }}#ds-cid-{{ rel.slug }}>`_
+          {% set rel_kind = 'dataset' if 'datasets' in rel.page_url else 'facility' %}
+
+          .. raw:: html
+
+             <a class="ikc-also-see" href="{{ rel.page_url }}#ds-cid-{{ rel.slug }}">Also see: {{ rel_kind }} ({{ rel.contribution_id }}) &rarr;</a>
+
           {% endif %}
           {% endfor %}
 
