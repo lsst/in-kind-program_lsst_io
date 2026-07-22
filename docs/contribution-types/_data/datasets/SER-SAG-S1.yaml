@@ -1,0 +1,70 @@
+contribution_id: SER-SAG-S1
+title: Science Pipeline Development for analysis of variability of celestial sources in the
+  LSST AGN and TVS Science Collaboration (associated dataset)
+country: Serbia
+institute: SAGNT
+form_data:
+  submitted: true
+  data_type:
+  - Value-Added Catalogs
+  data_volume: The current QhX Hub is based on known quasars in LSST DP1. Of approximately
+    1,500 cross-matched quasars, 428 met the sampling criteria and form the analysed sample.
+    For these sources the Hub stores statistical results (object-level and per-band tables,
+    including light-curve features and coherence/vetting metrics) together with per-object
+    images and interactive plots. The current total data volume is of order a few hundred
+    megabytes, dominated by the image and interactive-plot products; it will scale with successive
+    LSST Data Releases.
+  data_schema_link: https://zenodo.org/records/18248330
+  hosting_location: It resides on data cloud machine at University of Kragujevac that is obtained
+    through TVS SC Kickstarter grant https://faculty.washington.edu/ivezic/lsst/LOI2022Plitvice/Simic_Regional_Storage_Support_for_LSST_Related_Science.pdf
+  access_url: https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php
+  access_mechanisms:
+  - TAP / Virtual Observatory Service
+  - API
+  - Web Portal / Interface
+  authentication: Rubin Data Rights verification (RSP authentication)
+  generation_methods: 'Generated with the QhX pipeline delivered under this contribution (ID
+    SER-SAG-S1): wavelet (WWZ) time–frequency analysis + 2D period–period cross-correlation
+    with statistical vetting (significance, period-error bounds, IoU). Input DP1 light curves
+    selected by cross-matching DP1 sources (via LSDB) with external AGN catalogues (DESI,
+    Quaia, MilliQuas, ZTF/QZO); products served through the QhX Hub. Software: https://github.com/LSST-SER-SAG-S1/QhX1
+    (Kovačević et al. 2026, JOSS, doi:10.21105/joss.08163), Catalogue: Kovačević et al. 2026
+    (ApJS, accepted). Docs: Cerovic et al 2026 doi:10.5281/zenodo.17914817.'
+  validation_limitations: 'QA in Kovačević et al. 2026 (ApJS, accepted): permutation significance,
+    cross-band IoU consistency, sinusoidal vetting (SN larger 1.5, phase-lag larger than 0.10),
+    FDR control (Benjamini–Hochberg, none rejected); reliability via Dawid–Skene (0.023) and
+    alias-floor (0.975) purity. Limitations: prototype DP1 catalogue; 7-week baseline, possible
+    to infer day-scale only; strong diurnal aliasing (0.5, 1, 2 d); sample g,r,i,z larger
+    than 50 epochs (428 of1,456; u/y excluded); conservative (1 strong + 15 medium of 230);
+    asymmetric baseline-limited period errors.'
+  tutorials_docs: Catalogue functioQhX Hub (https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php,
+    doi:10.5281/zenodo.17914817),
+  support_channel: agncatalogue.sersag@gmail.com.
+  citation: 'Citation. Users of the QhX AGN variability catalogue / QhX Hub should cite the
+    catalogue paper (Kovačević et al. 2026, ApJSS ) and its technical documentation (Stanković
+    Cerović et al. 2025, Zenodo, doi:10.5281/zenodo.17914817). Acknowledgement. In addition
+    to the citations above, please include: "This work makes use of data/software products
+    from the QhX contribution, developed as a contribution to the Rubin community through
+    the Rubin In-Kind program, with contribution ID SER-SAG-S1." License. The catalogue data
+    products are open-access; access to the full catalogue via the QhX Hub is granted to Rubin
+    Data Rights Holders on request (ORCID authentication), consistent with Rubin data-rights
+    policy.'
+  maintenance_plan: Discrete future Data Releases (e.g. DR2)
+  maintenance_notes: repository/release upkeep, bug fixing, dependency updates, and documentation/tutorial
+    maintenance, continued application to new Rubin data releases; user support and occasional
+    training; and dissemination through publications, presentations, and QhX Hub citizen-science
+    activities. Estimated effort ~0.05–0.10 FTE across the team.
+  final_report: The final/completion summary was included in the FY26 Q3 Quarterly Update
+    (June 2026), which reported completion of the QhX software and QhX Hub development (along
+    QNPy/Latte) and the transition to maintenance. It was also reflected in the FY25 Annual
+    Evaluation, which stated the contribution had delivered the fully operable pipeline and
+    entered the maintenance and deployment phase.
+curated:
+  primary_recipient: LSST AGN Science Collaboration
+  target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
+  summary: null
+  wavelength_regime: []
+  status_override: null
+  related_contribution_ids:
+  - SER-SAG-S1
+  needs_review: true

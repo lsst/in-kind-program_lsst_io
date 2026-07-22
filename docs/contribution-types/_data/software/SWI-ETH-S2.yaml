@@ -1,0 +1,44 @@
+contribution_id: SWI-ETH-S2
+title: Covariance Estimation and Cosmology Ppieline Development in DESC
+country: Switzerland
+institute: ETH
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: UZH contributes directable software development effort to the LSST
+    DESC analyses, including the covariance estimation code TJPCov, as described in the resource
+    needs statement DESC-RN-02. UZH staff works within DESC, taking input from the Collaboration,
+    producing detailed documentation, and supporting DESC members in the use of the code as
+    needed. We use modest amounts of existing local computing to support this work as we focus
+    on using Rubin- and DESC-provided user computing resources to ensure the code functions
+    at the needed scale. We avoid risks associated with gaining the needed expertise in the
+    Rubin/DESC tools and data products as one member of our staff has already been working
+    in the pipeline scientists role.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  summary: null
+  status_override: null
+  related_contribution_ids: []

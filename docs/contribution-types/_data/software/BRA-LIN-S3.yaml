@@ -1,0 +1,45 @@
+contribution_id: BRA-LIN-S3
+title: Contributions to Science Pipeline Development in the LSST-DESC TJP Working Group
+country: Brazil
+institute: LIneA
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: LIneA will contribute with directable software development effort
+    in the general area of cosmological calculations (Theory, Covariances, and Joint Probes).
+    The direct software development efforts include the development and validation of CCL,
+    firecrown, and development of TJP Covariance pipeline (TJPCov) for multiprobe analysis.
+    Since development will take place inside DESC projects, most of it will be done locally
+    and tested inside Rubin-provided computer resources (NERSC). When it comes to this proposal,
+    the main challenge is acquiring the needed expertise in the LSST-DESC. In order to mitigate
+    this risk, the members are engaged with the Pipeline Scientist group and interacting within
+    the DESC TJP working group. If necessary LIneA also provides computing infrastructure
+    that can be used to run and test the developed codes.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -11,7 +11,7 @@ Recipient groups can be either Rubin teams or LSST Science Collaborations. Furth
 Contributions and Developers
 ============================
 
-General Pool resources have been offered by the folliowing programs and are listed with the skills of the developers available.
+General Pool resources have been offered by the following programs and are listed with the skills of the developers available.
 
 +--------------+---------+----------------------------------------------------------------------------------+
 |Program       |Started  |Notes and Skills                                                                  |

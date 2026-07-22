@@ -1,0 +1,60 @@
+contribution_id: SWE-STK-S1
+title: Science Pipeline Development in the LSST Dark Energy Science Collaboration
+country: Sweden
+institute: Stockholm
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'SU will contribute directable software development effort in the
+    general area of LSST DESC science analysis. We will contribute two strands of directable
+    effort: (1) computing infrastructure effort supporting areas covering data access, data
+    processing, simulation setup and management, validation and/or provenance tracking; and
+    (2) software development effort in areas requiring domain knowledge, where we have the
+    expertise to contribute to the DESC’s photometric redshift, supernovae, large scale structure
+    WGs; difference imaging and low surface brightness image processing and validation (and
+    related cross-WG activities); and observing-strategy related work. SU staff will work
+    with the DESC to define needed software development tasks, and then carry out those tasks
+    as an integral part of the collaboration, reporting regularly on progress, taking input
+    from the rest of the collaboration, and supporting the collaboration’s members in the
+    use of the code. This proposed contribution was developed in consultation with the DESC.
+    We anticipate needing modest amounts of local computing to support this work, and will
+    work to ensure that codes run on the needed scale at the primary DESC computing center
+    (currently NERSC); we may use DESC computing resources in the course of code development/testing.
+    Local computing resources are already available at the SU Physics Department through a
+    29 node cluster with 880 cores, 6128 GB memory and 462 TB storage. We will add local resources
+    if needed. The primary risk associated with this work is in gaining the needed expertise
+    in the DESC and Rubin tools and data products: to mitigate this, SU staff will engage
+    early with any Rubin and LSST DESC tutorials provided, engage with DESC Data Challenges,
+    and look to be active participants in events associated with the Rubin “Data Previews”,
+    all within the context of LSST DESC.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  - Photometric redshift
+  - Supernovae
+  summary: null
+  status_override: null
+  related_contribution_ids: []

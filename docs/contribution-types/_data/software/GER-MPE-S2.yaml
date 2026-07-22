@@ -1,0 +1,58 @@
+contribution_id: GER-MPE-S2
+title: MPE efforts to assure reliable photo-z for AGN
+country: Germany
+institute: MPE
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST AGN Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: 'MPE will contribute directable software development effort in the
+    specific area of LSST AGN photometric redshifts. In general this contribution will comprise
+    studies aimed at determining the best way to compute photo-z for AGN enhanced by LSST
+    photometry. Together with the AGN SC and the AGN photo-z group at least two distinct areas
+    that need development have already been identified and for which the expertise of MPE
+    would be valuable. First, the construction and improvement of AGN templates (e.g. templates
+    for obscured AGN). Second, a “recipe” that allows the merging of photometry from different
+    surveys at different wavelengths, depending on e.g., whether the sources are extended
+    or point-like. The latter development should allow reliable photo-z for AGN to be determined
+    as soon as LSST data become available, to enable science while waiting for homogenised
+    photometry (e.g., like that currently offered by Legacy Survey) to become available. These
+    areas have been highlighted from a range of other related efforts towards realising reliable
+    AGN photo-z’s. We will respond flexibly under the guidance of the SC to assist with effort
+    towards the high priority development needed with mutual agreement. The studies will be
+    in synergy and coordinated together with the experts of the AGN SC, to which the MPE group
+    will report periodically.The primary risk associated with this work is in gaining the
+    needed expertise in the Rubin tools and data products: to mitigate this, MPE staff will
+    engage early with any Rubin tutorials provided, and look to be active participants in
+    events associated with the Rubin “Data Previews”, all within the context of the AGN SC.
+    The AGN SC and in particular the AGN photo-z group within the SC has endorsed this proposed
+    contribution.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astronomy software
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

@@ -1,0 +1,68 @@
+contribution_id: ITA-INA-S3
+title: 'Directable SW contribution for the TVS SC: Development of a software to classify variable
+  stars'
+country: Italy
+institute: INAF
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'The INAF team will provide directable software development effort
+    in the area of Rubin data science analysis and classification of stellar variability,
+    contributing to user-support projects to benefit a diverse range of science of interest
+    for the TVS SC. Software effort to help TVS members transfer their data reduction to the
+    Science Platform, will be provided, particularly for TVS members studying variable stars.For
+    example, a potential project could include large catalog queries on the annual data release
+    products, comparing the classifications provided by different brokers in order to compile
+    verified variable stars catalogs.The proposers will make available their expertise in
+    young stellar object variability phenomena in the framework of classification of stellar
+    variability, and the final project will be developed in collaboration with TVS.Details
+    describing the TVS software requirements concerning this science have been discussed in
+    several Sections of the TVS. In particular, Sect. 2.4.1 and Sect. 3.3.5 (Giannini, Bonito
+    &amp; Antoniucci) describe the software requirements and possible follow-up observations
+    to study YSOs with erupting accretion bursts (e.g. EXOrs objects), while 5.2.7 (Bonito)
+    is focused on the variability due to quiescent accretion in YSOs in general discussing
+    the necessary software and synergy with different multi-band facilities to accomplish
+    the characterisation of variability for young stars.The INAF proposers will work with
+    the Rubin TVS SC, reporting regularly on progress, taking input from the SC, and supporting
+    the collaboration’s members in the use of the proposed tool. We anticipate needing modest
+    amounts of local computing to support this work and focus on using Rubin-provided user
+    computing resources as they become. The aforementioned local computing resources are already
+    available at INAF, and we will apply for additional international resources if needed,
+    as made since more than a decade for numerical simulations. The primary risk associated
+    with this work is in gaining the needed expertise in the Rubin tools and data products,
+    both for INAF team staff members and dedicated recruited personnel: to mitigate this,
+    the INAF team will engage early with any Rubin tutorials provided, and look to be active
+    participants in events associated with the Rubin “Data Previews”.Both proposers are members
+    of the Stack Club, (Bonito is the Chair of the TVS Task Force on the Rubin Science Platform
+    Evaluation).'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Time domain astronomy
+  - Transient detection
+  - Variable stars
+  summary: null
+  status_override: null
+  related_contribution_ids: []

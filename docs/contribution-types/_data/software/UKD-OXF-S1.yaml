@@ -1,0 +1,63 @@
+contribution_id: UKD-OXF-S1
+title: DESC Analysis Pipeline Development
+country: UK
+institute: Oxford
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: 'Oxford will contribute directable software development effort in
+    “catalog-to-parameters” stage of the data analysis pipeline of the Rubin DESC, which is
+    the main recipient of this contribution. This covers activities relevant to four of the
+    DESC working groups: Large-Scale Structure (LSS), Theory and Joint Probes (TJP), Weak
+    Lensing (WL) and Photometric Redshifts (PZ).These are examples of the activities for which,
+    given our expertise, we could provide a more useful contribution (with references to specific
+    deliverables and products in the DESC Science Roadmap): development of the Core Cosmology
+    Library (TJP5A), likelihood pipeline for joint analyses (TJP5B), joint pipelines with
+    CMB data (TXPipe-LSS), covariances for WL and LSS (TXCov), software for two-point statistics
+    (TXTwoPoint), the design of null tests (WLNullTest), including extensions to external
+    CMB datasets, software for astrophysical systematics (CX5), covariance matrices for joint
+    analyses (CX7), interfaces between LSS, WL and PZ (PZSummarize, PZnzSummarizers), the
+    development of algorithms to obtain optimal source and lens tomographic samples (TXSourceSelector
+    and TXLensSelector), generation of random catalogs (TXRandoms).The relevance of this proposed
+    contribution has been discussed and coordinated with the points of contact in the DESC,
+    and the example activities provided above are valuable active or anticipated deliverables
+    and products.Note that the potential PZ-related activities contained in this part of the
+    proposal are different from those described in S2. While there are obvious synergies between
+    both contributions, there is a clear division of work between the tasks of developing
+    and improving PZ algorithms (the subject of S2), and the developing of interfaces to make
+    use of PZ products in the cosmological analysis of LSS and WL data (relevant to this contribution).The
+    development and validation of these software packages will require access to HPC facilities.
+    The resources available at the Oxford Astrophysics Small Research Facility (to which we
+    have unrestricted access), as well as access to NERSC should be sufficient for this work.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Gravitational lensing
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

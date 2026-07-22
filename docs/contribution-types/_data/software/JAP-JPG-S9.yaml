@@ -1,0 +1,52 @@
+contribution_id: JAP-JPG-S9
+title: Directable effort in the SL working group
+country: Japan
+institute: JPG
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - LSST Strong Lensing Science Collaboration
+  activity_description: The JPG strong lensing team led by Masamune Oguri will contribute
+    directable software development effort in the general area of LSST Strong Lensing science
+    analysis. The possible effort includes, but not limited to, contribution to the end-to-end
+    simulations of various types of strong lens systems to characterize the selection function
+    in observations and contribution to strong lens finding tools. The team will work closely
+    with the leadership of DESC SL WG and SLSC to define needed software tasks, and then carry
+    out those tasks as an integral part of the collaboration in the DESC GitHub organization,
+    taking inputs from DESC SL WG and SLSC members and reporting the progress regularly. The
+    work will be carried out within DESC Projects as per the DESC Publication Policy. The
+    team will use DESC tools and tutorials in the initial learning phase to ensure that softwares
+    developed by the team will be smoothly connected with other software efforts in DESC.
+    We anticipate that the effort will require modest amounts of computing resources, which
+    are already available at University of Tokyo and NAOJ, although the team will also use
+    NERSC to ensure broader collaboration engagement. This proposed contribution was developed
+    in consultation with DESC.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

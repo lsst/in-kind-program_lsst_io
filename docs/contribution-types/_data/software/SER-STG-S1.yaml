@@ -1,0 +1,54 @@
+contribution_id: SER-STG-S1
+title: Credit for past contribution to the LSST by Serbian Technical Group (STG)
+country: Serbia
+institute: STG
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: Rubin Prompt Processing Group
+  additional_recipient_groups:
+  - Rubin Alert Production Group
+  activity_description: Following agreement about the Serbian Technical Group’s in-kind contribution,
+    signed on November 19, 2013, we were embedded in the LSST Simulations group led by Andrew
+    Connolly (University of Washington) and worked with the LSST Data Management subsystem.
+    The work packages delivered by the STG involved development of an alert simulator using
+    other components of the simulation package (opsim, catsim, stack tools, etc.). This was
+    necessary for having ‘realistic’ objects timing for generating simulated alerts. The alert
+    simulator is a part of the Rubin simulation package (github.com/lsst-sims/sims_alertsim).With
+    a new branch delivered towards the end of the last year, we added support for using MongoDB
+    as a system for a more compact and efficient way of storing alerts. We generated around
+    twenty million alerts and, though there are still some issues, we made all the products
+    available to the Alert Production team. Most of this work is recorded in the LSST JIRA
+    system.In addition, we were testing LSST Stack installations on different Linux flavors,
+    and helped student Yana Kuhanova produce a master thesis in 2016 which played a significant
+    part in a decision to adopt the DM Stack for a different instrument.Members of our team
+    were active at LSST AHM’s and PCW’s and we also organized LSST@Europe2 conference in Belgrade
+    in June 2016 (with support from LSSTC), which connected the European and US LSST communities.
+    We also acted as a proxy for LSST in a very successful EU COST action “Big data in Sky
+    and Earth Observations.”Members of our team are involved in LSST TVS and DESC Science
+    Collaborations.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  summary: null
+  status_override: null
+  related_contribution_ids: []

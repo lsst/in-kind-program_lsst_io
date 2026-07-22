@@ -1,0 +1,70 @@
+contribution_id: UKD-OXF-S4
+title: Strong Lens Discovery System and Candidate Server
+country: UK
+institute: Oxford
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Strong Lensing Science Collaboration
+  additional_recipient_groups:
+  - LSST Dark Energy Science Collaboration
+  activity_description: Oxford will contribute directable software development effort in the
+    area of the Rubin Strong Lens discovery system and infrastructure in collaboration with
+    the SLSC and DESC SL Working Group. This may include (but won’t encompass all) providing
+    the basic infrastructure for the SL discovery pipeline that connects the DM/DA to UGDP
+    image/stamp generation, explores local PSF determination and applying lens subtraction
+    methods, connects the discovery algorithms and the SL EPO (Rubin-Space Warps) platform,
+    develops and implements active learning between ML and Citizen Science, connects to multiple
+    fast modelling algorithms and then connects the resultant samples to value added databases
+    that will serve the candidates. The work also needs detailed planning and framework and
+    standards definition to achieve this to help all contributors build components that contribute
+    to the overall goal. The foreseen infrastructure will allow multiple lens finders (ML-assisted
+    or otherwise) to plug into the SL discovery system, thereby maximising the number of lenses
+    discovered. As such, the proposed work will help to deliver a system for the US/Chilean
+    Rubin community that will enable e.g. discovery, candidate ranking and follow-up prioritisation,
+    and connect the database to the alert stream to allow the identification of extragalactic
+    lensed transients a quick and fast possibility. The plan of work will be developed in
+    conjunction with the leadership for both collaborations, following priorities and gaps
+    in the infrastructure development to meet the needs of the whole Rubin SL community. We
+    are willing and happy to work with other SL infrastructure S/W teams either in place among
+    the US/Chilean communities or contributing effort via in-kinds to complete this work.We
+    will hire an experienced developer or researcher with strong computational skills who
+    will work along with the DM, EPO and SC teams to ensure that the infrastructure components
+    are effectively generated. Given the large number of cutouts that will be needed, a relationship
+    to either the US-DAC/iDAC will be developed, and accompanying infrastructure to deliver
+    these to the system and lean finders and modellers. In addition, connection of the candidate
+    servers to the alert stream via one of the alert brokers will also be needed to maximize
+    the potential to identify lensed transients from early survey data. We aim to have the
+    infrastructure in place for commissioning/early science to test and then demonstrate the
+    efficacy of the system and then improve, refine, optimise the capability as required.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Citizen science
+  - Gravitational lensing
+  - Strong gravitational lensing
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []

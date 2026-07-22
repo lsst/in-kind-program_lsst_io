@@ -1,0 +1,61 @@
+contribution_id: ITA-INA-S23
+title: 'Staff effort in support of Rubin commissioning: ML tools for instrumental monitoring
+  and analysis'
+country: Italy
+institute: INAF
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: Rubin Commissioning Team
+  additional_recipient_groups: []
+  activity_description: 'The INAF-OACN team will contribute directable software development
+    effort in the general area of LSST focal plane instrument HouseKeeping/telemetry and science
+    analysis, including machine/deep learning methods for prediction/classification tasks,
+    as well as trend analysis and statistical characterization of focal plane instrument and
+    science data/images systems. By considering that a general-purpose version of the proposed
+    system is already in place and a customized version was adopted by ESA Euclid Mission,
+    the proposers intend to exploit their previous experience into the adaptation of the tool
+    to specific LSST project needs. The INAF-OACN proposers will work with the LSST Commissioning
+    Team to define needed software development and tasks aimed at tailoring/integrating the
+    existing product on the base of LSST requirements. In fact, this activity can be activated
+    in a very short time, due to the already available software system on which to work. They
+    also carry out those tasks as an integral part of the collaboration, reporting regularly
+    on progress, taking input from the rest of the collaboration, and supporting the collaboration
+    members in the use of the proposed tool. We anticipate needing modest amounts of local
+    computing to support this work, and focus on using Rubin-provided user computing resources
+    as they become available to ensure the code functions at the needed scale. The aforementioned
+    local computing resources are already available at INAF-OACN, and we will work to secure
+    additional local resources if needed. The primary risk associated with this work is in
+    gaining the needed expertise in the Rubin tools and data products, both for INAF-OACN
+    team staff members and dedicated recruited personnel: to mitigate this, the INAF-OACN
+    team will engage early with any Rubin tutorials provided, and look to be active participants
+    in events associated with the Rubin “Data Previews”, all within the context of the I&S
+    SC.More technical and functional information on the prototype system offered is available
+    here: https://drive.google.com/drive/folders/1iXAoA8OS9G1Srl7erVu9zQ-EdWVm5Rkj?usp=sharing'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Deep learning
+  - Machine learning
+  summary: null
+  status_override: null
+  related_contribution_ids: []

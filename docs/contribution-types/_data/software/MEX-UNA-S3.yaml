@@ -1,0 +1,60 @@
+contribution_id: MEX-UNA-S3
+title: Non-directable Science Pipeline Development in the LSST DE Science Collaboration
+country: Mexico
+institute: UNAM
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'This MEX-UNA subgroup is seeking to contribute a non-directable software
+    development effort to be embedded within DESC. The aim of this proposal is to develop
+    a three point statistics pipeline, whose Software Development Priority will contain the
+    following coding efforts: a) an algorithm to extract the signal from data, b) a prescription
+    to estimate its associated error and c) the modelling of the signal. The first stage of
+    the project is to choose and design an algorithm that would most benefit the LSST science,
+    primarily steered by the TJP WG but also in close coordination with the LSS and WL WGs.
+    At the moment, we envision two possibilities: either a configuration space three point
+    correlation function, perhaps, using a multipole decomposition or its fourier space counterpart,
+    the bispectrum, using spin-weighted spherical harmonics. Depending on the target space
+    and other considerations, the error estimation may be done using semi-analytical approaches
+    or re-sampling methods, and to model the signal, we can use our experience using recent
+    developments in EFT-perturbation theory with a consistent biasing model. However, a more
+    detailed study of the benefits, challenges and scientific goals of the two possibilities
+    should be carried on and detailed in a document, which may also prove useful for further
+    developments to the higher statistics pipeline. During this short design phase we will
+    also assess the computational cost, integration into pre-existing codes and pipelines
+    within DESC. Once the decision has been made in agreement with the relevant DESC Working
+    Groups, we plan to spend most of the promised FTE time working in the three lines of software
+    development described above until their completion, with the corresponding documentation
+    in agreement with the collaboration guidelines. A further phase of enhancements can also
+    take place where one may think of general improvements and model extensions. Long-term
+    maintenance will be provided by the contributors of this proposal and according to the
+    requirements of the recipient working groups.DESC endorses this proposed contribution,
+    MEX-UNA-S3.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  summary: null
+  status_override: null
+  related_contribution_ids: []

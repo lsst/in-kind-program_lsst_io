@@ -1,0 +1,66 @@
+contribution_id: UKD-UKD-S6
+title: 'Science Software development: Low surface brightness science'
+country: UK
+institute: LSST:UK
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: Rubin Algorithms & Pipelines Team
+  additional_recipient_groups:
+  - LSST Galaxies Science Collaboration
+  activity_description: The LSB Universe – the regime that is inaccessible in past wide-area
+    surveys – hosts virtually all of LSST’s extra-galactic discovery space. However, LSST’s
+    ability to access this revolutionary domain depends on the sky-subtraction in the DM pipeline
+    preserving LSB flux in LSST images. We will contribute directable pipeline development
+    to produce sky-background modelling and subtraction that preserves LSB flux, which is
+    essential for LSST Galaxies science. The immediate recipient is the Rubin Algorithms and
+    Pipelines team and the eventual beneficiary is the Galaxies Science Collaboration (GSC).
+    We have already been working on this project, in a directable fashion, with the DM team
+    (Kelvin/Al-Sayyad/Lupton/Reed) since March 20. We have developed quality-assurance metrics,
+    in the form of surface-brightness/magnitude deficits, to quantify how the pipeline handles
+    LSB flux. As a proof of concept, injection of fake single-Sersic sources into coadded
+    imaging, from the continuously re-reduced COSMOS tract 9813, has revealed potentially
+    significant sky over-subtraction at flux levels fainter than ~26 mag arcsec-2 around large
+    objects (>8 arcsec), with a flux-loss ratio of >15 percent in the worst cases. This relatively
+    aggressive sky-subtraction ensures that LSB flux does not connect objects and confuse
+    de-blenders, making it ideal for weak-lensing science. However, it compromises the majority
+    of Galaxies science. A bifurcation of the pipeline appears necessary to satisfy both communities.
+    Ongoing testing in collaboration with the DM team will repeat these analyses for a more
+    realistic scenario, injecting fake sources at the visit level and propagating those images
+    through to final coaddition. The broad plan is to explore intermediate points in the DM
+    pipeline, where the sky-subtraction is not as aggressive, as a starting point to developing
+    sky-background modelling and subtraction that preserves LSB flux. We will continue to
+    work closely with the DM team to identify future development tasks and perform these as
+    an integral part of the GSC, taking input from members and reporting regularly on progress
+    in telecons and via interaction on Slack. We are using the Rubin Science Platform (RSP)
+    to access and analyze pre- and post-model injection outputs from the DM pipeline, since
+    the RSP computing architecture is built specifically for the Project, and using local
+    resources to interpret the results. We do not anticipate a change in our resource needs.
+    The primary risk is gaining an understanding of the DM pipeline architecture. However,
+    our close and ongoing interaction with the DM team mitigates this.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Gravitational lensing
+  summary: null
+  status_override: null
+  related_contribution_ids: []

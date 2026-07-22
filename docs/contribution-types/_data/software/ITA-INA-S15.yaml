@@ -1,0 +1,66 @@
+contribution_id: ITA-INA-S15
+title: Tools for classification, full characterization and validation of variable sources
+country: Italy
+institute: INAF
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
+  additional_recipient_groups: []
+  activity_description: The INAF team will contribute directable software development effort,
+    endorsed by Rubin Transients and Variable Stars (TVS), Science Collaboration (SC), in
+    order to provide TVS with an architecture and specific tools for the identification, classification
+    and validation of variable sources observed by the Rubin Observatory. This will include
+    machine/deep learning methods for prediction/classification tasks, as well as tools for
+    cross-matching with existing catalogues, analysis and validation of variable sources.Tools,
+    pipelines and (python-written) procedures we developed in the context of the Variability
+    Unit of the Gaia Data Processing and Analysis Consortium (DPAC) will be re-moduled and
+    adapted for the analysis of the LSST multi-wavelength time series data and/or used to
+    feed machine-learning (python-based) pipelines to validate the classification. The machine
+    learning training set will be based on the vast and accurate training sets that we have
+    developed along the years in the context of the Gaia mission, which will be progressively
+    updated to account for the Rubin-LSST achievements. In parallel, the validation will take
+    full advantage of the huge compilation of literature catalogues (including those produced
+    by previous Gaia releases) which we have been building over the years and constantly update
+    to validate the Gaia products. The proposers will collaborate with the Rubin Team to define
+    needed software developments, to integrate/tailor existing software products or implement
+    specific tools from scratch, based on the Rubin requirements and following Rubin requests.
+    The activity will be carried out in strict collaboration with other members of the LSST
+    TVS SC and taking into account the feedback from the rest of the collaboration. The tools
+    will be developed in the same framework adopted by the Rubin TVS SC in order to ensure
+    compatibility and ease of use and testing. To allow for an efficient development of the
+    proposed software both the INAF team staff members and the dedicated recruited personnel
+    will need to quickly become familiar with the Rubin tools and data products. To this end
+    the INAF team will engage early with any tutorials provided by RO, and will actively participate
+    in events of the TVS SC associated with the Rubin “Data Previews”.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Deep learning
+  - Machine learning
+  - Time domain astronomy
+  - Transient detection
+  - Variable stars
+  summary: null
+  status_override: null
+  related_contribution_ids: []

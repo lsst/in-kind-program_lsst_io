@@ -1,0 +1,64 @@
+contribution_id: POL-NCB-S2
+title: Near-Term Directable computing infrastructure effort for Dark Energy Science Collaboration
+  providing a link between
+country: Poland
+institute: NCBJ
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'NCBJ will contribute directable computing infrastructure effort in
+    the general area of DESC science analysis, in particular science pipelines. NCBJ will
+    work with the DESC SC to define needed computing infrastructure development tasks, and
+    then carry out those tasks as an integral part of the collaboration, reporting regularly
+    on progress, taking input from the rest of the collaboration, and supporting the collaboration’s
+    members in the use of the code. At this point NCBJ anticipates that the main task will
+    revolve around 1/ collaboration with DESC group on a distributed infrastructure, primarily
+    targeted at NERSC; development of this common infrastructure, developed via a work plan
+    in consultation with DESC leadership and would be the primary outcome. The Centre intends
+    to achieve integration with DESC collaborative software efforts using DESC tools and tutorials,
+    enabling the infrastructure to be used for DESC Data Challenges as well as Rubin Data
+    Previews. All code that will be produced will be shared in DESC Community GitHub repositories.
+    A by-product of this collaboration will be also development connected to the local infrastructure:
+    2/ integration of local computing resources (CIŚ) with DESC computation scheme through
+    local IDAC and using local data resources, NCBJ provided IDAC, for the purpose of DESC
+    group, 3/ integration of DESC science pipeline working at the National Energy Research
+    Scientific Computing Center (NERSC) with local resources 4/ providing aid to the members
+    of the DESC group using IDAC located at NCBJ. NCBJ will provide computational resources
+    for (2-4) tasks. The primary risk associated with this work is in gaining the needed expertise
+    in the Rubin tools and data products: to mitigate this, the NCBJ staff will engage early
+    with any Rubin tutorials provided, and look to be active participants in events associated
+    with the Rubin “Data Previews”, all within the context of the DESC SC.If selected, NCBJ
+    would secure funding to hire two IT professionals or highly IT-oriented physicists (2
+    x 0.75 FTE) to give support to DESC infrastructure and DESC group. Ideally, these will
+    be the same individuals overseeing the IDAC at 0.25 of their FTE. The main task for the
+    staff will be to serve DESC infrastructure. This includes installation and maintenance
+    of the software and continuous monitoring of the processes, as well as participation in
+    development of necessary pipelines.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  summary: null
+  status_override: null
+  related_contribution_ids: []

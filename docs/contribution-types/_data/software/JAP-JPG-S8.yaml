@@ -1,0 +1,69 @@
+contribution_id: JAP-JPG-S8
+title: ML deblending algorithm with ground- and space-based images
+country: Japan
+institute: JPG
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: The JPG deblending team led by Hironao Miyatake will contribute non-directable
+    software development effort in the object deblending of Rubin images primarily for reducing
+    systematics in weak lensing measurement and in associated infrastructure works. Our team
+    will develop a machine-learning (ML) based deblending algorithm, using pairs of ground-based
+    and space-based telescope images as a training set, which enables to deblend objects observed
+    by a ground-based telescope alone. We will develop the algorithm using the HSC and Hubble
+    Space Telescope (HST) images and apply the algorithm to the HSC and early LSST data. This
+    software development is a pathfinder for a longer-term joint processing effort when the
+    Nancy Grace Roman Space Telescope comes online. We are currently at the initial stage
+    of the algorithm development. Before obtaining proofs of concept, this development should
+    be counted as research rather than a part of our in-kind contribution.Through this development,
+    we will contribute to the infrastructure work on BTK, which will benefit other groups
+    within the DESC BLWG. Our contribution includes adding capability to simulate pairs of
+    high-resolution and low-resolution realistic galaxy images based on, e.g., real galaxy
+    images from the COSMOS HST data and ML-based generative images (Lanusse et al., arXiv:2008.03833),
+    which is used to validate our deblending algorithm. Through this process, we will validate
+    the completeness of COSMOS input catalog and enhance the COSMOS catalog with the ML-based
+    generative images, which should benefit other DESC projects relying on the COSMOS catalog.
+    Once initial proofs of concept for the deblender are successful, later stages of the algorithm
+    development could be part of this in-kind contribution pending agreement from DESC that
+    this would be a valued infrastructure contribution. We already have GPU machines in Nagoya
+    University used for training deep learning models and have enough funding to purchase
+    additional GPU machines if necessary. We will make sure our deblending algorithm runs
+    on NERSC computers and will run deblending on the HSC and early LSST data within NERSC.
+    A possible major risk is to identify an appropriate ML algorithm for deblending. To lower
+    this risk, we already identified expert consultants at Institute of Statistical Mathematics
+    (ISM) and Nippon Telegraph and Telephone Corporation (NTT) in Japan. We will also consult
+    with ML experts within DESC and the Informatics and Statistics Science Collaboration (ISSC),
+    which ensures this work is well-embedded within DESC and Rubin Observatory.DESC endorses
+    this contribution, with LOI code JAP-JAP-4.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astroinformatics
+  - Astronomy software
+  - Cosmology
+  - Deep learning
+  - Gravitational lensing
+  - Machine learning
+  summary: null
+  status_override: null
+  related_contribution_ids: []

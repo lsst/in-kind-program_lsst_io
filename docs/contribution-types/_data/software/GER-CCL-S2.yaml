@@ -1,0 +1,59 @@
+contribution_id: GER-CCL-S2
+title: Science Pipeline Development in the Dark Energy Science Collaboration
+country: Germany
+institute: GCCL
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups: []
+  activity_description: 'As part of the GCCL contribution, Robert Reischke and Andrina Nicola
+    will contribute directable software development efforts to LSST DESC. After consultation
+    with the WLSS, MCP and CL WGs in DESC as well as the analysis coordination team, we have
+    settled on the following proposed development effort: The primary goal of this contribution
+    is to implement the covariance tools needed to perform cluster cosmology analyses using
+    TJPCov and CCL. We will implement theoretical predictions for cluster overdensity cross-correlations
+    into CCL. In addition, we will implement cluster cross 2pt-function covariances into TJPCov
+    and validate them using independent implementations. We will do this both for optical
+    clusters as well as tSZ-selected clusters to allow for joint analyses with CMB surveys.
+    In particular, we will coordinate development of the analysis pipeline with the Simons
+    Observatory to facilitate future combined analyses (examples are: consistent theory predictions
+    and likelihoods/samplers). In a first step, we will focus on Fourier space. If needed,
+    we could also extend to real space correlations.In a second part of this in-kind contribution,
+    we will support the development of the augur forecasting tool and help with implementing
+    cluster cosmology forecasts. However, with mutual agreement, the DESC may request a change
+    of direction in the future if the goals and resources available to the DESC require it.We
+    have secured funding to cover the position of Robert Reischke, who has joined the AIfA
+    in October 2023. He will be able to dedicate 0.5 FTE for 2 years starting at any time
+    convenient for Rubin and DESC. In addition, we have access to local computing resources
+    to support this work. We will also work on NERSC to ensure that the developed tools run
+    there as well and to facilitate collaboration with other DESC researchers. Given that
+    a person with very relevant expertise has already been hired, the risk associated with
+    this contribution is minor.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Galaxy clusters
+  summary: null
+  status_override: null
+  related_contribution_ids: []

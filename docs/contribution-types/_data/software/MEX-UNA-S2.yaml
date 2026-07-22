@@ -1,0 +1,56 @@
+contribution_id: MEX-UNA-S2
+title: Science Pipeline Development in the DESC Science Collaboration
+country: Mexico
+institute: UNAM
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: LSST Dark Energy Science Collaboration
+  additional_recipient_groups:
+  - Rubin Photo-z Coordination Group
+  activity_description: This MEX-UNA subgroup will contribute directable effort to code/software
+    development embedded in LSST DESC, with emphasis on the Photometric Redshifts (Photo-z)
+    and Theory and Joint Probes (TJP) analysis groups. This group will work with the SC to
+    define the needed software development tasks, and carry them out as an integral part of
+    the collaboration, reporting regularly on progress, taking input from the rest of the
+    collaboration, and so on.There is particular interest to contribute with tasks regarding
+    covariance matrices, the development of CCL to compute observables in cosmology, the likelihood
+    pipelines for joint analyses, the DESC single-probe LSS likelihood module, and the pipelines
+    to test models beyond wCDM.This group has access to modest local computing resources already
+    available at the researchers institutions, CINVESTAV and UNAM, which will support the
+    majority of this work. The members of this group have also access to grants and funding
+    to expand some of such resources as the project develops. In addition, we will make use
+    of NERSC, DESC primary computing center, in order to efficiently work in a collaborative
+    manner with other DESC members and verify that all developed codes run correctly. The
+    main risk concerning this proposal is acquiring the expertise needed with the tools and
+    products already in place. To mitigate this, the group will engage early with DESC, looking
+    to be active participants in all the events, and will take advantage of DESC and SCSL
+    existing documentation, tools and tutorials, as well as to join the regular telecoms and
+    make use of their communication tools.
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Astronomy software
+  - Cosmology
+  - Photometric redshift
+  summary: null
+  status_override: null
+  related_contribution_ids: []

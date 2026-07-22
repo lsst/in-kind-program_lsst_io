@@ -14,6 +14,7 @@ Contribution Types
 
    general-pool
    contributed-datasets
+   contributed-software
    contributed-telescope
    contributed-resources
 

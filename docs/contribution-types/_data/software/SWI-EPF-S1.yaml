@@ -1,0 +1,73 @@
+contribution_id: SWI-EPF-S1
+title: An Interactive and Dynamical Database of Strong Lensing Systems
+country: Switzerland
+institute: EPFL
+form_data:
+  category: Non-directable SW dev
+  primary_recipient_group: LSST Strong Lensing Science Collaboration
+  additional_recipient_groups:
+  - LSST Dark Energy Science Collaboration
+  activity_description: 'A strong lensing database is proposed and builds on two existing
+    efforts: 1- the masterlens database of Leonidas Moustakas, who is a collaborator of EPFL
+    and a member of the Euclid strong lensing work group, 2- the EPFL database of time-delay
+    strong lenses which currently contains all known lensed quasars in addition to a number
+    of candidates found at EPFL. This database will contain at least the following: 1- all
+    known lenses, at galaxy, group, and cluster scales (along with the arcs within clusters),
+    2- positional and redshift information, 3- a classification statement, 4- the method(s)
+    used to find them, 5- lens models either from the literature or linked to the LSST modeling
+    effort, 6- deblending of the lens and source with improved photometry linked to the photo-z
+    group, 7- a catalogue of false positive in view of retraining of neural networks for improved
+    efficiency of the lens finding in LSST, 8- a catalogue of lensed transients. For each
+    object the database will query dynamically all available ancillary public data including
+    SDSS, DES, KiDS, HSC, PanSTARRS, CFIS, in addition to the MAST database and ESAsky database.
+    A query to the literature will also be included. All interactions with the database will
+    be done through APIs written, when needed, in collaboration with other DESC and SLSC infrastructures.
+    The PI’s group has the general policy to produce exclusively open source codes. In fact,
+    collaborative development with other groups working in LSST is something we would welcome.
+    The database shall be updated by any registered member with a minimum effort, for example
+    by uploading .csv files with minimum information or by editing specific fields for specific
+    lenses. EPFL will act as a moderator to make sure that only reliable entries are actually
+    recorded. This will be a long-term maintenance effort over the whole duration of the survey.
+    Specific effort will be devoted to enabling LSST strong lensing science. Links between
+    the database and the modeling tools in the consortium will be made. This is also true
+    for the deblending and photo-z works. Note that EPFL is currently designing new modeling
+    tools based on sparse regularization with wavelets and leading to improved lens/source
+    deblending as well as to exquisite source reconstruction on any grid of arbitrarily small
+    pixels. These tools will be used to feed the database with source reconstruction and source/lens
+    separation. The codes are already freely available as a lenstromy module, SLITromomy.
+    We will work along these lines for any work done in the context of the present proposal.
+    This contribution has been endorsed by the Strong Lensing Science Collaboration and the
+    Dark Energy Strong Lensing Science Collaboration.'
+  submitted: false
+  email: null
+  submitter_name: null
+  target_audience: null
+  software_name: null
+  version: null
+  software_url: null
+  documentation: null
+  verification_testing: null
+  sharing_of_software: null
+  publications: null
+  acknowledgements: null
+  support: null
+  maintenance_plan: null
+  maintenance_notes: null
+  further_development: null
+  other_feedback: null
+  uat_category: null
+  uat_concepts: null
+  associated_dataset: null
+curated:
+  uat_keywords:
+  - Active galactic nuclei
+  - Astroinformatics
+  - Galaxy clusters
+  - Gravitational lensing
+  - Photometric redshift
+  - Strong gravitational lensing
+  - Time domain astronomy
+  - Transient detection
+  summary: null
+  status_override: null
+  related_contribution_ids: []
