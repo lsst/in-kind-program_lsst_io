@@ -36,6 +36,44 @@ form_data:
     Brazilian team at Linea, who is submitting a separated in-kind request), the space-resolved
     star-formation history of nearby galaxies, etc. This is a non-directable in-kind contribution
     endorsed by the SMWLV Collaboration. S25'
+  timeline: 'FY18: Dr. Léo Girardi (staff, 0.1 FTE), Dr. Giada Pastorelli (graduate student,
+    0.2 FTE), Dr. Piero Dal Tio (graduate student, 0.2 FTE), Dr. Michele Trabucchi (postdoc,
+    0.2 FTE), Dr. Yang Chen (postdoc, 0.1 FTE), Dr. Simone Zaggia (staff, 0.05 FTE), Dr. Yazan
+    Momany (staff, 0.05 FTE)FY19: Dr. Léo Girardi (staff, 0.2 FTE), Dr. Giada Pastorelli (postdoc,
+    0.2 FTE), Dr. Piero Dal Tio (graduate student, 0.3 FTE), Dr. Michele Trabucchi (postdoc,
+    0.2 FTE) Dr. Yang Chen (postdoc, 0.1 FTE), Dr. Simone Zaggia (staff, 0.05 FTE), Dr. Yazan
+    Momany (staff, 0.05 FTE)FY20: Dr. Léo Girardi (staff, 0.2 FTE), Dr. Giada Pastorelli (postdoc,
+    0.1 FTE), Dr. Piero Dal Tio (graduate student, 0.3 FTE), Dr. Michele Trabucchi (postdoc,
+    0.2 FTE), Dr. Simone Zaggia (staff, 0.05 FTE), Dr. Yazan Momany (staff, 0.05 FTE), Dr.
+    Alessandro Mazzi (graduate student, 0.1 FTE)FY21: Dr. Léo Girardi (staff, 0.2 FTE), Dr.
+    Simone Zaggia (staff, 0.2 FTE), Yazan Momany (staff, 0.2 FTE), Dr. Alessandro Mazzi (graduate
+    student, 0.1 FTE)Milestone 1 (early-2021): ensuring the best usage of present simulations
+    on MAF. This is ongoing work, in the context of the Cadence Notes from the SMWLV Science
+    Collaboration.Milestone 2 (mid-2021): To complete the installation of the 1st complete
+    simulation in NOIR Data Lab together with a minimal set of jupyter notebooks (e.g. star
+    counts and distributions of intrinsic stellar parameters for different color-magnitude
+    cuts). The exact data of release depends on the interaction with NOIR Data Lab staff.FY22:
+    New hire (postdoc, 0.75 FTE), Dr. Léo Girardi (staff, 0.2 FTE), Dr. Simone Zaggia (staff,
+    0.2 FTE), Yazan Momany (staff, 0.2 FTE)FY23: New hire (postdoc, 0.75 FTE), Dr. Léo Girardi
+    (staff, 0.2 FTE), Dr. Simone Zaggia (staff, 0.2 FTE), Yazan Momany (staff, 0.2 FTE)Milestone
+    3 (early-2023): Release of the second simulation, now with detailed binary parameters
+    (including eclipses), basic variability parameters (dominant modes, periods), and an extended
+    set of jupyter notebooks.FY24: Dr. Léo Girardi (staff, 0.2 FTE), Dr. Simone Zaggia (staff,
+    0.2 FTE), Yazan Momany (staff, 0.2 FTE)Milestone 4 (mid-2024): Release of the third simulation,
+    ensuring a better match to star counts from Gaia latest (or last) data release.FY25: Dr.
+    Léo Girardi (staff, 0.2 FTE), Dr. Simone Zaggia (staff, 0.2 FTE), Yazan Momany (staff,
+    0.2 FTE)Milestone 5 (late-2025): Release of the fourth simulation, with added light curves
+    and a careful check of basic predictions with first LSST data, plus jupyter notebooks
+    to facilitate LSST data-model comparisons.FY26-FY35: potential continued contribution
+    of development effort.We recall that each one of these milestones will involve a number
+    of small simulations being done in our computers in Padova, and checked against basic
+    data from Gaia and a variety of other public surveys. While Leo Girardi, Alessandro Mazzi
+    and the new postdoc will concentrate on developing and scaling up the software, Simone
+    Zaggia and Yazan Momany, with their decennial experience in wide-area and multi-epoch
+    photometric surveys of the Local Group, will be checking the results of these small-scale
+    simulations (and contributing to the library of jupyter notebooks), especially in the
+    periods immediately before their release.The contribution lead, Leo Girardi, will act
+    as the main point of contact to the recipient group throughout the course of the contribution,'
   submitted: false
   email: null
   submitter_name: null

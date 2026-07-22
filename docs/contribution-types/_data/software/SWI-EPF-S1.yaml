@@ -38,6 +38,27 @@ form_data:
     We will work along these lines for any work done in the context of the present proposal.
     This contribution has been endorsed by the Strong Lensing Science Collaboration and the
     Dark Energy Strong Lensing Science Collaboration.'
+  timeline: 'The plan below is only tentative, but provides a global idea of the expected
+    progress. All proposed tasks correspond to new or updates freely available APIs. FY22:
+    Cameron Lemon (postdoc, 0.2 FTE), G. Vernardos (postdoc, 0.2 FTE) + supporting effort
+    from the PI In this initial phase the database would contain the basic information for
+    galaxy-scale lenses, such as position, grade, redshift information, if available, and
+    methods used to find or re-discover any given lens or candidate. Work should be done in
+    direct collaboration with LSST working groups to ensure formatting is compatible with
+    needs. FY23: Cameron Lemon (postdoc, 0.1 FTE), G. Vernardos (postdoc, 0.1 FTE) +supporting
+    effort from the PI In this phase the goal is to ingest further information in the database
+    for galaxy-scale lenses: ancillary data fetched from other databases and basic lens models.
+    Link to the complete literature for all objects.FY24: Cameron Lemon (postdoc, 0.1 FTE)
+    + 0.1 FTE from another postdoc (TBD) + supporting effort from the PI Start to include
+    time dimension, more evolved lens models, link to ESAsky, start to make the LSST and Euclid
+    data models compatible and ready to be merged at some point when decided by the two consortia.
+    Include lensing by clusters and arcs, arclets grouped by image and counter-image.FY25-FY35:
+    0.1 FTE per year for postdocs to maintain, document, update the database and increase
+    LSST strong lensing science. At this stage the database is assumed to include all known
+    galaxy-scale lenses and all false positives. False positives should ideally be classified
+    in subclasses, e.g. spirals, ring-galaxies, mergers, etc… Work on deblending and interaction
+    with photo-z group for refined determination of photo-z for lens and source. Include more
+    extensive lens models, including error bars on lens parameters.'
   submitted: false
   email: null
   submitter_name: null

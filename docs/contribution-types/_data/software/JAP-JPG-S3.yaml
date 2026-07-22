@@ -32,6 +32,11 @@ form_data:
     data products from HSC-SSP and the upcoming PFS survey in neighboring systems in NAOJ,
     we would discuss an efficient way to provide access to those products for synergistic
     work combining those data sets with LSST data.
+  timeline: 'If selected, the timeline of resource assignment is as follows: FY22-25: a 0.5
+    FTE of software professional, responsible for operation and development of RSP in coordination
+    with Rubin Community Engagement team and other related personnel. FY23-35: a 0.5 FTE of
+    instrument scientist for user support and software deployment of RSP in coordination with
+    Rubin Community Engagement team and other related personnel.'
   submitted: false
   email: null
   submitter_name: null

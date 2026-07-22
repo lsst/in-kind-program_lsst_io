@@ -6,7 +6,10 @@ Two inputs:
                      columns: Country, Institute, ID, Contribution Title,
                      Scraped Recipient Group, SOW, Timeline, Category,
                      Recipient Group(s), Primary Recipient Group,
-                     Activity Description)
+                     Activity Description). Timeline is a free-text
+                     FTE-by-fiscal-year narrative, not a clean date -- it's
+                     carried through as-is and the page derives a rough
+                     "first FY mentioned" indicator from it.
   --form-responses  the "In-kind Contribution Resources" Google Form export,
                      shared with the Datasets page's intake. Only rows whose
                      "Contribution deliverable type" is Software are used
@@ -131,6 +134,10 @@ def load_contributions(path):
             "primary_recipient_group": primary,
             "additional_recipient_groups": additional,
             "activity_description": normalize_ws(row[10]),
+            # Free-text FTE-by-fiscal-year narrative, not a clean date --
+            # the page derives a rough "first FY mentioned" indicator from
+            # this, see conf.py's _approx_start_fy().
+            "timeline": normalize_ws(row[6]),
         }
     return records
 
@@ -276,6 +283,7 @@ def default_form_data(row):
         "primary_recipient_group": row["primary_recipient_group"],
         "additional_recipient_groups": row["additional_recipient_groups"],
         "activity_description": row["activity_description"],
+        "timeline": row["timeline"],
         "submitted": False,
         "email": None,
         "submitter_name": None,

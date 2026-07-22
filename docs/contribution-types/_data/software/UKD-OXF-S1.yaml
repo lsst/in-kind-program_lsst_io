@@ -31,6 +31,10 @@ form_data:
     development and validation of these software packages will require access to HPC facilities.
     The resources available at the Oxford Astrophysics Small Research Facility (to which we
     have unrestricted access), as well as access to NERSC should be sufficient for this work.'
+  timeline: 'FY15-FY20: David Alonso (1 FTE)[1]FY21: Carlos Garcia (Beecroft fellow, 0.5 FTE)FY22:
+    Carlos Garcia (Beecroft fellow, 0.5 FTE)FY23: New hire (postdoc/software engineer, 0.5
+    FTE)FY24: New hire (postdoc/software engineer, 0.5 FTE)FY25-FY35: potential continued
+    contribution of development effort.'
   submitted: false
   email: null
   submitter_name: null

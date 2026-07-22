@@ -20,6 +20,12 @@ form_data:
     UV light curves will be connected with LSST events (either transients or static sources
     - e.g., for stellar flares). This will allow curators of LSST data to add the public ULTRASAT
     light curves to the aggregated information about these LSST sources.
+  timeline: 'Proposed timeline is appended below: December 2025 - begin technical discussions
+    between ULTRASAT and LSST alert teams June 2026 - finalize discussions and produce a document
+    with agreed protocols June 2026 - set a test machine at Weizmann (ULTRASAT Data center)
+    to undertake communication tests During 2027 - conduct tests using incoming LSST test
+    alert stream; develop algorithm and routines to associate ULTRASAT UV light curves with
+    LSST sources prior to release.'
   submitted: false
   email: null
   submitter_name: null
