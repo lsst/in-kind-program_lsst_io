@@ -97,7 +97,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </table>
 
       <script>
-      (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        // Deferred to DOMContentLoaded: this script tag renders above the
+        // `.. grid::` block below, which is where the cards (and their
+        // Show more/Show less buttons) actually live in the page source.
+        // An inline <script> runs the instant the parser reaches it, so
+        // querying for card elements here immediately (rather than after
+        // the whole page has parsed) would always find zero of them --
+        // that's why the expand button did nothing.
         var SEARCH_INDEX = {{ search_index_json }};
         var CID_RE = /cid-([a-z0-9-]+)/;
 
@@ -183,7 +190,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             rows.forEach(function (r) { tbody.appendChild(r); });
           });
         });
-      })();
+      });
       </script>
 
    .. grid:: 1 1 2 2
