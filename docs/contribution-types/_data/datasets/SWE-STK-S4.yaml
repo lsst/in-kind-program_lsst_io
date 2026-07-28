@@ -30,6 +30,13 @@ form_data:
   maintenance_notes: DR2.5 will resolve photometry issues at the 1% level in DR2, and DR3
     wil add data through 2025, reaching 10000 SNIa.
   final_report: The final delivery was reported in the annual report for 2025.
+  email: ariel@fysik.su.se
+  name: Ariel Goobar
+  target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
+  contribution_summary: Cosmology grade sample of z<0.1 Type Ia supernova lighcturves and
+    spectra provide the necessary low-redshift sample to anchor the LSST SNIa Hubble diagram
+    in order to study the equation of state of dark energy.
+  version: ZTF DR2
   uat_category:
   - Cosmology
   - Galactic and extragalactic astronomy

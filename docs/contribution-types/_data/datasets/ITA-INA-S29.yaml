@@ -51,6 +51,35 @@ form_data:
     DR5: planned for the first half of 2027 will release the full dataset, catalogs and lightcurves
     of all fields.'
   final_report: N/A
+  email: maurizio.paolillo@unina.it
+  name: Maurizio Paolillo
+  target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
+  contribution_summary: 'The TIMEDOMES project aims at producing a legacy dataset of images,
+    catalogs and lightcurves over 4 of the LSST Deep Drilling Fields (COSMOS, CDF-S, XMM-LSS,
+    ELAIS-S1) using the VST telescope, doubling the temporal baseline that will be covered
+    by the Vera Rubin observatory over the next decade and down to similar single-epoch depths
+    in at least 2 bands. The team started to collect and homogenise all archival VST observations;
+    in parallel it obtained GO and GTO VST time to target pre-exhisting (COSMOS, CDF-S) and
+    new (ELAIS-S1, XMM-LSS) DDFs. This effort benefitted from time allocated within other
+    ongoing surveys (e.g. VEGAS, VSTxSKA), as well as on dedicated time allocated by INAF
+    once VST became an entirely italian facility (late 2022). TIMEDOMES aims at: 1) anticipating
+    the performance expected by the future LSST survey, extending the VST monitoring campaign
+    to the same ﬁnal temporal baseline, in some of the regions of the sky with the best multiwavelength
+    ancillary coverage; 2) studying the eﬀectiveness of AGN variability selection, in order
+    to verify what fraction of X-ray/IR/spectroscopically selected AGN will be discovered
+    by LSST, and compute the corresponding selection corrections; 3) improving the identiﬁcation
+    of low-luminosity and Type-2 AGN, which are aﬀected by a lower selection eﬃciency, and
+    understand if this is due to intrinsic properties of these source and if it can be improved
+    by longer baselines and the use of Machine Learning methods; 4) better probing the faint
+    end of the AGN LF (r>22 mag) where the lower contrast of the AGN w.r.t. the host-galaxy
+    requires the larger variability expected on longer timescales for a robust detection;
+    5) identifying rare/peculiar AGN candidates that are not selected by complementary methods
+    and study their properties through archival data and dedicated follow-ups; studying the
+    much-debated link between variability and intrinsic AGN properties (BH mass, accretion
+    rate) which requires long baselines to be properly measured. A number of additional science
+    cases can be envisioned ranging from cosmological studies with the deep stacks to the
+    detection of all sort of transient and variable sources other than AGN.'
+  version: Data Release 2
   uat_category:
   - Cosmology
   - Galactic and extragalactic astronomy

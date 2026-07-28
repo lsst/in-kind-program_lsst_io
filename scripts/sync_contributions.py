@@ -264,13 +264,22 @@ DATASET_FIELD_MAP = {
 }
 LIST_VALUED_DATASET_FIELDS = {"data_type", "access_mechanisms"}
 
-# A direct Datasets-branch submission also answers Section 5 (UAT) for
-# itself, since there's no separate Software record to hold it -- an
-# associated_dataset drafted from a *Software* submission deliberately
-# omits these two, since that submission's own top-level uat_category/
-# uat_concepts already describe the whole contribution. See
+# A direct Datasets-branch submission also answers Section 1 (common
+# fields: email, name, target audience, summary, version) and Section 5
+# (UAT) for itself, since there's no separate Software record to hold
+# them -- an associated_dataset drafted from a *Software* submission
+# deliberately omits all of these, since that submission's own top-level
+# form_data already carries them for the whole contribution. See
 # build_dataset_form_data() vs. build_associated_dataset() below.
-DIRECT_DATASET_EXTRA_FIELD_MAP = {"uat_category": "uat_category", "uat_concepts": "uat_concepts"}
+DIRECT_DATASET_EXTRA_FIELD_MAP = {
+    "email": "email",
+    "submitter_name": "name",
+    "target_audience": "target_audience",
+    "contribution_summary": "contribution_summary",
+    "version": "version",
+    "uat_category": "uat_category",
+    "uat_concepts": "uat_concepts",
+}
 DIRECT_DATASET_LIST_FIELDS = LIST_VALUED_DATASET_FIELDS | {"uat_category"}
 
 
