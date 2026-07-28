@@ -1,41 +1,103 @@
 contribution_id: ITA-INA-S29
-title: "Toward next-generation time-domain surveys (TIMEDOMES): VST monitoring of the LSST Deep Drilling Fields"
+title: 'Toward next-generation time-domain surveys (TIMEDOMES): VST monitoring of the LSST
+  Deep Drilling Fields'
 country: Italy
 institute: INAF
 
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
-  submitted: false
-  email: null
-  name: null
-  target_audience: null
-  contribution_summary: null
-  version: null
-  data_type: [Imaging / Cutouts, Value-Added Catalogs, Time-Series / Lightcurves]  # backfilled guess
-  data_volume: null
-  data_schema_link: null
-  hosting_location: null
-  access_url: null
-  access_mechanisms: []
-  authentication: null
-  generation_methods: null
-  validation_limitations: null
-  tutorials_docs: null
-  support_channel: null
-  citation: null
-  maintenance_plan: null
-  maintenance_notes: null
-  final_report: null
-  uat_category: [High energy astrophysics]  # backfilled guess -- primary recipient is the AGN Science Collaboration
-  uat_concepts: null
+  submitted: true
+  data_type:
+  - Value-Added Catalogs
+  - Time-Series / Lightcurves
+  - Imaging / Cutouts
+  - Diagnostic plots and recipes to personalise the extracted data
+  data_volume: 550 GB
+  data_schema_link: https://docs.google.com/document/d/1X4idB7uv9xptCg6Q9f3XUla0dWfakTo9qh3YJxCZbtE/edit?usp=sharing
+  hosting_location: University of Naples Ad-Hoc data center. A second copy on personal NAS
+    for small data retrieval needs.
+  access_url: https://sites.google.com/view/timedomes/data-releases?authuser=0
+  access_mechanisms:
+  - Direct File Download (HTTP/FTP)
+  - The access through the Ad-Hoc data center require to obtain VPN access first as explained
+    at the provided link
+  authentication: Requires specific institutional or IDAC Login
+  generation_methods: 'The data are reduced through the AstroWise pipeline for VST data reduction.
+    Catalogs are produced through SExtractor, while masks lightcurves and diagnostic plots
+    are produced through dedicated IDL/python software developed in-house. All information
+    are at: https://sites.google.com/view/timedomes/data?authuser=0'
+  validation_limitations: 'Sungle epoch catalogs reach r~23.5 mag. Single-epoch catalogs are
+    cross-calibrated to a specific epoch requiring an average rms<0.05 mag for sources between
+    r=16-21. Cross-calibration with LSST DP1/DP2 is under way. Limitations are mostly in the
+    non-homogeneous area coverage due to past archival data and large temporal gaps. All this
+    is shown clearly at: https://sites.google.com/view/timedomes/data?authuser=0'
+  tutorials_docs: Jupiter Notbooks for DP1 cross-calibration and light curve extraction are
+    being developed, although these were not part of the agreed data product.
+  support_channel: Email maurizio.paolillo@unina.it or tag M.Paolillo on Community.lsst.org
+    or SLAC channels.
+  citation: '"This work made use of the data provided by the TIMEDOMES project, an Italian
+    in-kind contribution to the LSST community." A series of papers presenting the project
+    are in preparation. For the time being users can cite the works n. 1 and 5 in the publication
+    list for Cosmos and CDFS data respectively, in addition to any other that is relevant
+    to their specific project. The publication list can be found here: https://sites.google.com/view/timedomes/publications?authuser=0'
+  maintenance_plan: Discrete future Data Releases (e.g. DR2)
+  maintenance_notes: 'DR2: has been released in March 2026. It contains reduced images acquired
+    over the first 11 years (2011-2022) of the Cosmos and CDF-S fields. It also contains masks
+    and source catalogs for the all Cosmos observations of the first 3 years (2011-2013) as
+    well as lightcurves (README). DR3: to be released in summer 2026, will extend the Cosmos
+    data products and lightcurves to the first 11 years (2011-2022), as well as include masks,
+    catalogs and lightcurves for the CDF-S fields up to 2016. DR4: planned for the end of
+    2026, will extend the data release to the new TIMEDOMES data including ELAIS-S1 and XMM-LSS.
+    DR5: planned for the first half of 2027 will release the full dataset, catalogs and lightcurves
+    of all fields.'
+  final_report: N/A
+  email: maurizio.paolillo@unina.it
+  name: Maurizio Paolillo
+  target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
+  contribution_summary: 'The TIMEDOMES project aims at producing a legacy dataset of images,
+    catalogs and lightcurves over 4 of the LSST Deep Drilling Fields (COSMOS, CDF-S, XMM-LSS,
+    ELAIS-S1) using the VST telescope, doubling the temporal baseline that will be covered
+    by the Vera Rubin observatory over the next decade and down to similar single-epoch depths
+    in at least 2 bands. The team started to collect and homogenise all archival VST observations;
+    in parallel it obtained GO and GTO VST time to target pre-exhisting (COSMOS, CDF-S) and
+    new (ELAIS-S1, XMM-LSS) DDFs. This effort benefitted from time allocated within other
+    ongoing surveys (e.g. VEGAS, VSTxSKA), as well as on dedicated time allocated by INAF
+    once VST became an entirely italian facility (late 2022). TIMEDOMES aims at: 1) anticipating
+    the performance expected by the future LSST survey, extending the VST monitoring campaign
+    to the same ﬁnal temporal baseline, in some of the regions of the sky with the best multiwavelength
+    ancillary coverage; 2) studying the eﬀectiveness of AGN variability selection, in order
+    to verify what fraction of X-ray/IR/spectroscopically selected AGN will be discovered
+    by LSST, and compute the corresponding selection corrections; 3) improving the identiﬁcation
+    of low-luminosity and Type-2 AGN, which are aﬀected by a lower selection eﬃciency, and
+    understand if this is due to intrinsic properties of these source and if it can be improved
+    by longer baselines and the use of Machine Learning methods; 4) better probing the faint
+    end of the AGN LF (r>22 mag) where the lower contrast of the AGN w.r.t. the host-galaxy
+    requires the larger variability expected on longer timescales for a robust detection;
+    5) identifying rare/peculiar AGN candidates that are not selected by complementary methods
+    and study their properties through archival data and dedicated follow-ups; studying the
+    much-debated link between variability and intrinsic AGN properties (BH mass, accretion
+    rate) which requires long baselines to be properly measured. A number of additional science
+    cases can be envisioned ranging from cosmological studies with the deep stacks to the
+    detection of all sort of transient and variable sources other than AGN.'
+  version: Data Release 2
+  uat_category:
+  - Cosmology
+  - Galactic and extragalactic astronomy
+  - High energy astrophysics
+  - Observational astronomy
+  uat_concepts: Active galaxies (17), Quasar (1319), Light curves (918), Galaxy photometry
+    (611), Ground telescopes (687)
 
+# --- fields only a human edits; the pull script never touches these ---
 curated:
   primary_recipient: LSST AGN Science Collaboration
   target_audience: null
-  summary: >
-    We propose to use 170 hours/year of VST time to execute a precursor
-    survey with VST, to complement and extend in time the LSST dataset on
-    4 DDF, and to combine these observations with all archival data to
-    deliver reduced images, catalogs and lightcurves lasting up to >10
-    years to the US/Chilean communities.
-  wavelength_regime: [Optical]
+  summary: 'We propose to use 170 hours/year of VST time to execute a precursor survey with
+    VST, to complement and extend in time the LSST dataset on 4 DDF, and to combine these
+    observations with all archival data to deliver reduced images, catalogs and lightcurves
+    lasting up to >10 years to the US/Chilean communities.
+
+    '
+  wavelength_regime:
+  - Optical
   status_override: null

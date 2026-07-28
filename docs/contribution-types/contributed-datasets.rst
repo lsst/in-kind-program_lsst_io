@@ -201,7 +201,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
 
-          **Target audience:** {{ ds.curated.target_audience or 'TBD' }}
+          **Target audience:** {{ ds.curated.target_audience or ds.form_data.target_audience or 'TBD' }}
 
           {{ ds.curated.summary or 'TBD' }}
 

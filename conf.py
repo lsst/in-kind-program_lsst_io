@@ -31,6 +31,13 @@ linkcheck_ignore = [
     # reachable site that browsers tolerate but Python's ssl module
     # rejects with CERTIFICATE_VERIFY_FAILED in CI.
     r'https://ser-sag\.pmf\.kg\.ac\.rs.*',
+    # zenodo.org (DOI/schema/documentation links on SER-SAG-S1's Software
+    # and Datasets cards) repeatedly times out under CI's 15s linkcheck
+    # timeout -- the records themselves resolve fine in a browser, Zenodo
+    # is just slow to respond often enough to make CI flaky rather than
+    # reliably broken.
+    r'https://zenodo\.org/.*',
+    r'https://doi\.org/10\.5281/zenodo\..*',
 ]
 
 
@@ -39,10 +46,11 @@ linkcheck_ignore = [
 #
 # Each dataset record lives as a YAML file in
 # docs/contribution-types/_data/datasets/<contribution-id>.yaml, split into
-# a `form_data` section (owned by the CSV pull script; safe to overwrite)
-# and a `curated` section (hand-edited only; the pull script never touches
-# it). This loader reads all records, resolves each one's display status,
-# and exposes them to the contributed-datasets.rst page via sphinx_jinja.
+# a `form_data` section (owned by scripts/sync_contributions.py; safe to
+# overwrite) and a `curated` section (hand-edited only; the sync script
+# never touches it). This loader reads all records, resolves each one's
+# display status, and exposes them to the contributed-datasets.rst page via
+# sphinx_jinja.
 # ============================================================================
 
 def _slugify(value):
@@ -562,9 +570,10 @@ jinja_contexts["contributed_opportunities"]["cid_to_slugs"] = (
 #
 # Each software-contribution record lives as a YAML file in
 # docs/contribution-types/_data/software/<contribution-id>.yaml, split into
-# a `form_data` section (owned by scripts/sync_software_contributions.py;
-# safe to overwrite) and a `curated` section (hand-edited only; the sync
-# script never touches it) -- same split as the Contributed Datasets page.
+# a `form_data` section (owned by scripts/sync_contributions.py; safe to
+# overwrite) and a `curated` section (hand-edited only; the sync script
+# never touches it) -- same split as the Contributed Datasets page. Both
+# pages are synced by the same script; see its module docstring.
 # General Pool contributions are not part of this dataset at all (they have
 # their own page); every record here is Directable or Non-directable.
 # ============================================================================
