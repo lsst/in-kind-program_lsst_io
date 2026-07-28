@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
 """Sync docs/contribution-types/_data/{software,datasets}/*.yaml from source CSVs.
 
-One script, two card types, both driven by the same two inputs:
+One script, two card types.
 
-  --contributions   the proposal-spreadsheet export (one row per contribution;
-                     columns: Country, Institute, ID, Contribution Title,
-                     Scraped Recipient Group, SOW, Timeline, Category,
-                     Recipient Group(s), Primary Recipient Group,
-                     Activity Description). Timeline is a free-text
-                     FTE-by-fiscal-year narrative, not a clean date -- it's
-                     carried through as-is and the Software page derives a
-                     rough "first FY mentioned" indicator from it. Covers
-                     both Software and Datasets contributions (General Pool,
-                     category "4.1", is the only category skipped -- it has
-                     its own page).
-  --form-responses  the "In-kind Contribution Resources" Google Form export.
-                     Each row's "Contribution deliverable type" answer routes
-                     it to one of three places:
+  --form-responses  REQUIRED in practice. The "In-kind Contribution
+                     Resources" Google Form export. This is the ongoing,
+                     day-to-day input -- every time a team submits (or
+                     edits) their closing-form response, re-export this
+                     sheet and re-run the script. Each row's "Contribution
+                     deliverable type" answer routes it to one of three
+                     places:
                        - "Software"  -> docs/.../_data/software/<id>.yaml
                        - "Datasets"  -> docs/.../_data/datasets/<id>.yaml
                        - a Software row that also answers "Yes" to data
@@ -24,16 +17,35 @@ One script, two card types, both driven by the same two inputs:
                          if no direct Datasets record exists yet for that ID,
                          a draft Datasets card is written too (flagged
                          needs_review) -- e.g. SER-SAG-S1.
+  --contributions   OPTIONAL, rare. The proposal-spreadsheet export (one row
+                     per contribution; columns: Country, Institute, ID,
+                     Contribution Title, Scraped Recipient Group, SOW,
+                     Timeline, Category, Recipient Group(s), Primary
+                     Recipient Group, Activity Description). This was a
+                     one-off used to bulk-populate the initial set of
+                     software cards (with a "pending" placeholder for every
+                     proposed contribution, submitted or not) and isn't
+                     expected to be re-pulled going forward. If you do
+                     supply it, it's only used to fill in identity fields
+                     (title/country/institute/category/recipient/timeline)
+                     for a contribution ID when a form response doesn't
+                     already have a card on disk for that ID.
+
+Without --contributions, a contribution (software or dataset) only gets a
+card once its closing form response actually arrives -- there's no more
+automatic "pending" placeholder for a newly proposed contribution. If you
+want one to show up as pending before it's submitted, hand-create a bare
+YAML file for it first (title/country/institute only, `submitted: false`),
+the same way the original 16 dataset cards were backfilled -- the sync
+script will then update that file in place once a response comes in.
 
 Both card types split their YAML into a `form_data` section (owned by this
 script; regenerated from the CSVs every run) and a `curated` section
 (hand-edited only; this script writes it once on first creation and never
-touches it again). Title/country/institute on an *existing* Datasets record
-are likewise treated as protected once set -- they were largely hand-set
-during the original page backfill and shouldn't get silently overwritten by
-a spreadsheet re-export. Software records don't get this protection; their
-title/country/institute are considered spreadsheet-owned, matching how this
-script worked before Datasets support was added.
+touches it again). Title/country/institute on an *existing* record are
+treated as protected once set (Datasets always; Software too, now that
+identity mostly comes from the form rather than a re-pulled spreadsheet)
+-- only assigned when a card is first created, never overwritten after.
 
 Review gate: this script never silently overwrites an *existing* card's
 form_data. Whenever a CSV re-read would change something on a record that's
@@ -105,7 +117,7 @@ TEXT_KEYWORDS = {
 
 
 def guess_uat_keywords(title, description, primary_recipient):
-    text = f"{title} {description}".lower()
+    text = f"{title or ''} {description or ''}".lower()
     pr = (primary_recipient or "").lower()
     tags = set()
     for key, vals in RECIPIENT_KEYWORDS.items():
@@ -136,8 +148,11 @@ def split_list(value):
 
 # --- read the proposal-spreadsheet CSV ----------------------------------
 # Covers both Software and Datasets contributions (General Pool is skipped).
+# Optional -- see module docstring. Returns {} if no path is given.
 
 def load_contributions(path):
+    if path is None:
+        return {}
     with open(path, newline="", encoding="utf-8") as f:
         rows = list(csv.reader(f))
     header = rows[2]
@@ -379,13 +394,28 @@ def review_update(cid, title, changed_fields, old_data, new_data, state):
 
 # --- YAML record assembly ------------------------------------------------
 
-def default_software_form_data(row):
+SPREADSHEET_ONLY_FIELDS = (
+    "category", "primary_recipient_group", "additional_recipient_groups",
+    "activity_description", "timeline",
+)
+
+
+def default_software_form_data(contrib, existing_form_data=None):
+    """contrib is the matching row from the (optional) --contributions
+    spreadsheet, or None if there isn't one -- e.g. every ongoing run now
+    that the spreadsheet isn't being re-pulled. The form itself never
+    supplies category/recipient-group/activity-description/timeline, so
+    without a spreadsheet row this run, those fields fall back to whatever
+    is already on disk (existing_form_data) rather than being blanked out."""
+    contrib = contrib or {}
+    existing_form_data = existing_form_data or {}
+    spreadsheet_source = contrib if contrib else existing_form_data
     return {
-        "category": row["category"],
-        "primary_recipient_group": row["primary_recipient_group"],
-        "additional_recipient_groups": row["additional_recipient_groups"],
-        "activity_description": row["activity_description"],
-        "timeline": row["timeline"],
+        "category": spreadsheet_source.get("category"),
+        "primary_recipient_group": spreadsheet_source.get("primary_recipient_group"),
+        "additional_recipient_groups": spreadsheet_source.get("additional_recipient_groups") or [],
+        "activity_description": spreadsheet_source.get("activity_description"),
+        "timeline": spreadsheet_source.get("timeline"),
         "submitted": False,
         "email": None,
         "submitter_name": None,
@@ -430,6 +460,15 @@ def write_dataset_yaml(path, data):
 
 
 # --- software sync --------------------------------------------------------
+# Driven by the union of (a) --contributions rows with a known software
+# category code, if that optional spreadsheet was supplied, and (b) every
+# ID with a Software-branch form response. (a) is the rare bulk/one-off
+# path (still creates a "pending" placeholder for a contribution with no
+# response yet); (b) is the ongoing day-to-day path -- a contribution with
+# no spreadsheet row still gets synced, just with incomplete identity
+# fields (title falls back to the form's own name field; country/institute/
+# category/timeline/activity_description are left blank) and flagged
+# needs_review so the coordinator can fill them in by hand.
 
 def sync_software(contributions, software_responses, review_state):
     SOFTWARE_DIR.mkdir(parents=True, exist_ok=True)
@@ -439,16 +478,25 @@ def sync_software(contributions, software_responses, review_state):
 
     created, updated, skipped, unchanged, drafts_written = [], [], [], [], []
 
-    for cid, row in sorted(contributions.items()):
-        # The spreadsheet also carries Datasets-category rows (Steve
-        # confirmed both live in the same export) -- only known software
-        # category codes get a software placeholder/record here. A
-        # Datasets-category row is only ever handled by sync_datasets(),
-        # via either a direct form response or (once one exists) the
-        # protected-title update path.
-        if row.get("category_code") not in CATEGORY_LABELS:
-            continue
-        form_data = default_software_form_data(row)
+    # The spreadsheet also carries Datasets-category rows (Steve confirmed
+    # both live in the same export) -- only known software category codes
+    # are eligible here. A Datasets-category row is only ever handled by
+    # sync_datasets().
+    software_cids_from_sheet = {
+        cid for cid, row in contributions.items() if row.get("category_code") in CATEGORY_LABELS
+    }
+    all_cids = sorted(software_cids_from_sheet | set(software_responses))
+
+    for cid in all_cids:
+        contrib = contributions.get(cid) if cid in software_cids_from_sheet else None
+
+        out_path = SOFTWARE_DIR / f"{cid}.yaml"
+        existing = None
+        if out_path.exists():
+            with out_path.open(encoding="utf-8") as f:
+                existing = yaml.safe_load(f) or {}
+
+        form_data = default_software_form_data(contrib, existing.get("form_data") if existing else None)
         response = software_responses.get(cid)
         if response:
             merge_form_response(form_data, response)
@@ -459,54 +507,61 @@ def sync_software(contributions, software_responses, review_state):
         if cid in dataset_titles or cid in telescope_titles or will_draft_dataset:
             related.append(cid)
 
-        out_path = SOFTWARE_DIR / f"{cid}.yaml"
-        existing = None
-        if out_path.exists():
-            with out_path.open(encoding="utf-8") as f:
-                existing = yaml.safe_load(f) or {}
+        # Identity fields (title/country/institute) are set once at
+        # creation and protected after that -- from the spreadsheet if
+        # available, else a fallback derived from the form response.
+        title_fallback = normalize_ws(response.get("software_name")) if response else None
+        if contrib:
+            title = contrib["title"]
+            country, institute = contrib["country"], contrib["institute"]
+        elif existing:
+            title = existing.get("title") or title_fallback or cid
+            country, institute = existing.get("country"), existing.get("institute")
+        else:
+            title = title_fallback or cid
+            country = institute = None
 
         if existing:
             changed = diff_fields(existing.get("form_data"), form_data)
             if not changed:
                 unchanged.append(cid)
                 continue
-            if not review_update(cid, row["title"], changed, existing.get("form_data"), form_data, review_state):
+            if not review_update(cid, title, changed, existing.get("form_data"), form_data, review_state):
                 skipped.append(cid)
                 continue
-            record = {
-                "contribution_id": cid,
-                "title": row["title"],
-                "country": row["country"],
-                "institute": row["institute"],
-                "form_data": form_data,
-                "curated": existing.get("curated") or {
-                    "uat_keywords": guess_uat_keywords(
-                        row["title"], row["activity_description"], row["primary_recipient_group"]
-                    ),
-                    "summary": None,
-                    "status_override": None,
-                    "related_contribution_ids": related,
-                },
+            curated = existing.get("curated") or {
+                "uat_keywords": guess_uat_keywords(
+                    title, form_data.get("activity_description"), form_data.get("primary_recipient_group")
+                ),
+                "summary": None,
+                "status_override": None,
+                "related_contribution_ids": related,
             }
             updated.append((cid, changed))
         else:
-            record = {
-                "contribution_id": cid,
-                "title": row["title"],
-                "country": row["country"],
-                "institute": row["institute"],
-                "form_data": form_data,
-                "curated": {
-                    "uat_keywords": guess_uat_keywords(
-                        row["title"], row["activity_description"], row["primary_recipient_group"]
-                    ),
-                    "summary": None,
-                    "status_override": None,
-                    "related_contribution_ids": related,
-                },
+            curated = {
+                "uat_keywords": guess_uat_keywords(
+                    title, form_data.get("activity_description"), form_data.get("primary_recipient_group")
+                ),
+                "summary": None,
+                "status_override": None,
+                "related_contribution_ids": related,
             }
+            # A contribution with no spreadsheet row is missing
+            # country/institute/category and needs a human pass, same
+            # spirit as the Datasets page's needs_review flag.
+            if not contrib:
+                curated["needs_review"] = True
             created.append(cid)
 
+        record = {
+            "contribution_id": cid,
+            "title": title,
+            "country": country,
+            "institute": institute,
+            "form_data": form_data,
+            "curated": curated,
+        }
         write_yaml(out_path, record)
 
         # Auto-draft a companion Datasets record when this contribution's
@@ -516,12 +571,12 @@ def sync_software(contributions, software_responses, review_state):
             draft_path = DATASETS_DIR / f"{cid}.yaml"
             draft = {
                 "contribution_id": cid,
-                "title": f"{row['title']} (associated dataset)",
-                "country": row["country"],
-                "institute": row["institute"],
+                "title": f"{title} (associated dataset)",
+                "country": country,
+                "institute": institute,
                 "form_data": assoc,
                 "curated": {
-                    "primary_recipient": row["primary_recipient_group"],
+                    "primary_recipient": form_data.get("primary_recipient_group"),
                     "target_audience": form_data.get("target_audience"),
                     "summary": None,
                     "wavelength_regime": [],
@@ -629,16 +684,17 @@ def sync(contributions_csv, form_responses_csv, auto_yes):
         load_form_responses(form_responses_csv)
     )
 
-    unmatched_software = sorted(software_ids - set(contributions))
-    if unmatched_software:
-        print(f"WARNING: {len(unmatched_software)} Software-labeled form response(s) reference a "
-              f"Contribution ID not found in the spreadsheet (typo, or a General Pool "
-              f"contribution that's out of scope here) -- skipped: {', '.join(unmatched_software)}")
-    unmatched_datasets = sorted(dataset_ids - set(contributions))
-    if unmatched_datasets:
-        print(f"NOTE: {len(unmatched_datasets)} Datasets-labeled form response(s) aren't in the "
-              f"proposal spreadsheet -- title/country/institute for new records will come from "
-              f"the form response itself and are flagged needs_review: {', '.join(unmatched_datasets)}")
+    if contributions:
+        unmatched_software = sorted(software_ids - set(contributions))
+        if unmatched_software:
+            print(f"NOTE: {len(unmatched_software)} Software-labeled form response(s) aren't in the "
+                  f"proposal spreadsheet -- title/country/institute for new records will come from "
+                  f"the form response itself and are flagged needs_review: {', '.join(unmatched_software)}")
+        unmatched_datasets = sorted(dataset_ids - set(contributions))
+        if unmatched_datasets:
+            print(f"NOTE: {len(unmatched_datasets)} Datasets-labeled form response(s) aren't in the "
+                  f"proposal spreadsheet -- title/country/institute for new records will come from "
+                  f"the form response itself and are flagged needs_review: {', '.join(unmatched_datasets)}")
 
     review_state = ReviewState(auto_yes=auto_yes)
 
@@ -680,8 +736,17 @@ def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument("--contributions", required=True, type=Path)
-    parser.add_argument("--form-responses", type=Path, default=None)
+    parser.add_argument(
+        "--form-responses", required=True, type=Path,
+        help="The 'In-kind Contribution Resources' Google Form export CSV. "
+             "This is the input for ongoing syncs.",
+    )
+    parser.add_argument(
+        "--contributions", type=Path, default=None,
+        help="OPTIONAL. The proposal-spreadsheet export CSV -- a one-off "
+             "used to bulk-populate the initial set of cards. Not needed "
+             "for ongoing syncs; see the module docstring.",
+    )
     parser.add_argument(
         "--yes", action="store_true",
         help="Apply every change without prompting (e.g. for a first bulk sync).",
