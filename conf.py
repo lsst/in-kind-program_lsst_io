@@ -31,6 +31,13 @@ linkcheck_ignore = [
     # reachable site that browsers tolerate but Python's ssl module
     # rejects with CERTIFICATE_VERIFY_FAILED in CI.
     r'https://ser-sag\.pmf\.kg\.ac\.rs.*',
+    # zenodo.org (DOI/schema/documentation links on SER-SAG-S1's Software
+    # and Datasets cards) repeatedly times out under CI's 15s linkcheck
+    # timeout -- the records themselves resolve fine in a browser, Zenodo
+    # is just slow to respond often enough to make CI flaky rather than
+    # reliably broken.
+    r'https://zenodo\.org/.*',
+    r'https://doi\.org/10\.5281/zenodo\..*',
 ]
 
 
