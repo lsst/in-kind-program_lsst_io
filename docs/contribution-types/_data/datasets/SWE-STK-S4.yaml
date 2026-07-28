@@ -1,43 +1,52 @@
 contribution_id: SWE-STK-S4
-title: "Supernova Lightcurves and low-resolution spectra for Full-sky Low-redshift Cosmography Complementing LSST"
+title: Supernova Lightcurves and low-resolution spectra for Full-sky Low-redshift Cosmography
+  Complementing LSST
 country: Sweden
 institute: Stockholm University
 
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
-  submitted: false
-  email: null
-  name: null
-  target_audience: null
-  contribution_summary: null
-  version: null
-  data_type: [Time-Series / Lightcurves, Spectra]  # backfilled guess
-  data_volume: null
-  data_schema_link: null
-  hosting_location: null
-  access_url: null
-  access_mechanisms: []
-  authentication: null
-  generation_methods: null
-  validation_limitations: null
-  tutorials_docs: null
-  support_channel: null
-  citation: null
-  maintenance_plan: null
-  maintenance_notes: null
-  final_report: null
-  uat_category: [Cosmology]  # backfilled guess -- title explicitly says "cosmography"
-  uat_concepts: null
+  submitted: true
+  data_type:
+  - Time-Series / Lightcurves
+  - Spectra
+  data_volume: The DR2 sample contains 3,628 spectroscopically confirmed SNe Ia (with 2,667
+    meeting standard cosmology cuts) gathered by the Zwicky Transient Facility between March
+    2018 and December 2020. The catalogs are about 250 Mb.
+  data_schema_link: https://ui.adsabs.harvard.edu/abs/2025A%26A...694A...1R/abstract
+  hosting_location: IN2P3 server
+  access_url: http://ztfcosmo.in2p3.fr/ data also accessible through WiseRep
+  access_mechanisms:
+  - Direct File Download (HTTP/FTP)
+  - API
+  authentication: Open Access (Publicly available)
+  generation_methods: The overview paper links above provide all the required documentation.
+  validation_limitations: 1% sensor issue in some of the CCDs being fixed in next release,
+    DR2.5
+  tutorials_docs: https://github.com/ZwickyTransientFacility/ztfcosmo
+  support_channel: https://github.com/ZwickyTransientFacility/ztfcosmo
+  citation: https://ui.adsabs.harvard.edu/abs/2025A%26A...694A...1R/abstract
+  maintenance_plan: Discrete future Data Releases (e.g. DR2)
+  maintenance_notes: DR2.5 will resolve photometry issues at the 1% level in DR2, and DR3
+    wil add data through 2025, reaching 10000 SNIa.
+  final_report: The final delivery was reported in the annual report for 2025.
+  uat_category:
+  - Cosmology
+  - Galactic and extragalactic astronomy
+  uat_concepts: Type Ia supernovae (1778), Cosmological constant experiments (334), Multi-color
+    photometry (1077), spectroscopy (1558)
 
+# --- fields only a human edits; the pull script never touches these ---
 curated:
   primary_recipient: DESC
   target_audience: null
-  summary: >
-    SU will provide online data file access (anticipated to be hosted at
-    NOIRLab) whereby it is possible for LSST users to download the
-    photometry and spectroscopy tables for each ZTF/ZTF-II SN (or the
-    entire set at once), as well as the ancillary information about the
-    host galaxy environment. We will provide machine readable files,
-    including standard formats used by lightcurve fitters (SALT2, SNooPy)
-    and FITS tables.
-  wavelength_regime: [Optical]
+  summary: 'SU will provide online data file access (anticipated to be hosted at NOIRLab)
+    whereby it is possible for LSST users to download the photometry and spectroscopy tables
+    for each ZTF/ZTF-II SN (or the entire set at once), as well as the ancillary information
+    about the host galaxy environment. We will provide machine readable files, including standard
+    formats used by lightcurve fitters (SALT2, SNooPy) and FITS tables.
+
+    '
+  wavelength_regime:
+  - Optical
   status_override: null
