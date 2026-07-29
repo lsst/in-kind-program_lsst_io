@@ -13,10 +13,14 @@ One script, two card types.
                        - "Software"  -> docs/.../_data/software/<id>.yaml
                        - "Datasets"  -> docs/.../_data/datasets/<id>.yaml
                        - a Software row that also answers "Yes" to data
-                         products gets an `associated_dataset` block, and,
-                         if no direct Datasets record exists yet for that ID,
-                         a draft Datasets card is written too (flagged
-                         needs_review) -- e.g. SER-SAG-S1.
+                         products gets an `associated_dataset` block, and
+                         that same data is also written to a companion
+                         Datasets card for that ID -- created fresh
+                         (flagged needs_review) if none exists yet, e.g.
+                         SER-SAG-S1, or, going through the normal
+                         review-diff gate like any other update, merged
+                         into one that already exists (e.g. one of the
+                         original pre-delivery placeholder cards).
   --contributions   OPTIONAL, rare. The proposal-spreadsheet export (one row
                      per contribution; columns: Country, Institute, ID,
                      Contribution Title, Scraped Recipient Group, SOW,
@@ -264,11 +268,29 @@ DATASET_FIELD_MAP = {
 }
 LIST_VALUED_DATASET_FIELDS = {"data_type", "access_mechanisms"}
 
+# UAT category/concepts (Section 5) are asked once per submission, not
+# once per branch -- unlike email/name/target audience/summary (Section 1),
+# which genuinely only make sense on the *parent* Software record for a
+# Software submission (there's no separate submitter identity for the
+# nested dataset). The Datasets page's own filters and badges read
+# `uat_category` from each dataset record's *own* form_data though, so an
+# associated_dataset block needs its own copy of this too -- without it, a
+# companion card auto-drafted (or updated) from a Software submission's
+# data-products answers silently shows no UAT badges and never matches the
+# "Science case (UAT)" filter, even though the parent Software card's own
+# card looks correct. See build_associated_dataset() below.
+ASSOCIATED_DATASET_UAT_FIELD_MAP = {
+    "uat_category": "uat_category",
+    "uat_concepts": "uat_concepts",
+}
+ASSOCIATED_DATASET_FIELD_MAP = {**DATASET_FIELD_MAP, **ASSOCIATED_DATASET_UAT_FIELD_MAP}
+ASSOCIATED_DATASET_LIST_FIELDS = LIST_VALUED_DATASET_FIELDS | {"uat_category"}
+
 # A direct Datasets-branch submission also answers Section 1 (common
-# fields: email, name, target audience, summary, version) and Section 5
-# (UAT) for itself, since there's no separate Software record to hold
-# them -- an associated_dataset drafted from a *Software* submission
-# deliberately omits all of these, since that submission's own top-level
+# fields: email, name, target audience, summary, version) for itself,
+# since there's no separate Software record to hold them -- an
+# associated_dataset drafted/updated from a *Software* submission
+# deliberately omits these, since that submission's own top-level
 # form_data already carries them for the whole contribution. See
 # build_dataset_form_data() vs. build_associated_dataset() below.
 DIRECT_DATASET_EXTRA_FIELD_MAP = {
@@ -277,8 +299,7 @@ DIRECT_DATASET_EXTRA_FIELD_MAP = {
     "target_audience": "target_audience",
     "contribution_summary": "contribution_summary",
     "version": "version",
-    "uat_category": "uat_category",
-    "uat_concepts": "uat_concepts",
+    **ASSOCIATED_DATASET_UAT_FIELD_MAP,
 }
 DIRECT_DATASET_LIST_FIELDS = LIST_VALUED_DATASET_FIELDS | {"uat_category"}
 
@@ -296,7 +317,9 @@ def build_associated_dataset(response):
     when that submission answered "Yes" to expecting data products."""
     if normalize_ws(response.get("data_products_expected", "")) != "Yes":
         return None
-    return _dataset_fields_from_response(response, DATASET_FIELD_MAP, LIST_VALUED_DATASET_FIELDS)
+    return _dataset_fields_from_response(
+        response, ASSOCIATED_DATASET_FIELD_MAP, ASSOCIATED_DATASET_LIST_FIELDS
+    )
 
 
 def build_dataset_form_data(response):
@@ -479,13 +502,80 @@ def write_dataset_yaml(path, data):
 # category/timeline/activity_description are left blank) and flagged
 # needs_review so the coordinator can fill them in by hand.
 
+def sync_associated_dataset(cid, title, country, institute, form_data, assoc, review_state):
+    """Create or update the companion Datasets card for a Software
+    submission that answered "Yes" to expecting data products.
+
+    This updates an *existing* Datasets card too, not just a missing one --
+    several of the original 16 dataset cards were backfilled as pre-
+    delivery placeholders (guessed data type/UAT tags, `submitted: false`)
+    before this script existed, for contributions whose data products were
+    expected to arrive via a *Software* submission rather than a direct
+    Datasets-branch response. Previously, once any Datasets card existed
+    for an ID -- placeholder or not -- a Software submission's
+    associated_dataset answers were captured into the Software record's
+    own form_data.associated_dataset block and never propagated any
+    further, leaving that Datasets card frozen at its placeholder content
+    forever, even after the real data arrived. Routing every
+    associated_dataset (not just ones with no existing card) through the
+    same review-diff gate as everything else fixes that.
+
+    Returns (outcome, changed_fields) where outcome is one of "created",
+    "updated", "skipped", "unchanged".
+    """
+    out_path = DATASETS_DIR / f"{cid}.yaml"
+    if out_path.exists():
+        with out_path.open(encoding="utf-8") as f:
+            existing = yaml.safe_load(f) or {}
+        changed = diff_fields(existing.get("form_data"), assoc)
+        if not changed:
+            return "unchanged", None
+        existing_title = existing.get("title") or title
+        if not review_update(cid, existing_title, changed, existing.get("form_data"), assoc, review_state):
+            return "skipped", None
+        record = {
+            "contribution_id": cid,
+            # Title/country/institute protected once a Datasets record
+            # exists, same as the direct-response sync path.
+            "title": existing.get("title") or title,
+            "country": existing.get("country") or country,
+            "institute": existing.get("institute") or institute,
+            "form_data": assoc,
+            # curated is hand-edited only and never touched on update --
+            # same convention as sync_datasets()'s existing-record branch.
+            "curated": existing.get("curated") or {},
+        }
+        write_dataset_yaml(out_path, record)
+        return "updated", changed
+    else:
+        draft = {
+            "contribution_id": cid,
+            "title": f"{title} (associated dataset)",
+            "country": country,
+            "institute": institute,
+            "form_data": assoc,
+            "curated": {
+                "primary_recipient": form_data.get("primary_recipient_group"),
+                "target_audience": form_data.get("target_audience"),
+                "summary": None,
+                "wavelength_regime": [],
+                "status_override": None,
+                "related_contribution_ids": [cid],
+                "needs_review": True,
+            },
+        }
+        write_dataset_yaml(out_path, draft)
+        return "created", None
+
+
 def sync_software(contributions, software_responses, review_state):
     SOFTWARE_DIR.mkdir(parents=True, exist_ok=True)
     dataset_titles = collect_existing_ids(DATASETS_DIR)
     telescope_titles = collect_existing_ids(TELESCOPES_DIR)
-    known_dataset_ids = set(dataset_titles)
 
-    created, updated, skipped, unchanged, drafts_written = [], [], [], [], []
+    created, updated, skipped, unchanged = [], [], [], []
+    drafts_written, dataset_updates, dataset_skips = [], [], []
+    dataset_touched_ids = set()
 
     # The spreadsheet also carries Datasets-category rows (Steve confirmed
     # both live in the same export) -- only known software category codes
@@ -511,9 +601,8 @@ def sync_software(contributions, software_responses, review_state):
             merge_form_response(form_data, response)
 
         assoc = form_data.get("associated_dataset")
-        will_draft_dataset = bool(assoc) and cid not in known_dataset_ids
         related = []
-        if cid in dataset_titles or cid in telescope_titles or will_draft_dataset:
+        if cid in dataset_titles or cid in telescope_titles or assoc:
             related.append(cid)
 
         # Identity fields (title/country/institute) are set once at
@@ -544,8 +633,19 @@ def sync_software(contributions, software_responses, review_state):
                 ),
                 "summary": None,
                 "status_override": None,
-                "related_contribution_ids": related,
+                "related_contribution_ids": [],
             }
+            # related_contribution_ids is the one field inside `curated`
+            # that this script keeps auto-derived rather than hand-edited
+            # only -- union in whatever's newly known (e.g. a companion
+            # dataset that just got created or updated *this run*, for a
+            # Software card that already existed before it) instead of
+            # leaving it frozen at whatever it was when the card was first
+            # created. Union, not replace, so a manually-added related ID
+            # (e.g. a telescope) is never dropped.
+            curated["related_contribution_ids"] = sorted(
+                set(curated.get("related_contribution_ids") or []) | set(related)
+            )
             updated.append((cid, changed))
         else:
             curated = {
@@ -573,34 +673,30 @@ def sync_software(contributions, software_responses, review_state):
         }
         write_yaml(out_path, record)
 
-        # Auto-draft a companion Datasets record when this contribution's
-        # form response says data products are expected and no Datasets
-        # record exists for this ID yet -- flagged for coordinator review.
-        if will_draft_dataset:
-            draft_path = DATASETS_DIR / f"{cid}.yaml"
-            draft = {
-                "contribution_id": cid,
-                "title": f"{title} (associated dataset)",
-                "country": country,
-                "institute": institute,
-                "form_data": assoc,
-                "curated": {
-                    "primary_recipient": form_data.get("primary_recipient_group"),
-                    "target_audience": form_data.get("target_audience"),
-                    "summary": None,
-                    "wavelength_regime": [],
-                    "status_override": None,
-                    "related_contribution_ids": [cid],
-                    "needs_review": True,
-                },
-            }
-            write_dataset_yaml(draft_path, draft)
-            known_dataset_ids.add(cid)
-            drafts_written.append(cid)
+        # Create or update the companion Datasets record for a
+        # contribution whose form response says data products are
+        # expected -- see sync_associated_dataset() for why this also
+        # covers a Datasets card that already existed (e.g. a pre-delivery
+        # placeholder from the original backfill).
+        if assoc:
+            outcome, changed_fields = sync_associated_dataset(
+                cid, title, country, institute, form_data, assoc, review_state
+            )
+            if outcome == "created":
+                drafts_written.append(cid)
+                dataset_touched_ids.add(cid)
+            elif outcome == "updated":
+                dataset_updates.append((cid, changed_fields))
+                dataset_touched_ids.add(cid)
+            elif outcome == "skipped":
+                dataset_skips.append(cid)
+            # "unchanged": nothing to report, file already matches.
 
     return {
         "created": created, "updated": updated, "skipped": skipped,
         "unchanged": unchanged, "drafts_written": drafts_written,
+        "dataset_updates": dataset_updates, "dataset_skips": dataset_skips,
+        "dataset_touched_ids": dataset_touched_ids,
     }
 
 
@@ -612,13 +708,13 @@ def sync_software(contributions, software_responses, review_state):
 # proposal spreadsheet. Existing pre-delivery records with no response yet
 # are simply left untouched, same as before this script existed.
 
-def sync_datasets(contributions, dataset_responses, software_drafted_ids, review_state):
+def sync_datasets(contributions, dataset_responses, software_touched_ids, review_state):
     DATASETS_DIR.mkdir(parents=True, exist_ok=True)
     created, updated, skipped, unchanged, conflicts = [], [], [], [], []
 
     for cid, response in sorted(dataset_responses.items()):
-        if cid in software_drafted_ids:
-            conflicts.append(cid)  # see warning printed in main()
+        if cid in software_touched_ids:
+            conflicts.append(cid)  # see warning printed in sync()
 
         out_path = DATASETS_DIR / f"{cid}.yaml"
         new_form_data = build_dataset_form_data(response)
@@ -709,12 +805,12 @@ def sync(contributions_csv, form_responses_csv, auto_yes):
 
     sw_result = sync_software(contributions, software_responses, review_state)
     ds_result = sync_datasets(
-        contributions, dataset_responses, set(sw_result["drafts_written"]), review_state
+        contributions, dataset_responses, sw_result["dataset_touched_ids"], review_state
     )
 
     for cid in ds_result["conflicts"]:
-        print(f"WARNING: {cid} has both a Software-branch associated-dataset draft and a direct "
-              f"Datasets-branch response this run -- the direct response takes precedence.")
+        print(f"WARNING: {cid} has both a Software-branch associated-dataset draft/update and a "
+              f"direct Datasets-branch response this run -- the direct response takes precedence.")
 
     print("\n=== Software ===")
     print(f"{len(sw_result['created'])} new, {len(sw_result['updated'])} updated, "
@@ -727,6 +823,13 @@ def sync(contributions_csv, form_responses_csv, auto_yes):
     if sw_result["drafts_written"]:
         print(f"  NEEDS-REVIEW: drafted {len(sw_result['drafts_written'])} companion dataset "
               f"record(s): {', '.join(sw_result['drafts_written'])}")
+    if sw_result["dataset_updates"]:
+        print(f"  companion dataset record(s) updated from a software submission's data-products "
+              f"answers:")
+        for cid, changed in sw_result["dataset_updates"]:
+            print(f"    updated {cid}: {', '.join(changed)}")
+    if sw_result["dataset_skips"]:
+        print(f"  companion dataset update(s) declined: {', '.join(sw_result['dataset_skips'])}")
 
     print("\n=== Datasets ===")
     print(f"{len(ds_result['created'])} new, {len(ds_result['updated'])} updated, "

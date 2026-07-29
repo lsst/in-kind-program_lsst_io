@@ -217,6 +217,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Citation:** {{ ds.form_data.citation or 'TBD' }}
 
+          **Maintenance plan:** {{ ds.form_data.maintenance_plan or 'TBD' }}
+
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++
           :bdg-success:`Available`
