@@ -34,6 +34,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         .ikc-more-fields { display: none; }
         .ikc-more-fields.ikc-expanded { display: block; }
         .ikc-more-btn { border: none; background: none; color: #1a5c33; font-size: 0.85em; padding: 0; cursor: pointer; margin: 0.4em 0; }
+        .ikc-also-see { display: inline-block; background: #e6e6e6; color: #333; font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 0.5em; text-decoration: none; }
+        .ikc-also-see:hover { background: #d9d9d9; }
       </style>
 
       <div class="ikc-filterbar">
@@ -255,6 +257,16 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
              <button type="button" class="ikc-more-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
 
+          {% for rel in ds.related %}
+          {% if rel.page_url %}
+
+          .. raw:: html
+
+             <a class="ikc-also-see" href="{{ rel.page_url }}#sw-cid-{{ rel.slug }}">Also see: software ({{ rel.contribution_id }}) &rarr;</a>
+
+          {% endif %}
+          {% endfor %}
+
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++
           :bdg-success:`Available`
@@ -271,6 +283,16 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {{ ds.curated.summary or 'TBD' }}
 
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
+
+          {% for rel in ds.related %}
+          {% if rel.page_url %}
+
+          .. raw:: html
+
+             <a class="ikc-also-see" href="{{ rel.page_url }}#sw-cid-{{ rel.slug }}">Also see: software ({{ rel.contribution_id }}) &rarr;</a>
+
+          {% endif %}
+          {% endfor %}
 
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++

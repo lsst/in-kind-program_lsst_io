@@ -140,6 +140,60 @@ def _last_updated(path):
         return fallback
 
 
+def _collect_cross_page_titles(subdir_name):
+    """contribution_id -> title/facility lookup for a sibling _data folder,
+    used to label a page's "Also see" cross-links to another page without
+    needing that other page's full loader context. contribution_id may be
+    a scalar or, on the Telescopes page, a list shared by sibling records.
+
+    Defined early in the file (rather than next to the page loader that
+    first needed it) because jinja_contexts["contributed_datasets"] is
+    built and assigned immediately below, at module load time -- unlike
+    most of this file's helpers, it can't wait until just before its
+    first caller.
+    """
+    data_dir = (
+        Path(__file__).parent
+        / "docs"
+        / "contribution-types"
+        / "_data"
+        / subdir_name
+    )
+    out = {}
+    if not data_dir.exists():
+        return out
+    for path in sorted(data_dir.glob("*.yaml")):
+        with path.open(encoding="utf-8") as f:
+            record = yaml.safe_load(f) or {}
+        cid = record.get("contribution_id")
+        cids = cid if isinstance(cid, list) else [cid]
+        for c in cids:
+            if c:
+                out[c] = record.get("title") or record.get("facility") or c
+    return out
+
+
+def _resolve_related_titles(related_ids, *page_lookups):
+    """page_lookups is a sequence of (page_html_filename, {contribution_id: title})
+    pairs, checked in order, so the returned dicts know which page to link to."""
+    resolved = []
+    for rid in related_ids or []:
+        title = None
+        page_url = None
+        for page_html, lookup in page_lookups:
+            if rid in lookup:
+                title = lookup[rid]
+                page_url = page_html
+                break
+        resolved.append({
+            "contribution_id": rid,
+            "title": title or rid,
+            "slug": _slugify(rid),
+            "page_url": page_url,
+        })
+    return resolved
+
+
 def _load_contributed_datasets():
     data_dir = (
         Path(__file__).parent
@@ -148,6 +202,12 @@ def _load_contributed_datasets():
         / "_data"
         / "datasets"
     )
+    # For the "Also see: software" reverse link -- mirrors the Contributed
+    # Software page's own "Also see: dataset" link (curated.related_
+    # contribution_ids there points at this page). Software title lookup
+    # only, since a dataset card never links out to a Telescopes record.
+    software_titles = _collect_cross_page_titles("software")
+
     records = []
     all_data_types = set()
     all_wavelengths = set()
@@ -175,6 +235,10 @@ def _load_contributed_datasets():
         cid_slug = _slugify(record.get("contribution_id", ""))
         record["cid_slug"] = cid_slug
         record["last_updated"] = _last_updated(path)
+        record["related"] = _resolve_related_titles(
+            curated.get("related_contribution_ids"),
+            ("contributed-software.html", software_titles),
+        )
 
         # Space-separated CSS-safe tokens used by the page's filter/sort
         # script to match table rows and cards against the active filters.
@@ -658,27 +722,6 @@ def _approx_start_fy(timeline_text):
     return f"FY{match.group(1)}" if match else None
 
 
-def _resolve_related_titles(related_ids, *page_lookups):
-    """page_lookups is a sequence of (page_html_filename, {contribution_id: title})
-    pairs, checked in order, so the returned dicts know which page to link to."""
-    resolved = []
-    for rid in related_ids or []:
-        title = None
-        page_url = None
-        for page_html, lookup in page_lookups:
-            if rid in lookup:
-                title = lookup[rid]
-                page_url = page_html
-                break
-        resolved.append({
-            "contribution_id": rid,
-            "title": title or rid,
-            "slug": _slugify(rid),
-            "page_url": page_url,
-        })
-    return resolved
-
-
 def _load_contributed_software():
     data_dir = (
         Path(__file__).parent
@@ -760,32 +803,6 @@ def _load_contributed_software():
         "slugify": _slugify,
         "search_index_json": json.dumps(search_index),
     }
-
-
-def _collect_cross_page_titles(subdir_name):
-    """contribution_id -> title/facility lookup for a sibling _data folder,
-    used to label the Contributed Software page's "Also see" cross-links
-    without needing that page's full loader context. contribution_id may be
-    a scalar or, on the Telescopes page, a list shared by sibling records."""
-    data_dir = (
-        Path(__file__).parent
-        / "docs"
-        / "contribution-types"
-        / "_data"
-        / subdir_name
-    )
-    out = {}
-    if not data_dir.exists():
-        return out
-    for path in sorted(data_dir.glob("*.yaml")):
-        with path.open(encoding="utf-8") as f:
-            record = yaml.safe_load(f) or {}
-        cid = record.get("contribution_id")
-        cids = cid if isinstance(cid, list) else [cid]
-        for c in cids:
-            if c:
-                out[c] = record.get("title") or record.get("facility") or c
-    return out
 
 
 jinja_contexts["contributed_software"] = _load_contributed_software()

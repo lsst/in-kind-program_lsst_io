@@ -533,6 +533,21 @@ def sync_associated_dataset(cid, title, country, institute, form_data, assoc, re
         existing_title = existing.get("title") or title
         if not review_update(cid, existing_title, changed, existing.get("form_data"), assoc, review_state):
             return "skipped", None
+        # curated is hand-edited only and never touched on update -- same
+        # convention as sync_datasets()'s existing-record branch -- except
+        # for related_contribution_ids, which mirrors the Software side's
+        # own related-IDs handling: it's the one field this script keeps
+        # auto-derived rather than hand-edited only. Without this, a
+        # Datasets card that predates this script (one of the original
+        # backfilled placeholders, created with no related_contribution_ids
+        # at all) would keep updating with real data forever but never
+        # pick up the "Also see: software" link back to its companion
+        # Software card, since nothing else ever sets that field on an
+        # *existing* Datasets record.
+        curated = existing.get("curated") or {}
+        curated["related_contribution_ids"] = sorted(
+            set(curated.get("related_contribution_ids") or []) | {cid}
+        )
         record = {
             "contribution_id": cid,
             # Title/country/institute protected once a Datasets record
@@ -541,9 +556,7 @@ def sync_associated_dataset(cid, title, country, institute, form_data, assoc, re
             "country": existing.get("country") or country,
             "institute": existing.get("institute") or institute,
             "form_data": assoc,
-            # curated is hand-edited only and never touched on update --
-            # same convention as sync_datasets()'s existing-record branch.
-            "curated": existing.get("curated") or {},
+            "curated": curated,
         }
         write_dataset_yaml(out_path, record)
         return "updated", changed

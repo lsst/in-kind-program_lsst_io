@@ -81,3 +81,5 @@ curated:
   - Optical
   - NIR
   status_override: null
+  related_contribution_ids:
+  - UKD-UKD-S5
