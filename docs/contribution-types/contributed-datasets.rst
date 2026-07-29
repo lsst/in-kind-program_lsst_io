@@ -31,6 +31,9 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         .ikc-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }
         .ikc-title-link:hover { text-decoration: underline; }
         .ikc-card.ikc-highlight .sd-card { outline: 3px solid #1a5c33; outline-offset: 2px; transition: outline-color 1.2s ease; }
+        .ikc-more-fields { display: none; }
+        .ikc-more-fields.ikc-expanded { display: block; }
+        .ikc-more-btn { border: none; background: none; color: #1a5c33; font-size: 0.85em; padding: 0; cursor: pointer; margin: 0.4em 0; }
       </style>
 
       <div class="ikc-filterbar">
@@ -91,7 +94,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </table>
 
       <script>
-      (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        // Deferred to DOMContentLoaded: this script tag renders above the
+        // `.. grid::` block below, which is where the cards (and their
+        // Show more/Show less buttons) actually live in the page source.
+        // An inline <script> runs the instant the parser reaches it, so
+        // querying for card elements here immediately (rather than after
+        // the whole page has parsed) would always find zero of them --
+        // same bug as the Contributed Software page's expand button had.
         var SEARCH_INDEX = {{ search_index_json }};
         var CID_RE = /cid-([a-z0-9-]+)/;
         var showAvailableOnly = false;
@@ -165,6 +175,16 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           });
         });
 
+        document.querySelectorAll('.ikc-more-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var moreFields = btn.previousElementSibling;
+            var expanded = moreFields.classList.toggle('ikc-expanded');
+            btn.textContent = expanded
+              ? btn.getAttribute('data-collapse-label')
+              : btn.getAttribute('data-expand-label');
+          });
+        });
+
         var sortState = {};
         document.querySelectorAll('#ikc-datasets-table th[data-sort]').forEach(function (th) {
           th.addEventListener('click', function () {
@@ -182,7 +202,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             rows.forEach(function (r) { tbody.appendChild(r); });
           });
         });
-      })();
+      });
       </script>
 
    .. grid:: 1 1 2 2
@@ -218,6 +238,22 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           **Citation:** {{ ds.form_data.citation or 'TBD' }}
 
           **Maintenance plan:** {{ ds.form_data.maintenance_plan or 'TBD' }}
+
+          .. container:: ikc-more-fields
+
+             **Data schema:** {{ ds.form_data.data_schema_link or 'TBD' }}
+
+             **Access mechanisms:** {{ (ds.form_data.access_mechanisms or []) | join(', ') or 'TBD' }}
+
+             **Authentication:** {{ ds.form_data.authentication or 'TBD' }}
+
+             **Generation methods:** {{ ds.form_data.generation_methods or 'TBD' }}
+
+             **Validation & limitations:** {{ ds.form_data.validation_limitations or 'TBD' }}
+
+          .. raw:: html
+
+             <button type="button" class="ikc-more-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
 
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++
