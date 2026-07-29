@@ -368,6 +368,16 @@ form_data:
       QNPy/Latte) and the transition to maintenance. It was also reflected in the FY25 Annual
       Evaluation, which stated the contribution had delivered the fully operable pipeline
       and entered the maintenance and deployment phase.
+    uat_category:
+    - Astronomy software
+    - Astrophysics
+    - Exoplanet astronomy
+    - Stellar astronomy
+    - Planetary science
+    - Solar system
+    uat_concepts: Active galactic nuclei16 --- Astroinformatics78 --- {Sky surveys}{1464}--Catalogues205
+      --- Astrostatistics1882 --- Light curves 918 --- {Period search}{1955}---{Photometry}{2168}---{Time
+      series analysis}{1916}}
 curated:
   uat_keywords:
   - Active galactic nuclei

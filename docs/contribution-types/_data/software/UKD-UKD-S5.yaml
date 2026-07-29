@@ -1,0 +1,139 @@
+contribution_id: UKD-UKD-S5
+title: 'LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-fusion (version:
+  v1.0.0) and obs_vista (version: v1.2.0)'
+country: null
+institute: null
+form_data:
+  category: null
+  primary_recipient_group: null
+  additional_recipient_groups: []
+  activity_description: null
+  timeline: null
+  submitted: true
+  email: E.Saremi@soton.ac.uk
+  submitter_name: Elham Saremi
+  target_audience: General Rubin Community
+  software_name: 'LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-fusion
+    (version: v1.0.0) and obs_vista (version: v1.2.0)'
+  version: 'lsst-ir-fusion (version: v1.0.0) and obs_vista (version: v1.2.0).0. Both releases
+    are compatible with LSST Science Pipelines v29.2.1.'
+  software_url: https://github.com/lsst-uk/obs_vista and https://github.com/lsst-uk/lsst-ir-fusion
+  documentation: 'lsst-ir-fusion documentation: https://github.com/lsst-uk/lsst-ir-fusion/blob/master/readme.md
+    obs_vista documentation: https://github.com/lsst-uk/obs_vista/blob/master/README.md'
+  verification_testing: The software has been validated throughout its development through
+    a combination of technical checks, scientific validation, and external review. At each
+    stage of the project, progress and results were documented in formal deliverables that
+    were reviewed by independent assessors, and their feedback was used to improve the implementation
+    and documentation. The development team also validated the resulting images and catalogues
+    by checking astrometric and photometric consistency, data quality, source measurements,
+    and agreement with external reference catalogues. The resulting data products are already
+    being used by collaborators for scientific analysis, including an ongoing publication
+    on active galactic nuclei. Feedback to date has confirmed that the products are scientifically
+    useful and suitable for research.
+  sharing_of_software: The software and its data products have been shared with the recipient
+    group throughout development and made available through the UK Data Access Centre and
+    the UK Rubin Science Platform. The project has also been presented at several Rubin, LSST,
+    and astronomy conferences and meetings, where we described the pipeline, demonstrated
+    the resulting products, and explained how interested researchers could request access.
+    More recently, the LSST–VISTA Data Preview 1 processing milestone and the availability
+    of the associated products were advertised through the Rubin Community Forum. Several
+    collaborators and community members are currently accessing and using the products for
+    scientific analysis. The source code is also publicly available through the lsst-ir-fusion
+    and obs_vista GitHub repositories.
+  publications: There are no peer-reviewed publications related to the software contribution
+    yet. A paper describing the LSST–VISTA fusion pipeline, its implementation, validation,
+    and initial data products is currently in preparation.
+  acknowledgements: The standard in-kind software acknowledgement text is suitable. "This
+    work makes use of the LSST–VISTA Fusion Pipeline software package, available at https://github.com/lsst-uk/lsst-ir-fusion
+    and https://github.com/lsst-uk/obs_vista. This software was developed as a contribution
+    to the Rubin community through the Rubin In-Kind Program, with contribution ID UKD-UKD-S5."
+  support: Questions about the software can primarily be directed to the project contacts
+    by email at [ E.Saremi@soton.ac.uk and M.Banerji-Wright@soton.ac.uk]. The Rubin Community
+    Forum may also be used as a secondary channel for questions, discussion, and feedback
+    from the wider Rubin community.
+  maintenance_plan: Continuously updated rolling release
+  maintenance_notes: The software is under active development and will be continuously updated
+    as new Rubin LSST data products, Science Pipelines versions, and VISTA datasets become
+    available. Major stable stages will continue to be recorded through versioned releases.
+  further_development: Further development would include applying and validating the LSST–VISTA
+    Fusion Pipeline on DP2 data during the remainder of Phase C. Since Phase C is expected
+    to end before the first LSST Data Release, extending the contribution through DR1 would
+    allow the pipeline to be adapted, tested, and demonstrated on the first full Rubin data
+    release.
+  other_feedback: null
+  uat_category:
+  - Galactic and extragalactic astronomy
+  - Interdisciplinary astronomy
+  - Observational astronomy
+  uat_concepts: Astronomy software (1855), Astronomy data reduction (1861), Astronomy image
+    processing (2306), Multi-color photometry (1077), Near infrared astronomy (1093)
+  associated_dataset:
+    submitted: true
+    data_type:
+    - Value-Added Catalogs
+    - Imaging / Cutouts
+    data_volume: The final merged DP1 ECDFS catalogue contains approximately 1.38 million
+      catalogue sources (1,380,173 rows). The total storage volume, including the ComCam and
+      VIRCAM coadd images, Butler catalogues, and merged catalogue, has not yet been quantified
+      and will be confirmed from the UK RSP/UK DAC storage system.
+    data_schema_link: 'The DP1 ECDFS LSST–VISTA dataset available through the UK Rubin Science
+      Platform includes ComCam optical and VIRCAM near-infrared deepCoadd_calexp images, measured-source
+      catalogues (deepCoadd_meas), forced-photometry catalogues (deepCoadd_forced_src), and
+      a merged multi-band catalogue. The image and catalogue products follow the Rubin Butler
+      data model, with dataset type, band, tract, patch, calibration, WCS, mask, variance,
+      and associated metadata available through the Butler repository. The final merged catalogue
+      contains 87 columns, with column descriptions and units provided alongside the catalogue
+      documentation. The column names, and data types, descriptions for the final merged DP1
+      ECDFS LSST–VISTA catalogue are documented at: https://github.com/lsst-uk/lsst-ir-fusion/blob/master/dmu5/dmu5_DP1/columns_descriptions.csv'
+    hosting_location: The dataset resides within the UK Independent Data Access Centre (UK
+      IDAC/UK DAC) and is accessible through the UK Rubin Science Platform.
+    access_url: https://rsp.lsst.ac.uk/
+    access_mechanisms:
+    - Rubin Science Platform (RSP) Integration
+    authentication: UK RSP authentication
+    generation_methods: 'The dataset was generated using the LSST–VISTA Fusion Pipeline, together
+      with the VIRCAM instrument package obs_vista. VISTA/VIRCAM data were ingested into a
+      Rubin Gen3 Butler repository, calibrated and aligned with the Rubin skymap, and processed
+      to produce optical and near-infrared coadd images, measured-source catalogues, forced-photometry
+      catalogues, and a merged multi-band catalogue. Both lsst-ir-fusion and obs_vista are
+      part of the LSST:UK in-kind contribution. Contribution ID: UKD-UKD-S5'
+    validation_limitations: 'Quality assurance included checks of image and catalogue completeness,
+      astrometric comparison with Gaia DR3, and photometric comparison with the public VIDEO
+      catalogue. The validation examined positional and photometric residuals, magnitude distributions,
+      colour–colour behaviour, bright-source performance, patch-level completeness, and band-specific
+      quality flags. Known limitations include non-uniform optical and near-infrared coverage
+      and missing forced-photometry products in five patch units. Users should therefore apply
+      quality flags and magnitude-error selections separately for each band. The QA and diagnostic
+      notebooks are available at: https://github.com/lsst-uk/lsst-ir-fusion/tree/master/dmu5/dmu5_DP1/diagnostics'
+    tutorials_docs: 'Jupyter tutorials demonstrating how to access, display, and interact
+      with the DP1 ComCam–VISTA data products through the UK Rubin Science Platform are available
+      at: https://github.com/lsst-uk/rsp-uk-notebooks/tree/main/ComCam_VISTA_Tutorials'
+    support_channel: Questions can primarily be directed to the project contacts by email
+      at [M.Banerji-Wright@soton.ac.uk and E.Saremi@soton.ac.uk]. The Rubin Community Forum
+      may also be used as a secondary channel for questions, discussion, and feedback from
+      the wider Rubin community.
+    citation: Users are requested to acknowledge the LSST–VISTA Fusion Pipeline developed
+      as part of the LSST:UK in-kind contribution. Publications using these data should cite
+      the forthcoming LSST–VISTA Fusion Pipeline paper (Saremi et al. in prep).
+    maintenance_plan: Discrete future Data Releases (e.g. DR2)
+    maintenance_notes: The DP1 ECDFS dataset will be retained as a versioned validation release.
+      Further releases are planned as new Rubin data products, Science Pipelines versions,
+      and overlapping VISTA datasets become available. Planned work includes processing additional
+      DP2/EDP2 fields, updating photometric and astrometric calibration, extending quality-assurance
+      tests, improving the data dictionary and user documentation, and publishing updated
+      catalogues and Butler collections through versioned releases.
+    final_report: N/A
+    uat_category:
+    - Galactic and extragalactic astronomy
+    - Interdisciplinary astronomy
+    - Observational astronomy
+    uat_concepts: Astronomy software (1855), Astronomy data reduction (1861), Astronomy image
+      processing (2306), Multi-color photometry (1077), Near infrared astronomy (1093)
+curated:
+  uat_keywords:
+  - Astronomy software
+  summary: null
+  status_override: null
+  related_contribution_ids:
+  - UKD-UKD-S5
+  needs_review: true
