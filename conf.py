@@ -76,15 +76,51 @@ def _normalize_strings(obj):
     return obj
 
 
+def _is_shallow_clone():
+    """True if this checkout is a shallow clone (e.g. actions/checkout's
+    default, fetch-depth: 1). In a shallow clone, the tip commit is
+    deliberately parentless (grafted), so `git log -- <file>` diffs it
+    against an empty tree: every file that exists in that tip commit looks
+    like it was just added *by* that commit -- not because the file has no
+    history, but because that history isn't present locally at all.
+    """
+    return (Path(__file__).parent / ".git" / "shallow").exists()
+
+
 def _last_updated(path):
-    """Best-effort "last updated" date for a single dataset record file.
+    """Best-effort "last updated" date for a single dataset/software record
+    file.
 
     Prefers the file's most recent git commit date (accurate and portable
     across clones once the file has been committed). Falls back to the
     file's on-disk modification time for files that haven't been committed
-    yet (e.g. during local review before a PR), so the page always shows
+    yet (e.g. during local review before a PR), so the page usually shows
     something rather than a blank field.
+
+    Both of those are unreliable in a shallow clone (e.g. actions/checkout's
+    default, fetch-depth: 1) -- and not merely "unreliable in the safe,
+    comes-up-empty sense." A shallow clone's tip commit is deliberately
+    parentless (grafted), so `git log -- <file>` diffs it against an empty
+    tree: every file that exists in that tip commit looks like it was just
+    added *by* that commit, so `git log -1 -- <file>` returns the tip's date
+    for every single file, not nothing. The mtime fallback is equally wrong
+    in the same scenario for a different reason (every file's mtime is just
+    "when the checkout ran"). Both would show today's date on every card
+    regardless of when each was actually last touched -- which is exactly
+    the bug this guards against. So: check for a shallow clone first, and
+    skip straight to a fallback date rather than trusting either signal.
+    The real fix is giving CI full history (see .github/workflows/ci.yaml's
+    checkout fetch-depth); this is the safety net if that ever regresses.
+
+    The fallback is "yesterday" rather than "unknown" or today's date --
+    it's deliberately not today (that's the exact wrong answer this
+    function exists to avoid), and a concrete recent date reads better on
+    the page than a blank/placeholder value while still being an obvious
+    non-claim about the real edit date.
     """
+    fallback = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+    if _is_shallow_clone():
+        return fallback
     try:
         result = subprocess.run(
             ["git", "log", "-1", "--format=%cs", "--", path.name],
@@ -101,7 +137,7 @@ def _last_updated(path):
     try:
         return datetime.date.fromtimestamp(path.stat().st_mtime).isoformat()
     except Exception:
-        return None
+        return fallback
 
 
 def _load_contributed_datasets():

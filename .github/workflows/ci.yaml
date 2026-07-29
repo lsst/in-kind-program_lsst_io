@@ -38,6 +38,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history, not the default shallow clone -- both
+          # Documenteer's sitewide "last updated" feature and the
+          # Contributed Datasets/Software pages' own per-card
+          # last-updated dates (conf.py's _last_updated()) resolve each
+          # file's last commit via `git log`, which needs real history
+          # to find anything for most files in a shallow clone.
+          fetch-depth: 0
 
       - name: Run tox
         uses: lsst-sqre/run-tox@v1
