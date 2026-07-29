@@ -1,41 +1,85 @@
 contribution_id: UKD-UKD-S5
-title: "Science Software development: Near infrared data fusion"
+title: 'Science Software development: Near infrared data fusion'
 country: United Kingdom
 institute: LSST:UK
 
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
-  submitted: false
-  email: null
-  name: null
-  target_audience: null
-  contribution_summary: null
-  version: null
-  data_type: [Value-Added Catalogs, Imaging / Cutouts]  # backfilled guess
-  data_volume: null
-  data_schema_link: null
-  hosting_location: null
-  access_url: null
-  access_mechanisms: []
-  authentication: null
-  generation_methods: null
-  validation_limitations: null
-  tutorials_docs: null
-  support_channel: null
-  citation: null
-  maintenance_plan: null
-  maintenance_notes: null
-  final_report: null
-  uat_category: [Observational astronomy]  # backfilled guess -- ambiguous, this is a generic pipeline/data-fusion effort with no stated science case; flagged for review
-  uat_concepts: null
+  submitted: true
+  data_type:
+  - Value-Added Catalogs
+  - Imaging / Cutouts
+  data_volume: The final merged DP1 ECDFS catalogue contains approximately 1.38 million catalogue
+    sources (1,380,173 rows). The total storage volume, including the ComCam and VIRCAM coadd
+    images, Butler catalogues, and merged catalogue, has not yet been quantified and will
+    be confirmed from the UK RSP/UK DAC storage system.
+  data_schema_link: 'The DP1 ECDFS LSST–VISTA dataset available through the UK Rubin Science
+    Platform includes ComCam optical and VIRCAM near-infrared deepCoadd_calexp images, measured-source
+    catalogues (deepCoadd_meas), forced-photometry catalogues (deepCoadd_forced_src), and
+    a merged multi-band catalogue. The image and catalogue products follow the Rubin Butler
+    data model, with dataset type, band, tract, patch, calibration, WCS, mask, variance, and
+    associated metadata available through the Butler repository. The final merged catalogue
+    contains 87 columns, with column descriptions and units provided alongside the catalogue
+    documentation. The column names, and data types, descriptions for the final merged DP1
+    ECDFS LSST–VISTA catalogue are documented at: https://github.com/lsst-uk/lsst-ir-fusion/blob/master/dmu5/dmu5_DP1/columns_descriptions.csv'
+  hosting_location: The dataset resides within the UK Independent Data Access Centre (UK IDAC/UK
+    DAC) and is accessible through the UK Rubin Science Platform.
+  access_url: https://rsp.lsst.ac.uk/
+  access_mechanisms:
+  - Rubin Science Platform (RSP) Integration
+  authentication: UK RSP authentication
+  generation_methods: 'The dataset was generated using the LSST–VISTA Fusion Pipeline, together
+    with the VIRCAM instrument package obs_vista. VISTA/VIRCAM data were ingested into a Rubin
+    Gen3 Butler repository, calibrated and aligned with the Rubin skymap, and processed to
+    produce optical and near-infrared coadd images, measured-source catalogues, forced-photometry
+    catalogues, and a merged multi-band catalogue. Both lsst-ir-fusion and obs_vista are part
+    of the LSST:UK in-kind contribution. Contribution ID: UKD-UKD-S5'
+  validation_limitations: 'Quality assurance included checks of image and catalogue completeness,
+    astrometric comparison with Gaia DR3, and photometric comparison with the public VIDEO
+    catalogue. The validation examined positional and photometric residuals, magnitude distributions,
+    colour–colour behaviour, bright-source performance, patch-level completeness, and band-specific
+    quality flags. Known limitations include non-uniform optical and near-infrared coverage
+    and missing forced-photometry products in five patch units. Users should therefore apply
+    quality flags and magnitude-error selections separately for each band. The QA and diagnostic
+    notebooks are available at: https://github.com/lsst-uk/lsst-ir-fusion/tree/master/dmu5/dmu5_DP1/diagnostics'
+  tutorials_docs: 'Jupyter tutorials demonstrating how to access, display, and interact with
+    the DP1 ComCam–VISTA data products through the UK Rubin Science Platform are available
+    at: https://github.com/lsst-uk/rsp-uk-notebooks/tree/main/ComCam_VISTA_Tutorials'
+  support_channel: Questions can primarily be directed to the project contacts by email at
+    [M.Banerji-Wright@soton.ac.uk and E.Saremi@soton.ac.uk]. The Rubin Community Forum may
+    also be used as a secondary channel for questions, discussion, and feedback from the wider
+    Rubin community.
+  citation: Users are requested to acknowledge the LSST–VISTA Fusion Pipeline developed as
+    part of the LSST:UK in-kind contribution. Publications using these data should cite the
+    forthcoming LSST–VISTA Fusion Pipeline paper (Saremi et al. in prep).
+  maintenance_plan: Discrete future Data Releases (e.g. DR2)
+  maintenance_notes: The DP1 ECDFS dataset will be retained as a versioned validation release.
+    Further releases are planned as new Rubin data products, Science Pipelines versions, and
+    overlapping VISTA datasets become available. Planned work includes processing additional
+    DP2/EDP2 fields, updating photometric and astrometric calibration, extending quality-assurance
+    tests, improving the data dictionary and user documentation, and publishing updated catalogues
+    and Butler collections through versioned releases.
+  final_report: N/A
+  uat_category:
+  - Galactic and extragalactic astronomy
+  - Interdisciplinary astronomy
+  - Observational astronomy
+  uat_concepts: Astronomy software (1855), Astronomy data reduction (1861), Astronomy image
+    processing (2306), Multi-color photometry (1077), Near infrared astronomy (1093)
 
+# --- fields only a human edits; the pull script never touches these ---
 curated:
   primary_recipient: NOIRLab CSDC
   target_audience: null
-  summary: >
-    LSST:UK will provide joint LSST+VISTA near infra-red catalogues
-    produced using the LSST Stack and access to VISTA survey images as a
-    dataset contribution, as well as an implementation of the LSST Stack
-    pipeline reconfigured to jointly process LSST pixels with external
-    survey pixels.
-  wavelength_regime: [Optical, NIR]
+  summary: 'LSST:UK will provide joint LSST+VISTA near infra-red catalogues produced using
+    the LSST Stack and access to VISTA survey images as a dataset contribution, as well as
+    an implementation of the LSST Stack pipeline reconfigured to jointly process LSST pixels
+    with external survey pixels.
+
+    '
+  wavelength_regime:
+  - Optical
+  - NIR
   status_override: null
+  related_contribution_ids:
+  - UKD-UKD-S5

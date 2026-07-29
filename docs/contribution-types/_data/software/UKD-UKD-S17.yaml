@@ -34,24 +34,31 @@ form_data:
     systematic maps.'
   timeline: 'Deliverable A: 04/2024; Deliverable B: 04/2025; Deliverable C: 04/2026; Deliverable
     D: 04/2027'
-  submitted: false
-  email: null
-  submitter_name: null
-  target_audience: null
-  software_name: null
-  version: null
-  software_url: null
-  documentation: null
-  verification_testing: null
-  sharing_of_software: null
-  publications: null
-  acknowledgements: null
-  support: null
-  maintenance_plan: null
+  submitted: true
+  email: david.alonso@physics.ox.ac.uk
+  submitter_name: David Alonso
+  target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
+  software_name: TXPipe v0
+  version: Our contribution is in the github master branch but has not yet seen an official
+    release.
+  software_url: https://github.com/LSSTDESC/TXPipe
+  documentation: https://txpipe.readthedocs.io/en/latest/
+  verification_testing: The software has been tested by DESC. The software itself comes with
+    a set of unit tests, which we also contributed to to ensure the validity of our contributions.
+  sharing_of_software: TXPipe is an official DESC pipeline, so our work has been shared with
+    the DESC throughout its development, as well as discussed in the relevant working group
+    meetings/calls.
+  publications: https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag360C
+  acknowledgements: No specific acknowledgements required besides the standard text.
+  support: david.alonso@physics.ox.ac.uk
+  maintenance_plan: While the contribution is complete, we foresee potential future developments
+    as soon as we are able to apply the pipeline to real data, and we will be on hand to carry
+    out those updates.
   maintenance_notes: null
   further_development: null
   other_feedback: null
-  uat_category: null
+  uat_category:
+  - Galactic and extragalactic astronomy
   uat_concepts: null
   associated_dataset: null
 curated:

@@ -3,6 +3,8 @@ title: Science Pipeline Development for analysis of variability of celestial sou
   LSST AGN and TVS Science Collaboration (associated dataset)
 country: Serbia
 institute: SAGNT
+
+# --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
   submitted: true
   data_type:
@@ -59,6 +61,18 @@ form_data:
     QNPy/Latte) and the transition to maintenance. It was also reflected in the FY25 Annual
     Evaluation, which stated the contribution had delivered the fully operable pipeline and
     entered the maintenance and deployment phase.
+  uat_category:
+  - Astronomy software
+  - Astrophysics
+  - Exoplanet astronomy
+  - Stellar astronomy
+  - Planetary science
+  - Solar system
+  uat_concepts: Active galactic nuclei16 --- Astroinformatics78 --- {Sky surveys}{1464}--Catalogues205
+    --- Astrostatistics1882 --- Light curves 918 --- {Period search}{1955}---{Photometry}{2168}---{Time
+    series analysis}{1916}}
+
+# --- fields only a human edits; the pull script never touches these ---
 curated:
   primary_recipient: LSST AGN Science Collaboration
   target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
