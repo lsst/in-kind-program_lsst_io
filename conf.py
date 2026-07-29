@@ -199,9 +199,9 @@ jinja_contexts = {
 # ============================================================================
 
 _APERTURE_BAND_LABELS = {
-    "small": "< 2m",
+    "small": "&lt; 2m",
     "medium": "2-8m",
-    "large": "> 8m",
+    "large": "&gt; 8m",
 }
 
 
