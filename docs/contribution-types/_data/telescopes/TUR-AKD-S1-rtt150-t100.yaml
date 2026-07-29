@@ -2,7 +2,7 @@ contribution_id: TUR-AKD-S1
 facility: RTT150 & T100
 aperture: 1.5m / 1.0m
 country: Türkiye
-site: TÜBITAK National Observatory
+site: TÜBİTAK National Observatory
 latitude: 36.825
 longitude: 30.335
 instrumentation:
@@ -28,7 +28,7 @@ external_links:
   url: https://tug.tubitak.gov.tr/en/teleskoplar/t100-telescope
 - label: RTT150
   url: https://tug.tubitak.gov.tr/en/teleskoplar/rtt150-telescope-0
-summary: 23 nights per year will be available at the T100 and RTT150 telescopes at the TUBITAK
+summary: 23 nights per year will be available at the T100 and RTT150 telescopes at the TÜBİTAK
   National Observatory in southern Türkiye. ToO is supported on predefined nights only, not
   as a full-time interrupt capability. This contribution is expected to be available for 10
   years from the first semester of availability.

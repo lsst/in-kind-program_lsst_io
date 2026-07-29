@@ -2,9 +2,7 @@
 Telescope Access
 ################
 
-This page lists the facilities expected to be made available via the Vera C. Rubin Observatory In-kind Program.
-The information on this page is subject to change. Final information on resources, time availability, and other pertinent information will be provided as part of the `NOIRLab Call for Proposals <https://noirlab.edu/science/observing-noirlab/proposals>`_ each semester.
-Unless otherwise noted, this time will be made available via the NOIRLab Time Allocation Process.
+This page lists the facilities expected to be made available via the Vera C. Rubin Observatory In-kind Program. The information on this page is subject to change. Final information on resources, time availability, and other pertinent information will be provided as part of the `NOIRLab Call for Proposals <https://noirlab.edu/science/observing-noirlab/proposals>`_ each semester. Unless otherwise noted, this time will be made available via the NOIRLab Time Allocation Process.
 
 Use the filters, search, or map below to find facilities relevant to your science case.
 
@@ -17,12 +15,12 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <style>
         .ikt-opp-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .ikt-opp-card { border: 2px solid #1a5c33; border-radius: 0.75rem; padding: 1rem 1.25rem; background: #f3faf6; }
-        .ikt-opp-title { font-weight: 600; margin: 0 0 0.4em; }
+        .ikt-opp-card { border: 2px solid #1a5c33; border-radius: 0.75rem; padding: 1rem 1.25rem; background: #f3faf6; color: #1a1a1a; }
+        .ikt-opp-title { font-weight: 600; margin: 0 0 0.4em; color: #1a1a1a; }
         .ikt-opp-milestones { list-style: none; margin: 0.6em 0; padding: 0; font-size: 0.9em; }
         .ikt-opp-milestones li { padding: 0.15em 0; }
         .ikt-opp-milestones .approx::after { content: " (approx.)"; color: #666; }
-        .ikt-opp-links a { margin-right: 1em; font-size: 0.9em; }
+        .ikt-opp-links a { margin-right: 1em; font-size: 0.9em; color: #145c33; }
       </style>
 
       <div class="ikt-opp-row">
@@ -93,12 +91,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             {% for v in all_wavelengths %}<option value="wl-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
           </select>
         </label>
+        {% if all_resolution_bins %}
         <label>Resolution
           <select id="ikt-filter-res">
             <option value="">All</option>
             {% for key, label in all_resolution_bins %}<option value="res-{{ key }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
+        {% endif %}
         <label>Multiplex
           <select id="ikt-filter-multiplex">
             <option value="">All</option>
@@ -202,7 +202,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         function applyFilters() {
           var instr = document.getElementById('ikt-filter-instr').value;
           var wl = document.getElementById('ikt-filter-wl').value;
-          var res = document.getElementById('ikt-filter-res').value;
+          var resEl = document.getElementById('ikt-filter-res');
+          var res = resEl ? resEl.value : '';
           var multiplex = document.getElementById('ikt-filter-multiplex').value;
           var status = document.getElementById('ikt-filter-status').value;
           var hemisphere = document.getElementById('ikt-filter-hemisphere').value;

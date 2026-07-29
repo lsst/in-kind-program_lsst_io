@@ -33,7 +33,7 @@ contacts:
 first_semester: TBA
 time_available: 2 nights/semester
 duration: 10 years
-status: future_semester
+status: available
 tac_process: special
 external_links:
 - label: Home
@@ -45,4 +45,4 @@ summary: Roughly two nights per semester will be available at the Gran Telescopi
   (Barcelona-Madrid) and ESP-IAC-S1 (IAC). In-kind access to the GTC is not allocated via
   the NOIRLab TAC, but via a dedicated Letter-of-Intent + Spanish TAC co-PI process (see the
   featured opportunity above when a call is open). This contribution is expected to be available
-  for ten years from the starting semester.
+  for 10 years from the starting semester.
