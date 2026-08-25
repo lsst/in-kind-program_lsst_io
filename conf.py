@@ -38,6 +38,11 @@ linkcheck_ignore = [
     # reliably broken.
     r'https://zenodo\.org/.*',
     r'https://doi\.org/10\.5281/zenodo\..*',
+    # ADS abstract pages (linked from the SWE-STK-S4 dataset card and the
+    # UKD-UKD-S17 software card) return 405 Not Allowed to non-browser user
+    # agents, including sphinx's linkcheck bot -- the link itself is valid,
+    # it's just blocking automated requests, same pattern as WISeREP above.
+    r'https://ui\.adsabs\.harvard\.edu/.*',
 ]
 
 
