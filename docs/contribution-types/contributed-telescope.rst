@@ -20,18 +20,24 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         .ikt-opp-milestones { list-style: none; margin: 0.6em 0; padding: 0; font-size: 0.9em; }
         .ikt-opp-milestones li { padding: 0.15em 0; }
         .ikt-opp-milestones .approx::after { content: " (approx.)"; color: #666; }
+        .ikt-opp-milestones .passed { text-decoration: line-through; color: #888; }
+        .ikt-opp-milestones .passed::after { content: " (passed)"; text-decoration: none; color: #a12626; }
         .ikt-opp-links a { margin-right: 1em; font-size: 0.9em; color: #145c33; }
+        .ikt-opp-card-warning { border-color: #8a5a00; background: #fdeecb; }
       </style>
 
       <div class="ikt-opp-row">
       {% for opp in opportunities %}
-        <div class="ikt-opp-card" id="opp-{{ opp.slug }}">
+        <div class="ikt-opp-card{% if opp.accent %} ikt-opp-card-{{ opp.accent }}{% endif %}" id="opp-{{ opp.slug }}">
           <p class="ikt-opp-title">{{ opp.title }}</p>
           <p>{{ opp.summary }}</p>
           {% if opp.milestones %}
           <ul class="ikt-opp-milestones">
             {% for m in opp.milestones %}
-            <li{% if m.get('approximate') %} class="approx"{% endif %}><strong>{{ m.date }}</strong> &mdash; {{ m.label }}</li>
+            {% set m_classes = [] %}
+            {% if m.get('approximate') %}{% set _ = m_classes.append('approx') %}{% endif %}
+            {% if m.get('passed') %}{% set _ = m_classes.append('passed') %}{% endif %}
+            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.display_date or m.date }}</strong> &mdash; {{ m.label }}</li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -72,6 +78,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         .ikt-badge-success { background: #d9f2e3; color: #1a5c33; }
         .ikt-badge-muted { background: #e6e6e6; color: #555; }
         .ikt-badge-warning { background: #fdeecb; color: #8a5a00; }
+        .ikt-badge-danger { background: #fbdcdc; color: #a12626; }
         .ikt-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }
         .ikt-title-link:hover { text-decoration: underline; }
         .ikt-card.ikt-highlight .sd-card { outline: 3px solid #1a5c33; outline-offset: 2px; transition: outline-color 1.2s ease; }
@@ -110,6 +117,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <option value="">All</option>
             <option value="status-available">Available</option>
             <option value="status-future-semester">Future semester</option>
+            <option value="status-past-opportunity">Past Opportunity</option>
           </select>
         </label>
         <label>Hemisphere
@@ -141,7 +149,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% if t.marker_x is not none %}
           <circle class="ikt-map-marker" data-slug="{{ t.slug }}" data-tokens="{{ t.filter_tokens }}"
                   cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"
-                  fill="{{ '#1a5c33' if t.status == 'available' else '#8a5a00' }}"></circle>
+                  fill="{{ '#1a5c33' if t.status == 'available' else ('#a12626' if t.status == 'past_opportunity' else '#8a5a00') }}"></circle>
           {% endif %}
           {% endfor %}
         </svg>
@@ -168,7 +176,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td><button type="button" class="ikt-title-link" data-slug="{{ t.slug }}">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
-            <td>{% if t.status == 'available' %}<span class="ikt-badge ikt-badge-success">Available</span>{% else %}<span class="ikt-badge ikt-badge-warning">Future semester</span>{% endif %}</td>
+            <td>{% if t.status == 'available' %}<span class="ikt-badge ikt-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikt-badge ikt-badge-danger">Past Opportunity</span>{% else %}<span class="ikt-badge ikt-badge-warning">Future semester</span>{% endif %}</td>
             <td>{{ t.aperture or 'TBA' }}</td>
           </tr>
           {% endfor %}
@@ -300,6 +308,6 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
              Also available under this contribution: {% for s in t.siblings %}`{{ s.label }} <#{{ s.slug }}>`_{{ ", " if not loop.last }}{% endfor %}
           {% endif %}
           +++
-          {% if t.status == 'available' %}:bdg-success:`Available`{% else %}:bdg-warning:`Future semester`{% endif %}
+          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'past_opportunity' %}:bdg-danger:`Past Opportunity`{% else %}:bdg-warning:`Future semester`{% endif %}
 
       {% endfor %}

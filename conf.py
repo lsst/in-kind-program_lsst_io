@@ -396,7 +396,7 @@ def _load_world_outline_path():
     return match.group(1) if match else ""
 
 
-_STATUS_SORT_ORDER = {"available": 0, "future_semester": 1}
+_STATUS_SORT_ORDER = {"available": 0, "future_semester": 1, "past_opportunity": 2}
 _SIBLING_CONSISTENCY_FIELDS = (
     "summary", "time_available", "duration", "status", "tac_process",
 )
@@ -465,8 +465,9 @@ def _load_contributed_telescopes():
             record["resolution_bin"] = None
             record["resolution_bin_label"] = None
 
-        # Only two states are tracked ("available" / "future_semester") --
-        # a facility whose availability isn't confirmed yet is future
+        # Three states are tracked: "available", "future_semester", and
+        # "past_opportunity" (a facility/opportunity that has closed). A
+        # facility whose availability isn't confirmed yet is future
         # semester by definition, so that's the safe default for a record
         # that omits `status` rather than a separate "tba" bucket.
         status = record.get("status", "future_semester")
