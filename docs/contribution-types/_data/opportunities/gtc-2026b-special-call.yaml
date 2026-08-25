@@ -1,6 +1,7 @@
 id: gtc-2026b-special-call
 title: GTC Observing Time Opportunity for the US and Chilean Community
 kind: special_call
+accent: warning
 related_contribution_ids:
 - ESP-BCM-S5
 - ESP-IAC-S1
@@ -10,6 +11,7 @@ summary: A special allocation of ~2 nights/semester on the 10.4m Gran Telescopio
 milestones:
 - label: Letters of Intent due
   date: '2026-08-07'
+  passed: true
 - label: Matchmaking & feasibility notifications
   date: '2026-08-31'
   approximate: true
@@ -17,6 +19,9 @@ milestones:
   date: '2026-09-01'
 - label: Spanish TAC submission deadline
   date: '2026-10-01'
+- label: Expected next opportunity
+  date: '2027-02-01'
+  display_date: Feb 2027
 links:
 - label: Full announcement
   url: https://community.lsst.org/t/gtc-observing-time-opportunity-for-the-us-and-chilean-community/12233
