@@ -80,6 +80,16 @@ Developer Profiles
 Some of the developers in the general pool have provided a short profile.
 
 
+Gerard Pérez Iglesias
+---------------------
+
+Spain (ESP-BCM-S4)
+
+I recently started working as a Software Engineer at the Institut de Física d’Altes Energies (IFAE), located at the Universitat Autònoma de Barcelona (UAB) campus.
+We provide engineering solutions for the projects in which IFAE is involved. Currently, I am working on the VIRGO and Future Circular Collider (FCC-hh) projects.
+I feel comfortable developing with Python, C/C++, Docker, and RESTful APIs, based on my experience in both my current role and previous companies I’ve worked for.
+
+
 Dr. Rekhesh Mohan
 -----------------
 
