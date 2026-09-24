@@ -41,8 +41,8 @@ capacity:
   free_storage_pb_years: 11.7
   cpu_mhrs:              280
   free_cpu_mhrs:         265.8
-  gpu_mhrs:              1
-  free_gpu_mhrs:         0.5
+  gpu_mhrs:              null
+  free_gpu_mhrs:         null
   hosted_data_pb_years:  53
   expected_local_users:  60
 
@@ -56,11 +56,11 @@ hardware:
 
 # === Software services & platform =========================================
 software_services: |
-  TBD
+  File storage with Lustre, Job scheduling with SLURM, Parallel jobs with OpenMPI/MPICH, Database hosted in PostgreSQL, Rubin data butler
 
 # === Complementary / auxiliary datasets ===================================
 complementary_datasets: |
-  Community-derived data products; Auxiliary data products relevant for transient + galaxy science such as SDSS, PS, WISE, VEXAS, KIDS, GALEX, Euclid
+  Community-derived data products; Auxiliary data products relevant for transient + galaxy science such as Euclid, DESI, GAIA, SDSS, 2MASS, PS, WISE, VEXAS, KIDS, GALEX
 
 # === Science use cases this IDAC specializes in ===========================
 use_cases: |
@@ -73,13 +73,18 @@ science_collaboration_agreements: ""
 # === Onboarding & documentation links (please fill in) ====================
 documentation:
   - title: "Onboarding guide"
-    url:   ""
+    url:   "https://wiki.nbi.ku.dk/lsst_idac/Main_Page"
   - title: "Science platform / user portal"
     url:   ""
 
 # === Contacts =============================================================
 contacts:
-  []  # TODO: add at least one contact
+  - name:  "Aidan Sedgewick"
+    email: "aidan.sedgewick@nbi.ku.dk"
+    role:  "Technical contacts"
+  - name:  "Aman Raju"
+    email: "aman.raju@nbi.ku.dk"
+    role:  "Technical contacts"
 
 # === Free-text notes ======================================================
 notes: ""
