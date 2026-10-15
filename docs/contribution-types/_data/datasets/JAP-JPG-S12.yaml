@@ -2,6 +2,7 @@ contribution_id: JAP-JPG-S12
 title: Contribution to the LSST photo-z calibration with the PFS-SSP galaxy evolution dataset
 country: Japan
 institute: Japan Participation Group (JPG)  # institute full name inferred, flagged for confirmation
+last_updated: '2026-07-15'
 
 form_data:
   submitted: false

@@ -2,6 +2,7 @@ contribution_id: NZL-AUK-S2
 title: "The MOA Archive: two decades of Galactic Bulge and Magellanic Clouds photometry"
 country: New Zealand
 institute: Auckland
+last_updated: '2026-07-15'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:

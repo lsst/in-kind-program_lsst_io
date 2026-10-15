@@ -2,6 +2,7 @@ contribution_id: ISR-UST-S2
 title: ULTRASAT all-sky UV maps
 country: Israel
 institute: UST
+last_updated: '2026-07-15'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:

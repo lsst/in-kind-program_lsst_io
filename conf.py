@@ -93,7 +93,10 @@ def _is_shallow_clone():
 
 
 def _last_updated(path):
-    """Best-effort "last updated" date for a single dataset/software record
+    """Fallback only: cards normally carry an explicit `last_updated` (see
+    `_record_last_updated`, ADR 0007).
+
+    Best-effort "last updated" date for a single dataset/software record
     file.
 
     Prefers the file's most recent git commit date (accurate and portable
@@ -143,6 +146,21 @@ def _last_updated(path):
         return datetime.date.fromtimestamp(path.stat().st_mtime).isoformat()
     except Exception:
         return fallback
+
+
+def _record_last_updated(record, path):
+    """The "Updated" date shown on a dataset/software card.
+
+    Each card's YAML carries an explicit, quoted `last_updated: 'YYYY-MM-DD'`
+    (ADR 0007), so the date means "content last changed" and is not disturbed
+    by maintenance commits. Records without the field (e.g. a hand-made new
+    card) fall back to the git-derived date. The value is always a string,
+    exactly as _last_updated() returns, so templates and sorting are unchanged.
+    """
+    explicit = record.get("last_updated")
+    if explicit:
+        return str(explicit)
+    return _last_updated(path)
 
 
 def _collect_cross_page_titles(subdir_name):
@@ -239,7 +257,7 @@ def _load_contributed_datasets():
 
         cid_slug = _slugify(record.get("contribution_id", ""))
         record["cid_slug"] = cid_slug
-        record["last_updated"] = _last_updated(path)
+        record["last_updated"] = _record_last_updated(record, path)
         record["related"] = _resolve_related_titles(
             curated.get("related_contribution_ids"),
             ("contributed-software.html", software_titles),
@@ -767,7 +785,7 @@ def _load_contributed_software():
 
         cid_slug = _slugify(record.get("contribution_id", ""))
         record["cid_slug"] = cid_slug
-        record["last_updated"] = _last_updated(path)
+        record["last_updated"] = _record_last_updated(record, path)
         record["uat_keywords"] = uat_keywords
         record["software_links"] = _extract_links(form_data.get("software_url"))
         record["documentation_links"] = _extract_links(form_data.get("documentation"))

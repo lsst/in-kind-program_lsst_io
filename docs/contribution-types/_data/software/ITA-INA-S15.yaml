@@ -2,6 +2,7 @@ contribution_id: ITA-INA-S15
 title: Tools for classification, full characterization and validation of variable sources
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration

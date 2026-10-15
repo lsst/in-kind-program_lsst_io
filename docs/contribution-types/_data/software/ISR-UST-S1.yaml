@@ -2,6 +2,7 @@ contribution_id: ISR-UST-S1
 title: Joint ULTRASAT-LSST Transient Alerts
 country: Israel
 institute: ULTRASAT
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: Rubin Prompt Processing Group

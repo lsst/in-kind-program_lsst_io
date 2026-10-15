@@ -3,6 +3,7 @@ title: Supernova Lightcurves and low-resolution spectra for Full-sky Low-redshif
   Complementing LSST
 country: Sweden
 institute: Stockholm University
+last_updated: '2026-07-28'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:

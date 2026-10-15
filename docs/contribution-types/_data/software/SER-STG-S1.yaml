@@ -2,6 +2,7 @@ contribution_id: SER-STG-S1
 title: Credit for past contribution to the LSST by Serbian Technical Group (STG)
 country: Serbia
 institute: STG
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: Rubin Prompt Processing Group

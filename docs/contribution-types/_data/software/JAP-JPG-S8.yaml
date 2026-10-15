@@ -2,6 +2,7 @@ contribution_id: JAP-JPG-S8
 title: ML deblending algorithm with ground- and space-based images
 country: Japan
 institute: JPG
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration

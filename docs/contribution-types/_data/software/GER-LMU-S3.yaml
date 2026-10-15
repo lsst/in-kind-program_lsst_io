@@ -2,6 +2,7 @@ contribution_id: GER-LMU-S3
 title: Cluster Line of Sight Simulation Software (near-term directable software development)
 country: Germany
 institute: LMU_Munich
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration

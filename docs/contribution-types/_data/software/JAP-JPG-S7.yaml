@@ -2,6 +2,7 @@ contribution_id: JAP-JPG-S7
 title: Software for calibrating the covariance matrix for large-scale structure probes
 country: Japan
 institute: JPG
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
