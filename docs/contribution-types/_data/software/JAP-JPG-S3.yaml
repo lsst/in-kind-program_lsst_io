@@ -39,8 +39,6 @@ form_data:
     instrument scientist for user support and software deployment of RSP in coordination with
     Rubin Community Engagement team and other related personnel.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -44,8 +44,6 @@ form_data:
     TJP pipelines.The LSST DESC has endorsed this contribution.'
   timeline: 'FY22: New hire (postdoc, 0.5 FTE)FY23: New hire (postdoc, 0.5 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -6,8 +6,6 @@ last_updated: '2026-07-22'
 
 form_data:
   submitted: false
-  email: null
-  name: null
   target_audience: null
   contribution_summary: null
   version: null

@@ -30,8 +30,6 @@ form_data:
   timeline: 'FY22: software developer to be hired 0.5 FTEFY23: software developer to be hired
     0.5 FTETotal: 1 FTE'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

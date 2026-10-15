@@ -30,8 +30,6 @@ form_data:
     will be supported.'
   timeline: 'FY21: Software engineer, 0.25 FTEFY22: Software engineer, 0.75 FTE'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

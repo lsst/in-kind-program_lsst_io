@@ -27,8 +27,6 @@ form_data:
   timeline: 'FY23-25 (flexible): New hire (postdoc, 0.5 FTE)FY26-28 (flexible): New hire (postdoc,
     0.5 FTE)FY29-FY35: potential continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

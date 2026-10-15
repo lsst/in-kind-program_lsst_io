@@ -43,8 +43,6 @@ form_data:
     by the hired personnel. In particular, Stefano Cavuoti is the contact point for the SitCom
     team.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

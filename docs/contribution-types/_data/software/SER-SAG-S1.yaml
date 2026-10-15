@@ -53,8 +53,6 @@ form_data:
     members will also be embedded within the recipient teams. From FY24, Dr Viktor Radovic
     will become a single point of contact.'
   submitted: true
-  email: andjelka.kovacevic@matf.bg.ac.rs
-  submitter_name: Andjelka Kovacevic
   target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
   software_name: QhX v0.2.1 (main inkind derivable), additional delierable QNPy-Latte 0.1.0
   version: null

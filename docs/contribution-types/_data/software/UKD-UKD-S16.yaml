@@ -43,8 +43,6 @@ form_data:
     with Lasair integration, comparing phase curves from different years, brightness/activity
     between perihelion passage, and incorporating data releases/multi-year prompt data products.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -44,8 +44,6 @@ form_data:
     or the full FTEs will be contributed to a single collaboration will be determined in due
     course, taking into account Rubin’s needs.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

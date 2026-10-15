@@ -31,8 +31,6 @@ form_data:
   timeline: 'FY23: New hire (postdoc, 1.0 FTE), + Staff scientists, 0.3 FTEFY24: New hire
     (postdoc, 1.0 FTE), + Staff scientists, 0.3 FTE'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -26,8 +26,6 @@ form_data:
     the DESC environment at NERSC.
   timeline: 'FY21 through FY26: Dr. Ignacio Sevilla-Noarbe (staff, 0.25 FTE/yr).'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

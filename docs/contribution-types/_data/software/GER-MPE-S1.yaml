@@ -41,8 +41,6 @@ form_data:
     support will be at a constant level considering the related effort in S1 and S2 over the
     four year period.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

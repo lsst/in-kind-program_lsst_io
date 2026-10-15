@@ -61,8 +61,6 @@ form_data:
     with photo-z group for refined determination of photo-z for lens and source. Include more
     extensive lens models, including error bars on lens parameters.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

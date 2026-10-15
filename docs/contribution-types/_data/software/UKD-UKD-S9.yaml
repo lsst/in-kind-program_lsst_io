@@ -41,8 +41,6 @@ form_data:
     Dr. Tom Wilson (postdoc 0.7 FTE)FY23-FY35: Potential contribution of software maintenance
     effort and running.'
   submitted: true
-  email: t.j.wilson@exeter.ac.uk
-  submitter_name: Tom J. Wilson
   target_audience: General Rubin Community
   software_name: macauff
   version: 0.1.2

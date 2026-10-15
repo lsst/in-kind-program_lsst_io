@@ -76,8 +76,6 @@ form_data:
     periods immediately before their release.The contribution lead, Leo Girardi, will act
     as the main point of contact to the recipient group throughout the course of the contribution,'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

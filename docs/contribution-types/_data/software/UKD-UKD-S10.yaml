@@ -42,8 +42,6 @@ form_data:
   timeline: 'FY21: 1 FTE software developer for 0.5 yrs FY22: 1 FTE software developer for
     1.0 yrs FY23: 1 FTE software developer for 1.0 yrs'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null
