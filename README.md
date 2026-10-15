@@ -29,6 +29,10 @@ tox run -e lint,linkcheck
 The pre-commit hooks, which run in the `lint` environment, also run automatically when you commit changes.
 The pre-commit hooks are installed as part of the `make init` command.
 
+## Card dates
+
+Each dataset and software card has an explicit `last_updated: 'YYYY-MM-DD'` field in its YAML file. Update the date when the card's content changes. New records must include `last_updated`. Until a schema check is added, a missing field falls back to the file's git date.
+
 ## CI and preview
 
 This documentation is built with GitHub Actions. The `main` branch reflects the `in-kind-program.lsst.io` site.
