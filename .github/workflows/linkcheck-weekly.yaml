@@ -1,0 +1,61 @@
+# Weekly full link check.
+#
+# Pull request builds skip a short list of URLs (see `linkcheck_ignore` in
+# conf.py) that are known to fail for reasons outside this repo, such as
+# expired TLS certificates or bot blocking. This workflow re-tests everything,
+# including those URLs, with more retries and a longer timeout, so a fixed
+# link can be un-ignored and a newly broken one is noticed.
+#
+# The job fails when any link is broken, and GitHub's notification for failed
+# scheduled workflows is how the maintainer finds out. Some failures are
+# expected while ignored URLs are still broken.
+#
+# To run it manually: Actions tab -> "Weekly link check" -> Run workflow.
+
+name: Weekly link check
+
+env:
+  PYTHON_VERSION: "3.13"
+
+"on":
+  schedule:
+    # Mondays at 06:00 UTC.
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history, as in ci.yaml (file dates come from `git log`).
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install tox
+        run: pip install tox
+
+      - name: Run full link check
+        run: tox run -e linkcheck
+        env:
+          # Tells conf.py to re-test ignored URLs and raise retries/timeout.
+          IKP_LINKCHECK_FULL: "1"
+
+      - name: Upload link check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linkcheck-report
+          path: |
+            _build/linkcheck/output.json
+            _build/linkcheck/output.txt
+          if-no-files-found: warn
