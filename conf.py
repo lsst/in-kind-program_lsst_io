@@ -13,36 +13,53 @@ html_theme_options = {
 }
 
 
-linkcheck_ignore = [
-    r'https://astronomers\.salt\.ac\.za/.*',
-    r'https://vidojevica\.aob\.rs/.*',
-    # WISeREP (linked from the NOT facility card) returns 403 to
-    # non-browser user agents, including sphinx's linkcheck bot -- the
-    # link itself is valid, it's just blocking automated requests.
-    r'https://www\.wiserep\.org/.*',
-    # GTC and the INAF SIPGI proposal tool (linked from the GTC and LBT
-    # facility cards) both serve incomplete SSL certificate chains --
-    # real, reachable sites that browsers tolerate but Python's ssl
-    # module rejects with CERTIFICATE_VERIFY_FAILED in CI.
-    r'https://www\.gtc\.iac\.es/.*',
-    r'https://pandora\.lambrate\.inaf\.it/.*',
-    # SER-SAG-S1 (QhX AGN catalogue, linked from both the Datasets and
-    # Software cards) serves an expired SSL certificate -- real,
-    # reachable site that browsers tolerate but Python's ssl module
-    # rejects with CERTIFICATE_VERIFY_FAILED in CI.
-    r'https://ser-sag\.pmf\.kg\.ac\.rs.*',
-    # zenodo.org (DOI/schema/documentation links on SER-SAG-S1's Software
-    # and Datasets cards) repeatedly times out under CI's 15s linkcheck
-    # timeout -- the records themselves resolve fine in a browser, Zenodo
-    # is just slow to respond often enough to make CI flaky rather than
-    # reliably broken.
-    r'https://zenodo\.org/.*',
-    r'https://doi\.org/10\.5281/zenodo\..*',
-    # ADS abstract pages (linked from the SWE-STK-S4 dataset card and the
-    # UKD-UKD-S17 software card) return 405 Not Allowed to non-browser user
-    # agents, including sphinx's linkcheck bot -- the link itself is valid,
-    # it's just blocking automated requests, same pattern as WISeREP above.
-    r'https://ui\.adsabs\.harvard\.edu/.*',
+# ----------------------------------------------------------------------------
+# Linkcheck settings (tuned 2026-10-16)
+#
+# Ignored URLs below will be re-tested by a planned weekly full link check, so
+# an entry here hides a link from the PR build only, not forever.
+# ----------------------------------------------------------------------------
+
+# 2026-10-16: Sphinx 8.1.3 does not retry timeouts, and a timeout fails the
+# build. Documenteer's preset is 15 s; slow-but-working hosts (e.g. LBT) need
+# more headroom.
+linkcheck_timeout = 30
+
+# 2026-10-16: use += so Documenteer's preset entries (e.g. ^https://ls.st/)
+# are kept instead of being replaced. Each pattern is an anchored exact-URL
+# regex (re.escape style) for a URL actually used on the site today, so any
+# new link on the same host is still checked. Add a URL here only when it is
+# known-broken for a documented reason.
+linkcheck_ignore += [
+    # 2026-10-16: returns 404. Kept ignored until a replacement link is
+    # available. Other vidojevica.aob.rs URLs are now checked.
+    r'^https://vidojevica\.aob\.rs/index\.php\?option=com_content&view=article&id=21&Itemid=28$',
+    # 2026-10-16: WISeREP (NOT telescope card) returns 403 to GitHub Actions
+    # runners even with a browser User-Agent, though it works from a desktop.
+    # The block is by network, not by agent string, so it can't be fixed here.
+    r'^https://www\.wiserep\.org/$',
+    # 2026-10-16: SALT (SZA-SAA-S1 telescope card) -- incomplete TLS
+    # certificate chain; browsers tolerate it but Python's ssl rejects it
+    # (CERTIFICATE_VERIFY_FAILED).
+    r'^https://astronomers\.salt\.ac\.za/$',
+    r'^https://astronomers\.salt\.ac\.za/instruments/$',
+    r'^https://astronomers\.salt\.ac\.za/proposals/$',
+    r'^https://astronomers\.salt\.ac\.za/software/$',
+    # 2026-10-16: INAF SIPGI proposal tool (LBT card) -- incomplete TLS
+    # certificate chain (CERTIFICATE_VERIFY_FAILED in Python's ssl).
+    r'^https://pandora\.lambrate\.inaf\.it/sipgi/$',
+    # 2026-10-16: SER-SAG-S1 AGN catalogue (Datasets and Software cards) --
+    # expired TLS certificate; browsers tolerate it, Python's ssl does not.
+    r'^https://ser-sag\.pmf\.kg\.ac\.rs:8081/agn_catalogue\.php$',
+    # 2026-10-16: Zenodo (SER-SAG-S1 cards) repeatedly times out. Keep these
+    # ignored until PR link checks stop failing on timeouts (planned); the
+    # records resolve fine in a browser.
+    r'^https://zenodo\.org/records/18248330$',
+    r'^https://doi\.org/10\.5281/zenodo\.17980656$',
+    # 2026-10-16: ADS abstract pages (SWE-STK-S4 dataset card, UKD-UKD-S17
+    # software card) return 405 to automated requests (WAF).
+    r'^https://ui\.adsabs\.harvard\.edu/abs/2025A%26A\.\.\.694A\.\.\.1R/abstract$',
+    r'^https://ui\.adsabs\.harvard\.edu/abs/2026MNRAS\.547ag360C$',
 ]
 
 
