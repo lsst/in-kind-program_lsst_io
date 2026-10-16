@@ -26,10 +26,10 @@ tac_process: default
 external_links:
 - label: Home
   url: https://www.astro.ncu.edu.tw/ncutwom/
-summary: NCU is providing approximately 20 nights per semester for 10 years on the 2-meter Trans-Pacific
-  Telescope at San Pedro Mártir, Mexico, for dedicated follow-up imaging observations complementing
-  LSST data. Observations are queue-mode (no travel required); standard calibration data are
-  taken nightly by on-site staff. Raw data are available within 24 hours and fully reduced/calibrated
-  data within 48 hours, with photometric catalogs available on request. NCU intends to conform
-  to AEON standards, but procedures are not yet established -- this project is still pre-first-light.
-  A user helpdesk is currently under development.
+summary: NCU is providing approximately 20 nights per semester for 10 years on the 2-meter
+  Trans-Pacific Telescope at San Pedro Mártir, Mexico, for dedicated follow-up imaging observations
+  complementing LSST data. Observations are queue-mode (no travel required); standard calibration
+  data are taken nightly by on-site staff. Raw data are available within 24 hours and fully
+  reduced/calibrated data within 48 hours, with photometric catalogs available on request.
+  NCU intends to conform to AEON standards, but procedures are not yet established -- this
+  project is still pre-first-light. A user helpdesk is currently under development.
