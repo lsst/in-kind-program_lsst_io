@@ -51,7 +51,7 @@ jobs:
         uses: lsst-sqre/run-tox@v1
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          tox-envs: "html,linkcheck"
+          tox-envs: "html,linkcheck,test"
 
       - uses: actions/upload-artifact@v4
         with:

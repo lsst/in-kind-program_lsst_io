@@ -1,0 +1,129 @@
+{
+  "cid_to_slugs": {
+    "ESP-BCM-S5": [
+      "esp-bcm-s5-esp-iac-s1-gtc"
+    ],
+    "ESP-IAC-S1": [
+      "esp-bcm-s5-esp-iac-s1-gtc"
+    ],
+    "ITA-INA-S18": [
+      "ita-ina-s18-lbt",
+      "ita-ina-s18-vst"
+    ],
+    "JAP-JPG-S1": [
+      "jap-jpg-s1-subaru"
+    ],
+    "KOR-KAS-S2": [
+      "kor-kas-s2-kmtnet-cerro-tololo",
+      "kor-kas-s2-kmtnet-saao",
+      "kor-kas-s2-kmtnet-siding-spring"
+    ],
+    "NZL-AUK-S1": [
+      "nzl-auk-s1-mclellan",
+      "nzl-auk-s1-nishimura"
+    ],
+    "SER-SAG-S2": [
+      "ser-sag-s2-milankovic"
+    ],
+    "SWE-STK-S3": [
+      "swe-stk-s3-not"
+    ],
+    "SZA-SAA-S1": [
+      "sza-saa-s1-salt"
+    ],
+    "SZA-SAA-S4": [
+      "sza-saa-s4-saao-various"
+    ],
+    "TAI-NCU-S1": [
+      "tai-ncu-s1-trans-pacific"
+    ],
+    "TUR-AKD-S1": [
+      "tur-akd-s1-rtt150-t100"
+    ]
+  },
+  "opportunities": [
+    {
+      "contact": null,
+      "id": "noirlab-cfp-2027a",
+      "is_visible": true,
+      "kind": "general_cfp",
+      "links": [
+        {
+          "label": "NOIRLab Call for Proposals",
+          "url": "https://noirlab.edu/science/observing-noirlab/proposals/call-for-proposals"
+        }
+      ],
+      "milestones": [
+        {
+          "date": "2026-09-30",
+          "label": "Proposal submission deadline (11:59 pm MST)"
+        }
+      ],
+      "next_milestone_date": "2026-09-30",
+      "related_contribution_ids": [],
+      "slug": "noirlab-cfp-2027a",
+      "summary": "NOIRLab has issued the Call for Proposals for Semester 2027A, which includes access to many Rubin In-kind contributed facilities. <strong>New in 2027A</strong>: In addition to regular single-semester proposals, PIs are invited to request long-term status (up to three semesters) on proposals to observe with in-kind contributed facilities. Full details on the proposal process, and specific details on each facility and instrument availability can be found on the Call for Proposal web page.",
+      "title": "NOIRLab Call for Proposals -- Semester 2027A",
+      "visible_until": "2026-10-15"
+    },
+    {
+      "accent": "warning",
+      "contact": {
+        "email": "steven.margheim@noirlab.edu",
+        "name": "Steven Margheim",
+        "note": "eligibility, general process, program opportunities -- technical instrument questions go to the GTC website or submission-portal contacts instead"
+      },
+      "id": "gtc-2026b-special-call",
+      "is_visible": true,
+      "kind": "special_call",
+      "links": [
+        {
+          "label": "Full announcement",
+          "url": "https://community.lsst.org/t/gtc-observing-time-opportunity-for-the-us-and-chilean-community/12233"
+        },
+        {
+          "label": "LoI submission portal",
+          "url": "https://lsst.ice.csic.es/"
+        },
+        {
+          "label": "Official Announcement of Opportunity (PDF)",
+          "url": "https://community.lsst.org/uploads/short-url/d2UEv88IgQXxlDY42eGCG0visIK.pdf"
+        }
+      ],
+      "milestones": [
+        {
+          "date": "2026-08-07",
+          "label": "Letters of Intent due",
+          "passed": true
+        },
+        {
+          "approximate": true,
+          "date": "2026-08-31",
+          "label": "Matchmaking & feasibility notifications"
+        },
+        {
+          "date": "2026-09-01",
+          "label": "GTC Call for Proposals opens"
+        },
+        {
+          "date": "2026-10-01",
+          "label": "Spanish TAC submission deadline"
+        },
+        {
+          "date": "2027-02-01",
+          "display_date": "Feb 2027",
+          "label": "Expected next opportunity"
+        }
+      ],
+      "next_milestone_date": "2026-10-01",
+      "related_contribution_ids": [
+        "ESP-BCM-S5",
+        "ESP-IAC-S1"
+      ],
+      "slug": "gtc-2026b-special-call",
+      "summary": "A special allocation of ~2 nights/semester on the 10.4m Gran Telescopio Canarias (GTC) is available to the US and Chilean community via a Letter-of-Intent + Spanish TAC co-PI process.",
+      "title": "GTC Observing Time Opportunity for the US and Chilean Community",
+      "visible_until": "2026-10-01"
+    }
+  ]
+}
