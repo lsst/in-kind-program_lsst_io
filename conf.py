@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -25,12 +26,24 @@ html_theme_options = {
 # more headroom.
 linkcheck_timeout = 30
 
-# 2026-10-16: use += so Documenteer's preset entries (e.g. ^https://ls.st/)
+# 2026-10-16: extend (not replace) so Documenteer's preset entries (e.g. ^https://ls.st/)
 # are kept instead of being replaced. Each pattern is an anchored exact-URL
 # regex (re.escape style) for a URL actually used on the site today, so any
 # new link on the same host is still checked. Add a URL here only when it is
 # known-broken for a documented reason.
-linkcheck_ignore += [
+#
+# Set IKP_LINKCHECK_FULL (to any non-empty value) for a "full" run: the
+# project's ignore entries below are skipped so every ignored URL is re-tested
+# (a link that was ignored for a transient reason can then be noticed when it
+# recovers, or when it breaks for a new reason), and retries/timeout are raised
+# so slow hosts get a fair chance. Documenteer's preset ignores always stay.
+# Normal (pull request) builds are unaffected.
+_LINKCHECK_FULL = bool(os.environ.get("IKP_LINKCHECK_FULL"))
+if _LINKCHECK_FULL:
+    linkcheck_retries = 3
+    linkcheck_timeout = 60
+
+_project_linkcheck_ignore = [
     # 2026-10-16: returns 404. Kept ignored until a replacement link is
     # available. Other vidojevica.aob.rs URLs are now checked.
     r'^https://vidojevica\.aob\.rs/index\.php\?option=com_content&view=article&id=21&Itemid=28$',
@@ -61,6 +74,10 @@ linkcheck_ignore += [
     r'^https://ui\.adsabs\.harvard\.edu/abs/2025A%26A\.\.\.694A\.\.\.1R/abstract$',
     r'^https://ui\.adsabs\.harvard\.edu/abs/2026MNRAS\.547ag360C$',
 ]
+
+# Only the PR/normal build honours the project's ignore list (see above).
+if not _LINKCHECK_FULL:
+    linkcheck_ignore += _project_linkcheck_ignore
 
 
 # ============================================================================

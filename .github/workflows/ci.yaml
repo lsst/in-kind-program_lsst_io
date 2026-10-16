@@ -51,13 +51,31 @@ jobs:
         uses: lsst-sqre/run-tox@v1
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          tox-envs: "html,linkcheck,test"
+          tox-envs: "html,test"
 
       - uses: actions/upload-artifact@v4
         with:
           name: html
           path: _build/html/
           if-no-files-found: error
+
+  # Link checking is its own job so that a broken external link (or a flaky
+  # host) never blocks the preview upload, which needs only `build`.
+  linkcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history, same as the build job: the docs build that the
+          # link checker performs reads file dates from `git log`.
+          fetch-depth: 0
+
+      - name: Run tox
+        uses: lsst-sqre/run-tox@v1
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          tox-envs: "linkcheck"
 
   upload:
     runs-on: ubuntu-latest
