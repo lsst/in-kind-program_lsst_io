@@ -2,6 +2,7 @@ contribution_id: TAI-ASI-S4
 title: Non-Directable Software Development for the Galaxy SC
 country: Taiwan
 institute: ASIAA
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Galaxies Science Collaboration
@@ -42,8 +43,6 @@ form_data:
     Dr. Hung-Yu Jian (0.1 FTE)In total, Dr. Hsieh will contribute 1.9 FTE, while Dr. Jian
     will contribute 1.3 FTE, over 11 years.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

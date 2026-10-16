@@ -3,6 +3,7 @@ title: Target and Observations Management (TOM) system Development in the LSST T
   Collaboration
 country: Germany
 institute: ARI_ZAH
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -27,8 +28,6 @@ form_data:
     (senior postdoc, 0.5 FTE)FY24-FY35: Dr. Yiannis Tsapras (senior postdoc, 0.2 FTE), Dr.
     Markus Hundertmark (senior postdoc, 0.2 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

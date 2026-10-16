@@ -2,6 +2,7 @@ contribution_id: MEX-UNA-S4
 title: Science Pipeline Development in the SMWLV Science Collaboration
 country: Mexico
 institute: UNAM
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Stars Milky Way and Local Volume Science Collaboration
@@ -30,8 +31,6 @@ form_data:
     (Associate Professor, 0.5 FTE), Dr. Maria de los Ángeles Pérez Villegas (Associate Professor,
     0.15 FTE)FY26-FY35: potential continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

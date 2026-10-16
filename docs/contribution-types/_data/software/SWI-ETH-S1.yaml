@@ -2,6 +2,7 @@ contribution_id: SWI-ETH-S1
 title: Science Pipeline Development in the LSST Dark Energy Survey Collaboration
 country: Switzerland
 institute: ETH
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -29,8 +30,6 @@ form_data:
   timeline: 'FY22: software developer to be hired 0.5 FTEFY23: software developer to be hired
     0.5 FTETotal: 1 FTE'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

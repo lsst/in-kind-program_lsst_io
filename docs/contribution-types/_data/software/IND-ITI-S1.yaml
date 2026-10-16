@@ -2,6 +2,7 @@ contribution_id: IND-ITI-S1
 title: Science Pipeline Development in the LSST AGN Science Collaboration
 country: India
 institute: IIT-Indore
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST AGN Science Collaboration
@@ -24,8 +25,6 @@ form_data:
   timeline: 'FY23-24 (flexible): New hire (postdoc, 0.5 FTE)FY25-26 (flexible): New hire (postdoc,
     0.5 FTE)FY27-FY35: potential continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

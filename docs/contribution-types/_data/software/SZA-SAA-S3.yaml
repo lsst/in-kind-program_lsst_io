@@ -2,6 +2,7 @@ contribution_id: SZA-SAA-S3
 title: Planning and Infrastructure for the LSST Dark Energy Science Collaboration
 country: South Africa
 institute: SAAO
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -39,8 +40,6 @@ form_data:
     Michelle Lochner (senior lecturer, 0.5 FTE over 5 years for DESC-guided software development
     and maintenance)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

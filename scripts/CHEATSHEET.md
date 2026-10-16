@@ -1,3 +1,5 @@
+> **RETIRED:** `sync_contributions.py` is frozen and exits with an error. Do not run it: it would write submitter PII back into the data files and drop each card's explicit `last_updated`. A replacement form-response sync tool is in development. The notes below are kept for reference only.
+
 # Syncing contributions from the CSVs — cheatsheet
 
 Quick reference for running `sync_contributions.py` and getting the result onto the live site. For the full design rationale, see `revamp-planning/04-implementation-plan.md`.

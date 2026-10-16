@@ -2,6 +2,7 @@ contribution_id: UKD-OXF-S1
 title: DESC Analysis Pipeline Development
 country: UK
 institute: Oxford
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -36,8 +37,6 @@ form_data:
     FTE)FY24: New hire (postdoc/software engineer, 0.5 FTE)FY25-FY35: potential continued
     contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

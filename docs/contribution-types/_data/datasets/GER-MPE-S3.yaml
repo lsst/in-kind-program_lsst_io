@@ -2,12 +2,11 @@ contribution_id: GER-MPE-S3
 title: The LSST sources detected by eROSITA
 country: Germany
 institute: MPE
+last_updated: '2026-07-15'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
   submitted: false
-  email: null
-  name: null
   target_audience: null
   contribution_summary: null
   version: null

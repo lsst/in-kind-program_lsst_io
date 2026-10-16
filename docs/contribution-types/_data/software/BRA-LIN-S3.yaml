@@ -2,6 +2,7 @@ contribution_id: BRA-LIN-S3
 title: Contributions to Science Pipeline Development in the LSST-DESC TJP Working Group
 country: Brazil
 institute: LIneA
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -21,8 +22,6 @@ form_data:
     Andrade-Oliveira (postdoc, 0.25 FTE), Dr. Vitenti (0.25 FTE).FY24: Dr. Felipe Andrade-Oliveira
     (postdoc, 0.25 FTE), Dr. Vitenti (0.25 FTE).'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

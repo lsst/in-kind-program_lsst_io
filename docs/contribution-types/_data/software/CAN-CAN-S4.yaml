@@ -2,6 +2,7 @@ contribution_id: CAN-CAN-S4
 title: Science Pipeline Development in the LSST Transient and Variable Star Science Collaboration
 country: Canada
 institute: LSST:Canada
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -20,8 +21,6 @@ form_data:
     on 3 year contracts) working at 0.5 FTE/yr to provide directable support of the Transient
     and Variable Star Science Collaboration.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

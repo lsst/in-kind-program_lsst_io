@@ -2,6 +2,7 @@ contribution_id: IND-IUC-S3
 title: Science Pipeline Development in the LSST Transients and Variable stars Science Collaboration
 country: India
 institute: IUCAA
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -24,8 +25,6 @@ form_data:
   timeline: 'FY23-24: New hire (postdoc, 0.5 FTE)FY25-FY35: potential continued contribution
     of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

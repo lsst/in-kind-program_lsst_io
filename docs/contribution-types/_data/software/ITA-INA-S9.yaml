@@ -3,6 +3,7 @@ title: 'Directable SW contribution for the Galaxy and Strong Lensing SC and Data
   Structural parameters with Machine learning'
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Galaxies Science Collaboration
@@ -33,8 +34,6 @@ form_data:
   timeline: 'FY23: New hire (postdoc, 0.8 FTE) + C. Tortora (staff researcher, 0.2 FTE) FY24:
     New hire (postdoc, 0.8 FTE) + C. Tortora (staff researcher, 0.2 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

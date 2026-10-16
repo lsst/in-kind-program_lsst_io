@@ -2,6 +2,7 @@ contribution_id: POL-NCB-S6
 title: Science Pipeline Development in the LSST AGN Collaboration
 country: Poland
 institute: NCBJ
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST AGN Science Collaboration
@@ -29,8 +30,6 @@ form_data:
     Zajacek (post-doc, 0.5 FTE), supervised by Prof. Bożena CzernyFY23: new hire (post-doc,
     0.5 FTE), supervised by Prof. Bożena Czerny'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

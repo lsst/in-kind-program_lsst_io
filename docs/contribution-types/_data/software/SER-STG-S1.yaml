@@ -2,6 +2,7 @@ contribution_id: SER-STG-S1
 title: Credit for past contribution to the LSST by Serbian Technical Group (STG)
 country: Serbia
 institute: STG
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: Rubin Prompt Processing Group
@@ -34,8 +35,6 @@ form_data:
     Vujčić (software engineer, 0.1 FTE)FY20: Prof. Darko Jevremović, (0.2 FTE), Mr. Veljko
     Vujčić (software engineer, 0.1 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

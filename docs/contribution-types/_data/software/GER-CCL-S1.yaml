@@ -2,6 +2,7 @@ contribution_id: GER-CCL-S1
 title: Science Pipeline Development in the Dark Energy Science Collaboration
 country: Germany
 institute: GCCL
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -40,8 +41,6 @@ form_data:
     New Hire (0.5 FTE)FY24: New hire (0.5 FTE), New Hire (0.5 FTE)FY25-FY35: potential continued
     contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

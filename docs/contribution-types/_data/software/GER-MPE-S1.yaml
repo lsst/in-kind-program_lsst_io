@@ -2,6 +2,7 @@ contribution_id: GER-MPE-S1
 title: Photometric redshift tuned for AGN
 country: Germany
 institute: MPE
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST AGN Science Collaboration
@@ -40,8 +41,6 @@ form_data:
     support will be at a constant level considering the related effort in S1 and S2 over the
     four year period.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

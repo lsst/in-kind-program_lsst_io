@@ -2,6 +2,7 @@ contribution_id: GER-CCL-S2
 title: Science Pipeline Development in the Dark Energy Science Collaboration
 country: Germany
 institute: GCCL
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -32,8 +33,6 @@ form_data:
   timeline: 'FY25 (or earlier): Dr. Robert Reischke (postdoc, 0.5 FTE)FY26: Dr. Robert Reischke
     (postdoc, 0.5 FTE)FY27-FY35: potential continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

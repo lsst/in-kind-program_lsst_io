@@ -2,6 +2,7 @@ contribution_id: NED-UTR-S3
 title: Science Pipeline Development in the crowded field photometry coordination group
 country: Netherlands
 institute: Utrecht
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: Rubin Crowded Field Coordination Group
@@ -20,8 +21,6 @@ form_data:
     reflects that we anticipate the agreement on the statement of work will take some time
     to complete as well as the ongoing obligations of Kostrzewa-Rutkowska to the Gaia DPAC.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

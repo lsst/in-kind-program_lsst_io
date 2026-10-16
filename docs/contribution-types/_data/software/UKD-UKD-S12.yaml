@@ -2,6 +2,7 @@ contribution_id: UKD-UKD-S12
 title: 'Science Software development: Phases C and D'
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: Rubin International Program Coordinator (Software Development)
@@ -44,8 +45,6 @@ form_data:
     LSST:UK Phase D FY2034 : 1 FTE for 0.5 yr (April to September) funded in LSST:UK Phase
     D'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

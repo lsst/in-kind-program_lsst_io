@@ -2,11 +2,10 @@ contribution_id: JAP-JPG-S10
 title: Subaru PFS spectroscopic follow-up survey of LSST transients in deep drilling fields
 country: Japan
 institute: Japan Participation Group (JPG)  # institute full name inferred, flagged for confirmation
+last_updated: '2026-07-15'
 
 form_data:
   submitted: false
-  email: null
-  name: null
   target_audience: null
   contribution_summary: null
   version: null

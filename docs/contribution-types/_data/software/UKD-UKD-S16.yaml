@@ -2,6 +2,7 @@ contribution_id: UKD-UKD-S16
 title: Adler - Solar System Transient Classification
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Solar System Science Collaboration
@@ -42,8 +43,6 @@ form_data:
     with Lasair integration, comparing phase curves from different years, brightness/activity
     between perihelion passage, and incorporating data releases/multi-year prompt data products.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

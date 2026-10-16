@@ -3,6 +3,7 @@ title: 'LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-
   v1.0.0) and obs_vista (version: v1.2.0)'
 country: null
 institute: null
+last_updated: '2026-07-29'
 form_data:
   category: null
   primary_recipient_group: null
@@ -10,8 +11,6 @@ form_data:
   activity_description: null
   timeline: null
   submitted: true
-  email: E.Saremi@soton.ac.uk
-  submitter_name: Elham Saremi
   target_audience: General Rubin Community
   software_name: 'LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-fusion
     (version: v1.0.0) and obs_vista (version: v1.2.0)'

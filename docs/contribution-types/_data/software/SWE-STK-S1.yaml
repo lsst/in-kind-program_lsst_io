@@ -2,6 +2,7 @@ contribution_id: SWE-STK-S1
 title: Science Pipeline Development in the LSST Dark Energy Science Collaboration
 country: Sweden
 institute: Stockholm
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -33,8 +34,6 @@ form_data:
     New hire (postdoc, 0.5 FTE) FY26: New hire (postdoc, 0.5 FTE)FY27-FY35: potential continued
     contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

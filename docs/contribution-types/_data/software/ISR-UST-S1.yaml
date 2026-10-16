@@ -2,6 +2,7 @@ contribution_id: ISR-UST-S1
 title: Joint ULTRASAT-LSST Transient Alerts
 country: Israel
 institute: ULTRASAT
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: Rubin Prompt Processing Group
@@ -27,8 +28,6 @@ form_data:
     alert stream; develop algorithm and routines to associate ULTRASAT UV light curves with
     LSST sources prior to release.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

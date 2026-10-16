@@ -3,6 +3,7 @@ title: 'Science Software development: spectroscopic classification of transients
   spectra'
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -41,8 +42,6 @@ form_data:
   timeline: 'FY21: 1 FTE software developer for 0.5 yrs FY22: 1 FTE software developer for
     1.0 yrs FY23: 1 FTE software developer for 1.0 yrs'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -2,6 +2,7 @@ contribution_id: SLO-UNG-S2
 title: Science Pipeline Development in the LSST TVS Science Collaboration
 country: Slovenia
 institute: UNG
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -25,8 +26,6 @@ form_data:
     FTE)Or FY22: Dr. Mile Karlica (postdoc, 0.5 FTE), Dr. Saptashwa Bhattacharyya (postdoc,
     0.5 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

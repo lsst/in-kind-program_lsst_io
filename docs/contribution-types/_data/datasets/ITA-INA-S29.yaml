@@ -3,6 +3,7 @@ title: 'Toward next-generation time-domain surveys (TIMEDOMES): VST monitoring o
   Deep Drilling Fields'
 country: Italy
 institute: INAF
+last_updated: '2026-07-28'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
@@ -51,8 +52,6 @@ form_data:
     DR5: planned for the first half of 2027 will release the full dataset, catalogs and lightcurves
     of all fields.'
   final_report: N/A
-  email: maurizio.paolillo@unina.it
-  name: Maurizio Paolillo
   target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
   contribution_summary: 'The TIMEDOMES project aims at producing a legacy dataset of images,
     catalogs and lightcurves over 4 of the LSST Deep Drilling Fields (COSMOS, CDF-S, XMM-LSS,

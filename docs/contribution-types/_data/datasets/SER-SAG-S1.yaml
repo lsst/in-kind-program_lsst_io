@@ -3,6 +3,7 @@ title: Science Pipeline Development for analysis of variability of celestial sou
   LSST AGN and TVS Science Collaboration (associated dataset)
 country: Serbia
 institute: SAGNT
+last_updated: '2026-07-29'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:

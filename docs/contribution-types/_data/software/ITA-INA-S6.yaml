@@ -3,6 +3,7 @@ title: 'Directable SW contribution for the Galaxies SC: Tools for the measuremen
   brightness fluctuations on LSST data'
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Galaxies Science Collaboration
@@ -40,8 +41,6 @@ form_data:
     1.0 FTE) + staff researcher (0.2 FTE) FY27:New hire (postdoc, 1.0 FTE) + staff researcher
     (0.2 FTE)
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

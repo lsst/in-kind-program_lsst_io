@@ -3,6 +3,7 @@ title: 'Cluster Finding and Likelihood: development and validation [near-term di
   development]'
 country: Germany
 institute: LMU_Munich
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -35,8 +36,6 @@ form_data:
     FTE10/23-9/27: Postdoc (to be hired), Sum: 0.4 FTEFY27-FY35: potential extended or continued
     contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

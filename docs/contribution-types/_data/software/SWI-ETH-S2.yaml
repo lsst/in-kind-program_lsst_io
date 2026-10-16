@@ -2,6 +2,7 @@ contribution_id: SWI-ETH-S2
 title: Covariance Estimation and Cosmology Ppieline Development in DESC
 country: Switzerland
 institute: ETH
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -22,8 +23,6 @@ form_data:
     0.10 FTE)FY26: Dr. Felipe Andrade-Oliveira (postdoc, 0.35 FTE), Dr. David Sanchez-Cid
     (postdoc, 0.35 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

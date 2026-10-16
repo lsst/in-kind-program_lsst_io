@@ -3,6 +3,7 @@ title: Contribution of Directable Software Development Effort to DESC Large Scal
   and/or photo-z WG
 country: Spain
 institute: BCN_MAD
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -25,8 +26,6 @@ form_data:
   timeline: 'FY23-FY24 (est): technical postdoc hired for 0.5 FTE effort, with support from
     staff specialists in the field.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

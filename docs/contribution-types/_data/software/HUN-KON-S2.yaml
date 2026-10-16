@@ -3,6 +3,7 @@ title: Directable Effort in the General Area of Machine Learning Classification 
   Infrastructure Software
 country: Hungary
 institute: Konkoly
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -42,8 +43,6 @@ form_data:
     Szklenár (Konkoly) 0.5 FTE/yr programmerFY23-FY35: potential new hire (0.2 FTE/yr) continued
     contribution to the development and maintenance effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

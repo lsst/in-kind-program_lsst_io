@@ -66,6 +66,7 @@ file is left completely untouched.
 import argparse
 import csv
 import re
+import sys
 from pathlib import Path
 
 import yaml
@@ -858,6 +859,19 @@ def sync(contributions_csv, form_responses_csv, auto_yes):
 
 
 def main():
+    # RETIRED (M01): this script would write submitter PII back into the data
+    # files and drop the explicit `last_updated` field. It is frozen until a
+    # replacement form-response sync tool (in development) is available. The
+    # code below is kept unchanged as a reference for that replacement.
+    # The exit happens before argument parsing, so even `--help` exits 1
+    # (intentional).
+    print(
+        "sync_contributions.py is retired and must not be run. A replacement "
+        "form-response sync tool is in development.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

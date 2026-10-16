@@ -3,6 +3,7 @@ title: Near-Term Directable computing infrastructure effort for Dark Energy Scie
   providing a link between
 country: Poland
 institute: NCBJ
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -43,8 +44,6 @@ form_data:
     support DESC group activities (direct effort) and maintenance for DESC computing infrastructureFY25-FY35:
     potential continued contribution of development effort, depending on future secured funding'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

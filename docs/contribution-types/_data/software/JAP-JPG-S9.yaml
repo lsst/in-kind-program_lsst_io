@@ -2,6 +2,7 @@ contribution_id: JAP-JPG-S9
 title: Directable effort in the SL working group
 country: Japan
 institute: JPG
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -28,8 +29,6 @@ form_data:
     0.2 FTE)FY26: New hire (postdoc, 0.5 FTE) or Dr. Masamune Oguri (faculty, 0.2 FTE)FY27-FY35:
     potential continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

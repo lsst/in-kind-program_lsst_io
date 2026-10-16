@@ -2,6 +2,7 @@ contribution_id: IND-NCR-S1
 title: Science Pipeline Development in the LSST Galaxies Science Collaboration
 country: India
 institute: NCRA
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Galaxies Science Collaboration
@@ -26,8 +27,6 @@ form_data:
   timeline: 'FY23-27 (flexible): New hire (postdoc, 0.5 FTE)FY28-FY35: potential continued
     contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

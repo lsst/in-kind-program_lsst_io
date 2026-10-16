@@ -2,11 +2,10 @@ contribution_id: JAP-JPG-S11
 title: Subaru PFS filler survey for LSST photo-z training dataset
 country: Japan
 institute: Japan Participation Group (JPG)  # institute full name inferred, flagged for confirmation
+last_updated: '2026-07-15'
 
 form_data:
   submitted: false
-  email: null
-  name: null
   target_audience: null
   contribution_summary: null
   version: null

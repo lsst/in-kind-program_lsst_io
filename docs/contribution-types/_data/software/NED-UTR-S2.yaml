@@ -3,6 +3,7 @@ title: Science Pipeline Development for astrophysical systematics for the LSST D
   Collaboration
 country: Netherlands
 institute: Utrecht
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -43,8 +44,6 @@ form_data:
     TJP pipelines.The LSST DESC has endorsed this contribution.'
   timeline: 'FY22: New hire (postdoc, 0.5 FTE)FY23: New hire (postdoc, 0.5 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

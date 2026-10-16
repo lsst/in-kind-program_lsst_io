@@ -2,6 +2,7 @@ contribution_id: MEX-UNA-S1
 title: Science Pipeline Development in the LSST SL AND DE Science Collaboration (Joint)
 country: Mexico
 institute: UNAM
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Strong Lensing Science Collaboration
@@ -41,8 +42,6 @@ form_data:
     primary contact between the team and the recipients and plans to continue to contribute
     to the effort in FY24 funding permitting (TBD, see S1.4.1).'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

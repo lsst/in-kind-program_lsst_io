@@ -2,6 +2,7 @@ contribution_id: UKD-UKD-S6
 title: 'Science Software development: Low surface brightness science'
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: Rubin Algorithms & Pipelines Team
@@ -41,8 +42,6 @@ form_data:
     Aaron Watkins (postdoc, 1 FTE)FY22: Dr Aaron Watkins (postdoc, 1 FTE)FY23 : Dr Aaron Watkins
     (postdoc, 1 FTE for 0.5 years)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

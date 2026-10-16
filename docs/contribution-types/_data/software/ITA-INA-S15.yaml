@@ -2,6 +2,7 @@ contribution_id: ITA-INA-S15
 title: Tools for classification, full characterization and validation of variable sources
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -36,8 +37,6 @@ form_data:
     Vincenzo Ripepi (Staff scientist, 0.1 FTE)FY26: New hire (postdoc, 0.8 FTE), Gisella Clementini
     (Staff scientist, 0.1 FTE), Vincenzo Ripepi (Staff scientist, 0.1 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

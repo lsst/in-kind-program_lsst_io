@@ -3,6 +3,7 @@ title: Galaxy Cluster Analysis Infrastructure [near-term directable software dev
   developed in consultation with LSST-DESC]
 country: Germany
 institute: LMU_Munich
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -37,8 +38,6 @@ form_data:
     Postdoc #1 (continued), 0.5 FTE + Postdoc #2 (continued), 0.5 FTEFY24 onwards: potential
     extended or continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

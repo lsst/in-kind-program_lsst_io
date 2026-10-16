@@ -2,6 +2,7 @@ contribution_id: UKD-UKD-S8
 title: 'Science Software development: DESC operations'
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -30,8 +31,6 @@ form_data:
     There is potential for this effort to continue beyond August 2023 and this will be presented
     as an overall UK contribution in FTE yrs in UKD-UKD-12.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

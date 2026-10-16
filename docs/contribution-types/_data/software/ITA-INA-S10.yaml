@@ -2,6 +2,7 @@ contribution_id: ITA-INA-S10
 title: 'Directable SW contribution for the SMWLV and TVS SCs: Software Tools for'
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Transients and Variable Stars Science Collaboration
@@ -44,8 +45,6 @@ form_data:
     G. Bono (staff scientist, 0.1 FTE, M. Di Criscienzo (staff scientist, 0.1 FTE), G. Fiorentino
     (staff scientist, 0.1FTE), I. Musella (staff scientist, 0.1FTE).'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

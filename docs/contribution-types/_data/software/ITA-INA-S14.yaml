@@ -2,6 +2,7 @@ contribution_id: ITA-INA-S14
 title: Directable SW contribution for the
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -36,8 +37,6 @@ form_data:
     0.7 FTE), Dr Marco Baldi (Staff Scientist, 0.1FTE), Dr Mauro Sereno (Staff Scientist,
     0.1FTE), Dr Alex Saro(Staff scientist, 0.1FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -2,6 +2,7 @@ contribution_id: MEX-UNA-S5
 title: Science Pipeline Development in the Galaxies Science Collaboration
 country: Mexico
 institute: UNAM
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Galaxies Science Collaboration
@@ -35,8 +36,6 @@ form_data:
     Hernández-Toledo (Full Professor, 0.3 FTE)FY24: New hire (postdoc, 0.6 FTE), Dr. H Hernández-Toledo
     (Full Professor, 0.3 FTE)FY25-FY32: potential continued contribution of development effort.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

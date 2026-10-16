@@ -2,6 +2,7 @@ contribution_id: UKD-UKD-S5
 title: 'Science Software development: Near infrared data fusion'
 country: United Kingdom
 institute: LSST:UK
+last_updated: '2026-07-29'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:

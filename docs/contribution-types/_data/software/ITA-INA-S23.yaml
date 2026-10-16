@@ -3,6 +3,7 @@ title: 'Staff effort in support of Rubin commissioning: ML tools for instrumenta
   and analysis'
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: Rubin Commissioning Team
@@ -42,8 +43,6 @@ form_data:
     by the hired personnel. In particular, Stefano Cavuoti is the contact point for the SitCom
     team.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -3,6 +3,7 @@ title: 'Non-Directable SW contribution for the [MWLW] SC: Population models of t
   content'
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Stars Milky Way and Local Volume Science Collaboration
@@ -75,8 +76,6 @@ form_data:
     periods immediately before their release.The contribution lead, Leo Girardi, will act
     as the main point of contact to the recipient group throughout the course of the contribution,'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

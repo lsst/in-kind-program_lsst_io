@@ -2,6 +2,7 @@ contribution_id: UKD-UKD-S17
 title: Galaxy Clustering Infrastructure
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-29'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -35,8 +36,6 @@ form_data:
   timeline: 'Deliverable A: 04/2024; Deliverable B: 04/2025; Deliverable C: 04/2026; Deliverable
     D: 04/2027'
   submitted: true
-  email: david.alonso@physics.ox.ac.uk
-  submitter_name: David Alonso
   target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
   software_name: TXPipe v0
   version: Our contribution is in the github master branch but has not yet seen an official

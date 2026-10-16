@@ -2,6 +2,7 @@ contribution_id: GER-MPE-S2
 title: MPE efforts to assure reliable photo-z for AGN
 country: Germany
 institute: MPE
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST AGN Science Collaboration
@@ -34,8 +35,6 @@ form_data:
     related GER-MPE-S1, allowing cross-benefit between the two contributions. Therefore the
     combined effort in S1 and S2 is compliant with the handbook guidance.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

@@ -3,6 +3,7 @@ title: 'Science Software development: photometric redshift estimation and DESC r
   development'
 country: UK
 institute: LSST:UK
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST Dark Energy Science Collaboration
@@ -36,8 +37,6 @@ form_data:
     (postdoc, 0.75 FTE)FY23++: potential continued contribution of software development and
     DESC data processing effort'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

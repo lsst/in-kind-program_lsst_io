@@ -3,6 +3,7 @@ title: 'Directable SW contribution for the AGN SC: Simulations of high-z AGNs an
   in the LSST survey'
 country: Italy
 institute: INAF
+last_updated: '2026-07-22'
 form_data:
   category: Directable SW dev
   primary_recipient_group: LSST AGN Science Collaboration
@@ -39,8 +40,6 @@ form_data:
     M. Mignoli (Staff scientist, 0.1 FTE)FY24: New hire (postdoc, 0.8 FTE), A. Bongiorno (Staff
     scientist, 0.1 FTE) and M. Mignoli (Staff scientist, 0.1 FTE)'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null

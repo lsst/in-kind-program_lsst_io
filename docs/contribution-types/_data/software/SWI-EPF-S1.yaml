@@ -2,6 +2,7 @@ contribution_id: SWI-EPF-S1
 title: An Interactive and Dynamical Database of Strong Lensing Systems
 country: Switzerland
 institute: EPFL
+last_updated: '2026-07-22'
 form_data:
   category: Non-directable SW dev
   primary_recipient_group: LSST Strong Lensing Science Collaboration
@@ -60,8 +61,6 @@ form_data:
     with photo-z group for refined determination of photo-z for lens and source. Include more
     extensive lens models, including error bars on lens parameters.'
   submitted: false
-  email: null
-  submitter_name: null
   target_audience: null
   software_name: null
   version: null
