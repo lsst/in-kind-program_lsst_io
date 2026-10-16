@@ -35,6 +35,10 @@ In pull requests, the link check fails only on broken links. Timeouts are report
 A few known-bad URLs are ignored in `conf.py`, so a weekly GitHub Actions run (`linkcheck-weekly.yaml`) re-checks everything, ignored URLs included.
 To run that full check locally: `IKP_LINKCHECK_FULL=1 tox run -e linkcheck`.
 
+## Card data validation
+
+Every card YAML file under `docs/contribution-types/_data/` must match its schema in `ikp_data/schemas.py`. CI and the pre-commit hook run `tox run -e validate`, so a malformed card (an unknown field, a missing `last_updated`, a misspelled status) fails with a message naming the file and field. Run the same check locally before you commit: `tox run -e validate`.
+
 ## Card dates
 
 Each dataset and software card has an explicit `last_updated: 'YYYY-MM-DD'` field in its YAML file. Update the date when the card's content changes. New records must include `last_updated`. Until a schema check is added, a missing field falls back to the file's git date.
