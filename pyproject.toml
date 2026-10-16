@@ -1,0 +1,24 @@
+# Minimal packaging metadata for the `ikp_data` package (the site's data model:
+# pydantic schemas, cross-record checks and the YAML validator).
+#
+# This file exists only so other tools (for example a local editing app) can
+# install the package, e.g. `pip install -e .`. It does NOT change how the site
+# is built: tox.ini sets `skip_install = true`, so tox never builds or installs
+# this package, and Sphinx reads its settings from conf.py and documenteer.toml.
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ikp-data"
+version = "0.1.0"
+description = "Data model and validation for the Rubin In-Kind Program website cards."
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2",
+    "pyyaml",
+]
+
+[tool.setuptools]
+# List the package explicitly so docs/, tests/ and scripts/ are never packaged.
+packages = ["ikp_data"]

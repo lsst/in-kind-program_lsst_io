@@ -12,6 +12,7 @@ milestones:
 - label: Letters of Intent due
   date: '2026-08-07'
   passed: true
+  role: deadline
 - label: Matchmaking & feasibility notifications
   date: '2026-08-31'
   approximate: true
@@ -19,9 +20,11 @@ milestones:
   date: '2026-09-01'
 - label: Spanish TAC submission deadline
   date: '2026-10-01'
+  role: deadline
 - label: Expected next opportunity
   date: '2027-02-01'
   display_date: Feb 2027
+  role: next
 links:
 - label: Full announcement
   url: https://community.lsst.org/t/gtc-observing-time-opportunity-for-the-us-and-chilean-community/12233
@@ -29,9 +32,4 @@ links:
   url: https://lsst.ice.csic.es/
 - label: Official Announcement of Opportunity (PDF)
   url: https://community.lsst.org/uploads/short-url/d2UEv88IgQXxlDY42eGCG0visIK.pdf
-contact:
-  name: Steven Margheim
-  email: steven.margheim@noirlab.edu
-  note: eligibility, general process, program opportunities -- technical instrument questions
-    go to the GTC website or submission-portal contacts instead
 visible_until: '2026-10-01'

@@ -12,8 +12,12 @@ summary: >-
 milestones:
 - label: Proposal submission deadline (11:59 pm MST)
   date: '2026-09-30'
+  role: deadline
+- label: Expected next opportunity
+  date: '2027-03-01'
+  display_date: March 2027
+  role: next
 links:
 - label: NOIRLab Call for Proposals
   url: https://noirlab.edu/science/observing-noirlab/proposals/call-for-proposals
-contact: null
 visible_until: '2026-10-15'
