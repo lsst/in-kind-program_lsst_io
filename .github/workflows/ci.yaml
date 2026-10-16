@@ -51,7 +51,8 @@ jobs:
         uses: lsst-sqre/run-tox@v1
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          tox-envs: "html,test"
+          # validate: every card YAML file must match its schema (ikp_data).
+          tox-envs: "html,test,validate"
 
       - uses: actions/upload-artifact@v4
         with:
