@@ -25,20 +25,6 @@ html_theme_options = {
 # more headroom.
 linkcheck_timeout = 30
 
-# 2026-10-16: WISeREP returns 403 to non-browser user agents. Rather than
-# ignoring it, send a browser-like User-Agent so the link is really checked.
-# (Documenteer's preset does not define linkcheck_request_headers, so there is
-# nothing to merge with.)
-linkcheck_request_headers = {
-    "https://www.wiserep.org": {
-        "User-Agent": (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/124.0 Safari/537.36"
-        ),
-    },
-}
-
 # 2026-10-16: use += so Documenteer's preset entries (e.g. ^https://ls.st/)
 # are kept instead of being replaced. Each pattern is an anchored exact-URL
 # regex (re.escape style) for a URL actually used on the site today, so any
@@ -48,6 +34,10 @@ linkcheck_ignore += [
     # 2026-10-16: returns 404. Kept ignored until a replacement link is
     # available. Other vidojevica.aob.rs URLs are now checked.
     r'^https://vidojevica\.aob\.rs/index\.php\?option=com_content&view=article&id=21&Itemid=28$',
+    # 2026-10-16: WISeREP (NOT telescope card) returns 403 to GitHub Actions
+    # runners even with a browser User-Agent, though it works from a desktop.
+    # The block is by network, not by agent string, so it can't be fixed here.
+    r'^https://www\.wiserep\.org/$',
     # 2026-10-16: SALT (SZA-SAA-S1 telescope card) -- incomplete TLS
     # certificate chain; browsers tolerate it but Python's ssl rejects it
     # (CERTIFICATE_VERIFY_FAILED).
