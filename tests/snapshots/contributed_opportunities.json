@@ -43,7 +43,6 @@
   },
   "opportunities": [
     {
-      "contact": null,
       "id": "noirlab-cfp-2027a",
       "is_visible": true,
       "kind": "general_cfp",
@@ -56,7 +55,14 @@
       "milestones": [
         {
           "date": "2026-09-30",
-          "label": "Proposal submission deadline (11:59 pm MST)"
+          "label": "Proposal submission deadline (11:59 pm MST)",
+          "role": "deadline"
+        },
+        {
+          "date": "2027-03-01",
+          "display_date": "March 2027",
+          "label": "Expected next opportunity",
+          "role": "next"
         }
       ],
       "next_milestone_date": "2026-09-30",
@@ -68,11 +74,6 @@
     },
     {
       "accent": "warning",
-      "contact": {
-        "email": "steven.margheim@noirlab.edu",
-        "name": "Steven Margheim",
-        "note": "eligibility, general process, program opportunities -- technical instrument questions go to the GTC website or submission-portal contacts instead"
-      },
       "id": "gtc-2026b-special-call",
       "is_visible": true,
       "kind": "special_call",
@@ -94,7 +95,8 @@
         {
           "date": "2026-08-07",
           "label": "Letters of Intent due",
-          "passed": true
+          "passed": true,
+          "role": "deadline"
         },
         {
           "approximate": true,
@@ -107,12 +109,14 @@
         },
         {
           "date": "2026-10-01",
-          "label": "Spanish TAC submission deadline"
+          "label": "Spanish TAC submission deadline",
+          "role": "deadline"
         },
         {
           "date": "2027-02-01",
           "display_date": "Feb 2027",
-          "label": "Expected next opportunity"
+          "label": "Expected next opportunity",
+          "role": "next"
         }
       ],
       "next_milestone_date": "2026-10-01",

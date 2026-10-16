@@ -20,14 +20,10 @@ from ikp_data import checks, schemas, validate
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "docs" / "contribution-types" / "_data"
 
-# Real files that are expected to fail validation today, with the reason.
-# Both opportunity records still carry the old `contact` key, which the schema
-# no longer declares; the data is cleaned up separately. Remove an entry here
-# when its file is fixed (the test below fails if a listed file starts to pass).
-KNOWN_FAILURES = {
-    "opportunities/gtc-2026b-special-call.yaml": "contact",
-    "opportunities/noirlab-cfp-2027a.yaml": "contact",
-}
+# Real files that are expected to fail validation, with the reason. Empty now that
+# all card data is clean; the mechanism stays so a future known failure can be listed
+# explicitly (the test below fails if a listed file starts to pass).
+KNOWN_FAILURES: dict[str, str] = {}
 
 
 def _all_record_paths():
@@ -131,10 +127,8 @@ def _telescope():
 
 
 def _opportunity():
-    """A valid opportunity: the real NOIRLab record without the old `contact` key."""
-    record = copy.deepcopy(_load("opportunities/noirlab-cfp-2027a.yaml"))
-    del record["contact"]
-    return record
+    """A valid opportunity: a deep copy of the real NOIRLab record."""
+    return copy.deepcopy(_load("opportunities/noirlab-cfp-2027a.yaml"))
 
 
 def test_clean_copies_of_real_records_validate():
