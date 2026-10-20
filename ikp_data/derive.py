@@ -13,6 +13,7 @@ cross-record checks):
 * the telescope fields that sibling records must agree on;
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
+* ``require_field``: reads a required field, or raises an error naming the file;
 * ``record_last_updated``: reads a card's explicit ``last_updated`` date.
 
 Nothing in this module reads the clock, runs git, or locates files by itself:
@@ -60,6 +61,22 @@ def normalize_strings(obj):
     if isinstance(obj, dict):
         return {k: normalize_strings(v) for k, v in obj.items()}
     return obj
+
+
+def require_field(record, key, path):
+    """The value of a field the schema requires, or a ValueError naming the file.
+
+    Without this, a record that lacks the field would fail deep inside the build
+    with a bare KeyError (or TypeError, for an explicit ``null``) that does not
+    say which file is at fault.
+    """
+    value = record.get(key)
+    if value is None:
+        raise ValueError(
+            f"{path}: missing required field '{key}'; "
+            "run `tox run -e validate` to see all problems"
+        )
+    return value
 
 
 def record_last_updated(record, path):

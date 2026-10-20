@@ -41,6 +41,8 @@ from ikp_data.derive import (
 
 def load_datasets(data_dir, today):
     """Build the `contributed_datasets` context from `data_dir`/datasets."""
+    # `today` is accepted so every loader has the same signature (and so date-based
+    # features, such as expiring highlights, can use it later).
     records_dir = data_dir / "datasets"
     # For the "Also see: software" reverse link -- mirrors the Contributed
     # Software page's own "Also see: dataset" link (curated.related_
@@ -53,7 +55,7 @@ def load_datasets(data_dir, today):
     all_wavelengths = set()
     all_uat = set()
     for path in sorted(records_dir.glob("*.yaml")):
-        with path.open() as f:
+        with path.open(encoding="utf-8") as f:
             record = yaml.safe_load(f) or {}
         record = normalize_strings(record)
         form_data = record.setdefault("form_data", {}) or {}
