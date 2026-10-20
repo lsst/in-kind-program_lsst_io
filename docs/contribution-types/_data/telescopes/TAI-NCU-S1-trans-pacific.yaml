@@ -3,8 +3,8 @@ facility: Trans-Pacific Two-Meter Telescope
 aperture: 2m
 country: Mexico
 site: San Pedro Mártir
-latitude: 31.029
-longitude: -115.486
+latitude: 31.044
+longitude: -115.464
 instrumentation:
 - Imaging
 instrument_names: []
