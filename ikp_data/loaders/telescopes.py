@@ -37,6 +37,7 @@ from ikp_data.derive import (
     load_world_outline_path,
     normalize_strings,
     offset_clustered_markers,
+    require_field,
     slugify,
     to_marker_xy,
 )
@@ -118,12 +119,13 @@ def load_telescopes(data_dir, world_outline_svg):
         # and map marker, breaking search/highlight/scroll-to-card matching.
         record["slug"] = slugify(path.stem)
 
-        # The schema requires latitude, so a missing value is a KeyError here
-        # rather than a silent "Northern" default.
-        latitude = record["latitude"]
+        # The schema requires latitude, so a missing value is an error naming
+        # the file rather than a silent "Northern" default. Longitude is
+        # optional: without it the facility simply gets no map marker.
+        latitude = require_field(record, "latitude", path)
         longitude = record.get("longitude")
         record["hemisphere"] = "Northern" if latitude >= 0 else "Southern"
-        if latitude is not None and longitude is not None:
+        if longitude is not None:
             mx, my = to_marker_xy(latitude, longitude)
             record["marker_x"], record["marker_y"] = mx, my
 
