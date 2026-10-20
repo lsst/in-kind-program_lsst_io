@@ -81,13 +81,8 @@ def to_stable_json(value):
     if callable(value):
         # e.g. the `slugify` helper passed to templates. Its identity is not
         # data; record only that a callable was present.
-        #
-        # The golden files were recorded when this helper was the private
-        # `_slugify` in conf.py; it is now the public `slugify` in
-        # ikp_data.derive. Spelling the placeholder with a leading underscore
-        # keeps the golden files byte-identical across that rename.
-        name = getattr(value, "__name__", "unknown").lstrip("_")
-        return f"<callable _{name}>"
+        name = getattr(value, "__name__", "unknown")
+        return f"<callable {name}>"
     if value is None or isinstance(value, (str, int, float, bool)):
         return value
     raise TypeError(f"No stable JSON conversion for {type(value).__name__}: {value!r}")
