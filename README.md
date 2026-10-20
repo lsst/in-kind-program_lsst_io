@@ -32,16 +32,16 @@ The pre-commit hooks are installed as part of the `make init` command.
 ## Link checking
 
 In pull requests, the link check fails only on broken links. Timeouts are reported as warnings, because a slow host is not necessarily a dead link.
-A few known-bad URLs are ignored in `conf.py`, so a weekly GitHub Actions run (`linkcheck-weekly.yaml`) re-checks everything, ignored URLs included.
-To run that full check locally: `IKP_LINKCHECK_FULL=1 tox run -e linkcheck`.
+A few known-bad URLs are ignored in `conf.py`. A weekly GitHub Actions run (`linkcheck-weekly.yaml`) re-checks every link, including the ignored ones.
+To run that full check locally, use `IKP_LINKCHECK_FULL=1 tox run -e linkcheck`.
 
 ## Card data validation
 
-Every card YAML file under `docs/contribution-types/_data/` must match its schema in `ikp_data/schemas.py`. CI and the pre-commit hook run `tox run -e validate`, so a malformed card (an unknown field, a missing `last_updated`, a misspelled status) fails with a message naming the file and field. Run the same check locally before you commit: `tox run -e validate`.
+Every card YAML file under `docs/contribution-types/_data/` must match its schema in `ikp_data/schemas.py`. CI runs `tox run -e validate`, and the pre-commit hook runs the same check. A malformed card (for example, one with an unknown field, a missing `last_updated`, or a misspelled status) fails with a message that names the file and the field. Run the check locally before you commit with `tox run -e validate`.
 
 ## Card dates
 
-Each dataset and software card has an explicit `last_updated: 'YYYY-MM-DD'` field in its YAML file. Update the date when the card's content changes. New records must include `last_updated`; a card without it fails validation (`tox run -e validate`).
+Each dataset and software card has an explicit `last_updated: 'YYYY-MM-DD'` field in its YAML file. Update the date whenever the card's content changes. New records must include `last_updated`. A card without it fails validation (`tox run -e validate`).
 
 ## CI and preview
 
