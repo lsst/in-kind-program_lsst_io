@@ -116,7 +116,7 @@ def load_software(data_dir, today):
 
         cid_slug = slugify(record.get("contribution_id", ""))
         record["cid_slug"] = cid_slug
-        record["last_updated"] = record_last_updated(record, path, today)
+        record["last_updated"] = record_last_updated(record, path)
         record["uat_keywords"] = uat_keywords
         record["software_links"] = _extract_links(form_data.get("software_url"))
         record["documentation_links"] = _extract_links(form_data.get("documentation"))

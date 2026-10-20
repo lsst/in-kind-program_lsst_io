@@ -13,16 +13,14 @@ cross-record checks):
 * the telescope fields that sibling records must agree on;
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
-* the git-based "last updated" fallback, kept here unchanged for now.
+* ``record_last_updated``: reads a card's explicit ``last_updated`` date.
 
-Nothing in this module reads the clock or locates files by itself: callers pass
-in the dates and paths they want used.
+Nothing in this module reads the clock, runs git, or locates files by itself:
+callers pass in the dates and paths they want used.
 """
 
-import datetime
 import math
 import re
-import subprocess
 from pathlib import Path
 
 import yaml
@@ -64,91 +62,23 @@ def normalize_strings(obj):
     return obj
 
 
-def _is_shallow_clone(path):
-    """True if the checkout containing `path` is a shallow clone (e.g.
-    actions/checkout's default, fetch-depth: 1). In a shallow clone, the tip commit is
-    deliberately parentless (grafted), so `git log -- <file>` diffs it
-    against an empty tree: every file that exists in that tip commit looks
-    like it was just added *by* that commit -- not because the file has no
-    history, but because that history isn't present locally at all.
-    """
-    # Walk up from the record file to the checkout root (the folder holding
-    # ".git") rather than locating it from this module's own path.
-    for folder in path.resolve().parents:
-        if (folder / ".git").exists():
-            return (folder / ".git" / "shallow").exists()
-    return False
-
-
-def _last_updated(path, today):
-    """Fallback only: cards normally carry an explicit `last_updated` (see
-    `record_last_updated`, ADR 0007).
-
-    Best-effort "last updated" date for a single dataset/software record
-    file.
-
-    Prefers the file's most recent git commit date (accurate and portable
-    across clones once the file has been committed). Falls back to the
-    file's on-disk modification time for files that haven't been committed
-    yet (e.g. during local review before a PR), so the page usually shows
-    something rather than a blank field.
-
-    Both of those are unreliable in a shallow clone (e.g. actions/checkout's
-    default, fetch-depth: 1) -- and not merely "unreliable in the safe,
-    comes-up-empty sense." A shallow clone's tip commit is deliberately
-    parentless (grafted), so `git log -- <file>` diffs it against an empty
-    tree: every file that exists in that tip commit looks like it was just
-    added *by* that commit, so `git log -1 -- <file>` returns the tip's date
-    for every single file, not nothing. The mtime fallback is equally wrong
-    in the same scenario for a different reason (every file's mtime is just
-    "when the checkout ran"). Both would show today's date on every card
-    regardless of when each was actually last touched -- which is exactly
-    the bug this guards against. So: check for a shallow clone first, and
-    skip straight to a fallback date rather than trusting either signal.
-    The real fix is giving CI full history (see .github/workflows/ci.yaml's
-    checkout fetch-depth); this is the safety net if that ever regresses.
-
-    The fallback is "yesterday" rather than "unknown" or today's date --
-    it's deliberately not today (that's the exact wrong answer this
-    function exists to avoid), and a concrete recent date reads better on
-    the page than a blank/placeholder value while still being an obvious
-    non-claim about the real edit date.
-    """
-    fallback = (today - datetime.timedelta(days=1)).isoformat()
-    if _is_shallow_clone(path):
-        return fallback
-    try:
-        result = subprocess.run(
-            ["git", "log", "-1", "--format=%cs", "--", path.name],
-            cwd=path.parent,
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-        date_str = result.stdout.strip()
-        if date_str:
-            return date_str
-    except Exception:
-        pass
-    try:
-        return datetime.date.fromtimestamp(path.stat().st_mtime).isoformat()
-    except Exception:
-        return fallback
-
-
-def record_last_updated(record, path, today):
+def record_last_updated(record, path):
     """The "Updated" date shown on a dataset/software card.
 
     Each card's YAML carries an explicit, quoted `last_updated: 'YYYY-MM-DD'`
     (ADR 0007), so the date means "content last changed" and is not disturbed
-    by maintenance commits. Records without the field (e.g. a hand-made new
-    card) fall back to the git-derived date. The value is always a string,
-    exactly as _last_updated() returns, so templates and sorting are unchanged.
+    by maintenance commits. The schema requires the field, so a missing value
+    is an authoring error: we raise an error naming the file instead of
+    guessing a date. The value is returned as a string, so templates and
+    sorting are unchanged.
     """
     explicit = record.get("last_updated")
-    if explicit:
-        return str(explicit)
-    return _last_updated(path, today)
+    if not explicit:
+        raise ValueError(
+            f"{path}: missing required `last_updated` (quoted 'YYYY-MM-DD'); "
+            "see ADR 0007. Run `tox run -e validate` for details."
+        )
+    return str(explicit)
 
 
 def collect_cross_page_titles(data_dir, subdir_name):

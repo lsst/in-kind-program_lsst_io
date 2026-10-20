@@ -35,8 +35,7 @@ def build_contexts(data_dir: Path, today: datetime.date) -> dict:
         The ``_data`` folder (``docs/contribution-types/_data``), containing one
         sub-folder of YAML files per record type.
     today:
-        The date to treat as "now" (which opportunities are visible, and the
-        fallback for cards with no explicit ``last_updated``).
+        The date to treat as "now" (which opportunities are visible).
 
     Returns a dict keyed by the context names the ``.rst`` templates use:
     ``contributed_datasets``, ``contributed_telescopes``,

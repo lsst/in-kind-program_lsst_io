@@ -155,14 +155,13 @@ def test_context_matches_golden_snapshot(name, jinja_contexts, request):
         ("contributed_software", "software", "software"),
     ],
 )
-def test_last_updated_comes_from_yaml_not_git(
+def test_last_updated_comes_from_yaml(
     context_name, records_key, data_subdir, jinja_contexts
 ):
     """Every record's last_updated must equal its YAML value.
 
-    The loader falls back to `git log` when a record has no explicit
-    last_updated. That would make the snapshot depend on git history, so we
-    require the explicit value (ADR 0007) and check it is what the loader used.
+    The loader reads only the explicit value (ADR 0007); it never consults
+    git or file times. This checks that is what the loader used.
     """
     yaml_values = {}
     missing = []
@@ -174,8 +173,8 @@ def test_last_updated_comes_from_yaml_not_git(
             yaml_values[record["contribution_id"]] = str(record["last_updated"])
 
     assert not missing, (
-        f"These {data_subdir} records have no explicit last_updated, so the "
-        f"snapshot would depend on git history: {missing}"
+        f"These {data_subdir} records have no explicit last_updated, which the "
+        f"schema requires: {missing}"
     )
 
     records = jinja_contexts[context_name][records_key]
@@ -183,3 +182,11 @@ def test_last_updated_comes_from_yaml_not_git(
     for record in records:
         cid = record["contribution_id"]
         assert record["last_updated"] == yaml_values[cid], cid
+
+
+def test_missing_last_updated_raises_error_naming_the_file():
+    """A card with no last_updated is an error, not a guessed date."""
+    from ikp_data.derive import record_last_updated
+
+    with pytest.raises(ValueError, match=r"some_card\.yaml.*last_updated"):
+        record_last_updated({}, Path("some_card.yaml"))

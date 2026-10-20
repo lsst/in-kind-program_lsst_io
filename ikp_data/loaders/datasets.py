@@ -73,7 +73,7 @@ def load_datasets(data_dir, today):
 
         cid_slug = slugify(record.get("contribution_id", ""))
         record["cid_slug"] = cid_slug
-        record["last_updated"] = record_last_updated(record, path, today)
+        record["last_updated"] = record_last_updated(record, path)
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
             ("contributed-software.html", software_titles),

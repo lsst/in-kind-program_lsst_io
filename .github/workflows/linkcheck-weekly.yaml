@@ -33,7 +33,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Full history, as in ci.yaml (file dates come from `git log`).
+          # Full history, as in ci.yaml (Documenteer's "last modified" footer
+          # and sitemap read file dates from git).
           fetch-depth: 0
 
       - name: Set up Python
