@@ -20,22 +20,13 @@ schema's job, and a check should simply skip what it cannot interpret.
 from __future__ import annotations
 
 import datetime
-import re
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import Any, Iterable, Literal
 
-Severity = Literal["error", "warning"]
+from ikp_data.derive import SIBLING_CONSISTENCY_FIELDS, slugify
 
-# Telescope fields that conf.py also compares across sibling records. Keep this
-# list in step with ``_SIBLING_CONSISTENCY_FIELDS`` in conf.py.
-SIBLING_CONSISTENCY_FIELDS = (
-    "summary",
-    "time_available",
-    "duration",
-    "status",
-    "tac_process",
-)
+Severity = Literal["error", "warning"]
 
 
 @dataclass(frozen=True)
@@ -54,11 +45,6 @@ class RecordFile:
     record_type: str  # folder name: telescopes, opportunities, datasets, software, idacs
     file: str  # path relative to the data folder
     data: Any  # whatever yaml.safe_load returned (normally a dict)
-
-
-def _slugify(value: str) -> str:
-    """Same rule as ``_slugify`` in conf.py: lowercase, runs of other characters become '-'."""
-    return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
 
 
 def _records_of(records: Iterable[RecordFile], record_type: str) -> list[RecordFile]:
@@ -104,15 +90,15 @@ def check_unique_ids(records: list[RecordFile]) -> list[Problem]:
                 else:
                     seen[cid] = record.file
 
-    # Telescopes: unique slug from the file name (conf.py: slugify(path.stem)).
+    # Telescopes: unique slug from the file name (ikp_data.loaders: slugify(path.stem)).
     # Opportunities use the file name as the slug too. IDACs use the "slug" key.
     def stem(file: str) -> str:
         return file.rsplit("/", 1)[-1].removesuffix(".yaml")
 
     slug_sources = {
-        "telescopes": lambda r: _slugify(stem(r.file)),
-        "opportunities": lambda r: _slugify(stem(r.file)),
-        "idacs": lambda r: _slugify(str(r.data.get("slug") or stem(r.file))),
+        "telescopes": lambda r: slugify(stem(r.file)),
+        "opportunities": lambda r: slugify(stem(r.file)),
+        "idacs": lambda r: slugify(str(r.data.get("slug") or stem(r.file))),
     }
     for record_type, slug_of in slug_sources.items():
         seen_slugs: dict[str, str] = {}
@@ -203,7 +189,7 @@ def check_related_ids_resolve(records: list[RecordFile]) -> list[Problem]:
 def check_telescope_siblings(records: list[RecordFile]) -> list[Problem]:
     """Warn when copies of the *same* facility disagree on shared fields.
 
-    Mirrors the build-time warning in conf.py. Siblings with different facility
+    Mirrors the build-time warning in ikp_data.loaders.telescopes. Siblings with different facility
     names (for example VST and LBT, contributed together for funding reasons) are
     expected to differ and are skipped. This is only a warning because a
     difference can be intentional.
