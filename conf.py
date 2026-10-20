@@ -67,9 +67,6 @@ _project_linkcheck_ignore = [
     # 2026-10-16: INAF SIPGI proposal tool (LBT card) -- incomplete TLS
     # certificate chain (CERTIFICATE_VERIFY_FAILED in Python's ssl).
     r'^https://pandora\.lambrate\.inaf\.it/sipgi/$',
-    # 2026-10-16: SER-SAG-S1 AGN catalogue (Datasets and Software cards) --
-    # expired TLS certificate; browsers tolerate it, Python's ssl does not.
-    r'^https://ser-sag\.pmf\.kg\.ac\.rs:8081/agn_catalogue\.php$',
     # 2026-10-16: ADS abstract pages (SWE-STK-S4 dataset card, UKD-UKD-S17
     # software card) return 405 to automated requests (WAF).
     r'^https://ui\.adsabs\.harvard\.edu/abs/2025A%26A\.\.\.694A\.\.\.1R/abstract$',
