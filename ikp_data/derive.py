@@ -197,17 +197,9 @@ def offset_clustered_markers(records):
         if len(group) < 2:
             continue
         for i, r in enumerate(group):
-            angle = 2 * 3.14159265 * i / len(group)
-            r["marker_x"] = round(r["marker_x"] + 6 * _cos(angle), 1)
-            r["marker_y"] = round(r["marker_y"] + 6 * _sin(angle), 1)
-
-
-def _cos(x):
-    return math.cos(x)
-
-
-def _sin(x):
-    return math.sin(x)
+            angle = 2 * math.pi * i / len(group)
+            r["marker_x"] = round(r["marker_x"] + 6 * math.cos(angle), 1)
+            r["marker_y"] = round(r["marker_y"] + 6 * math.sin(angle), 1)
 
 
 def load_world_outline_path(svg_path):
