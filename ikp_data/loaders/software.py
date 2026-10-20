@@ -86,6 +86,8 @@ def _approx_start_fy(timeline_text):
 
 def load_software(data_dir, today):
     """Build the `contributed_software` context from `data_dir`/software."""
+    # `today` is accepted so every loader has the same signature (and so date-based
+    # features, such as expiring highlights, can use it later).
     records_dir = data_dir / "software"
     dataset_targets = collect_cross_page_targets(data_dir, "datasets", dataset_anchor)
     telescope_targets = collect_cross_page_targets(data_dir, "telescopes", telescope_anchor)
