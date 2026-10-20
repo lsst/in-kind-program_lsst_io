@@ -41,7 +41,7 @@ Every card YAML file under `docs/contribution-types/_data/` must match its schem
 
 ## Card dates
 
-Each dataset and software card has an explicit `last_updated: 'YYYY-MM-DD'` field in its YAML file. Update the date when the card's content changes. New records must include `last_updated`. Until a schema check is added, a missing field falls back to the file's git date.
+Each dataset and software card has an explicit `last_updated: 'YYYY-MM-DD'` field in its YAML file. Update the date when the card's content changes. New records must include `last_updated`; a card without it fails validation (`tox run -e validate`).
 
 ## CI and preview
 
