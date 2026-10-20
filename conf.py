@@ -78,6 +78,11 @@ _project_linkcheck_ignore = [
     # 2026-10-20: NBI LSST IDAC wiki (Denmark IDAC card) -- <error from log>
       # to GitHub Actions runners; works from a browser.
       r'^https://wiki\.nbi\.ku\.dk/lsst_idac/Main_Page$',
+        # 2026-10-20: Zenodo (contributed software and dataset cards) returns 403
+    # to GitHub Actions runners (bot blocking); links work from a browser.
+    # Covers zenodo.org pages and Zenodo DOIs, which redirect there.
+    r'^https://zenodo\.org/',
+    r'^https://doi\.org/10\.5281/zenodo\.',
 ]
 
 # Only the PR/normal build honours the project's ignore list (see above).
