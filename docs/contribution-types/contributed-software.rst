@@ -229,7 +229,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <a class="ikc-also-see" href="{{ rel.page_url }}#ds-cid-{{ rel.slug }}">Also see: {{ rel_kind }} ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikc-also-see" href="{{ rel.page_url }}#{{ rel.anchor }}">Also see: {{ rel_kind }} ({{ rel.contribution_id }}) &rarr;</a>
 
           {% endif %}
           {% endfor %}

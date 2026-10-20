@@ -8,7 +8,7 @@ tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
 * text helpers: ``slugify`` and ``normalize_strings``;
-* cross-page lookups: ``collect_cross_page_titles`` and ``resolve_related_titles``
+* cross-page lookups: ``collect_cross_page_targets`` and ``resolve_related_titles``
   (how a card labels its "Also see" links to another page);
 * the telescope fields that sibling records must agree on;
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
@@ -81,14 +81,23 @@ def record_last_updated(record, path):
     return str(explicit)
 
 
-def collect_cross_page_titles(data_dir, subdir_name):
-    """contribution_id -> title/facility lookup for a sibling _data folder,
-    used to label a page's "Also see" cross-links to another page without
-    needing that other page's full loader context. contribution_id may be
-    a scalar or, on the Telescopes page, a list shared by sibling records.
+def collect_cross_page_targets(data_dir, subdir_name, anchor_for):
+    """contribution_id -> {"title", "anchors"} lookup for a sibling _data folder.
 
-    `data_dir` is the `_data` folder; `subdir_name` is the record type's
-    folder inside it (for example "software").
+    Used to label a page's "Also see" cross-links to another page, and to point
+    each link at the right card, without needing that other page's full loader
+    context.
+
+    * ``title``: the record's title (or facility, or the ID itself).
+    * ``anchors``: the in-page anchor of every card with this contribution ID,
+      without the leading "#". It is a list because the Telescopes page can have
+      several sibling cards (for example KMTNet's three sites) sharing one ID.
+
+    ``contribution_id`` may be a scalar or, on the Telescopes page, a list.
+    ``data_dir`` is the `_data` folder; ``subdir_name`` is the record type's
+    folder inside it (for example "software"). ``anchor_for(path, cid)`` returns
+    the anchor the target page gives the card in ``path`` for ``cid``. It is a
+    parameter because each page names its anchors differently.
     """
     subdir = data_dir / subdir_name
     out = {}
@@ -100,28 +109,63 @@ def collect_cross_page_titles(data_dir, subdir_name):
         cid = record.get("contribution_id")
         cids = cid if isinstance(cid, list) else [cid]
         for c in cids:
-            if c:
-                out[c] = record.get("title") or record.get("facility") or c
+            if not c:
+                continue
+            target = out.setdefault(c, {"title": None, "anchors": []})
+            # With siblings, the last file's title wins (as before this lookup
+            # kept anchors); sibling cards share a facility name anyway.
+            target["title"] = record.get("title") or record.get("facility") or c
+            target["anchors"].append(anchor_for(path, c))
     return out
 
 
+# Anchor builders for collect_cross_page_targets. Each must match the label the
+# target page's template gives its cards:
+#   datasets.rst   ".. _ds-cid-<cid slug>:"
+#   software.rst   ".. _sw-cid-<cid slug>:"
+#   telescope.rst  ".. _<file-stem slug>:"  (one per file, so siblings differ)
+def dataset_anchor(path, cid):
+    return f"ds-cid-{slugify(cid)}"
+
+
+def software_anchor(path, cid):
+    return f"sw-cid-{slugify(cid)}"
+
+
+def telescope_anchor(path, cid):
+    return slugify(path.stem)
+
+
 def resolve_related_titles(related_ids, *page_lookups):
-    """page_lookups is a sequence of (page_html_filename, {contribution_id: title})
-    pairs, checked in order, so the returned dicts know which page to link to."""
+    """Label and locate each related contribution ID for a card's "Also see" links.
+
+    page_lookups is a sequence of (page_html_filename, targets) pairs, where
+    targets comes from ``collect_cross_page_targets``. They are checked in
+    order, so each returned dict knows which page to link to.
+
+    Each returned dict has:
+    * ``anchor``: the anchor on that page to link to (the first card when
+      several siblings share the ID);
+    * ``anchors``: every sibling's anchor, for templates that want them all.
+    """
     resolved = []
     for rid in related_ids or []:
         title = None
         page_url = None
-        for page_html, lookup in page_lookups:
-            if rid in lookup:
-                title = lookup[rid]
+        anchors = []
+        for page_html, targets in page_lookups:
+            if rid in targets:
+                title = targets[rid]["title"]
                 page_url = page_html
+                anchors = list(targets[rid]["anchors"])
                 break
         resolved.append({
             "contribution_id": rid,
             "title": title or rid,
             "slug": slugify(rid),
             "page_url": page_url,
+            "anchor": anchors[0] if anchors else None,
+            "anchors": anchors,
         })
     return resolved
 

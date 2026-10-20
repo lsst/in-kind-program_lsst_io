@@ -165,6 +165,10 @@
       "last_updated": "2026-07-29",
       "related": [
         {
+          "anchor": "ds-cid-ser-sag-s1",
+          "anchors": [
+            "ds-cid-ser-sag-s1"
+          ],
           "contribution_id": "SER-SAG-S1",
           "page_url": "contributed-datasets.html",
           "slug": "ser-sag-s1",
@@ -358,6 +362,10 @@
       "last_updated": "2026-07-29",
       "related": [
         {
+          "anchor": "ds-cid-ukd-ukd-s5",
+          "anchors": [
+            "ds-cid-ukd-ukd-s5"
+          ],
           "contribution_id": "UKD-UKD-S5",
           "page_url": "contributed-datasets.html",
           "slug": "ukd-ukd-s5",
@@ -472,6 +480,10 @@
       "last_updated": "2026-07-29",
       "related": [
         {
+          "anchor": "ds-cid-ukd-ukd-s9",
+          "anchors": [
+            "ds-cid-ukd-ukd-s9"
+          ],
           "contribution_id": "UKD-UKD-S9",
           "page_url": "contributed-datasets.html",
           "slug": "ukd-ukd-s9",
@@ -4424,6 +4436,10 @@
       "last_updated": "2026-07-22",
       "related": [
         {
+          "anchor": "ds-cid-sza-saa-s2",
+          "anchors": [
+            "ds-cid-sza-saa-s2"
+          ],
           "contribution_id": "SZA-SAA-S2",
           "page_url": "contributed-datasets.html",
           "slug": "sza-saa-s2",
@@ -4742,6 +4758,10 @@
       "last_updated": "2026-07-22",
       "related": [
         {
+          "anchor": "ds-cid-ukd-ukd-s10",
+          "anchors": [
+            "ds-cid-ukd-ukd-s10"
+          ],
           "contribution_id": "UKD-UKD-S10",
           "page_url": "contributed-datasets.html",
           "slug": "ukd-ukd-s10",

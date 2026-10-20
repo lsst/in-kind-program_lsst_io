@@ -82,6 +82,10 @@
       "last_updated": "2026-07-29",
       "related": [
         {
+          "anchor": "sw-cid-ser-sag-s1",
+          "anchors": [
+            "sw-cid-ser-sag-s1"
+          ],
           "contribution_id": "SER-SAG-S1",
           "page_url": "contributed-software.html",
           "slug": "ser-sag-s1",
@@ -143,6 +147,10 @@
       "last_updated": "2026-07-29",
       "related": [
         {
+          "anchor": "sw-cid-ukd-ukd-s5",
+          "anchors": [
+            "sw-cid-ukd-ukd-s5"
+          ],
           "contribution_id": "UKD-UKD-S5",
           "page_url": "contributed-software.html",
           "slug": "ukd-ukd-s5",
@@ -205,6 +213,10 @@
       "last_updated": "2026-07-29",
       "related": [
         {
+          "anchor": "sw-cid-ukd-ukd-s9",
+          "anchors": [
+            "sw-cid-ukd-ukd-s9"
+          ],
           "contribution_id": "UKD-UKD-S9",
           "page_url": "contributed-software.html",
           "slug": "ukd-ukd-s9",
@@ -374,6 +386,10 @@
       "last_updated": "2026-07-22",
       "related": [
         {
+          "anchor": "sw-cid-sza-saa-s2",
+          "anchors": [
+            "sw-cid-sza-saa-s2"
+          ],
           "contribution_id": "SZA-SAA-S2",
           "page_url": "contributed-software.html",
           "slug": "sza-saa-s2",
@@ -432,6 +448,10 @@
       "last_updated": "2026-07-22",
       "related": [
         {
+          "anchor": "sw-cid-ukd-ukd-s10",
+          "anchors": [
+            "sw-cid-ukd-ukd-s10"
+          ],
           "contribution_id": "UKD-UKD-S10",
           "page_url": "contributed-software.html",
           "slug": "ukd-ukd-s10",

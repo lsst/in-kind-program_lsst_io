@@ -30,11 +30,12 @@ import json
 import yaml
 
 from ikp_data.derive import (
-    collect_cross_page_titles,
+    collect_cross_page_targets,
     normalize_strings,
     record_last_updated,
     resolve_related_titles,
     slugify,
+    software_anchor,
 )
 
 
@@ -45,7 +46,7 @@ def load_datasets(data_dir, today):
     # Software page's own "Also see: dataset" link (curated.related_
     # contribution_ids there points at this page). Software title lookup
     # only, since a dataset card never links out to a Telescopes record.
-    software_titles = collect_cross_page_titles(data_dir, "software")
+    software_targets = collect_cross_page_targets(data_dir, "software", software_anchor)
 
     records = []
     all_data_types = set()
@@ -76,7 +77,7 @@ def load_datasets(data_dir, today):
         record["last_updated"] = record_last_updated(record, path)
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
-            ("contributed-software.html", software_titles),
+            ("contributed-software.html", software_targets),
         )
 
         # Space-separated CSS-safe tokens used by the page's filter/sort
