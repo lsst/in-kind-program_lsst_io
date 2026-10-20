@@ -55,7 +55,7 @@ def load_datasets(data_dir, today):
     all_wavelengths = set()
     all_uat = set()
     for path in sorted(records_dir.glob("*.yaml")):
-        with path.open() as f:
+        with path.open(encoding="utf-8") as f:
             record = yaml.safe_load(f) or {}
         record = normalize_strings(record)
         form_data = record.setdefault("form_data", {}) or {}
