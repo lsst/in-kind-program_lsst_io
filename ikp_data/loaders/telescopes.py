@@ -82,7 +82,6 @@ def _resolution_bin(r_min, r_max):
     return "r-gte-5000", "R >= 5,000"
 
 
-
 _STATUS_SORT_ORDER = {"available": 0, "future_semester": 1, "past_opportunity": 2}
 
 
