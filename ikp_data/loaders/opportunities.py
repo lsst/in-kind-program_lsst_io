@@ -14,6 +14,10 @@ Why the derived fields exist
 * ``next_milestone_date``: the soonest milestone that is today or later, so the
   banner can show "next: ..." and so banners sort soonest-first.
 
+* ``opportunity_phase`` and ``milestone_passed`` (below): pure functions for the
+  card lifecycle. They are tested but **not yet used by the loader or the
+  template**; a later milestone wires them into the context.
+
 The context also needs ``cid_to_slugs`` from the telescopes context so a banner
 can link to facility cards; ``ikp_data.loaders.build_contexts`` adds it.
 """
@@ -68,3 +72,98 @@ def load_opportunities(data_dir, today):
     )
 
     return {"opportunities": visible_records}
+
+
+# ---------------------------------------------------------------------------
+# Card lifecycle (pure functions; not yet part of the context)
+# ---------------------------------------------------------------------------
+#
+# The phases and the rules for incomplete records come from the opportunity
+# lifecycle design. A milestone may carry a `role`: "opens", "deadline",
+# "results" or "next". From the dated roles and `visible_until`:
+#
+#   hidden     today is after `visible_until`
+#   upcoming   today is before the `opens` date
+#   open       from `opens` through the LAST `deadline`
+#   in_review  after the last deadline, through the `results` date
+#   closed     after `results` (or after the last deadline if there is no
+#              `results`), until `visible_until`
+#
+# Boundary days: every phase lasts THROUGH its end date, inclusive. So the
+# deadline day itself is still `open` (the card says "Deadline <date>", and a
+# proposal due that day is still welcome), the `results` day is still
+# `in_review`, and the `visible_until` day is still shown. This matches
+# `milestone_passed`, which treats a milestone as passed only once its date is
+# strictly before today, and the loader's `today <= visible_until` visibility.
+#
+# Incomplete records:
+#   * no `opens`: never `upcoming` (open from the start);
+#   * no `deadline`: `open` until `visible_until` (then hidden);
+#   * several `deadline`s: the last one decides;
+#   * several `opens`: the earliest one decides;
+#   * several `results`: the latest one decides;
+#   * no `results`: `open` goes straight to `closed`;
+#   * no `visible_until` (the schema requires it, so this is only defensive):
+#     the card is never `hidden`.
+
+
+def _as_date(value):
+    """A date from a date object or an ISO "YYYY-MM-DD" string; None if unreadable."""
+    if isinstance(value, datetime.datetime):
+        return value.date()
+    if isinstance(value, datetime.date):
+        return value
+    if isinstance(value, str):
+        try:
+            return datetime.date.fromisoformat(value)
+        except ValueError:
+            return None
+    return None
+
+
+def _role_dates(record, role):
+    """The readable dates of the milestones with this role, in no particular order."""
+    dates = []
+    for milestone in record.get("milestones") or []:
+        if isinstance(milestone, dict) and milestone.get("role") == role:
+            date = _as_date(milestone.get("date"))
+            if date is not None:
+                dates.append(date)
+    return dates
+
+
+def milestone_passed(milestone, today):
+    """True once the milestone's date is strictly before `today`.
+
+    A milestone dated today has not passed yet. A milestone with no readable
+    date (for example a purely descriptive one) never counts as passed.
+    """
+    date = _as_date(milestone.get("date"))
+    return date is not None and date < today
+
+
+def opportunity_phase(record, today):
+    """The lifecycle phase of one opportunity record on `today`.
+
+    Returns one of "upcoming", "open", "in_review", "closed" or "hidden".
+    `record` is the opportunity dictionary (as loaded from YAML, dates as
+    strings or date objects). See the comment block above for the rules,
+    including the boundary days and incomplete records.
+    """
+    visible_until = _as_date(record.get("visible_until"))
+    if visible_until is not None and today > visible_until:
+        return "hidden"
+
+    opens = min(_role_dates(record, "opens"), default=None)
+    if opens is not None and today < opens:
+        return "upcoming"
+
+    last_deadline = max(_role_dates(record, "deadline"), default=None)
+    if last_deadline is None or today <= last_deadline:
+        return "open"
+
+    results = max(_role_dates(record, "results"), default=None)
+    if results is not None and today <= results:
+        return "in_review"
+
+    return "closed"
