@@ -86,6 +86,26 @@ def test_deadline_order_in_the_file_does_not_matter():
     assert opportunity_phase(record, _day("2026-09-01")) == "open"
 
 
+def test_earliest_opens_decides():
+    # Two "opens" milestones: the earlier one (08-01) starts the open phase.
+    record = _record(deadlines=["2026-09-01"])
+    record["milestones"] += [
+        {"label": "Opens", "date": "2026-08-01", "role": "opens"},
+        {"label": "Opens again", "date": "2026-08-15", "role": "opens"},
+    ]
+    assert opportunity_phase(record, _day("2026-07-31")) == "upcoming"
+    assert opportunity_phase(record, _day("2026-08-01")) == "open"  # not waiting for 08-15
+
+
+def test_latest_results_decides():
+    # Two "results" milestones: the later one (10-15) ends the in_review phase.
+    record = _record(deadlines=["2026-09-01"], results="2026-10-01")
+    record["milestones"].append({"label": "More results", "date": "2026-10-15", "role": "results"})
+    assert opportunity_phase(record, _day("2026-10-02")) == "in_review"  # past the first only
+    assert opportunity_phase(record, _day("2026-10-15")) == "in_review"
+    assert opportunity_phase(record, _day("2026-10-16")) == "closed"
+
+
 def test_no_results_goes_straight_from_open_to_closed():
     record = _record(deadlines=["2026-09-01"])
     assert opportunity_phase(record, _day("2026-09-01")) == "open"
