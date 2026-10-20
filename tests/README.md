@@ -7,7 +7,7 @@ All tests run through one entry point:
 The suite has three parts:
 
 * **Snapshot tests** (`test_conf_snapshots.py`): golden-file tests for the
-  data loaders in `conf.py`. See below.
+  card loaders in `ikp_data/loaders/`. See below.
 * **Schema, check and validator tests** (`test_schemas.py`): the pydantic
   models in `ikp_data/schemas.py`, the cross-record checks, and the
   `python -m ikp_data.validate` command line. They run against the real card
@@ -18,11 +18,12 @@ The suite has three parts:
 
 ## Golden snapshots
 
-`tests/snapshots/<context>.json` holds the output of each loader in `conf.py`
-(datasets, telescopes, opportunities, software, IDACs) as stable JSON, with
-the date frozen at 2026-09-15. `test_conf_snapshots.py` rebuilds each context
-and compares it with its file. The snapshots show that changes to the loaders,
-such as moving them out of `conf.py` into a package, change nothing in the output.
+`tests/snapshots/<context>.json` holds the output of each loader in
+`ikp_data/loaders/` (datasets, telescopes, opportunities, software, IDACs) as
+stable JSON, built for the fixed date 2026-09-15. `test_conf_snapshots.py` calls
+`build_contexts` and compares each context with its file, so a change to the
+loaders that alters any output shows up as a failing test. One more test imports
+`conf.py` (with the clock frozen) and checks it produces the same contexts.
 
 Update them **only for an intended, reviewed change** (for example, a data
 edit or an approved loader change). Never update them just to make a failing
