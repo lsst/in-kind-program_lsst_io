@@ -113,6 +113,7 @@ def format_report(problems: list[Problem], file_count: int) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Command-line entry point: validate the card data and return the exit code."""
     parser = argparse.ArgumentParser(
         prog="python -m ikp_data.validate",
         description="Validate the Rubin In-Kind Program card data files.",

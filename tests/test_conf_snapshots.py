@@ -1,7 +1,7 @@
 """Golden-snapshot tests for the data loaders in the site's conf.py.
 
 WHY THIS EXISTS
-    The M04 refactor moves the loaders out of conf.py into a package. It is
+    The planned move of the loaders out of conf.py into a package is
     meant to change nothing observable. These tests prove that: each Jinja
     context that conf.py builds (the data every card template renders) is
     serialized to stable JSON and compared with a committed "golden" copy. If

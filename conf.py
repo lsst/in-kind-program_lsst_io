@@ -32,13 +32,19 @@ linkcheck_timeout = 30
 # new link on the same host is still checked. Add a URL here only when it is
 # known-broken for a documented reason.
 #
-# Set IKP_LINKCHECK_FULL (to any non-empty value) for a "full" run: the
+# Set IKP_LINKCHECK_FULL (to anything except "", "0", "false" or "no", in any
+# letter case) for a "full" run: the
 # project's ignore entries below are skipped so every ignored URL is re-tested
 # (a link that was ignored for a transient reason can then be noticed when it
 # recovers, or when it breaks for a new reason), and retries/timeout are raised
 # so slow hosts get a fair chance. Documenteer's preset ignores always stay.
 # Normal (pull request) builds are unaffected.
-_LINKCHECK_FULL = bool(os.environ.get("IKP_LINKCHECK_FULL"))
+_LINKCHECK_FULL = os.environ.get("IKP_LINKCHECK_FULL", "").strip().lower() not in (
+    "",
+    "0",
+    "false",
+    "no",
+)
 if _LINKCHECK_FULL:
     linkcheck_retries = 3
     linkcheck_timeout = 60
@@ -61,9 +67,6 @@ _project_linkcheck_ignore = [
     # 2026-10-16: INAF SIPGI proposal tool (LBT card) -- incomplete TLS
     # certificate chain (CERTIFICATE_VERIFY_FAILED in Python's ssl).
     r'^https://pandora\.lambrate\.inaf\.it/sipgi/$',
-    # 2026-10-16: SER-SAG-S1 AGN catalogue (Datasets and Software cards) --
-    # expired TLS certificate; browsers tolerate it, Python's ssl does not.
-    r'^https://ser-sag\.pmf\.kg\.ac\.rs:8081/agn_catalogue\.php$',
     # 2026-10-16: ADS abstract pages (SWE-STK-S4 dataset card, UKD-UKD-S17
     # software card) return 405 to automated requests (WAF).
     r'^https://ui\.adsabs\.harvard\.edu/abs/2025A%26A\.\.\.694A\.\.\.1R/abstract$',

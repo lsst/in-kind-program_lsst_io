@@ -95,6 +95,22 @@ def test_every_field_has_description_and_rendered_flag():
     assert len(seen_models) > len(schemas.MODEL_FOR_FOLDER)  # nested models were visited
 
 
+def test_highlight_fields_are_rendered_but_not_content_updates():
+    """Highlights show on the page but must not bump last_updated; other fields default to rendered."""
+    highlight_fields = [
+        schemas.Highlight.model_fields["reason"],
+        schemas.Highlight.model_fields["until"],
+        schemas.DatasetCurated.model_fields["highlight"],
+        schemas.SoftwareCurated.model_fields["highlight"],
+    ]
+    for info in highlight_fields:
+        assert info.json_schema_extra["rendered"] is True
+        assert schemas.counts_as_content_update(info) is False
+    assert schemas.counts_as_content_update(schemas.Telescope.model_fields["summary"]) is True
+    # A field that is not rendered is not a content update either.
+    assert schemas.counts_as_content_update(schemas.DatasetCurated.model_fields["needs_review"]) is False
+
+
 def _nested_models(annotation):
     """Yield BaseModel subclasses mentioned anywhere inside a type annotation."""
     from typing import get_args
@@ -392,11 +408,11 @@ def test_validator_exit_codes_on_real_data(capsys):
     """Warn-only exits 0 even with errors; --strict exits 1 while the data has errors."""
     assert validate.main([]) == 0
     problems, file_count = validate.validate_data_dir(DATA_DIR)
-    assert file_count == 131
+    assert file_count == len(_all_record_paths())
     errors = [p for p in problems if p.severity == "error"]
     assert {p.file for p in errors} <= set(KNOWN_FAILURES)
     assert validate.main(["--strict"]) == (1 if errors else 0)
-    assert "Checked 131 files" in capsys.readouterr().out
+    assert f"Checked {len(_all_record_paths())} files" in capsys.readouterr().out
 
 
 def test_validator_missing_data_dir_exits_2(tmp_path):
