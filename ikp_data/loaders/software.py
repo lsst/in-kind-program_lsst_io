@@ -30,11 +30,13 @@ import re
 import yaml
 
 from ikp_data.derive import (
-    collect_cross_page_titles,
+    collect_cross_page_targets,
+    dataset_anchor,
     normalize_strings,
     record_last_updated,
     resolve_related_titles,
     slugify,
+    telescope_anchor,
 )
 
 
@@ -85,8 +87,8 @@ def _approx_start_fy(timeline_text):
 def load_software(data_dir, today):
     """Build the `contributed_software` context from `data_dir`/software."""
     records_dir = data_dir / "software"
-    dataset_titles = collect_cross_page_titles(data_dir, "datasets")
-    telescope_titles = collect_cross_page_titles(data_dir, "telescopes")
+    dataset_targets = collect_cross_page_targets(data_dir, "datasets", dataset_anchor)
+    telescope_targets = collect_cross_page_targets(data_dir, "telescopes", telescope_anchor)
 
     records = []
     all_categories = set()
@@ -116,15 +118,15 @@ def load_software(data_dir, today):
 
         cid_slug = slugify(record.get("contribution_id", ""))
         record["cid_slug"] = cid_slug
-        record["last_updated"] = record_last_updated(record, path, today)
+        record["last_updated"] = record_last_updated(record, path)
         record["uat_keywords"] = uat_keywords
         record["software_links"] = _extract_links(form_data.get("software_url"))
         record["documentation_links"] = _extract_links(form_data.get("documentation"))
         record["approx_start"] = _approx_start_fy(form_data.get("timeline"))
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
-            ("contributed-datasets.html", dataset_titles),
-            ("contributed-telescope.html", telescope_titles),
+            ("contributed-datasets.html", dataset_targets),
+            ("contributed-telescope.html", telescope_targets),
         )
 
         tokens = [

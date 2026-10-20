@@ -2,7 +2,7 @@
 
 Why this file exists
 --------------------
-Until now the only definition of "a valid card" was whatever conf.py happened to
+Until now the only definition of "a valid card" was whatever the page loaders happened to
 tolerate. These models make that definition explicit, so that a typo in a key,
 a missing date, or a stray personal e-mail address is caught when the YAML is
 edited rather than discovered on the published page.
@@ -13,7 +13,7 @@ How to read it
   ``Dataset``, ``Software`` and ``Idac``, plus small nested models.
 * The models describe the YAML *as written in the files* (what
   ``yaml.safe_load`` returns). They must never be applied to the enriched
-  dictionaries that conf.py builds, because those carry extra derived keys
+  dictionaries that the loaders (``ikp_data.loaders``) build, because those carry extra derived keys
   (``slug``, ``status``, ``filter_tokens``, ...) that the models forbid.
 * Every model forbids unknown keys (``extra="forbid"``). That is how a typo, or
   a key that must not be stored, is rejected.
@@ -149,8 +149,8 @@ IsoDateString = Annotated[
 def _check_date_or_iso_string(value: Any) -> Any:
     """Validate a date that may be a quoted ISO string or an unquoted YAML date.
 
-    conf.py accepts either form for ``visible_until`` and milestone ``date``
-    (it converts strings with ``datetime.date.fromisoformat``). Real files use
+    The loaders accept either form for ``visible_until`` and milestone ``date``
+    (they convert strings with ``datetime.date.fromisoformat``). Real files use
     quoted strings, which is the preferred form.
     """
     if isinstance(value, datetime.datetime):

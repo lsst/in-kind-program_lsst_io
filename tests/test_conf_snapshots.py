@@ -81,13 +81,8 @@ def to_stable_json(value):
     if callable(value):
         # e.g. the `slugify` helper passed to templates. Its identity is not
         # data; record only that a callable was present.
-        #
-        # The golden files were recorded when this helper was the private
-        # `_slugify` in conf.py; it is now the public `slugify` in
-        # ikp_data.derive. Spelling the placeholder with a leading underscore
-        # keeps the golden files byte-identical across that rename.
-        name = getattr(value, "__name__", "unknown").lstrip("_")
-        return f"<callable _{name}>"
+        name = getattr(value, "__name__", "unknown")
+        return f"<callable {name}>"
     if value is None or isinstance(value, (str, int, float, bool)):
         return value
     raise TypeError(f"No stable JSON conversion for {type(value).__name__}: {value!r}")
@@ -155,14 +150,13 @@ def test_context_matches_golden_snapshot(name, jinja_contexts, request):
         ("contributed_software", "software", "software"),
     ],
 )
-def test_last_updated_comes_from_yaml_not_git(
+def test_last_updated_comes_from_yaml(
     context_name, records_key, data_subdir, jinja_contexts
 ):
     """Every record's last_updated must equal its YAML value.
 
-    The loader falls back to `git log` when a record has no explicit
-    last_updated. That would make the snapshot depend on git history, so we
-    require the explicit value (ADR 0007) and check it is what the loader used.
+    The loader reads only the explicit value (ADR 0007); it never consults
+    git or file times. This checks that is what the loader used.
     """
     yaml_values = {}
     missing = []
@@ -174,8 +168,8 @@ def test_last_updated_comes_from_yaml_not_git(
             yaml_values[record["contribution_id"]] = str(record["last_updated"])
 
     assert not missing, (
-        f"These {data_subdir} records have no explicit last_updated, so the "
-        f"snapshot would depend on git history: {missing}"
+        f"These {data_subdir} records have no explicit last_updated, which the "
+        f"schema requires: {missing}"
     )
 
     records = jinja_contexts[context_name][records_key]
@@ -183,3 +177,41 @@ def test_last_updated_comes_from_yaml_not_git(
     for record in records:
         cid = record["contribution_id"]
         assert record["last_updated"] == yaml_values[cid], cid
+
+
+def test_missing_last_updated_raises_error_naming_the_file():
+    """A card with no last_updated is an error, not a guessed date."""
+    from ikp_data.derive import record_last_updated
+
+    with pytest.raises(ValueError, match=r"some_card\.yaml.*last_updated"):
+        record_last_updated({}, Path("some_card.yaml"))
+
+
+def test_related_anchors_match_each_target_pages_anchor_style():
+    """Software->telescope links must use telescope file-stem anchors, with
+    every sibling listed for a shared ID such as KMTNet (not "ds-cid-...")."""
+    from ikp_data.derive import (
+        collect_cross_page_targets,
+        dataset_anchor,
+        resolve_related_titles,
+        telescope_anchor,
+    )
+
+    telescopes = collect_cross_page_targets(DATA_DIR, "telescopes", telescope_anchor)
+    datasets = collect_cross_page_targets(DATA_DIR, "datasets", dataset_anchor)
+    kmtnet_id = next(cid for cid, t in telescopes.items() if len(t["anchors"]) > 1)
+    dataset_id = next(iter(datasets))
+
+    resolved = resolve_related_titles(
+        [kmtnet_id, dataset_id, "NO-SUCH-ID"],
+        ("contributed-datasets.html", datasets),
+        ("contributed-telescope.html", telescopes),
+    )
+    siblings, dataset, unknown = resolved
+
+    assert siblings["page_url"] == "contributed-telescope.html"
+    assert len(siblings["anchors"]) > 1
+    assert siblings["anchor"] == siblings["anchors"][0]
+    assert not any(a.startswith("ds-cid-") for a in siblings["anchors"])
+    assert dataset["anchor"].startswith("ds-cid-")
+    assert unknown["anchor"] is None and unknown["anchors"] == []

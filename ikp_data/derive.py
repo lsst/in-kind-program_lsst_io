@@ -8,21 +8,19 @@ tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
 * text helpers: ``slugify`` and ``normalize_strings``;
-* cross-page lookups: ``collect_cross_page_titles`` and ``resolve_related_titles``
+* cross-page lookups: ``collect_cross_page_targets`` and ``resolve_related_titles``
   (how a card labels its "Also see" links to another page);
 * the telescope fields that sibling records must agree on;
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
-* the git-based "last updated" fallback, kept here unchanged for now.
+* ``record_last_updated``: reads a card's explicit ``last_updated`` date.
 
-Nothing in this module reads the clock or locates files by itself: callers pass
-in the dates and paths they want used.
+Nothing in this module reads the clock, runs git, or locates files by itself:
+callers pass in the dates and paths they want used.
 """
 
-import datetime
 import math
 import re
-import subprocess
 from pathlib import Path
 
 import yaml
@@ -64,101 +62,42 @@ def normalize_strings(obj):
     return obj
 
 
-def _is_shallow_clone(path):
-    """True if the checkout containing `path` is a shallow clone (e.g.
-    actions/checkout's default, fetch-depth: 1). In a shallow clone, the tip commit is
-    deliberately parentless (grafted), so `git log -- <file>` diffs it
-    against an empty tree: every file that exists in that tip commit looks
-    like it was just added *by* that commit -- not because the file has no
-    history, but because that history isn't present locally at all.
-    """
-    # Walk up from the record file to the checkout root (the folder holding
-    # ".git") rather than locating it from this module's own path.
-    for folder in path.resolve().parents:
-        if (folder / ".git").exists():
-            return (folder / ".git" / "shallow").exists()
-    return False
-
-
-def _last_updated(path, today):
-    """Fallback only: cards normally carry an explicit `last_updated` (see
-    `record_last_updated`, ADR 0007).
-
-    Best-effort "last updated" date for a single dataset/software record
-    file.
-
-    Prefers the file's most recent git commit date (accurate and portable
-    across clones once the file has been committed). Falls back to the
-    file's on-disk modification time for files that haven't been committed
-    yet (e.g. during local review before a PR), so the page usually shows
-    something rather than a blank field.
-
-    Both of those are unreliable in a shallow clone (e.g. actions/checkout's
-    default, fetch-depth: 1) -- and not merely "unreliable in the safe,
-    comes-up-empty sense." A shallow clone's tip commit is deliberately
-    parentless (grafted), so `git log -- <file>` diffs it against an empty
-    tree: every file that exists in that tip commit looks like it was just
-    added *by* that commit, so `git log -1 -- <file>` returns the tip's date
-    for every single file, not nothing. The mtime fallback is equally wrong
-    in the same scenario for a different reason (every file's mtime is just
-    "when the checkout ran"). Both would show today's date on every card
-    regardless of when each was actually last touched -- which is exactly
-    the bug this guards against. So: check for a shallow clone first, and
-    skip straight to a fallback date rather than trusting either signal.
-    The real fix is giving CI full history (see .github/workflows/ci.yaml's
-    checkout fetch-depth); this is the safety net if that ever regresses.
-
-    The fallback is "yesterday" rather than "unknown" or today's date --
-    it's deliberately not today (that's the exact wrong answer this
-    function exists to avoid), and a concrete recent date reads better on
-    the page than a blank/placeholder value while still being an obvious
-    non-claim about the real edit date.
-    """
-    fallback = (today - datetime.timedelta(days=1)).isoformat()
-    if _is_shallow_clone(path):
-        return fallback
-    try:
-        result = subprocess.run(
-            ["git", "log", "-1", "--format=%cs", "--", path.name],
-            cwd=path.parent,
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-        date_str = result.stdout.strip()
-        if date_str:
-            return date_str
-    except Exception:
-        pass
-    try:
-        return datetime.date.fromtimestamp(path.stat().st_mtime).isoformat()
-    except Exception:
-        return fallback
-
-
-def record_last_updated(record, path, today):
+def record_last_updated(record, path):
     """The "Updated" date shown on a dataset/software card.
 
     Each card's YAML carries an explicit, quoted `last_updated: 'YYYY-MM-DD'`
     (ADR 0007), so the date means "content last changed" and is not disturbed
-    by maintenance commits. Records without the field (e.g. a hand-made new
-    card) fall back to the git-derived date. The value is always a string,
-    exactly as _last_updated() returns, so templates and sorting are unchanged.
+    by maintenance commits. The schema requires the field, so a missing value
+    is an authoring error: we raise an error naming the file instead of
+    guessing a date. The value is returned as a string, so templates and
+    sorting are unchanged.
     """
     explicit = record.get("last_updated")
-    if explicit:
-        return str(explicit)
-    return _last_updated(path, today)
+    if not explicit:
+        raise ValueError(
+            f"{path}: missing required `last_updated` (quoted 'YYYY-MM-DD'); "
+            "see ADR 0007. Run `tox run -e validate` for details."
+        )
+    return str(explicit)
 
 
-def collect_cross_page_titles(data_dir, subdir_name):
-    """contribution_id -> title/facility lookup for a sibling _data folder,
-    used to label a page's "Also see" cross-links to another page without
-    needing that other page's full loader context. contribution_id may be
-    a scalar or, on the Telescopes page, a list shared by sibling records.
+def collect_cross_page_targets(data_dir, subdir_name, anchor_for):
+    """contribution_id -> {"title", "anchors"} lookup for a sibling _data folder.
 
-    `data_dir` is the `_data` folder; `subdir_name` is the record type's
-    folder inside it (for example "software").
+    Used to label a page's "Also see" cross-links to another page, and to point
+    each link at the right card, without needing that other page's full loader
+    context.
+
+    * ``title``: the record's title (or facility, or the ID itself).
+    * ``anchors``: the in-page anchor of every card with this contribution ID,
+      without the leading "#". It is a list because the Telescopes page can have
+      several sibling cards (for example KMTNet's three sites) sharing one ID.
+
+    ``contribution_id`` may be a scalar or, on the Telescopes page, a list.
+    ``data_dir`` is the `_data` folder; ``subdir_name`` is the record type's
+    folder inside it (for example "software"). ``anchor_for(path, cid)`` returns
+    the anchor the target page gives the card in ``path`` for ``cid``. It is a
+    parameter because each page names its anchors differently.
     """
     subdir = data_dir / subdir_name
     out = {}
@@ -170,28 +109,63 @@ def collect_cross_page_titles(data_dir, subdir_name):
         cid = record.get("contribution_id")
         cids = cid if isinstance(cid, list) else [cid]
         for c in cids:
-            if c:
-                out[c] = record.get("title") or record.get("facility") or c
+            if not c:
+                continue
+            target = out.setdefault(c, {"title": None, "anchors": []})
+            # With siblings, the last file's title wins (as before this lookup
+            # kept anchors); sibling cards share a facility name anyway.
+            target["title"] = record.get("title") or record.get("facility") or c
+            target["anchors"].append(anchor_for(path, c))
     return out
 
 
+# Anchor builders for collect_cross_page_targets. Each must match the label the
+# target page's template gives its cards:
+#   datasets.rst   ".. _ds-cid-<cid slug>:"
+#   software.rst   ".. _sw-cid-<cid slug>:"
+#   telescope.rst  ".. _<file-stem slug>:"  (one per file, so siblings differ)
+def dataset_anchor(path, cid):
+    return f"ds-cid-{slugify(cid)}"
+
+
+def software_anchor(path, cid):
+    return f"sw-cid-{slugify(cid)}"
+
+
+def telescope_anchor(path, cid):
+    return slugify(path.stem)
+
+
 def resolve_related_titles(related_ids, *page_lookups):
-    """page_lookups is a sequence of (page_html_filename, {contribution_id: title})
-    pairs, checked in order, so the returned dicts know which page to link to."""
+    """Label and locate each related contribution ID for a card's "Also see" links.
+
+    page_lookups is a sequence of (page_html_filename, targets) pairs, where
+    targets comes from ``collect_cross_page_targets``. They are checked in
+    order, so each returned dict knows which page to link to.
+
+    Each returned dict has:
+    * ``anchor``: the anchor on that page to link to (the first card when
+      several siblings share the ID);
+    * ``anchors``: every sibling's anchor, for templates that want them all.
+    """
     resolved = []
     for rid in related_ids or []:
         title = None
         page_url = None
-        for page_html, lookup in page_lookups:
-            if rid in lookup:
-                title = lookup[rid]
+        anchors = []
+        for page_html, targets in page_lookups:
+            if rid in targets:
+                title = targets[rid]["title"]
                 page_url = page_html
+                anchors = list(targets[rid]["anchors"])
                 break
         resolved.append({
             "contribution_id": rid,
             "title": title or rid,
             "slug": slugify(rid),
             "page_url": page_url,
+            "anchor": anchors[0] if anchors else None,
+            "anchors": anchors,
         })
     return resolved
 
@@ -223,17 +197,9 @@ def offset_clustered_markers(records):
         if len(group) < 2:
             continue
         for i, r in enumerate(group):
-            angle = 2 * 3.14159265 * i / len(group)
-            r["marker_x"] = round(r["marker_x"] + 6 * _cos(angle), 1)
-            r["marker_y"] = round(r["marker_y"] + 6 * _sin(angle), 1)
-
-
-def _cos(x):
-    return math.cos(x)
-
-
-def _sin(x):
-    return math.sin(x)
+            angle = 2 * math.pi * i / len(group)
+            r["marker_x"] = round(r["marker_x"] + 6 * math.cos(angle), 1)
+            r["marker_y"] = round(r["marker_y"] + 6 * math.sin(angle), 1)
 
 
 def load_world_outline_path(svg_path):

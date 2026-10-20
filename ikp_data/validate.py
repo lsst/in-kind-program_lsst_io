@@ -8,8 +8,8 @@ What it does
 ------------
 1. Loads every ``*.yaml`` file in the data sub-folders (telescopes,
    opportunities, datasets, software, idacs) with ``yaml.safe_load``. It
-   validates the raw file contents, never the enriched dictionaries conf.py
-   builds, because the models forbid the derived keys.
+   validates the raw file contents, never the enriched dictionaries the
+   loaders (``ikp_data.loaders``) build, because the models forbid the derived keys.
 2. Validates each file against its pydantic model (``ikp_data.schemas``).
 3. Runs the cross-record checks (``ikp_data.checks``).
 4. Prints a report grouped by file.

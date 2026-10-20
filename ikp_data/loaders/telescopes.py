@@ -118,11 +118,11 @@ def load_telescopes(data_dir, world_outline_svg):
         # and map marker, breaking search/highlight/scroll-to-card matching.
         record["slug"] = slugify(path.stem)
 
-        latitude = record.get("latitude")
+        # The schema requires latitude, so a missing value is a KeyError here
+        # rather than a silent "Northern" default.
+        latitude = record["latitude"]
         longitude = record.get("longitude")
-        record["hemisphere"] = (
-            "Northern" if (latitude or 0) >= 0 else "Southern"
-        )
+        record["hemisphere"] = "Northern" if latitude >= 0 else "Southern"
         if latitude is not None and longitude is not None:
             mx, my = to_marker_xy(latitude, longitude)
             record["marker_x"], record["marker_y"] = mx, my
