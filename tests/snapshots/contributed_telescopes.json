@@ -481,9 +481,9 @@
       "instrumentation": [
         "Imaging"
       ],
-      "latitude": 43.141,
-      "longitude": 21.524,
-      "marker_x": 559.8,
+      "latitude": 43.14,
+      "longitude": 21.556,
+      "marker_x": 559.9,
       "marker_y": 130.2,
       "multiplex": null,
       "observing_mode": "service",
@@ -916,9 +916,9 @@
       "instrumentation": [
         "Imaging"
       ],
-      "latitude": 31.029,
-      "longitude": -115.486,
-      "marker_x": 179.2,
+      "latitude": 31.044,
+      "longitude": -115.464,
+      "marker_x": 179.3,
       "marker_y": 163.8,
       "multiplex": null,
       "observing_mode": "queue",

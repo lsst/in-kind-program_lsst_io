@@ -3,8 +3,8 @@ facility: Milanković Telescope 1.4m
 aperture: 1.4m
 country: Serbia
 site: Astronomical Station Vidojevica
-latitude: 43.141
-longitude: 21.524
+latitude: 43.140
+longitude: 21.556
 instrumentation:
 - Imaging
 instrument_names:
