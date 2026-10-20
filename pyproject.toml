@@ -21,4 +21,4 @@ dependencies = [
 
 [tool.setuptools]
 # List the package explicitly so docs/, tests/ and scripts/ are never packaged.
-packages = ["ikp_data"]
+packages = ["ikp_data", "ikp_data.loaders"]
