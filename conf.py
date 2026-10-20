@@ -75,6 +75,9 @@ _project_linkcheck_ignore = [
     # software card) return 405 to automated requests (WAF).
     r'^https://ui\.adsabs\.harvard\.edu/abs/2025A%26A\.\.\.694A\.\.\.1R/abstract$',
     r'^https://ui\.adsabs\.harvard\.edu/abs/2026MNRAS\.547ag360C$',
+    # 2026-10-20: NBI LSST IDAC wiki (Denmark IDAC card) -- <error from log>
+      # to GitHub Actions runners; works from a browser.
+      r'^https://wiki\.nbi\.ku\.dk/lsst_idac/Main_Page$',
 ]
 
 # Only the PR/normal build honours the project's ignore list (see above).
