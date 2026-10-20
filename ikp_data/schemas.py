@@ -20,13 +20,17 @@ How to read it
 * Every field carries two pieces of metadata:
 
   - ``description``: plain-language help text, suitable for a form or tooltip;
-  - ``json_schema_extra={"rendered": bool}``: whether changing the field
-    changes what a visitor sees on the public page. Editing tools can use this
-    to decide whether a change counts as a content update. (Fields that only
-    steer the page, such as a status override or ``visible_until``, count as
-    rendered because changing them changes the page.)
+  - ``json_schema_extra={"rendered": bool}``: whether the field appears on, or
+    affects, the public page. (Fields that only steer the page, such as a
+    status override or ``visible_until``, count as rendered.)
+  - ``json_schema_extra={"content_update": bool}`` (optional, defaults to the
+    value of ``rendered``): whether changing the field should by default count
+    as a content update that bumps the card's ``last_updated`` date. Highlight
+    fields are rendered but set ``content_update`` to False, because adding or
+    expiring a highlight does not change the card's content.
 
-  Read the flag back with ``Model.model_fields["name"].json_schema_extra``.
+  Read the flags back with ``Model.model_fields["name"].json_schema_extra``, or
+  use ``counts_as_content_update(field_info)`` for the content-update answer.
 
 Submitter personal information
 ------------------------------
@@ -62,18 +66,24 @@ def _field(
     description: str,
     *,
     rendered: bool,
+    content_update: bool | None = None,
     default: Any = ...,
     default_factory: Any = None,
     **constraints: Any,
 ) -> Any:
     """Build a ``Field`` that always carries a description and a rendered flag.
 
+    ``content_update`` is stored only when given; leave it out to inherit the
+    value of ``rendered`` (see the module docstring).
+
     ``default=...`` (the default) means the field is required. Pass
     ``default=None`` for an optional field, or ``default_factory=list`` for a
     list that defaults to empty. Any extra keyword (``ge=``, ``le=``) is passed
     straight to ``Field``.
     """
-    extra = {"rendered": rendered}
+    extra: dict[str, bool] = {"rendered": rendered}
+    if content_update is not None:
+        extra["content_update"] = content_update
     if default_factory is not None:
         return Field(
             default_factory=default_factory,
@@ -87,6 +97,15 @@ def _field(
         json_schema_extra=extra,
         **constraints,
     )
+
+
+def counts_as_content_update(field_info: Any) -> bool:
+    """Return True if changing this field should default to a content update.
+
+    Uses the optional ``content_update`` flag, falling back to ``rendered``.
+    """
+    extra = field_info.json_schema_extra or {}
+    return bool(extra.get("content_update", extra["rendered"]))
 
 
 def _check_iso_date_string(value: str) -> str:
@@ -513,10 +532,12 @@ class Highlight(_Strict):
     reason: str = _field(
         "Short badge text explaining the highlight, for example 'Newly delivered'.",
         rendered=True,
+        content_update=False,
     )
     until: IsoDateString = _field(
         "Last day the highlight is active, as a quoted ISO date 'YYYY-MM-DD'.",
         rendered=True,
+        content_update=False,
     )
 
 
@@ -559,7 +580,10 @@ class DatasetCurated(_Strict):
         default=None,
     )
     highlight: Highlight | None = _field(
-        "Optional temporary highlight for this card.", rendered=True, default=None
+        "Optional temporary highlight for this card.",
+        rendered=True,
+        content_update=False,
+        default=None,
     )
 
 
@@ -731,7 +755,10 @@ class SoftwareCurated(_Strict):
         default=None,
     )
     highlight: Highlight | None = _field(
-        "Optional temporary highlight for this card.", rendered=True, default=None
+        "Optional temporary highlight for this card.",
+        rendered=True,
+        content_update=False,
+        default=None,
     )
 
 
