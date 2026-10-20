@@ -1,4 +1,4 @@
-"""Pytest configuration for the conf.py golden-snapshot tests.
+"""Pytest configuration for the loader golden-snapshot tests.
 
 Adds the `--update-snapshots` command-line option. Without it the tests only
 *compare* against the committed golden files; with it they rewrite those files.
