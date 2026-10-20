@@ -32,13 +32,19 @@ linkcheck_timeout = 30
 # new link on the same host is still checked. Add a URL here only when it is
 # known-broken for a documented reason.
 #
-# Set IKP_LINKCHECK_FULL (to any non-empty value) for a "full" run: the
+# Set IKP_LINKCHECK_FULL (to anything except "", "0", "false" or "no", in any
+# letter case) for a "full" run: the
 # project's ignore entries below are skipped so every ignored URL is re-tested
 # (a link that was ignored for a transient reason can then be noticed when it
 # recovers, or when it breaks for a new reason), and retries/timeout are raised
 # so slow hosts get a fair chance. Documenteer's preset ignores always stay.
 # Normal (pull request) builds are unaffected.
-_LINKCHECK_FULL = bool(os.environ.get("IKP_LINKCHECK_FULL"))
+_LINKCHECK_FULL = os.environ.get("IKP_LINKCHECK_FULL", "").strip().lower() not in (
+    "",
+    "0",
+    "false",
+    "no",
+)
 if _LINKCHECK_FULL:
     linkcheck_retries = 3
     linkcheck_timeout = 60
