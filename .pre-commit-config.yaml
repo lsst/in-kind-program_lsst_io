@@ -22,6 +22,8 @@ repos:
         name: Validate card data (ikp_data)
         entry: python -m ikp_data.validate --strict
         language: python
-        additional_dependencies: ["pydantic>=2", "pyyaml"]
+        # Keep these pins at the same major.minor that the site's tox
+        # environments resolve (check with `pip show pydantic pyyaml`).
+        additional_dependencies: ["pydantic>=2.14,<2.15", "pyyaml>=6.0,<6.1"]
         files: ^docs/contribution-types/_data/
         pass_filenames: false
