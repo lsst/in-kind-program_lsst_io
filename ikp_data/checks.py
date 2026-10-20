@@ -8,6 +8,7 @@ visible when records are compared with each other:
 * two datasets using the same contribution ID;
 * a "related contribution" that points at an ID that does not exist;
 * sibling facilities that are meant to be described identically but have drifted;
+* an opportunity whose ``id`` differs from its file name;
 * an opportunity whose milestones are in an impossible order (results announced
   before the deadline).
 
@@ -300,6 +301,31 @@ def check_opportunity_milestones(records: list[RecordFile]) -> list[Problem]:
     return problems
 
 
+def check_opportunity_id_matches_file_name(records: list[RecordFile]) -> list[Problem]:
+    """An opportunity's ``id`` must equal its file name without ``.yaml``.
+
+    The schema describes ``id`` as matching the file name, and the page uses the
+    file name as the banner anchor, so a mismatch would leave two different
+    names for one opportunity.
+    """
+    problems: list[Problem] = []
+    for record in _records_of(records, "opportunities"):
+        opp_id = record.data.get("id")
+        if not isinstance(opp_id, str):
+            continue  # a missing or wrong-type id is reported by the schema
+        file_stem = record.file.rsplit("/", 1)[-1].removesuffix(".yaml")
+        if opp_id != file_stem:
+            problems.append(
+                Problem(
+                    "error",
+                    record.file,
+                    f"id '{opp_id}' must equal the file name '{file_stem}' "
+                    "(rename the file or change the id)",
+                )
+            )
+    return problems
+
+
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
@@ -312,4 +338,5 @@ def run_all_checks(records: list[RecordFile]) -> list[Problem]:
     problems.extend(check_related_ids_resolve(records))
     problems.extend(check_telescope_siblings(records))
     problems.extend(check_opportunity_milestones(records))
+    problems.extend(check_opportunity_id_matches_file_name(records))
     return problems

@@ -360,6 +360,27 @@ def test_duplicate_dataset_contribution_id_is_an_error():
     assert [p.severity for p in problems] == ["error"]
 
 
+def test_opportunity_id_equal_to_file_name_passes():
+    problems = checks.check_opportunity_id_matches_file_name(
+        [_record("opportunities", "opportunities/call-a.yaml", id="call-a")]
+    )
+    assert problems == []
+
+
+def test_opportunity_id_different_from_file_name_is_an_error():
+    problems = checks.check_opportunity_id_matches_file_name(
+        [_record("opportunities", "opportunities/call-a.yaml", id="call-b")]
+    )
+    assert [p.severity for p in problems] == ["error"]
+    assert "call-a" in problems[0].message and "call-b" in problems[0].message
+
+
+def test_opportunity_with_no_id_is_left_to_the_schema():
+    assert not checks.check_opportunity_id_matches_file_name(
+        [_record("opportunities", "opportunities/call-a.yaml")]
+    )
+
+
 def test_telescope_siblings_may_share_a_contribution_id():
     problems = checks.check_unique_ids(
         [
