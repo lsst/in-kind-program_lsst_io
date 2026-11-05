@@ -83,6 +83,8 @@ _project_linkcheck_ignore = [
     # Covers zenodo.org pages and Zenodo DOIs, which redirect there.
     r'^https://zenodo\.org/',
     r'^https://doi\.org/10\.5281/zenodo\.',
+    #cover project.lsst.org which is down due to vulnerability
+    r'^https://project.lsst.org/$',
 ]
 
 # Only the PR/normal build honours the project's ignore list (see above).
