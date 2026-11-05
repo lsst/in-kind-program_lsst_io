@@ -86,7 +86,7 @@ _project_linkcheck_ignore = [
     #cover project.lsst.org which is down due to vulnerability
     r'^https://project.lsst.org/$',
     #added ser-sag data link until understood
-    r'https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php/',
+    r'^https://ser-sag\.pmf\.kg\.ac\.rs:8081/agn_catalogue\.php/?$',
 ]
 
 # Only the PR/normal build honours the project's ignore list (see above).
