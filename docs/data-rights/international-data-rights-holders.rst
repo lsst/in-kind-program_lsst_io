@@ -15,9 +15,6 @@ International LSST Data Rights Holders - Rubin Observatory
 
 .. raw:: html
 
-   <iframe
-       src="https://docs.google.com/spreadsheets/d/1VXbISTr9a7h63nfv5aVCGH0H-7tVWNieFo2Nu1ExKoY/edit?usp=sharing"
-       width="100%"
-       height="600">
+   <iframe 
+       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQl6Qs4QHMhRTeJIoNoV7V8kTLxPB3A8ktZIeR-KmWfjTDmyXhWwpNTQ3Wl6XR8kRNOvsk8JpSMEjuQ/pubhtml?gid=1088084782&amp;single=true&amp;widget=true&amp;headers=false">
    </iframe>
-
