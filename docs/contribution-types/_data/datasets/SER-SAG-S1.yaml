@@ -3,7 +3,7 @@ title: Science Pipeline Development for analysis of variability of celestial sou
   LSST AGN and TVS Science Collaboration (associated dataset)
 country: Serbia
 institute: SAGNT
-last_updated: '2026-07-29'
+last_updated: '2026-11-17'
 
 # --- fields the CSV pull script owns; safe to overwrite on every sync ---
 form_data:
@@ -40,9 +40,8 @@ form_data:
     to infer day-scale only; strong diurnal aliasing (0.5, 1, 2 d); sample g,r,i,z larger
     than 50 epochs (428 of1,456; u/y excluded); conservative (1 strong + 15 medium of 230);
     asymmetric baseline-limited period errors.'
-  tutorials_docs: Catalogue functioQhX Hub (https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php,
-    doi:10.5281/zenodo.17914817),
-  support_channel: agncatalogue.sersag@gmail.com.
+  tutorials_docs: QhX Hub (https://ser-sag.pmf.kg.ac.rs:8081/agn_catalogue.php, doi:10.5281/zenodo.17914817)
+  support_channel: agncatalogue.sersag@gmail.com
   citation: 'Citation. Users of the QhX AGN variability catalogue / QhX Hub should cite the
     catalogue paper (Kovačević et al. 2026, ApJSS ) and its technical documentation (Stanković
     Cerović et al. 2025, Zenodo, doi:10.5281/zenodo.17914817). Acknowledgement. In addition
@@ -77,9 +76,15 @@ form_data:
 curated:
   primary_recipient: LSST AGN Science Collaboration
   target_audience: Specific Science Collaboration (e.g., DESC, TVS, SMWLV)
-  summary: null
-  wavelength_regime: []
+  summary: The QhX Hub provides a value-added catalogue of variability for known quasars in
+    Rubin Data Preview 1. Of about 1,500 DP1 sources cross-matched with external AGN catalogues,
+    428 met the sampling criteria. For each, the Hub serves object-level and per-band tables
+    of light-curve features and periodicity and coherence metrics, together with images and
+    interactive plots. The products are made with the QhX wavelet and cross-correlation pipeline
+    (contribution SER-SAG-S1), and the catalogue will grow with each LSST data release.
+  wavelength_regime:
+  - Optical
   status_override: null
   related_contribution_ids:
   - SER-SAG-S1
-  needs_review: true
+  needs_review: false

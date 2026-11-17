@@ -54,9 +54,11 @@ if _LINKCHECK_FULL:
     linkcheck_timeout = 60
 
 _project_linkcheck_ignore = [
-    # 2026-10-16: returns 404. Kept ignored until a replacement link is
-    # available. Other vidojevica.aob.rs URLs are now checked.
-    r'^https://vidojevica\.aob\.rs/index\.php\?option=com_content&view=article&id=21&Itemid=28$',
+    # 2026-11-17: Mt John Observatory wiki (McLellan and Nishimura telescope
+    # cards). The university moved its wiki: this address now redirects to the
+    # new wiki's front page, and GitHub Actions runners get 403. Ignored until
+    # the observatory's new page is found and the cards are updated.
+    r'^https://wiki\.canterbury\.ac\.nz/pages/viewpage\.action\?pageId=152307302$',
     # 2026-10-16: WISeREP (NOT telescope card) returns 403 to GitHub Actions
     # runners even with a browser User-Agent, though it works from a desktop.
     # The block is by network, not by agent string, so it can't be fixed here.

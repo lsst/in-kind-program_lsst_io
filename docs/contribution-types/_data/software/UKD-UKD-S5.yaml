@@ -1,14 +1,19 @@
 contribution_id: UKD-UKD-S5
 title: 'LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-fusion (version:
   v1.0.0) and obs_vista (version: v1.2.0)'
-country: null
-institute: null
-last_updated: '2026-07-29'
+country: UK
+institute: LSST:UK
+last_updated: '2026-11-17'
 form_data:
-  category: null
-  primary_recipient_group: null
+  category: Non-directable SW dev
+  primary_recipient_group: NOIRLab CSDC
   additional_recipient_groups: []
-  activity_description: null
+  activity_description: 'The LSST–VISTA Fusion Pipeline jointly processes Rubin LSST and VISTA/VIRCAM
+    near-infrared images with the LSST Science Pipelines. It has two public packages: lsst-ir-fusion,
+    which provides the pipeline configuration and processing, and obs_vista, the VIRCAM instrument
+    package for the Butler. Both are compatible with Science Pipelines v29.2.1. The pipeline
+    produced the DP1 ECDFS LSST–VISTA optical and near-infrared images and catalogues, about
+    1.38 million sources, available through the UK Rubin Science Platform.'
   timeline: null
   submitted: true
   target_audience: General Rubin Community
@@ -135,4 +140,4 @@ curated:
   status_override: null
   related_contribution_ids:
   - UKD-UKD-S5
-  needs_review: true
+  needs_review: false
