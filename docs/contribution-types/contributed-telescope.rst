@@ -13,26 +13,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
    {% if opportunities %}
    .. raw:: html
 
-      <style>
-        .ikt-opp-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .ikt-opp-card { border: 2px solid #1a5c33; border-radius: 0.75rem; padding: 1rem 1.25rem; background: #f3faf6; color: #1a1a1a; }
-        .ikt-opp-title { font-weight: 600; margin: 0 0 0.4em; color: #1a1a1a; }
-        .ikt-opp-milestones { list-style: none; margin: 0.6em 0; padding: 0; font-size: 0.9em; }
-        .ikt-opp-milestones li { padding: 0.15em 0; }
-        .ikt-opp-milestones .approx::after { content: " (approx.)"; color: #666; }
-        .ikt-opp-milestones .passed { text-decoration: line-through; color: #888; }
-        .ikt-opp-milestones .passed::after { content: " (passed)"; text-decoration: none; color: #a12626; }
-        .ikt-opp-links a { margin-right: 1em; font-size: 0.9em; color: #145c33; }
-        .ikt-opp-card-warning { border-color: #8a5a00; background: #fdeecb; }
-      </style>
-
-      <div class="ikt-opp-row">
+      <div class="ikp-opp-row">
       {% for opp in opportunities %}
-        <div class="ikt-opp-card{% if opp.accent %} ikt-opp-card-{{ opp.accent }}{% endif %}" id="opp-{{ opp.slug }}">
-          <p class="ikt-opp-title">{{ opp.title }}</p>
+        <div class="ikp-opp-card{% if opp.accent %} ikp-opp-card-{{ opp.accent }}{% endif %}" id="opp-{{ opp.slug }}">
+          <p class="ikp-opp-title">{{ opp.title }}</p>
           <p>{{ opp.summary }}</p>
           {% if opp.milestones %}
-          <ul class="ikt-opp-milestones">
+          <ul class="ikp-opp-milestones">
             {% for m in opp.milestones %}
             {% set m_classes = [] %}
             {% if m.get('approximate') %}{% set _ = m_classes.append('approx') %}{% endif %}
@@ -41,7 +28,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             {% endfor %}
           </ul>
           {% endif %}
-          <div class="ikt-opp-links">
+          <div class="ikp-opp-links">
           {% for link in (opp.links or []) %}
             <a href="{{ link.url }}">{{ link.label }}</a>
           {% endfor %}
@@ -63,29 +50,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
    .. raw:: html
 
-      <style>
-        .ikt-filterbar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-        .ikt-filterbar label { font-size: 0.9em; }
-        .ikt-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .ikt-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid #999; border-radius: 0.3em; font-size: 0.9em; }
-        .ikt-map-wrap { margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; background: #eef2f0; }
-        .ikt-map-marker { cursor: pointer; }
-        .ikt-map-marker:hover { stroke: #1a1a1a; stroke-width: 1.5; }
-        .ikt-telescopes-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
-        .ikt-telescopes-table th, .ikt-telescopes-table td { text-align: left; padding: 0.5em 0.75em; border-bottom: 1px solid #ddd; }
-        .ikt-telescopes-table th { cursor: pointer; user-select: none; }
-        .ikt-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 1em; font-size: 0.85em; margin: 0 0.2em 0.2em 0; }
-        .ikt-badge-success { background: #d9f2e3; color: #1a5c33; }
-        .ikt-badge-muted { background: #e6e6e6; color: #555; }
-        .ikt-badge-warning { background: #fdeecb; color: #8a5a00; }
-        .ikt-badge-danger { background: #fbdcdc; color: #a12626; }
-        .ikt-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }
-        .ikt-title-link:hover { text-decoration: underline; }
-        .ikt-card.ikt-highlight .sd-card { outline: 3px solid #1a5c33; outline-offset: 2px; transition: outline-color 1.2s ease; }
-        .ikt-siblings { font-size: 0.85em; color: #555; margin-top: 0.6em; }
-      </style>
-
-      <div class="ikt-filterbar">
+      <div class="ikp-filterbar">
         <label>Instrumentation
           <select id="ikt-filter-instr">
             <option value="">All</option>
@@ -135,11 +100,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </label>
       </div>
 
-      <div class="ikt-actionbar">
+      <div class="ikp-tel-actionbar">
         <input type="text" id="ikt-search" placeholder="Search facilities, sites, instruments...">
       </div>
 
-      <div class="ikt-map-wrap">
+      <div class="ikp-map-wrap">
         <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map showing facility locations">
           <rect x="0" y="0" width="1000" height="500" fill="#eef2f0"></rect>
           {% if world_outline_path %}
@@ -147,7 +112,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endif %}
           {% for t in telescopes %}
           {% if t.marker_x is not none %}
-          <circle class="ikt-map-marker" data-slug="{{ t.slug }}" data-tokens="{{ t.filter_tokens }}"
+          <circle class="ikp-map-marker" data-slug="{{ t.slug }}" data-tokens="{{ t.filter_tokens }}"
                   cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"
                   fill="{{ '#1a5c33' if t.status == 'available' else ('#a12626' if t.status == 'past_opportunity' else '#8a5a00') }}"></circle>
           {% endif %}
@@ -155,7 +120,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </svg>
       </div>
 
-      <table class="ikt-telescopes-table" id="ikt-telescopes-table">
+      <table class="ikp-telescopes-table" id="ikt-telescopes-table">
         <thead>
           <tr>
             <th data-sort="facility">Facility</th>
@@ -167,16 +132,16 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </thead>
         <tbody>
           {% for t in telescopes %}
-          <tr class="ikt-row" data-tokens="{{ t.filter_tokens }}"
+          <tr class="ikp-row" data-tokens="{{ t.filter_tokens }}"
               data-facility="{{ t.facility }}"
               data-location="{{ [t.site, t.country] | select | join(', ') }}"
               data-instrumentation="{{ (t.instrumentation or []) | join(', ') }}"
               data-status="{{ t.status }}"
               data-aperture="{{ t.aperture or '' }}">
-            <td><button type="button" class="ikt-title-link" data-slug="{{ t.slug }}">{{ t.facility }}</button></td>
+            <td><button type="button" class="ikp-title-link" data-slug="{{ t.slug }}">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
-            <td>{% if t.status == 'available' %}<span class="ikt-badge ikt-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikt-badge ikt-badge-danger">Past Opportunity</span>{% else %}<span class="ikt-badge ikt-badge-warning">Future semester</span>{% endif %}</td>
+            <td>{% if t.status == 'available' %}<span class="ikp-tel-badge ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-tel-badge ikp-badge-danger">Past Opportunity</span>{% else %}<span class="ikp-tel-badge ikp-badge-warning">Future semester</span>{% endif %}</td>
             <td>{{ t.aperture or 'TBA' }}</td>
           </tr>
           {% endfor %}
@@ -224,13 +189,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
               && matchesSearch(slug);
           }
 
-          document.querySelectorAll('.ikt-row').forEach(function (row) {
-            setVisible(row, matches(row.getAttribute('data-tokens'), row.querySelector('.ikt-title-link').getAttribute('data-slug')));
+          document.querySelectorAll('.ikp-row').forEach(function (row) {
+            setVisible(row, matches(row.getAttribute('data-tokens'), row.querySelector('.ikp-title-link').getAttribute('data-slug')));
           });
-          document.querySelectorAll('.ikt-card').forEach(function (card) {
+          document.querySelectorAll('.ikp-card').forEach(function (card) {
             setVisible(card, matches(card.className, slugOfCard(card)));
           });
-          document.querySelectorAll('.ikt-map-marker').forEach(function (marker) {
+          document.querySelectorAll('.ikp-map-marker').forEach(function (marker) {
             setVisible(marker, matches(marker.getAttribute('data-tokens'), marker.getAttribute('data-slug')));
           });
         }
@@ -243,17 +208,17 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         if (searchInput) { searchInput.addEventListener('input', applyFilters); }
 
         function scrollToCard(slug) {
-          var card = document.querySelector('.ikt-card.slug-' + CSS.escape(slug));
+          var card = document.querySelector('.ikp-card.slug-' + CSS.escape(slug));
           if (!card) { return; }
           card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          card.classList.add('ikt-highlight');
-          setTimeout(function () { card.classList.remove('ikt-highlight'); }, 1500);
+          card.classList.add('ikp-highlight');
+          setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
         }
 
-        document.querySelectorAll('.ikt-title-link').forEach(function (link) {
+        document.querySelectorAll('.ikp-title-link').forEach(function (link) {
           link.addEventListener('click', function () { scrollToCard(link.getAttribute('data-slug')); });
         });
-        document.querySelectorAll('.ikt-map-marker').forEach(function (marker) {
+        document.querySelectorAll('.ikp-map-marker').forEach(function (marker) {
           marker.addEventListener('click', function () { scrollToCard(marker.getAttribute('data-slug')); });
         });
 
@@ -282,7 +247,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       {% for t in telescopes %}
       .. grid-item-card:: {{ t.facility }}
-          :class-item: ikt-card slug-{{ t.slug }} {{ t.filter_tokens }}
+          :class-item: ikp-card slug-{{ t.slug }} {{ t.filter_tokens }}
 
           .. _{{ t.slug }}:
 
@@ -303,7 +268,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% if t.external_links %}**Links:** {% for link in t.external_links %}`{{ link.label }} <{{ link.url }}>`__{{ ", " if not loop.last }}{% endfor %}{% endif %}
 
           {% if t.siblings %}
-          .. container:: ikt-siblings
+          .. container:: ikp-siblings
 
              Also available under this contribution: {% for s in t.siblings %}`{{ s.label }} <#{{ s.slug }}>`_{{ ", " if not loop.last }}{% endfor %}
           {% endif %}

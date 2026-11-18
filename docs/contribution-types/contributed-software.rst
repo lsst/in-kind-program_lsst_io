@@ -15,28 +15,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
    .. raw:: html
 
-      <style>
-        .ikc-filterbar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-        .ikc-filterbar label { font-size: 0.9em; }
-        .ikc-sw-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
-        .ikc-sw-table th, .ikc-sw-table td { text-align: left; padding: 0.5em 0.75em; border-bottom: 1px solid #ddd; }
-        .ikc-sw-table th { cursor: pointer; user-select: none; }
-        .ikc-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 1em; font-size: 0.85em; }
-        .ikc-badge-success { background: #d9f2e3; color: #1a5c33; }
-        .ikc-badge-muted { background: #e6e6e6; color: #555; }
-        .ikc-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .ikc-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid #999; border-radius: 0.3em; font-size: 0.9em; }
-        .ikc-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }
-        .ikc-title-link:hover { text-decoration: underline; }
-        .ikc-sw-card.ikc-highlight .sd-card { outline: 3px solid #1a5c33; outline-offset: 2px; transition: outline-color 1.2s ease; }
-        .ikc-desc { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0.4em; }
-        .ikc-desc.ikc-expanded { -webkit-line-clamp: unset; display: block; overflow: visible; }
-        .ikc-expand-btn { border: none; background: none; color: #1a5c33; font-size: 0.85em; padding: 0; cursor: pointer; margin-bottom: 0.6em; }
-        .ikc-also-see { display: inline-block; background: #e6e6e6; color: #333; font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 0.5em; text-decoration: none; }
-        .ikc-also-see:hover { background: #d9d9d9; }
-      </style>
-
-      <div class="ikc-filterbar">
+      <div class="ikp-filterbar">
         <label>Category
           <select id="ikc-sw-filter-cat">
             <option value="">All</option>
@@ -64,11 +43,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </label>
       </div>
 
-      <div class="ikc-actionbar">
+      <div class="ikp-actionbar">
         <input type="text" id="ikc-sw-search" placeholder="Search title, description, keywords...">
       </div>
 
-      <table class="ikc-sw-table" id="ikc-sw-table">
+      <table class="ikp-sw-table" id="ikc-sw-table">
         <thead>
           <tr>
             <th data-sort="title">Software</th>
@@ -80,16 +59,16 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </thead>
         <tbody>
           {% for item in software %}
-          <tr class="ikc-row" data-tokens="{{ item.filter_tokens }}"
+          <tr class="ikp-row" data-tokens="{{ item.filter_tokens }}"
               data-title="{{ item.title }}"
               data-category="{{ item.form_data.category or '' }}"
               data-recipient="{{ item.form_data.primary_recipient_group or '' }}"
               data-status="{{ item.status }}"
               data-updated="{{ item.last_updated or '' }}">
-            <td><button type="button" class="ikc-title-link" data-cid="{{ item.cid_slug }}">{{ item.title }} ({{ item.contribution_id }})</button></td>
+            <td><button type="button" class="ikp-title-link" data-cid="{{ item.cid_slug }}">{{ item.title }} ({{ item.contribution_id }})</button></td>
             <td>{{ item.form_data.category or 'TBD' }}</td>
             <td>{{ item.form_data.primary_recipient_group or 'TBD' }}</td>
-            <td>{% if item.status == 'delivered' %}<span class="ikc-badge ikc-badge-success">Delivered</span>{% else %}<span class="ikc-badge ikc-badge-muted">In Progress</span>{% endif %}</td>
+            <td>{% if item.status == 'delivered' %}<span class="ikp-badge ikp-badge-success">Delivered</span>{% else %}<span class="ikp-badge ikp-badge-muted">In Progress</span>{% endif %}</td>
             <td>{{ item.last_updated or 'unknown' }}</td>
           </tr>
           {% endfor %}
@@ -130,14 +109,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           var recipient = document.getElementById('ikc-sw-filter-recipient').value;
           var status = document.getElementById('ikc-sw-filter-status').value;
           var filters = [cat, uat, recipient, status].filter(Boolean);
-          document.querySelectorAll('#ikc-sw-table .ikc-row').forEach(function (row) {
+          document.querySelectorAll('#ikc-sw-table .ikp-row').forEach(function (row) {
             var tokenStr = row.getAttribute('data-tokens');
             var tokens = ' ' + tokenStr + ' ';
             var visible = filters.every(function (f) { return tokens.indexOf(' ' + f + ' ') !== -1; })
               && matchesSearch(tokenStr);
             setVisible(row, visible);
           });
-          document.querySelectorAll('.ikc-sw-card').forEach(function (card) {
+          document.querySelectorAll('.ikp-sw-card').forEach(function (card) {
             var tokenStr = card.className;
             var tokens = ' ' + tokenStr + ' ';
             var visible = filters.every(function (f) { return tokens.indexOf(' ' + f + ' ') !== -1; })
@@ -152,21 +131,21 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         var searchInput = document.getElementById('ikc-sw-search');
         if (searchInput) { searchInput.addEventListener('input', applyFilters); }
 
-        document.querySelectorAll('.ikc-title-link').forEach(function (link) {
+        document.querySelectorAll('.ikp-title-link').forEach(function (link) {
           link.addEventListener('click', function () {
             var cid = link.getAttribute('data-cid');
-            var card = document.querySelector('.ikc-sw-card.cid-' + cid);
+            var card = document.querySelector('.ikp-sw-card.cid-' + cid);
             if (!card) { return; }
             card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            card.classList.add('ikc-highlight');
-            setTimeout(function () { card.classList.remove('ikc-highlight'); }, 1500);
+            card.classList.add('ikp-highlight');
+            setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
           });
         });
 
-        document.querySelectorAll('.ikc-expand-btn').forEach(function (btn) {
+        document.querySelectorAll('.ikp-expand-btn').forEach(function (btn) {
           btn.addEventListener('click', function () {
             var desc = btn.previousElementSibling;
-            var expanded = desc.classList.toggle('ikc-expanded');
+            var expanded = desc.classList.toggle('ikp-expanded');
             btn.textContent = expanded
               ? btn.getAttribute('data-collapse-label')
               : btn.getAttribute('data-expand-label');
@@ -200,7 +179,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       .. _sw-cid-{{ item.cid_slug }}:
 
       .. grid-item-card:: {{ item.title }}
-          :class-item: ikc-sw-card ikc-card {{ item.filter_tokens }}
+          :class-item: ikp-sw-card ikp-card {{ item.filter_tokens }}
 
           {{ item.contribution_id }}
           ^^^
@@ -220,15 +199,15 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <div class="ikc-desc">{{ item.form_data.activity_description or 'TBD' }}</div>
-             <button type="button" class="ikc-expand-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
+             <div class="ikp-desc">{{ item.form_data.activity_description or 'TBD' }}</div>
+             <button type="button" class="ikp-expand-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
 
           {% for rel in item.related %}
           {% if rel.page_url %}
 
           .. raw:: html
 
-             <a class="ikc-also-see" href="{{ rel.page_url }}#{{ rel.anchor }}">Also see: dataset ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikp-also-see" href="{{ rel.page_url }}#{{ rel.anchor }}">Also see: dataset ({{ rel.contribution_id }}) &rarr;</a>
 
           {% endif %}
           {% endfor %}
