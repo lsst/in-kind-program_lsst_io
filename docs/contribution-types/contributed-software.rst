@@ -40,19 +40,19 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <label>Category
           <select id="ikc-sw-filter-cat">
             <option value="">All</option>
-            {% for v in all_categories %}<option value="cat-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_categories %}<option value="cat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>UAT keyword
           <select id="ikc-sw-filter-uat">
             <option value="">All</option>
-            {% for v in all_uat %}<option value="uat-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Primary recipient
           <select id="ikc-sw-filter-recipient">
             <option value="">All</option>
-            {% for v in all_recipients %}<option value="recipient-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_recipients %}<option value="recipient-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Status

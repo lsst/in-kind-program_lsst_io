@@ -21,8 +21,8 @@ the loader adds, for every record:
 * ``filter_tokens``: space-separated CSS-safe tokens the filter script matches;
 * ``search_text``: lowercase text for the free-text search box.
 
-The context also carries the sorted lists of filter choices, the ``slugify``
-function (templates use it too) and the search index as JSON.
+The context also carries the filter drop-down options as sorted ``(label, slug)``
+pairs and the search index as JSON.
 """
 
 import json
@@ -32,6 +32,7 @@ import yaml
 from ikp_data.derive import (
     collect_cross_page_targets,
     normalize_strings,
+    option_pairs,
     record_last_updated,
     resolve_related_titles,
     slugify,
@@ -114,9 +115,8 @@ def load_datasets(data_dir, today):
     search_index = {r["cid_slug"]: r["search_text"] for r in records}
     return {
         "datasets": records,
-        "all_data_types": sorted(all_data_types),
-        "all_wavelengths": sorted(all_wavelengths),
-        "all_uat": sorted(all_uat),
-        "slugify": slugify,
+        "all_data_types": option_pairs(all_data_types),
+        "all_wavelengths": option_pairs(all_wavelengths),
+        "all_uat": option_pairs(all_uat),
         "search_index_json": json.dumps(search_index),
     }

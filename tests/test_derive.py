@@ -4,7 +4,7 @@ import datetime
 
 import pytest
 
-from ikp_data.derive import parse_date
+from ikp_data.derive import option_pairs, parse_date, slugify
 
 
 def test_parse_date_returns_a_date_unchanged():
@@ -26,3 +26,9 @@ def test_parse_date_reads_an_iso_string():
 @pytest.mark.parametrize("unreadable", ["not a date", "2027-13-45", "", None, 20270315, 3.5])
 def test_parse_date_treats_anything_unreadable_as_absent(unreadable):
     assert parse_date(unreadable) is None
+
+
+def test_option_pairs_are_sorted_and_the_slug_is_the_slugified_label():
+    pairs = option_pairs({"Radio", "Optical / IR", "X-ray"})
+    assert pairs == [("Optical / IR", "optical-ir"), ("Radio", "radio"), ("X-ray", "x-ray")]
+    assert all(slug == slugify(label) for label, slug in pairs)

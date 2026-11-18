@@ -34,6 +34,7 @@ from ikp_data.derive import (
     collect_cross_page_targets,
     dataset_anchor,
     normalize_strings,
+    option_pairs,
     record_last_updated,
     resolve_related_titles,
     slugify,
@@ -154,9 +155,8 @@ def load_software(data_dir, today):
     search_index = {r["cid_slug"]: r["search_text"] for r in records}
     return {
         "software": records,
-        "all_categories": sorted(all_categories),
-        "all_uat": sorted(all_uat),
-        "all_recipients": sorted(all_recipients),
-        "slugify": slugify,
+        "all_categories": option_pairs(all_categories),
+        "all_uat": option_pairs(all_uat),
+        "all_recipients": option_pairs(all_recipients),
         "search_index_json": json.dumps(search_index),
     }

@@ -36,6 +36,7 @@ from ikp_data.derive import (
     load_world_outline_path,
     normalize_strings,
     offset_clustered_markers,
+    option_pairs,
     require_field,
     slugify,
     to_marker_xy,
@@ -252,13 +253,12 @@ def load_telescopes(data_dir, world_outline_svg):
 
     return {
         "telescopes": records,
-        "all_instrumentation": sorted(all_instrumentation),
-        "all_wavelengths": sorted(all_wavelengths),
+        "all_instrumentation": option_pairs(all_instrumentation),
+        "all_wavelengths": option_pairs(all_wavelengths),
         "all_resolution_bins": sorted(resolution_bins_present.items()),
         "all_aperture_bands": [
             (k, v) for k, v in _APERTURE_BAND_LABELS.items()
         ],
-        "slugify": slugify,
         "search_index_json": json.dumps(search_index),
         "cid_to_slugs": cid_to_slugs,
         "world_outline_path": load_world_outline_path(world_outline_svg),

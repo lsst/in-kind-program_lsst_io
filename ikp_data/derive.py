@@ -7,7 +7,7 @@ dictionaries the page templates render. They need the same small tools, so those
 tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
-* text helpers: ``slugify`` and ``normalize_strings``;
+* text helpers: ``slugify``, ``option_pairs`` and ``normalize_strings``;
 * cross-page lookups: ``collect_cross_page_targets`` and ``resolve_related_titles``
   (how a card labels its "Also see" links to another page);
 * the telescope fields that sibling records must agree on;
@@ -43,6 +43,16 @@ SIBLING_CONSISTENCY_FIELDS = (
 def slugify(value):
     """Lowercase, and turn each run of other characters into one "-"."""
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+def option_pairs(values):
+    """Sorted ``(label, slug)`` pairs for a filter drop-down's options.
+
+    The page templates build each ``<option value="...">`` from the slug and show
+    the label. Computing the pairs here keeps the Jinja contexts plain data (no
+    functions), which Sphinx needs in order to cache its configuration.
+    """
+    return [(label, slugify(label)) for label in sorted(values)]
 
 
 def parse_date(value):

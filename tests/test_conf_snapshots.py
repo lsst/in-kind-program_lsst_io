@@ -79,8 +79,9 @@ def to_stable_json(value):
     if isinstance(value, (datetime.datetime, datetime.date)):
         return value.isoformat()
     if callable(value):
-        # e.g. the `slugify` helper passed to templates. Its identity is not
-        # data; record only that a callable was present.
+        # Safety net only: test_contexts_are_plain_data forbids callables in
+        # a context. If one slips in, record just that a callable was present
+        # (its identity is not data) rather than failing in the snapshot code.
         name = getattr(value, "__name__", "unknown")
         return f"<callable {name}>"
     if value is None or isinstance(value, (str, int, float, bool)):
@@ -97,6 +98,28 @@ def dump(value):
 def jinja_contexts():
     """The five contexts, built directly by the package for a fixed date."""
     return build_contexts(DATA_DIR, today=TODAY)
+
+
+def _find_callables(value, path="context"):
+    """Paths of any functions or classes inside a nested dict/list/tuple."""
+    if isinstance(value, dict):
+        found = []
+        for k, v in value.items():
+            found += _find_callables(v, f"{path}[{k!r}]")
+        return found
+    if isinstance(value, (list, tuple, set, frozenset)):
+        found = []
+        for i, v in enumerate(value):
+            found += _find_callables(v, f"{path}[{i}]")
+        return found
+    return [path] if callable(value) else []
+
+
+def test_contexts_are_plain_data(jinja_contexts):
+    """No context may hold a function: Sphinx cannot cache a config that does
+    (it logs "cannot cache unpickable configuration value: 'jinja_contexts'").
+    Templates get precomputed (label, slug) pairs instead."""
+    assert _find_callables(jinja_contexts) == []
 
 
 def test_conf_py_wires_the_package(jinja_contexts):
