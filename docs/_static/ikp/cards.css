@@ -1,0 +1,11 @@
+/*
+ * cards.css: shared styles for the card pages of the In-Kind Program site
+ * (Telescope Access, Datasets and Software).
+ *
+ * Sphinx adds this file to every page of the site (see conf.py), so every
+ * selector here starts with the `ikp-` prefix and cannot match anything on a
+ * page that does not use those classes.
+ *
+ * The Computing Resources (IDAC) page keeps its own inline styles and does not
+ * use this file.
+ */

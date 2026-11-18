@@ -18,6 +18,18 @@ html_theme_options = {
     "use_social_cards": False,
 }
 
+# Shared styles and script for the card pages (Telescope Access, Datasets,
+# Software). Append to Documenteer's lists rather than replacing them, so its
+# own theme CSS and script stay. Sphinx adds these files to every page of the
+# site, so both files only act on elements that the card pages use. The static
+# path is relative to the conf directory (the repository root). These appends
+# must stay last: the card styles rely on loading after the theme and
+# sphinx-design CSS.
+html_static_path += ["docs/_static/ikp"]
+html_css_files += ["cards.css"]
+# `defer` makes the browser run the script after the page has been parsed.
+html_js_files += [("cards.js", {"defer": "defer"})]
+
 
 # ----------------------------------------------------------------------------
 # Linkcheck settings (tuned 2026-10-16)
