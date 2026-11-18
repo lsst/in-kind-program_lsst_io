@@ -29,9 +29,8 @@ from pathlib import Path
 import yaml
 
 # Telescope fields that must be authored identically across sibling records that
-# are the same facility at several sites. Used by the telescope loader (which
-# warns at build time) and by ``ikp_data.checks`` (which reports a validation
-# warning), so both always compare the same fields.
+# are the same facility at several sites. Used by ``ikp_data.checks``, which
+# reports a validation warning when they drift apart.
 SIBLING_CONSISTENCY_FIELDS = (
     "summary",
     "time_available",

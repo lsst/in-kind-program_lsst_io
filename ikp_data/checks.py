@@ -190,7 +190,8 @@ def check_related_ids_resolve(records: list[RecordFile]) -> list[Problem]:
 def check_telescope_siblings(records: list[RecordFile]) -> list[Problem]:
     """Warn when copies of the *same* facility disagree on shared fields.
 
-    Mirrors the build-time warning in ikp_data.loaders.telescopes. Siblings with different facility
+    This is the only place the drift is reported (the telescope loader does
+    not check it). Siblings with different facility
     names (for example VST and LBT, contributed together for funding reasons) are
     expected to differ and are skipped. This is only a warning because a
     difference can be intentional.

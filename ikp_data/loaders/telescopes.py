@@ -21,8 +21,8 @@ Why the derived fields exist
 * ``status``: defaults to "future_semester" when a record omits it.
 * ``filter_tokens`` and ``search_text``: what the filter and search scripts match.
 * ``siblings``: links between records that share a ``contribution_id`` (for
-  example KMTNet's three sites), plus a build-time warning if fields that
-  should be identical across same-facility siblings have drifted.
+  example KMTNet's three sites). Drift between same-facility siblings is
+  reported by ``ikp_data.validate``, not by the loader.
 * ``cid_to_slugs``: contribution ID -> the card slugs for it, used by the
   opportunities banner to link to facility cards.
 """
@@ -33,7 +33,6 @@ import re
 import yaml
 
 from ikp_data.derive import (
-    SIBLING_CONSISTENCY_FIELDS,
     load_world_outline_path,
     normalize_strings,
     offset_clustered_markers,
@@ -186,20 +185,13 @@ def load_telescopes(data_dir, world_outline_svg):
 
     # Group sibling records sharing a contribution_id (KMTNet's 3 sites,
     # Mt John's 2 telescopes, VST/LBT) for the "also available under this
-    # contribution" cross-link, and warn at build time if fields that
-    # should be authored identically across siblings have drifted --
-    # catches copy/paste mistakes before they render as inconsistent cards.
+    # contribution" cross-link. (Whether sibling records that should agree
+    # have drifted apart is reported by `ikp_data.validate`, not here.)
     by_cid = {}
     for r in records:
         for cid in r["contribution_ids"]:
             if cid:
                 by_cid.setdefault(cid, []).append(r)
-
-    try:
-        from sphinx.util import logging as sphinx_logging
-        logger = sphinx_logging.getLogger(__name__)
-    except Exception:
-        logger = None
 
     for cid, group in by_cid.items():
         if len(group) < 2:
@@ -232,24 +224,6 @@ def load_telescopes(data_dir, world_outline_svg):
             for s in siblings:
                 if s not in r["siblings"]:
                     r["siblings"].append(s)
-        # Only enforce agreement across siblings that are the *same*
-        # facility replicated at multiple sites (KMTNet's three near-
-        # identical telescopes, per Section 4 of the requirements doc).
-        # Siblings that are materially different facilities sharing a
-        # contribution_id purely for funding reasons (VST/LBT, McLellan/
-        # Nishimura) are expected to have their own distinct summary,
-        # time_available, etc. -- checking those would just be noise.
-        facility_names = {r.get("facility") for r in group}
-        if len(facility_names) > 1:
-            continue
-        for field in SIBLING_CONSISTENCY_FIELDS:
-            values = {r.get(field) for r in group}
-            if len(values) > 1 and logger is not None:
-                logger.warning(
-                    "[telescope-data] sibling records under contribution_id "
-                    f"'{cid}' disagree on '{field}': "
-                    f"{ {r['slug']: r.get(field) for r in group} }"
-                )
 
     for r in records:
         r.setdefault("siblings", [])
