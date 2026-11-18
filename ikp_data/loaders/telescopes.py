@@ -27,7 +27,6 @@ Why the derived fields exist
   opportunities banner to link to facility cards.
 """
 
-import json
 import re
 
 import yaml
@@ -38,6 +37,7 @@ from ikp_data.derive import (
     offset_clustered_markers,
     option_pairs,
     require_field,
+    search_index_to_json,
     slugify,
     to_marker_xy,
 )
@@ -259,7 +259,7 @@ def load_telescopes(data_dir, world_outline_svg):
         "all_aperture_bands": [
             (k, v) for k, v in _APERTURE_BAND_LABELS.items()
         ],
-        "search_index_json": json.dumps(search_index),
+        "search_index_json": search_index_to_json(search_index),
         "cid_to_slugs": cid_to_slugs,
         "world_outline_path": load_world_outline_path(world_outline_svg),
     }

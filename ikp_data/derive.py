@@ -8,6 +8,8 @@ tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
 * text helpers: ``slugify``, ``option_pairs`` and ``normalize_strings``;
+* ``search_index_to_json``: dumps a page's search index so it is safe to embed in a
+  ``<script>`` block;
 * cross-page lookups: ``collect_cross_page_targets`` and ``resolve_related_titles``
   (how a card labels its "Also see" links to another page);
 * the telescope fields that sibling records must agree on;
@@ -22,6 +24,7 @@ callers pass in the dates and paths they want used.
 """
 
 import datetime
+import json
 import math
 import re
 from pathlib import Path
@@ -94,6 +97,20 @@ def normalize_strings(obj):
     if isinstance(obj, dict):
         return {k: normalize_strings(v) for k, v in obj.items()}
     return obj
+
+
+def search_index_to_json(search_index):
+    """Return `search_index` as JSON text that is safe inside a ``<script>`` block.
+
+    Why: each card page embeds its search index in
+    ``<script type="application/json" data-ikp="search-index">``. The index is
+    built from form responses, so a value containing ``</script`` would end that
+    block early and let the rest of the value be read as page HTML. Writing every
+    ``<`` as the JSON escape ``\\u003c`` prevents that. ``JSON.parse`` (and
+    ``json.loads``) turn the escape back into ``<``, so the strings the page
+    script sees are identical.
+    """
+    return json.dumps(search_index).replace("<", "\\u003c")
 
 
 def require_field(record, key, path):

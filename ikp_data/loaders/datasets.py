@@ -25,8 +25,6 @@ The context also carries the filter drop-down options as sorted ``(label, slug)`
 pairs and the search index as JSON.
 """
 
-import json
-
 import yaml
 
 from ikp_data.derive import (
@@ -35,6 +33,7 @@ from ikp_data.derive import (
     option_pairs,
     record_last_updated,
     resolve_related_titles,
+    search_index_to_json,
     slugify,
     software_anchor,
 )
@@ -118,5 +117,5 @@ def load_datasets(data_dir, today):
         "all_data_types": option_pairs(all_data_types),
         "all_wavelengths": option_pairs(all_wavelengths),
         "all_uat": option_pairs(all_uat),
-        "search_index_json": json.dumps(search_index),
+        "search_index_json": search_index_to_json(search_index),
     }

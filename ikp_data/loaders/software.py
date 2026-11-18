@@ -25,7 +25,6 @@ Why the derived fields exist
   telescopes.)
 """
 
-import json
 import re
 
 import yaml
@@ -37,6 +36,7 @@ from ikp_data.derive import (
     option_pairs,
     record_last_updated,
     resolve_related_titles,
+    search_index_to_json,
     slugify,
 )
 
@@ -158,5 +158,5 @@ def load_software(data_dir, today):
         "all_categories": option_pairs(all_categories),
         "all_uat": option_pairs(all_uat),
         "all_recipients": option_pairs(all_recipients),
-        "search_index_json": json.dumps(search_index),
+        "search_index_json": search_index_to_json(search_index),
     }
