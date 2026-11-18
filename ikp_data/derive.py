@@ -7,19 +7,21 @@ dictionaries the page templates render. They need the same small tools, so those
 tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
-* text helpers: ``slugify`` and ``normalize_strings``;
+* text helpers: ``slugify``, ``option_pairs`` and ``normalize_strings``;
 * cross-page lookups: ``collect_cross_page_targets`` and ``resolve_related_titles``
   (how a card labels its "Also see" links to another page);
 * the telescope fields that sibling records must agree on;
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
 * ``require_field``: reads a required field, or raises an error naming the file;
-* ``record_last_updated``: reads a card's explicit ``last_updated`` date.
+* ``record_last_updated``: reads a card's explicit ``last_updated`` date;
+* ``parse_date``: reads a date that may be a date object or an ISO string.
 
 Nothing in this module reads the clock, runs git, or locates files by itself:
 callers pass in the dates and paths they want used.
 """
 
+import datetime
 import math
 import re
 from pathlib import Path
@@ -27,9 +29,8 @@ from pathlib import Path
 import yaml
 
 # Telescope fields that must be authored identically across sibling records that
-# are the same facility at several sites. Used by the telescope loader (which
-# warns at build time) and by ``ikp_data.checks`` (which reports a validation
-# warning), so both always compare the same fields.
+# are the same facility at several sites. Used by ``ikp_data.checks``, which
+# reports a validation warning when they drift apart.
 SIBLING_CONSISTENCY_FIELDS = (
     "summary",
     "time_available",
@@ -42,6 +43,38 @@ SIBLING_CONSISTENCY_FIELDS = (
 def slugify(value):
     """Lowercase, and turn each run of other characters into one "-"."""
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+def option_pairs(values):
+    """Sorted ``(label, slug)`` pairs for a filter drop-down's options.
+
+    The page templates build each ``<option value="...">`` from the slug and show
+    the label. Computing the pairs here keeps the Jinja contexts plain data (no
+    functions), which Sphinx needs in order to cache its configuration.
+    """
+    return [(label, slugify(label)) for label in sorted(values)]
+
+
+def parse_date(value):
+    """A ``datetime.date`` from a date, a datetime or an ISO "YYYY-MM-DD" string.
+
+    YAML gives us a date object for an unquoted date and a string for a quoted
+    one, so every loader needs to accept both. Returns None for anything else
+    (including a string that is not a valid date): the schema checks in
+    ``ikp_data.validate`` are where bad dates are reported, so the loaders just
+    treat an unreadable date as absent.
+    """
+    # datetime is a subclass of date, so it must be tested first.
+    if isinstance(value, datetime.datetime):
+        return value.date()
+    if isinstance(value, datetime.date):
+        return value
+    if isinstance(value, str):
+        try:
+            return datetime.date.fromisoformat(value)
+        except ValueError:
+            return None
+    return None
 
 
 def normalize_strings(obj):
@@ -140,17 +173,12 @@ def collect_cross_page_targets(data_dir, subdir_name, anchor_for):
 # target page's template gives its cards:
 #   datasets.rst   ".. _ds-cid-<cid slug>:"
 #   software.rst   ".. _sw-cid-<cid slug>:"
-#   telescope.rst  ".. _<file-stem slug>:"  (one per file, so siblings differ)
 def dataset_anchor(path, cid):
     return f"ds-cid-{slugify(cid)}"
 
 
 def software_anchor(path, cid):
     return f"sw-cid-{slugify(cid)}"
-
-
-def telescope_anchor(path, cid):
-    return slugify(path.stem)
 
 
 def resolve_related_titles(related_ids, *page_lookups):

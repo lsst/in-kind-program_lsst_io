@@ -6,7 +6,8 @@ Why this file exists
 visible when records are compared with each other:
 
 * two datasets using the same contribution ID;
-* a "related contribution" that points at an ID that does not exist;
+* a "related contribution" that points at an ID that does not exist, or (on a
+  dataset or software record) at a telescope instead of a dataset or software record;
 * sibling facilities that are meant to be described identically but have drifted;
 * an opportunity whose ``id`` differs from its file name;
 * an opportunity whose milestones are in an impossible order (results announced
@@ -182,6 +183,42 @@ def check_related_ids_resolve(records: list[RecordFile]) -> list[Problem]:
     return problems
 
 
+def check_related_ids_are_datasets_or_software(records: list[RecordFile]) -> list[Problem]:
+    """A dataset's or software record's related IDs may name only datasets or software.
+
+    The "Also see" links on those two pages are built to point at other dataset
+    and software cards. An ID that resolves to a telescope
+    would have no sensible link target, so it is reported as an error. IDs that
+    resolve to nothing at all are reported by ``check_related_ids_resolve``.
+    """
+    allowed: set[str] = set()
+    for record_type in ("datasets", "software"):
+        for record in _records_of(records, record_type):
+            allowed.update(_contribution_ids(record.data))
+    everything = _known_contribution_ids(records)
+
+    problems: list[Problem] = []
+    for record_type in ("datasets", "software"):
+        for record in _records_of(records, record_type):
+            curated = record.data.get("curated")
+            related = curated.get("related_contribution_ids") if isinstance(curated, dict) else None
+            if not isinstance(related, list):
+                continue
+            for rid in related:
+                # Unknown IDs are the other check's job; here only wrong-type IDs.
+                if rid in everything and rid not in allowed:
+                    problems.append(
+                        Problem(
+                            "error",
+                            record.file,
+                            f"curated.related_contribution_ids contains '{rid}', which is a "
+                            "telescope record; related IDs on dataset and software records "
+                            "must name a dataset or software record",
+                        )
+                    )
+    return problems
+
+
 # ---------------------------------------------------------------------------
 # 3. Sibling telescopes
 # ---------------------------------------------------------------------------
@@ -190,7 +227,8 @@ def check_related_ids_resolve(records: list[RecordFile]) -> list[Problem]:
 def check_telescope_siblings(records: list[RecordFile]) -> list[Problem]:
     """Warn when copies of the *same* facility disagree on shared fields.
 
-    Mirrors the build-time warning in ikp_data.loaders.telescopes. Siblings with different facility
+    This is the only place the drift is reported (the telescope loader does
+    not check it). Siblings with different facility
     names (for example VST and LBT, contributed together for funding reasons) are
     expected to differ and are skipped. This is only a warning because a
     difference can be intentional.
@@ -336,6 +374,7 @@ def run_all_checks(records: list[RecordFile]) -> list[Problem]:
     problems: list[Problem] = []
     problems.extend(check_unique_ids(records))
     problems.extend(check_related_ids_resolve(records))
+    problems.extend(check_related_ids_are_datasets_or_software(records))
     problems.extend(check_telescope_siblings(records))
     problems.extend(check_opportunity_milestones(records))
     problems.extend(check_opportunity_id_matches_file_name(records))

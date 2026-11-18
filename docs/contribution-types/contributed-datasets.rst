@@ -42,19 +42,19 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <label>Data type
           <select id="ikc-filter-dt">
             <option value="">All</option>
-            {% for v in all_data_types %}<option value="dt-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_data_types %}<option value="dt-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Wavelength
           <select id="ikc-filter-wl">
             <option value="">All</option>
-            {% for v in all_wavelengths %}<option value="wl-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Science case (UAT)
           <select id="ikc-filter-uat">
             <option value="">All</option>
-            {% for v in all_uat %}<option value="uat-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
       </div>

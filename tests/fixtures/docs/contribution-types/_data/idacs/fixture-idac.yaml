@@ -1,0 +1,43 @@
+country: "Examplia"
+slug: "fixture-idac"
+idac_type: "Lite IDAC"
+location:
+  city: "Fixture City"
+  institution: "Fixture Institute"
+  lat: 10.0
+  lng: 20.0
+data_products:
+  object_table_subset: true
+  object_table: false
+  source_table: false
+  forced_source_table: false
+  dia_object_table: false
+  dia_source_table: false
+  solar_system_tables: false
+  co_added_images: true
+  visit_images: false
+  difference_images: false
+  template_images: false
+  other_data_products: false
+data_releases: []
+capacity:
+  storage_pb_years: 10
+  free_storage_pb_years: 5
+  cpu_mhrs: 20
+  free_cpu_mhrs: 10
+  gpu_mhrs: null
+  free_gpu_mhrs: null
+  hosted_data_pb_years: 1
+  expected_local_users: 5
+hardware:
+  cpu_architecture: ""
+  gpu_architecture: ""
+  storage_type: ""
+  network: ""
+software_services: "An invented science platform."
+complementary_datasets: ""
+use_cases: "Invented use cases."
+science_collaboration_agreements: ""
+documentation: []
+contacts: []
+notes: ""

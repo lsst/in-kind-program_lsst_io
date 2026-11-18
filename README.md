@@ -29,6 +29,22 @@ tox run -e lint,linkcheck
 The pre-commit hooks, which run in the `lint` environment, also run automatically when you commit changes.
 The pre-commit hooks are installed as part of the `make init` command.
 
+## Local preview switches
+
+Two environment variables let you preview states of the Contributed pages that the live data can't show. They are for **local previews only**:
+
+- `IKP_TODAY=YYYY-MM-DD` builds the pages as if that were today's date (for example, to see an opportunity banner that has not opened yet).
+- `IKP_DATA_DIR=<folder>` builds the pages from another `_data` folder, such as the test data in `tests/fixtures/docs/contribution-types/_data` (see `tests/fixtures/README.md`).
+
+For example:
+
+```bash
+IKP_DATA_DIR=tests/fixtures/docs/contribution-types/_data IKP_TODAY=2027-03-15 \
+    sphinx-build -E -b html -d _build/doctrees-preview -c . docs _build/html-preview
+```
+
+Use `-E` (a fresh environment) with them, so Sphinx doesn't reuse pages cached from a build with different data. A preview build prints one line, `IKP preview override: ...`, naming what is overridden. The build refuses to start if either switch is set while `CI` or `GITHUB_ACTIONS` is set, so a preview can't be published by mistake. A relative `IKP_DATA_DIR` is relative to the folder you run the build from. A custom `IKP_DATA_DIR` should have the same layout as the real one (`docs/contribution-types/_data`, with `docs/_static/world-outline.svg` two levels up), or the map outline will be empty.
+
 ## Link checking
 
 In pull requests, the link check fails only on broken links. Timeouts are reported as warnings, because a slow host is not necessarily a dead link.

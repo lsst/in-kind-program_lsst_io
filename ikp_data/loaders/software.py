@@ -20,8 +20,9 @@ Why the derived fields exist
   can show real links.
 * ``approx_start``: the first fiscal year named in the free-text timeline, as a
   rough "started" hint (never a precise date).
-* ``related``: "Also see" links, with titles looked up from the datasets and
-  telescopes pages.
+* ``related``: "Also see" links, with titles looked up from the datasets page.
+  (``ikp_data.checks`` ensures related IDs name datasets or software, never
+  telescopes.)
 """
 
 import json
@@ -33,10 +34,10 @@ from ikp_data.derive import (
     collect_cross_page_targets,
     dataset_anchor,
     normalize_strings,
+    option_pairs,
     record_last_updated,
     resolve_related_titles,
     slugify,
-    telescope_anchor,
 )
 
 
@@ -90,7 +91,6 @@ def load_software(data_dir, today):
     # features, such as expiring highlights, can use it later).
     records_dir = data_dir / "software"
     dataset_targets = collect_cross_page_targets(data_dir, "datasets", dataset_anchor)
-    telescope_targets = collect_cross_page_targets(data_dir, "telescopes", telescope_anchor)
 
     records = []
     all_categories = set()
@@ -128,7 +128,6 @@ def load_software(data_dir, today):
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
             ("contributed-datasets.html", dataset_targets),
-            ("contributed-telescope.html", telescope_targets),
         )
 
         tokens = [
@@ -156,9 +155,8 @@ def load_software(data_dir, today):
     search_index = {r["cid_slug"]: r["search_text"] for r in records}
     return {
         "software": records,
-        "all_categories": sorted(all_categories),
-        "all_uat": sorted(all_uat),
-        "all_recipients": sorted(all_recipients),
-        "slugify": slugify,
+        "all_categories": option_pairs(all_categories),
+        "all_uat": option_pairs(all_uat),
+        "all_recipients": option_pairs(all_recipients),
         "search_index_json": json.dumps(search_index),
     }

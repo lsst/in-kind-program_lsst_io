@@ -89,13 +89,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <label>Instrumentation
           <select id="ikt-filter-instr">
             <option value="">All</option>
-            {% for v in all_instrumentation %}<option value="instr-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_instrumentation %}<option value="instr-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Wavelength
           <select id="ikt-filter-wl">
             <option value="">All</option>
-            {% for v in all_wavelengths %}<option value="wl-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         {% if all_resolution_bins %}

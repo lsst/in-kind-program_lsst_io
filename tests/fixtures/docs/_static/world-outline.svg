@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Stub world outline for tests: a single rectangle, not a real map. The
+     loaders only read the "d" attribute of the first <path>. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500">
+  <path d="M100,100 L900,100 L900,400 L100,400 Z"/>
+</svg>

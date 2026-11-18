@@ -27,6 +27,7 @@ from ikp_data.derive import (
     load_world_outline_path,
     normalize_strings,
     offset_clustered_markers,
+    option_pairs,
     slugify,
     to_marker_xy,
 )
@@ -133,10 +134,9 @@ def load_idacs(data_dir, world_outline_svg):
 
     return {
         "idacs": records,
-        "all_types": sorted(all_types),
-        "all_products": sorted(all_products),
+        "all_types": option_pairs(all_types),
+        "all_products": option_pairs(all_products),
         "product_labels": _IDAC_PRODUCT_LABELS,
-        "slugify": slugify,
         "search_index_json": json.dumps(search_index),
         "world_outline_path": load_world_outline_path(world_outline_svg),
     }

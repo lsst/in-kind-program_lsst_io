@@ -12,6 +12,7 @@ CONF_DIR = Path(__file__).parent
 sys.path.insert(0, str(CONF_DIR))
 
 from ikp_data.loaders import build_contexts  # noqa: E402
+from ikp_data.preview import resolve_preview_settings  # noqa: E402
 
 html_theme_options = {
     "use_social_cards": False,
@@ -77,17 +78,17 @@ _project_linkcheck_ignore = [
     # software card) return 405 to automated requests (WAF).
     r'^https://ui\.adsabs\.harvard\.edu/abs/2025A%26A\.\.\.694A\.\.\.1R/abstract$',
     r'^https://ui\.adsabs\.harvard\.edu/abs/2026MNRAS\.547ag360C$',
-    # 2026-10-20: NBI LSST IDAC wiki (Denmark IDAC card) -- <error from log>
-      # to GitHub Actions runners; works from a browser.
-      r'^https://wiki\.nbi\.ku\.dk/lsst_idac/Main_Page$',
-        # 2026-10-20: Zenodo (contributed software and dataset cards) returns 403
+    # 2026-10-20: NBI LSST IDAC wiki (Denmark IDAC card) returns an error to
+    # GitHub Actions runners; it works from a browser.
+    r'^https://wiki\.nbi\.ku\.dk/lsst_idac/Main_Page$',
+    # 2026-10-20: Zenodo (contributed software and dataset cards) returns 403
     # to GitHub Actions runners (bot blocking); links work from a browser.
     # Covers zenodo.org pages and Zenodo DOIs, which redirect there.
     r'^https://zenodo\.org/',
     r'^https://doi\.org/10\.5281/zenodo\.',
-    #cover project.lsst.org which is down due to vulnerability
+    # 2026-10-20: project.lsst.org is down because of a vulnerability.
     r'^https://project.lsst.org/$',
-    #added ser-sag data link until understood
+    # 2026-10-20: SER-SAG data link, ignored until the reason it fails is understood.
     r'^https://ser-sag\.pmf\.kg\.ac\.rs:8081/agn_catalogue\.php/?$',
 ]
 
@@ -106,4 +107,14 @@ if not _LINKCHECK_FULL:
 # ----------------------------------------------------------------------------
 DATA_DIR = CONF_DIR / "docs" / "contribution-types" / "_data"
 
-jinja_contexts = build_contexts(DATA_DIR, today=datetime.date.today())
+
+# Local preview switches (IKP_TODAY, IKP_DATA_DIR): see ikp_data/preview.py.
+# They raise an error, and so stop the build, if set in CI. When one is active
+# the build prints a single line naming it.
+_preview = resolve_preview_settings(
+    os.environ, default_data_dir=DATA_DIR, real_today=datetime.date.today()
+)
+if _preview.notice:
+    print(_preview.notice, flush=True)
+
+jinja_contexts = build_contexts(_preview.data_dir, today=_preview.today)

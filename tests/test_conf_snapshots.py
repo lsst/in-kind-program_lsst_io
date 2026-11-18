@@ -79,8 +79,9 @@ def to_stable_json(value):
     if isinstance(value, (datetime.datetime, datetime.date)):
         return value.isoformat()
     if callable(value):
-        # e.g. the `slugify` helper passed to templates. Its identity is not
-        # data; record only that a callable was present.
+        # Safety net only: test_contexts_are_plain_data forbids callables in
+        # a context. If one slips in, record just that a callable was present
+        # (its identity is not data) rather than failing in the snapshot code.
         name = getattr(value, "__name__", "unknown")
         return f"<callable {name}>"
     if value is None or isinstance(value, (str, int, float, bool)):
@@ -99,13 +100,38 @@ def jinja_contexts():
     return build_contexts(DATA_DIR, today=TODAY)
 
 
-def test_conf_py_wires_the_package(jinja_contexts):
+def _find_callables(value, path="context"):
+    """Paths of any functions or classes inside a nested dict/list/tuple."""
+    if isinstance(value, dict):
+        found = []
+        for k, v in value.items():
+            found += _find_callables(v, f"{path}[{k!r}]")
+        return found
+    if isinstance(value, (list, tuple, set, frozenset)):
+        found = []
+        for i, v in enumerate(value):
+            found += _find_callables(v, f"{path}[{i}]")
+        return found
+    return [path] if callable(value) else []
+
+
+def test_contexts_are_plain_data(jinja_contexts):
+    """No context may hold a function: Sphinx cannot cache a config that does
+    (it logs "cannot cache unpickable configuration value: 'jinja_contexts'").
+    Templates get precomputed (label, slug) pairs instead."""
+    assert _find_callables(jinja_contexts) == []
+
+
+def test_conf_py_wires_the_package(jinja_contexts, monkeypatch):
     """conf.py's `jinja_contexts` must equal what the package builds.
 
     The golden-file tests below skip conf.py entirely, so this one test imports
     it (with the clock frozen) to prove conf.py passes the right data folder and
     uses the package's output unchanged.
     """
+    # A developer's own preview switches must not leak into this comparison.
+    for name in ("IKP_TODAY", "IKP_DATA_DIR", "CI", "GITHUB_ACTIONS"):
+        monkeypatch.delenv(name, raising=False)
     conf_path = REPO_ROOT / "conf.py"
     spec = importlib.util.spec_from_file_location("site_conf", conf_path)
     module = importlib.util.module_from_spec(spec)
@@ -188,30 +214,29 @@ def test_missing_last_updated_raises_error_naming_the_file():
 
 
 def test_related_anchors_match_each_target_pages_anchor_style():
-    """Software->telescope links must use telescope file-stem anchors, with
-    every sibling listed for a shared ID such as KMTNet (not "ds-cid-...")."""
+    """Related links must use the anchor style of the page they point at
+    ("ds-cid-..." for datasets, "sw-cid-..." for software)."""
     from ikp_data.derive import (
         collect_cross_page_targets,
         dataset_anchor,
         resolve_related_titles,
-        telescope_anchor,
+        software_anchor,
     )
 
-    telescopes = collect_cross_page_targets(DATA_DIR, "telescopes", telescope_anchor)
     datasets = collect_cross_page_targets(DATA_DIR, "datasets", dataset_anchor)
-    kmtnet_id = next(cid for cid, t in telescopes.items() if len(t["anchors"]) > 1)
+    software = collect_cross_page_targets(DATA_DIR, "software", software_anchor)
     dataset_id = next(iter(datasets))
+    software_id = next(iter(software))
 
     resolved = resolve_related_titles(
-        [kmtnet_id, dataset_id, "NO-SUCH-ID"],
+        [dataset_id, software_id, "NO-SUCH-ID"],
         ("contributed-datasets.html", datasets),
-        ("contributed-telescope.html", telescopes),
+        ("contributed-software.html", software),
     )
-    siblings, dataset, unknown = resolved
+    dataset, sw, unknown = resolved
 
-    assert siblings["page_url"] == "contributed-telescope.html"
-    assert len(siblings["anchors"]) > 1
-    assert siblings["anchor"] == siblings["anchors"][0]
-    assert not any(a.startswith("ds-cid-") for a in siblings["anchors"])
+    assert dataset["page_url"] == "contributed-datasets.html"
     assert dataset["anchor"].startswith("ds-cid-")
+    assert sw["page_url"] == "contributed-software.html"
+    assert sw["anchor"].startswith("sw-cid-")
     assert unknown["anchor"] is None and unknown["anchors"] == []

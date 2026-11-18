@@ -438,3 +438,39 @@ def test_validator_exit_codes_on_real_data(capsys):
 
 def test_validator_missing_data_dir_exits_2(tmp_path):
     assert validate.main(["--data-dir", str(tmp_path / "nope")]) == 2
+
+
+def test_related_id_pointing_at_a_telescope_is_an_error():
+    records = [
+        _record("telescopes", "telescopes/t.yaml", contribution_id="T-1"),
+        _record("datasets", "datasets/a.yaml", contribution_id="D-1"),
+        _record(
+            "software",
+            "software/b.yaml",
+            contribution_id="S-1",
+            curated={"related_contribution_ids": ["D-1", "T-1"]},
+        ),
+    ]
+    problems = checks.check_related_ids_are_datasets_or_software(records)
+    assert [(p.severity, p.file) for p in problems] == [("error", "software/b.yaml")]
+    assert "T-1" in problems[0].message
+    assert "D-1" not in problems[0].message
+
+
+def test_related_ids_naming_datasets_and_software_pass_the_type_rule():
+    records = [
+        _record("datasets", "datasets/a.yaml", contribution_id="D-1"),
+        _record(
+            "software",
+            "software/b.yaml",
+            contribution_id="S-1",
+            curated={"related_contribution_ids": ["D-1"]},
+        ),
+        _record(
+            "datasets",
+            "datasets/c.yaml",
+            contribution_id="D-2",
+            curated={"related_contribution_ids": ["S-1"]},
+        ),
+    ]
+    assert checks.check_related_ids_are_datasets_or_software(records) == []

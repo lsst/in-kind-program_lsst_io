@@ -1,0 +1,24 @@
+contribution_id: TST-FIX-S3
+title: Fixture Pipeline (invented software)
+country: Examplia
+institute: FIXINST
+last_updated: '2027-02-01'
+form_data:
+  category: Directable SW dev
+  primary_recipient_group: Fixture Science Collaboration
+  additional_recipient_groups: []
+  activity_description: An invented software contribution used only by the test fixtures.
+  timeline: 'FY26: Software engineer, 0.5 FTE'
+  submitted: true
+  software_name: FixPipe
+  software_url: 'Source repository: https://example.org/fixpipe'
+  documentation: 'Docs: https://example.org/fixpipe/docs'
+  uat_category:
+  - Astronomy software
+curated:
+  uat_keywords:
+  - Astronomy software
+  summary: null
+  status_override: null
+  related_contribution_ids:
+  - TST-FIX-S2

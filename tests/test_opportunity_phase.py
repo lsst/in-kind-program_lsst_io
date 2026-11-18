@@ -163,3 +163,29 @@ def test_milestone_without_a_readable_date_is_never_passed():
 
 def test_milestone_passed_accepts_date_objects():
     assert milestone_passed({"date": _day("2026-01-01")}, _day("2026-09-15")) is True
+
+
+# ---------------------------------------------------------------------------
+# The loader treats unreadable dates as absent (ikp_data.validate reports them)
+# ---------------------------------------------------------------------------
+
+
+def test_loader_keeps_a_record_visible_when_visible_until_is_unreadable(tmp_path):
+    from ikp_data.loaders.opportunities import load_opportunities
+
+    records_dir = tmp_path / "opportunities"
+    records_dir.mkdir()
+    (records_dir / "bad-date.yaml").write_text(
+        "id: bad-date\n"
+        "visible_until: not-a-date\n"
+        "milestones:\n"
+        "  - {label: Deadline, date: also-not-a-date, role: deadline}\n"
+        "  - {label: Results, date: '2027-05-01', role: results}\n"
+        "  - just a string, not a milestone\n",
+        encoding="utf-8",
+    )
+    context = load_opportunities(tmp_path, _day("2027-03-15"))
+    (record,) = context["opportunities"]
+    assert record["is_visible"] is True
+    # Only the readable milestone date counts.
+    assert record["next_milestone_date"] == _day("2027-05-01")

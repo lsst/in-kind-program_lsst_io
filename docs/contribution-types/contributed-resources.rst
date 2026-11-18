@@ -45,13 +45,13 @@ Click a country in the table, or a marker on the map, to jump to its full profil
         <label>Type
           <select id="ikt-filter-type">
             <option value="">All</option>
-            {% for v in all_types %}<option value="type-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_types %}<option value="type-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Data product
           <select id="ikt-filter-product">
             <option value="">All</option>
-            {% for v in all_products %}<option value="product-{{ slugify(v) }}">{{ v }}</option>{% endfor %}
+            {% for label, slug in all_products %}<option value="product-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>GPUs
