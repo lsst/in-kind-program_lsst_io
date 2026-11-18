@@ -22,11 +22,15 @@ The context also needs ``cid_to_slugs`` from the telescopes context so a banner
 can link to facility cards; ``ikp_data.loaders.build_contexts`` adds it.
 """
 
-import datetime
-
 import yaml
 
-from ikp_data.derive import normalize_strings
+from ikp_data.derive import normalize_strings, parse_date
+
+
+def _dated_milestones(milestones):
+    """The dates of every milestone that has a readable date (past or future)."""
+    dates = (parse_date(m.get("date")) for m in milestones or [] if isinstance(m, dict))
+    return [d for d in dates if d is not None]
 
 
 def load_opportunities(data_dir, today):
@@ -43,27 +47,12 @@ def load_opportunities(data_dir, today):
         record = normalize_strings(record)
         record["slug"] = path.stem
 
-        visible_until = record.get("visible_until")
-        if isinstance(visible_until, str):
-            visible_until = datetime.date.fromisoformat(visible_until)
+        visible_until = parse_date(record.get("visible_until"))
         record["is_visible"] = visible_until is None or today <= visible_until
 
-        milestones = record.get("milestones") or []
-        upcoming = [
-            m for m in milestones
-            if isinstance(m.get("date"), (datetime.date, str))
-        ]
-
-        def _milestone_date(m):
-            d = m.get("date")
-            if isinstance(d, str):
-                return datetime.date.fromisoformat(d)
-            return d
-
-        future_milestones = [m for m in upcoming if _milestone_date(m) >= today]
-        record["next_milestone_date"] = (
-            min((_milestone_date(m) for m in future_milestones), default=None)
-        )
+        dated_milestones = _dated_milestones(record.get("milestones"))
+        future_dates = [d for d in dated_milestones if d >= today]
+        record["next_milestone_date"] = min(future_dates, default=None)
         records.append(record)
 
     visible_records = [r for r in records if r["is_visible"]]
@@ -107,26 +96,12 @@ def load_opportunities(data_dir, today):
 #     the card is never `hidden`.
 
 
-def _as_date(value):
-    """A date from a date object or an ISO "YYYY-MM-DD" string; None if unreadable."""
-    if isinstance(value, datetime.datetime):
-        return value.date()
-    if isinstance(value, datetime.date):
-        return value
-    if isinstance(value, str):
-        try:
-            return datetime.date.fromisoformat(value)
-        except ValueError:
-            return None
-    return None
-
-
 def _role_dates(record, role):
     """The readable dates of the milestones with this role, in no particular order."""
     dates = []
     for milestone in record.get("milestones") or []:
         if isinstance(milestone, dict) and milestone.get("role") == role:
-            date = _as_date(milestone.get("date"))
+            date = parse_date(milestone.get("date"))
             if date is not None:
                 dates.append(date)
     return dates
@@ -138,7 +113,7 @@ def milestone_passed(milestone, today):
     A milestone dated today has not passed yet. A milestone with no readable
     date (for example a purely descriptive one) never counts as passed.
     """
-    date = _as_date(milestone.get("date"))
+    date = parse_date(milestone.get("date"))
     return date is not None and date < today
 
 
@@ -150,7 +125,7 @@ def opportunity_phase(record, today):
     strings or date objects). See the comment block above for the rules,
     including the boundary days and incomplete records.
     """
-    visible_until = _as_date(record.get("visible_until"))
+    visible_until = parse_date(record.get("visible_until"))
     if visible_until is not None and today > visible_until:
         return "hidden"
 

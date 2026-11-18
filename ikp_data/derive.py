@@ -14,12 +14,14 @@ cross-record checks):
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
 * ``require_field``: reads a required field, or raises an error naming the file;
-* ``record_last_updated``: reads a card's explicit ``last_updated`` date.
+* ``record_last_updated``: reads a card's explicit ``last_updated`` date;
+* ``parse_date``: reads a date that may be a date object or an ISO string.
 
 Nothing in this module reads the clock, runs git, or locates files by itself:
 callers pass in the dates and paths they want used.
 """
 
+import datetime
 import math
 import re
 from pathlib import Path
@@ -42,6 +44,28 @@ SIBLING_CONSISTENCY_FIELDS = (
 def slugify(value):
     """Lowercase, and turn each run of other characters into one "-"."""
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+def parse_date(value):
+    """A ``datetime.date`` from a date, a datetime or an ISO "YYYY-MM-DD" string.
+
+    YAML gives us a date object for an unquoted date and a string for a quoted
+    one, so every loader needs to accept both. Returns None for anything else
+    (including a string that is not a valid date): the schema checks in
+    ``ikp_data.validate`` are where bad dates are reported, so the loaders just
+    treat an unreadable date as absent.
+    """
+    # datetime is a subclass of date, so it must be tested first.
+    if isinstance(value, datetime.datetime):
+        return value.date()
+    if isinstance(value, datetime.date):
+        return value
+    if isinstance(value, str):
+        try:
+            return datetime.date.fromisoformat(value)
+        except ValueError:
+            return None
+    return None
 
 
 def normalize_strings(obj):
