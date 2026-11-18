@@ -163,17 +163,12 @@ def collect_cross_page_targets(data_dir, subdir_name, anchor_for):
 # target page's template gives its cards:
 #   datasets.rst   ".. _ds-cid-<cid slug>:"
 #   software.rst   ".. _sw-cid-<cid slug>:"
-#   telescope.rst  ".. _<file-stem slug>:"  (one per file, so siblings differ)
 def dataset_anchor(path, cid):
     return f"ds-cid-{slugify(cid)}"
 
 
 def software_anchor(path, cid):
     return f"sw-cid-{slugify(cid)}"
-
-
-def telescope_anchor(path, cid):
-    return slugify(path.stem)
 
 
 def resolve_related_titles(related_ids, *page_lookups):

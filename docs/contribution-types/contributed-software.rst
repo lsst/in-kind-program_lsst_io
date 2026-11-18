@@ -225,11 +225,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {% for rel in item.related %}
           {% if rel.page_url %}
-          {% set rel_kind = 'dataset' if 'datasets' in rel.page_url else 'facility' %}
 
           .. raw:: html
 
-             <a class="ikc-also-see" href="{{ rel.page_url }}#{{ rel.anchor }}">Also see: {{ rel_kind }} ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikc-also-see" href="{{ rel.page_url }}#{{ rel.anchor }}">Also see: dataset ({{ rel.contribution_id }}) &rarr;</a>
 
           {% endif %}
           {% endfor %}

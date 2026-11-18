@@ -188,30 +188,29 @@ def test_missing_last_updated_raises_error_naming_the_file():
 
 
 def test_related_anchors_match_each_target_pages_anchor_style():
-    """Software->telescope links must use telescope file-stem anchors, with
-    every sibling listed for a shared ID such as KMTNet (not "ds-cid-...")."""
+    """Related links must use the anchor style of the page they point at
+    ("ds-cid-..." for datasets, "sw-cid-..." for software)."""
     from ikp_data.derive import (
         collect_cross_page_targets,
         dataset_anchor,
         resolve_related_titles,
-        telescope_anchor,
+        software_anchor,
     )
 
-    telescopes = collect_cross_page_targets(DATA_DIR, "telescopes", telescope_anchor)
     datasets = collect_cross_page_targets(DATA_DIR, "datasets", dataset_anchor)
-    kmtnet_id = next(cid for cid, t in telescopes.items() if len(t["anchors"]) > 1)
+    software = collect_cross_page_targets(DATA_DIR, "software", software_anchor)
     dataset_id = next(iter(datasets))
+    software_id = next(iter(software))
 
     resolved = resolve_related_titles(
-        [kmtnet_id, dataset_id, "NO-SUCH-ID"],
+        [dataset_id, software_id, "NO-SUCH-ID"],
         ("contributed-datasets.html", datasets),
-        ("contributed-telescope.html", telescopes),
+        ("contributed-software.html", software),
     )
-    siblings, dataset, unknown = resolved
+    dataset, sw, unknown = resolved
 
-    assert siblings["page_url"] == "contributed-telescope.html"
-    assert len(siblings["anchors"]) > 1
-    assert siblings["anchor"] == siblings["anchors"][0]
-    assert not any(a.startswith("ds-cid-") for a in siblings["anchors"])
+    assert dataset["page_url"] == "contributed-datasets.html"
     assert dataset["anchor"].startswith("ds-cid-")
+    assert sw["page_url"] == "contributed-software.html"
+    assert sw["anchor"].startswith("sw-cid-")
     assert unknown["anchor"] is None and unknown["anchors"] == []
