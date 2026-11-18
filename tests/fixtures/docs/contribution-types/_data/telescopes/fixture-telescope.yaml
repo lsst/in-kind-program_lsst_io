@@ -1,0 +1,34 @@
+contribution_id: TST-FIX-S1
+facility: Fixture Reflector (FR)
+aperture: 4.0m
+country: Examplia
+site: Fixture Ridge
+latitude: -30.0
+longitude: -70.0
+instrumentation:
+- Imaging
+- Spectroscopy
+instrument_names:
+- FixCam
+wavelength_regime:
+- Optical
+- NIR
+spectral_resolution_min: null
+spectral_resolution_max: null
+multiplex: null
+field_of_view: null
+aeon: false
+too_capable: false
+observing_mode: null
+contacts:
+- name: Pat Placeholder
+  email: pat.placeholder@example.org
+first_semester: 2027A
+time_available: 10 nights/semester
+duration: 3 years
+status: available
+tac_process: default
+external_links:
+- label: Home
+  url: https://example.org/fixture-reflector
+summary: Invented telescope used only by the test fixtures. It has one imager and one spectrograph.

@@ -1,0 +1,27 @@
+contribution_id: TST-FIX-S2
+title: Fixture Catalogue of Invented Sources (highlighted dataset)
+country: Examplia
+institute: FIXINST
+last_updated: '2027-03-01'
+form_data:
+  submitted: true
+  data_type:
+  - Value-Added Catalogs
+  data_volume: About 1 TB of invented catalogue data.
+  hosting_location: An invented data center.
+  access_url: https://example.org/fixture-catalogue
+  access_mechanisms:
+  - Web Portal / Interface
+  authentication: None
+  uat_category:
+  - Astrophysics
+curated:
+  primary_recipient: Fixture Science Collaboration
+  summary: An invented catalogue used only by the test fixtures; one card is highlighted.
+  wavelength_regime:
+  - Optical
+  related_contribution_ids:
+  - TST-FIX-S3
+  highlight:
+    reason: Newly delivered
+    until: '2027-04-30'

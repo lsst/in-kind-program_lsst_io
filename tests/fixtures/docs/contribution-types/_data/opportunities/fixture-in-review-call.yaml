@@ -1,0 +1,20 @@
+id: fixture-in-review-call
+title: Fixture call under review
+kind: special_call
+related_contribution_ids:
+- TST-FIX-S1
+summary: Invented opportunity used by the test fixtures (in review on 2027-03-15).
+milestones:
+- label: Call opens
+  date: '2027-01-15'
+  role: opens
+- label: Proposal deadline
+  date: '2027-03-01'
+  role: deadline
+- label: Results announced
+  date: '2027-04-01'
+  role: results
+links:
+- label: Fixture announcement
+  url: https://example.org/fixture-announcement
+visible_until: '2027-12-31'

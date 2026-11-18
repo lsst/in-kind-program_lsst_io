@@ -1,0 +1,20 @@
+id: fixture-hidden-call
+title: Fixture call that is no longer shown
+kind: special_call
+related_contribution_ids:
+- TST-FIX-S1
+summary: Invented opportunity used by the test fixtures (hidden on 2027-03-15).
+milestones:
+- label: Call opens
+  date: '2026-09-01'
+  role: opens
+- label: Proposal deadline
+  date: '2026-10-15'
+  role: deadline
+- label: Results announced
+  date: '2026-12-01'
+  role: results
+links:
+- label: Fixture announcement
+  url: https://example.org/fixture-announcement
+visible_until: '2027-03-01'

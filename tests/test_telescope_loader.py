@@ -12,16 +12,18 @@ import yaml
 
 from ikp_data.loaders.telescopes import load_telescopes
 
-REAL_DATA_DIR = Path(__file__).resolve().parent.parent / "docs" / "contribution-types" / "_data"
+# The invented fixture records (see tests/fixtures/README.md), so these tests do
+# not depend on the real, changing card data.
+FIXTURE_DATA_DIR = Path(__file__).resolve().parent / "fixtures" / "docs" / "contribution-types" / "_data"
 
 
 def _data_dir_with_one_telescope(tmp_path, **overrides):
-    """A temporary `_data` dir holding a copy of one real telescope record.
+    """A temporary `_data` dir holding a copy of the fixture telescope record.
 
     Each keyword overrides (or, when the value is the string "DELETE", removes)
     a field of the copied record. Returns (data_dir, path_of_the_record).
     """
-    source = sorted((REAL_DATA_DIR / "telescopes").glob("*.yaml"))[0]
+    source = sorted((FIXTURE_DATA_DIR / "telescopes").glob("*.yaml"))[0]
     record = yaml.safe_load(source.read_text(encoding="utf-8"))
     for key, value in overrides.items():
         if value == "DELETE":

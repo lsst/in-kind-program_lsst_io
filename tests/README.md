@@ -4,7 +4,7 @@ All tests run through one entry point:
 
     tox run -e test
 
-The suite has three parts:
+The suite has four parts:
 
 * **Snapshot tests** (`test_conf_snapshots.py`): golden-file tests for the
   card loaders in `ikp_data/loaders/`. See below.
@@ -12,6 +12,9 @@ The suite has three parts:
   models in `ikp_data/schemas.py`, the cross-record checks, and the
   `python -m ikp_data.validate` command line. They run against the real card
   data and against small made-up records.
+* **Fixture tests** (`test_fixture_data.py`, `test_telescope_loader.py`): the invented data
+  tree in `tests/fixtures/` (see its README) that covers every card type and opportunity phase
+  on a fixed date, 2027-03-15.
 * **Link-check gate tests** (`test_linkcheck_gate.py`): the script that reads
   the link checker's report and decides whether the build passes (working
   links pass, timeouts warn, broken links fail).
