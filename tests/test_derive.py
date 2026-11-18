@@ -1,10 +1,11 @@
 """Direct tests for the small helpers in ``ikp_data.derive``."""
 
 import datetime
+import json
 
 import pytest
 
-from ikp_data.derive import option_pairs, parse_date, slugify
+from ikp_data.derive import option_pairs, parse_date, search_index_to_json, slugify
 
 
 def test_parse_date_returns_a_date_unchanged():
@@ -32,3 +33,15 @@ def test_option_pairs_are_sorted_and_the_slug_is_the_slugified_label():
     pairs = option_pairs({"Radio", "Optical / IR", "X-ray"})
     assert pairs == [("Optical / IR", "optical-ir"), ("Radio", "radio"), ("X-ray", "x-ray")]
     assert all(slug == slugify(label) for label, slug in pairs)
+
+
+# ---------------------------------------------------------------------------
+# search_index_to_json: safe to embed in a <script> block
+# ---------------------------------------------------------------------------
+def test_search_index_to_json_escapes_less_than_and_round_trips():
+    """A value holding "</script><b>" must not appear as raw text, yet parse back unchanged."""
+    search_index = {"slug-a": "before </script><b>bold</b> after", "slug-b": "plain text"}
+    text = search_index_to_json(search_index)
+    assert "<" not in text  # nothing can close the surrounding <script> block
+    assert "\\u003c/script" in text  # "<" is written as the JSON escape \u003c
+    assert json.loads(text) == search_index  # the page script sees identical strings
