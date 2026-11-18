@@ -9,6 +9,8 @@ the site renders it:
   cross-references, sibling consistency, milestone ordering).
 * ``ikp_data.validate`` - a command-line validator that runs both over the
   YAML files in ``docs/contribution-types/_data/``.
+* ``ikp_data.preview``  - the local-only ``IKP_TODAY`` / ``IKP_DATA_DIR`` preview
+  switches that ``conf.py`` applies (refused in CI).
 
 Run the validator from the repository root with::
 

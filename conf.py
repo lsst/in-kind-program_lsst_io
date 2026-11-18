@@ -12,6 +12,7 @@ CONF_DIR = Path(__file__).parent
 sys.path.insert(0, str(CONF_DIR))
 
 from ikp_data.loaders import build_contexts  # noqa: E402
+from ikp_data.preview import resolve_preview_settings  # noqa: E402
 
 html_theme_options = {
     "use_social_cards": False,
@@ -106,4 +107,14 @@ if not _LINKCHECK_FULL:
 # ----------------------------------------------------------------------------
 DATA_DIR = CONF_DIR / "docs" / "contribution-types" / "_data"
 
-jinja_contexts = build_contexts(DATA_DIR, today=datetime.date.today())
+
+# Local preview switches (IKP_TODAY, IKP_DATA_DIR): see ikp_data/preview.py.
+# They raise an error, and so stop the build, if set in CI. When one is active
+# the build prints a single line naming it.
+_preview = resolve_preview_settings(
+    os.environ, default_data_dir=DATA_DIR, real_today=datetime.date.today()
+)
+if _preview.notice:
+    print(_preview.notice, flush=True)
+
+jinja_contexts = build_contexts(_preview.data_dir, today=_preview.today)

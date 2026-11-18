@@ -122,13 +122,16 @@ def test_contexts_are_plain_data(jinja_contexts):
     assert _find_callables(jinja_contexts) == []
 
 
-def test_conf_py_wires_the_package(jinja_contexts):
+def test_conf_py_wires_the_package(jinja_contexts, monkeypatch):
     """conf.py's `jinja_contexts` must equal what the package builds.
 
     The golden-file tests below skip conf.py entirely, so this one test imports
     it (with the clock frozen) to prove conf.py passes the right data folder and
     uses the package's output unchanged.
     """
+    # A developer's own preview switches must not leak into this comparison.
+    for name in ("IKP_TODAY", "IKP_DATA_DIR", "CI", "GITHUB_ACTIONS"):
+        monkeypatch.delenv(name, raising=False)
     conf_path = REPO_ROOT / "conf.py"
     spec = importlib.util.spec_from_file_location("site_conf", conf_path)
     module = importlib.util.module_from_spec(spec)
