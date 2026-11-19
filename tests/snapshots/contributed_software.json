@@ -229,7 +229,7 @@
           "recipient-noirlab-csdc"
         ],
         "status": [
-          "status-delivered"
+          "status-available"
         ],
         "uat": [
           "uat-galactic-and-extragalactic-astronomy",
@@ -315,7 +315,7 @@
           "url": "https://github.com/lsst-uk/obs_vista"
         }
       ],
-      "status": "delivered",
+      "status": "available",
       "title": "LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-fusion (version: v1.0.0) and obs_vista (version: v1.2.0)",
       "uat_keywords": [
         "Galactic and extragalactic astronomy",
@@ -367,7 +367,7 @@
           "recipient-lsst-agn-science-collaboration"
         ],
         "status": [
-          "status-delivered"
+          "status-available"
         ],
         "uat": [
           "uat-astronomy-software",
@@ -483,7 +483,7 @@
           "url": "https://github.com/LSST-SER-SAG-S1/QNPy_Latte"
         }
       ],
-      "status": "delivered",
+      "status": "available",
       "title": "Science Pipeline Development for analysis of variability of celestial sources in the LSST AGN and TVS Science Collaboration",
       "uat_keywords": [
         "Astronomy software",
@@ -525,7 +525,7 @@
           "recipient-lsst-dark-energy-science-collaboration"
         ],
         "status": [
-          "status-delivered"
+          "status-available"
         ],
         "uat": [
           "uat-galactic-and-extragalactic-astronomy"
@@ -570,7 +570,7 @@
           "url": "https://github.com/LSSTDESC/TXPipe"
         }
       ],
-      "status": "delivered",
+      "status": "available",
       "title": "Galaxy Clustering Infrastructure",
       "uat_keywords": [
         "Galactic and extragalactic astronomy"
@@ -608,7 +608,7 @@
           "recipient-lsst-transients-and-variable-stars-science-collaboration"
         ],
         "status": [
-          "status-delivered"
+          "status-available"
         ],
         "uat": [
           "uat-cosmology",
@@ -703,7 +703,7 @@
           "url": "https://github.com/macauff/macauff"
         }
       ],
-      "status": "delivered",
+      "status": "available",
       "title": "Science Software development: Cross-matching",
       "uat_keywords": [
         "Cosmology",

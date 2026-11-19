@@ -6,7 +6,7 @@ The Vera C. Rubin Observatory In-Kind Program includes contributed software: dir
 This page lists all current software-development contributions. General pool contributions -- directable effort offered without a recipient defined ahead of time -- are listed on the :doc:`general-pool` page instead.
 
 Use the filters or the table below to browse by category, science keyword, or recipient group.
-Each entry starts with the basics from the original proposal; cards marked *Delivered* have a full team-submitted record on file, and cards marked *In Progress* are still awaiting that submission.
+Each entry starts with the basics from the original proposal; cards marked *Available* have a full team-submitted record on file, and cards marked *In progress* are still awaiting that submission.
 Some software contributions also produce a dataset -- where that's the case, the card links to the matching entry on the :doc:`contributed-datasets` page.
 
 Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have any questions about contributed software.
@@ -37,8 +37,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <label>Status
           <select id="ikp-sw-filter-status" data-filter-key="status">
             <option value="">All</option>
-            <option value="status-delivered">Delivered</option>
-            <option value="status-pending">In Progress</option>
+            <option value="status-available">Available</option>
+            <option value="status-pending">In progress</option>
           </select>
         </label>
       </div>
@@ -68,7 +68,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td><button type="button" class="ikp-title-link">{{ item.title }} ({{ item.contribution_id }})</button></td>
             <td>{{ item.form_data.category or 'TBD' }}</td>
             <td>{{ item.form_data.primary_recipient_group or 'TBD' }}</td>
-            <td>{% if item.status == 'delivered' %}<span class="ikp-badge ikp-badge-success">Delivered</span>{% else %}<span class="ikp-badge ikp-badge-muted">In Progress</span>{% endif %}</td>
+            <td>{% if item.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">In progress</span>{% endif %}</td>
             <td>{{ item.last_updated or 'unknown' }}</td>
           </tr>
           {% endfor %}
@@ -119,5 +119,5 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           *Updated: {{ item.last_updated or 'unknown' }}*
           +++
-          {% if item.status == 'delivered' %}:bdg-success:`Delivered`{% else %}:bdg-muted:`In Progress`{% endif %}
+          {% if item.status == 'available' %}:bdg-success:`Available`{% else %}:bdg-muted:`In progress`{% endif %}
       {% endfor %}

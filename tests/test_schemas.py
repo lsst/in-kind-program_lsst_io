@@ -250,11 +250,20 @@ def test_unknown_top_level_key_fails():
 
 def test_status_override_must_be_a_known_value():
     record = _dataset()
-    record["curated"]["status_override"] = "delivered"  # a software value, not a dataset one
+    record["curated"]["status_override"] = "pending"  # a software value, not a dataset one
     with pytest.raises(ValidationError):
         schemas.Dataset.model_validate(record)
     record["curated"]["status_override"] = "not_yet_delivered"
     schemas.Dataset.model_validate(record)
+
+
+def test_software_status_override_accepts_available_and_rejects_delivered():
+    record = _software()
+    record["curated"]["status_override"] = "available"
+    schemas.Software.model_validate(record)
+    record["curated"]["status_override"] = "delivered"
+    with pytest.raises(ValidationError):
+        schemas.Software.model_validate(record)
 
 
 def test_highlight_shape():

@@ -10,7 +10,7 @@ this data set: every record here is Directable or Non-directable.
 
 Why the derived fields exist
 ----------------------------
-* ``status``: "delivered" or "pending" (or ``curated.status_override``).
+* ``status``: "available" or "pending" (or ``curated.status_override``).
 * ``anchor`` (``sw-cid-<contribution ID slug>``), ``last_updated``,
   ``filters`` and ``search_text``: as for datasets.
 * ``uat_keywords``: the team's own UAT answer if given, otherwise the sync
@@ -47,7 +47,7 @@ def _software_status(record):
     curated = record.get("curated") or {}
     if curated.get("status_override"):
         return curated["status_override"]
-    return "delivered" if (record.get("form_data") or {}).get("submitted") else "pending"
+    return "available" if (record.get("form_data") or {}).get("submitted") else "pending"
 
 
 _URL_RE = re.compile(r"https?://[^\s,]+")

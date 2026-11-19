@@ -623,7 +623,7 @@ class Dataset(_Strict):
 # Software (docs/contribution-types/_data/software/*.yaml)
 # ---------------------------------------------------------------------------
 
-SoftwareStatus = Literal["delivered", "pending"]
+SoftwareStatus = Literal["available", "pending"]
 
 
 class SoftwareFormData(_RejectSubmitterPii):
@@ -631,7 +631,7 @@ class SoftwareFormData(_RejectSubmitterPii):
 
     submitted: bool = _field(
         "True once the contributor has submitted the software form; decides "
-        "whether the card reads 'Delivered' (unless overridden in curated).",
+        "whether the card reads 'Available' (unless overridden in curated).",
         rendered=True,
     )
     category: str | None = _field(
@@ -746,7 +746,7 @@ class SoftwareCurated(_Strict):
         default=None,
     )
     status_override: SoftwareStatus | None = _field(
-        "Force the card status instead of deriving it from the form: 'delivered' "
+        "Force the card status instead of deriving it from the form: 'available' "
         "or 'pending'. Leave empty normally.",
         rendered=True,
         default=None,
