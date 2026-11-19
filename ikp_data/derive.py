@@ -224,7 +224,6 @@ def resolve_related_titles(related_ids, *page_lookups):
         resolved.append({
             "contribution_id": rid,
             "title": title or rid,
-            "slug": slugify(rid),
             "page_url": page_url,
             "anchor": anchors[0] if anchors else None,
             "anchors": anchors,

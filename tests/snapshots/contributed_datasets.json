@@ -181,7 +181,6 @@
           ],
           "contribution_id": "SER-SAG-S1",
           "page_url": "contributed-software.html",
-          "slug": "ser-sag-s1",
           "title": "Science Pipeline Development for analysis of variability of celestial sources in the LSST AGN and TVS Science Collaboration"
         }
       ],
@@ -270,7 +269,6 @@
           ],
           "contribution_id": "UKD-UKD-S9",
           "page_url": "contributed-software.html",
-          "slug": "ukd-ukd-s9",
           "title": "Science Software development: Cross-matching"
         }
       ],
@@ -352,7 +350,6 @@
           ],
           "contribution_id": "UKD-UKD-S5",
           "page_url": "contributed-software.html",
-          "slug": "ukd-ukd-s5",
           "title": "LSST–VISTA Fusion Pipeline including two public repositories: lsst-ir-fusion (version: v1.0.0) and obs_vista (version: v1.2.0)"
         }
       ],
@@ -573,7 +570,6 @@
           ],
           "contribution_id": "SZA-SAA-S2",
           "page_url": "contributed-software.html",
-          "slug": "sza-saa-s2",
           "title": "MeerKAT high-level data products and services for LSST"
         }
       ],
@@ -648,7 +644,6 @@
           ],
           "contribution_id": "UKD-UKD-S10",
           "page_url": "contributed-software.html",
-          "slug": "ukd-ukd-s10",
           "title": "Science Software development: spectroscopic classification of transients and 4MOST spectra"
         }
       ],
