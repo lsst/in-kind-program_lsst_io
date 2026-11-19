@@ -8,6 +8,7 @@ without a full build. (``test_dataset_card_text.py`` does the same for Datasets.
 """
 
 import datetime
+import html
 import io
 import shutil
 from pathlib import Path
@@ -212,3 +213,92 @@ def test_bracketed_emails_still_link_without_the_brackets(tmp_path):
         "mailto:a.one@example.org",
         "mailto:b.two@example.org",
     ]
+
+
+# --- Layout: short rows first, then the description ------------------------
+
+
+def test_short_rows_come_before_the_description_in_page_order(tmp_path):
+    text = render_card_text(
+        tmp_path,
+        form_data={"version": "1.0", "support": "Ask on the forum."},
+    )
+    markers = [
+        "**Primary recipient:**",
+        "**Category:**",
+        "**Version:**",
+        "**Software:**",
+        "**Start (approx.):**",
+        "**Links:**",
+        "**Documentation:**",
+        "**Support:**",
+        'class="ikp-desc"',
+        'class="ikp-expand-btn"',
+        'class="ikp-also-see"',
+    ]
+    positions = [text.index(marker) for marker in markers]
+    assert positions == sorted(positions)
+
+
+def test_description_toggle_labels_have_arrows(tmp_path):
+    text = render_card_text(tmp_path)
+    # &#9662; is the down-pointing small triangle and &#9652; the up-pointing one.
+    assert 'data-expand-label="Read full description &#9662;"' in text
+    assert 'data-collapse-label="Show less &#9652;"' in text
+    assert ">Read full description &#9662;</button>" in text
+
+
+def test_description_toggle_does_not_say_show_more(tmp_path):
+    assert ">Show more<" not in render_card_text(tmp_path)
+
+
+# --- Description escaping ---------------------------------------------------
+
+
+def description_html_for(tmp_path, description):
+    """The `description_html` the loader builds for the fixture record."""
+    data_dir = tmp_path / "_data"
+    shutil.copytree(FIXTURE_DATA_DIR, data_dir)
+    record_path = next((data_dir / "software").glob("*.yaml"))
+    record = yaml.safe_load(record_path.read_text(encoding="utf-8"))
+    record["form_data"]["activity_description"] = description
+    record_path.write_text(yaml.safe_dump(record), encoding="utf-8")
+    software = build_contexts(data_dir, today=TODAY)["contributed_software"]["software"][0]
+    return software["description_html"]
+
+
+def test_markup_in_a_description_is_shown_as_text(tmp_path):
+    escaped = description_html_for(tmp_path, "<script>alert(1)</script> and a < b")
+    assert "<script>" not in escaped
+    assert escaped == "&lt;script&gt;alert(1)&lt;/script&gt; and a &lt; b"
+
+
+def test_an_ampersand_is_escaped_once(tmp_path):
+    assert description_html_for(tmp_path, "Stars & galaxies") == "Stars &amp; galaxies"
+
+
+def test_an_existing_entity_is_not_escaped_twice(tmp_path):
+    """A literal "&amp;" in the data must still show as one "&", not "&amp;"."""
+    escaped = description_html_for(tmp_path, "Stars &amp; galaxies")
+    assert escaped == "Stars &amp; galaxies"
+    assert html.unescape(escaped) == "Stars & galaxies"
+
+
+def test_an_empty_description_shows_tbd(tmp_path):
+    assert description_html_for(tmp_path / "a", None) == "TBD"
+    assert description_html_for(tmp_path / "b", "") == "TBD"
+
+
+def test_the_card_shows_the_escaped_description(tmp_path):
+    text = render_card_text(tmp_path, form_data={"activity_description": "x <script> y"})
+    assert '<div class="ikp-desc">x &lt;script&gt; y</div>' in text
+    assert "<script>" not in text.replace('<script type="application/json"', "")
+
+
+def test_no_live_description_can_start_a_tag():
+    """No live answer may put a raw "<" into the card's HTML block."""
+    live_data_dir = REPO_ROOT / "docs" / "contribution-types" / "_data"
+    records = build_contexts(live_data_dir, today=TODAY)["contributed_software"]["software"]
+    assert records
+    for software in records:
+        assert "<" not in software["description_html"], software["contribution_id"]

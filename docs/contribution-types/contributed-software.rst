@@ -110,8 +110,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <div class="ikp-desc">{{ item.form_data.activity_description or 'TBD' }}</div>
-             <button type="button" class="ikp-expand-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
+             <div class="ikp-desc">{{ item.description_html }}</div>
+             <button type="button" class="ikp-expand-btn" data-expand-label="Read full description &#9662;" data-collapse-label="Show less &#9652;">Read full description &#9662;</button>
 
           {% for rel in item.related %}
           {% if rel.href %}
