@@ -78,7 +78,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       :gutter: 2
 
       {% for ds in datasets %}
-      {% if ds.status == 'available' %}
+      {% set available = (ds.status == 'available') %}
       .. _{{ ds.anchor }}:
 
       .. grid-item-card:: {{ ds.title }}
@@ -88,6 +88,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           ^^^
           {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
 
+          {% if available %}
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
 
           **Target audience:** {{ ds.curated.target_audience or ds.form_data.target_audience or 'TBD' }}
@@ -123,33 +124,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           .. raw:: html
 
              <button type="button" class="ikp-more-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
-
-          {% for rel in ds.related %}
-          {% if rel.page_url %}
-
-          .. raw:: html
-
-             <a class="ikp-also-see" href="{{ rel.page_url }}#sw-cid-{{ rel.slug }}">Also see: software ({{ rel.contribution_id }}) &rarr;</a>
-
-          {% endif %}
-          {% endfor %}
-
-          *Updated: {{ ds.last_updated or 'unknown' }}*
-          +++
-          :bdg-success:`Available`
-      {% else %}
-      .. _{{ ds.anchor }}:
-
-      .. grid-item-card:: {{ ds.title }}
-          :class-item: ikp-card
-
-          {{ ds.contribution_id }} - {{ ds.country }}
-          ^^^
-          {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
-
+          {% else %}
           {{ ds.curated.summary or 'TBD' }}
 
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
+          {% endif %}
 
           {% for rel in ds.related %}
           {% if rel.page_url %}
@@ -163,6 +142,5 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++
-          :bdg-muted:`Not yet delivered`
-      {% endif %}
+          {% if available %}:bdg-success:`Available`{% else %}:bdg-muted:`Not yet delivered`{% endif %}
       {% endfor %}
