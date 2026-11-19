@@ -156,7 +156,7 @@ def test_category_row_shows_the_category_or_tbd(tmp_path):
 
 
 def test_category_row_follows_the_recipients(tmp_path):
-    text = render_card_text(tmp_path)
+    text = render_card_text(tmp_path, form_data={"additional_recipient_groups": ["Group One"]})
     assert text.index("**Additional recipients:**") < text.index("**Category:**")
 
 
@@ -302,3 +302,24 @@ def test_no_live_description_can_start_a_tag():
     assert records
     for software in records:
         assert "<" not in software["description_html"], software["contribution_id"]
+
+
+# --- Empty values -----------------------------------------------------------
+
+
+def test_additional_recipients_row_is_hidden_when_the_list_is_empty(tmp_path):
+    empty = render_card_text(tmp_path / "a", form_data={"additional_recipient_groups": []})
+    # Neither the row nor a "None" placeholder for it appears.
+    assert "Additional recipients" not in empty
+    filled = render_card_text(
+        tmp_path / "b", form_data={"additional_recipient_groups": ["Group One", "Group Two"]}
+    )
+    assert "**Additional recipients:** Group One, Group Two" in filled
+
+
+def test_updated_date_is_shown_with_no_unknown_fallback(tmp_path):
+    text = render_card_text(tmp_path, last_updated="2027-03-01")
+    assert "Updated: unknown" not in text
+    assert "*Updated: 2027-03-01*" in text
+    assert 'data-updated="2027-03-01"' in text
+    assert "<td>2027-03-01</td>" in text

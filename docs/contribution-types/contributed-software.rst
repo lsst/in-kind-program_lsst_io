@@ -64,12 +64,12 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
               data-category="{{ item.form_data.category or '' }}"
               data-recipient="{{ item.form_data.primary_recipient_group or '' }}"
               data-status="{{ item.status }}"
-              data-updated="{{ item.last_updated or '' }}">
+              data-updated="{{ item.last_updated }}">
             <td><button type="button" class="ikp-title-link">{{ item.title }} ({{ item.contribution_id }})</button></td>
             <td>{{ item.form_data.category or 'TBD' }}</td>
             <td>{{ item.form_data.primary_recipient_group or 'TBD' }}</td>
             <td>{% if item.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">In progress</span>{% endif %}</td>
-            <td>{{ item.last_updated or 'unknown' }}</td>
+            <td>{{ item.last_updated }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -92,7 +92,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Primary recipient:** {{ item.form_data.primary_recipient_group or 'TBD' }}
 
-          **Additional recipients:** {{ (item.form_data.additional_recipient_groups or []) | join(', ') or 'None' }}
+          {% if item.form_data.additional_recipient_groups %}**Additional recipients:** {{ item.form_data.additional_recipient_groups | join(', ') }}{% endif %}
 
           **Category:** {{ item.form_data.category or 'TBD' }}
 
@@ -123,7 +123,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endif %}
           {% endfor %}
 
-          *Updated: {{ item.last_updated or 'unknown' }}*
+          *Updated: {{ item.last_updated }}*
           +++
           {% if item.status == 'available' %}:bdg-success:`Available`{% else %}:bdg-muted:`In progress`{% endif %}
       {% endfor %}
