@@ -303,7 +303,8 @@
             "ds-cid-ukd-ukd-s5"
           ],
           "contribution_id": "UKD-UKD-S5",
-          "page_url": "contributed-datasets.html",
+          "href": "contributed-datasets.html#ds-cid-ukd-ukd-s5",
+          "kind": "dataset",
           "title": "Science Software development: Near infrared data fusion"
         }
       ],
@@ -454,7 +455,8 @@
             "ds-cid-ser-sag-s1"
           ],
           "contribution_id": "SER-SAG-S1",
-          "page_url": "contributed-datasets.html",
+          "href": "contributed-datasets.html#ds-cid-ser-sag-s1",
+          "kind": "dataset",
           "title": "Science Pipeline Development for analysis of variability of celestial sources in the LSST AGN and TVS Science Collaboration (associated dataset)"
         }
       ],
@@ -689,7 +691,8 @@
             "ds-cid-ukd-ukd-s9"
           ],
           "contribution_id": "UKD-UKD-S9",
-          "page_url": "contributed-datasets.html",
+          "href": "contributed-datasets.html#ds-cid-ukd-ukd-s9",
+          "kind": "dataset",
           "title": "Science Software development: Cross-matching (associated dataset)"
         }
       ],
@@ -5723,7 +5726,8 @@
             "ds-cid-sza-saa-s2"
           ],
           "contribution_id": "SZA-SAA-S2",
-          "page_url": "contributed-datasets.html",
+          "href": "contributed-datasets.html#ds-cid-sza-saa-s2",
+          "kind": "dataset",
           "title": "MeerKAT high-level data products and services for LSST"
         }
       ],
@@ -6133,7 +6137,8 @@
             "ds-cid-ukd-ukd-s10"
           ],
           "contribution_id": "UKD-UKD-S10",
-          "page_url": "contributed-datasets.html",
+          "href": "contributed-datasets.html#ds-cid-ukd-ukd-s10",
+          "kind": "dataset",
           "title": "Science Software development: spectroscopic classification of transients and 4MOST spectra"
         }
       ],

@@ -569,8 +569,9 @@ class DatasetCurated(_Strict):
         default=None,
     )
     related_contribution_ids: list[str] = _field(
-        "IDs of related contributions (for example the software that produced "
-        "the data); each becomes an 'Also see' link.",
+        "IDs of related dataset or software contributions; each becomes an 'Also "
+        "see' link. An ID that names both a dataset and a software record links "
+        "to the one on the other page.",
         rendered=True,
         default_factory=list,
     )
@@ -745,7 +746,9 @@ class SoftwareCurated(_Strict):
         default=None,
     )
     related_contribution_ids: list[str] = _field(
-        "IDs of related datasets or facilities; each becomes an 'Also see' link.",
+        "IDs of related dataset or software contributions; each becomes an 'Also "
+        "see' link. An ID that names both a dataset and a software record links "
+        "to the one on the other page.",
         rendered=True,
         default_factory=list,
     )

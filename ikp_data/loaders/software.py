@@ -20,7 +20,8 @@ Why the derived fields exist
   can show real links.
 * ``approx_start``: the first fiscal year named in the free-text timeline, as a
   rough "started" hint (never a precise date).
-* ``related``: "Also see" links, with titles looked up from the datasets page.
+* ``related``: "Also see" links to dataset cards (another page) or to other
+  software cards (this page), with titles looked up from the records.
   (``ikp_data.checks`` ensures related IDs name datasets or software, never
   telescopes.)
 """
@@ -91,7 +92,11 @@ def load_software(data_dir, today):
     # `today` is accepted so every loader has the same signature (and so date-based
     # features, such as expiring highlights, can use it later).
     records_dir = data_dir / "software"
+    # For the "Also see" links: a related ID is looked up on the Datasets page
+    # first (the usual case: the matching dataset card), then on this page
+    # (another software item).
     dataset_targets = collect_cross_page_targets(data_dir, "datasets", dataset_anchor)
+    software_targets = collect_cross_page_targets(data_dir, "software", software_anchor)
 
     records = []
     all_categories = set()
@@ -127,7 +132,10 @@ def load_software(data_dir, today):
         record["approx_start"] = _approx_start_fy(form_data.get("timeline"))
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
-            ("contributed-datasets.html", dataset_targets),
+            ("contributed-datasets.html", dataset_targets, "dataset"),
+            ("contributed-software.html", software_targets, "software"),
+            current_page="contributed-software.html",
+            own_id=record.get("contribution_id"),
         )
 
         # The tokens this item has for each filter, keyed by the drop-down's

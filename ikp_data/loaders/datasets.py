@@ -18,7 +18,8 @@ the loader adds, for every record:
 * ``anchor``: the id of the dataset's card on the page (``ds-cid-<contribution ID slug>``).
   Table rows carry it as ``data-card`` so the filter script can find the card;
 * ``last_updated``: the date shown on the card (see ``ikp_data.derive``);
-* ``related``: "Also see" links, with titles looked up from the software page;
+* ``related``: "Also see" links to software cards (another page) or to other
+  dataset cards (this page), with titles looked up from the records;
 * ``filters``: for each filter key (the ``data-filter-key`` of a drop-down, or the
   "available only" button), the tokens this dataset has. The template writes each
   entry onto the table row as a ``data-filter-<key>`` attribute;
@@ -48,11 +49,11 @@ def load_datasets(data_dir, today):
     # `today` is accepted so every loader has the same signature (and so date-based
     # features, such as expiring highlights, can use it later).
     records_dir = data_dir / "datasets"
-    # For the "Also see: software" reverse link -- mirrors the Contributed
-    # Software page's own "Also see: dataset" link (curated.related_
-    # contribution_ids there points at this page). Software title lookup
-    # only, since a dataset card never links out to a Telescopes record.
+    # For the "Also see" links: a related ID is looked up on the Software page
+    # first (the usual case: the matching software card), then on this page
+    # (another dataset). A dataset card never links out to a Telescopes record.
     software_targets = collect_cross_page_targets(data_dir, "software", software_anchor)
+    dataset_targets = collect_cross_page_targets(data_dir, "datasets", dataset_anchor)
 
     records = []
     all_data_types = set()
@@ -82,7 +83,10 @@ def load_datasets(data_dir, today):
         record["last_updated"] = record_last_updated(record, path)
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
-            ("contributed-software.html", software_targets),
+            ("contributed-software.html", software_targets, "software"),
+            ("contributed-datasets.html", dataset_targets, "dataset"),
+            current_page="contributed-datasets.html",
+            own_id=record.get("contribution_id"),
         )
 
         # The tokens this dataset has for each filter, keyed by the filter's

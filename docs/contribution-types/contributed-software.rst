@@ -108,11 +108,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
              <button type="button" class="ikp-expand-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
 
           {% for rel in item.related %}
-          {% if rel.page_url %}
+          {% if rel.href %}
 
           .. raw:: html
 
-             <a class="ikp-also-see" href="{{ rel.page_url }}#{{ rel.anchor }}">Also see: dataset ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikp-also-see" href="{{ rel.href }}">Also see: {{ rel.kind }} ({{ rel.contribution_id }}) &rarr;</a>
 
           {% endif %}
           {% endfor %}
