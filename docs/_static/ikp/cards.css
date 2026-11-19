@@ -26,6 +26,9 @@
   --ikp-green: #1a5c33;              /* accents, pressed toggle, highlight outline */
   --ikp-green-link: #145c33;         /* links inside opportunity cards */
   --ikp-green-tint: #f3faf6;         /* opportunity card background */
+  --ikp-green-on-dark: #7fd6a0;      /* the green used for text and outlines in dark mode */
+  --ikp-pill-hover: #e6e6e6;         /* outlined pill, hovered */
+  --ikp-pill-hover-on-dark: rgba(255, 255, 255, 0.1);  /* outlined pill, hovered, dark mode */
   --ikp-text: #1a1a1a;
   --ikp-white: #fff;
   --ikp-control-border: #999;        /* inputs and toggle buttons */
@@ -131,7 +134,12 @@
 /* Datasets: the extra fields hidden behind "Show more". */
 .ikp-more-fields { display: none; }
 .ikp-more-fields.ikp-expanded { display: block; }
-.ikp-more-btn { border: none; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0; cursor: pointer; margin: 0.4em 0; }
+/* The dataset toggle is an outlined pill in the accent green. */
+.ikp-more-btn { border: 1px solid var(--ikp-green); border-radius: 1em; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0.25em 0.9em; cursor: pointer; margin: 0.4em 0; }
+.ikp-more-btn:hover { background: var(--ikp-pill-hover); }
+/* The dark green above is unreadable on the dark card, so the pill takes a light green. */
+html[data-theme=dark] .ikp-more-btn { border-color: var(--ikp-green-on-dark); color: var(--ikp-green-on-dark); }
+html[data-theme=dark] .ikp-more-btn:hover { background: var(--ikp-pill-hover-on-dark); }
 
 /* Software: the description clamped to three lines behind "Show more". */
 .ikp-desc { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0.4em; }

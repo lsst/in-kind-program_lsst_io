@@ -60,13 +60,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
               data-wavelength="{{ (ds.curated.wavelength_regime or []) | join(', ') }}"
               data-recipient="{{ ds.curated.primary_recipient or '' }}"
               data-status="{{ ds.status }}"
-              data-updated="{{ ds.last_updated or '' }}">
+              data-updated="{{ ds.last_updated }}">
             <td><button type="button" class="ikp-title-link">{{ ds.title }} ({{ ds.contribution_id }})</button></td>
             <td>{{ (ds.form_data.data_type or []) | join(', ') or 'TBD' }}</td>
             <td>{{ (ds.curated.wavelength_regime or []) | join(', ') or 'TBD' }}</td>
             <td>{{ ds.curated.primary_recipient or 'TBD' }}</td>
-            <td>{% if ds.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">Not yet delivered</span>{% endif %}</td>
-            <td>{{ ds.last_updated or 'unknown' }}</td>
+            <td>{% if ds.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">In progress</span>{% endif %}</td>
+            <td>{{ ds.last_updated }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -84,32 +84,36 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       .. grid-item-card:: {{ ds.title }}
           :class-item: ikp-card
 
-          {{ ds.contribution_id }} - {{ ds.country }}
+          {{ ds.contribution_id }} - {{ ds.display_country }}
           ^^^
-          {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
+          {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-primary-line:`{{ uc }}` {% endfor %}
 
           {% if available %}
+          {{ ds.curated.summary or 'TBD' }}
+
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
 
           **Target audience:** {{ ds.curated.target_audience or ds.form_data.target_audience or 'TBD' }}
 
-          {{ ds.curated.summary or 'TBD' }}
+          {% if ds.form_data.version %}
+          **Version:** {{ ds.form_data.version }}
 
-          **Data volume:** {{ ds.form_data.data_volume or 'TBD' }}
-
-          **Hosting location:** {{ ds.form_data.hosting_location or 'TBD' }}
-
+          {% endif %}
           **Access:** {{ ds.form_data.access_url or 'TBD' }}
 
           **Documentation:** {{ ds.form_data.tutorials_docs or 'TBD' }}
 
           **Support channel:** {{ ds.form_data.support_channel or 'TBD' }}
 
-          **Citation:** {{ ds.form_data.citation or 'TBD' }}
-
-          **Maintenance plan:** {{ ds.form_data.maintenance_plan or 'TBD' }}
-
           .. container:: ikp-more-fields
+
+             **Data volume:** {{ ds.form_data.data_volume or 'TBD' }}
+
+             **Hosting location:** {{ ds.form_data.hosting_location or 'TBD' }}
+
+             **Citation:** {{ ds.form_data.citation or 'TBD' }}
+
+             **Maintenance plan:** {{ ds.form_data.maintenance_plan or 'TBD' }}
 
              **Data schema:** {{ ds.form_data.data_schema_link or 'TBD' }}
 
@@ -123,7 +127,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <button type="button" class="ikp-more-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
+             <button type="button" class="ikp-more-btn" data-expand-label="Show more details &#9662;" data-collapse-label="Show fewer details &#9652;">Show more details &#9662;</button>
           {% else %}
           {{ ds.curated.summary or 'TBD' }}
 
@@ -140,7 +144,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endif %}
           {% endfor %}
 
-          *Updated: {{ ds.last_updated or 'unknown' }}*
+          *Updated: {{ ds.last_updated }}*
           +++
-          {% if available %}:bdg-success:`Available`{% else %}:bdg-muted:`Not yet delivered`{% endif %}
+          {% if available %}:bdg-success:`Available`{% else %}:bdg-muted:`In progress`{% endif %}
       {% endfor %}

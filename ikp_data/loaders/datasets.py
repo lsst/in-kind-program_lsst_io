@@ -18,6 +18,9 @@ the loader adds, for every record:
 * ``anchor``: the id of the dataset's card on the page (``ds-cid-<contribution ID slug>``).
   Table rows carry it as ``data-card`` so the filter script can find the card;
 * ``last_updated``: the date shown on the card (see ``ikp_data.derive``);
+* ``display_country``: the country as the card header spells it ("UK" is shown as
+  "United Kingdom"; see ``ikp_data.derive.display_country``). It is for display
+  only: the free-text search does not cover the country;
 * ``related``: "Also see" links to software cards (another page) or to other
   dataset cards (this page), with titles looked up from the records;
 * ``filters``: for each filter key (the ``data-filter-key`` of a drop-down, or the
@@ -34,6 +37,7 @@ import yaml
 from ikp_data.derive import (
     collect_cross_page_targets,
     dataset_anchor,
+    display_country,
     normalize_strings,
     option_pairs,
     record_last_updated,
@@ -81,6 +85,7 @@ def load_datasets(data_dir, today):
 
         record["anchor"] = dataset_anchor(path, record.get("contribution_id", ""))
         record["last_updated"] = record_last_updated(record, path)
+        record["display_country"] = display_country(record.get("country"))
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
             ("contributed-software.html", software_targets, "software"),
