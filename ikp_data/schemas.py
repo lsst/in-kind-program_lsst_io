@@ -276,8 +276,9 @@ class Telescope(_Strict):
         default=None,
     )
     observing_mode: str | None = _field(
-        "Observing mode, for example 'queue', 'service' or 'mixed'. Stored but not shown on the page.",
-        rendered=False,
+        "Observing mode, for example 'queue', 'service' or 'mixed'. The card shows it "
+        "capitalized as an 'Observing mode' line.",
+        rendered=True,
         default=None,
     )
     contacts: list[TelescopeContact] = _field(
@@ -299,9 +300,11 @@ class Telescope(_Strict):
         rendered=True,
     )
     tac_process: str = _field(
-        "How time is allocated, for example 'special' for a dedicated call. Only used "
-        "for consistency checks between sibling facilities; not shown on the page.",
-        rendered=False,
+        "How time is allocated: 'default' for the NOIRLab call, or another value such as "
+        "'special' for a facility's own process. Any value other than 'default' adds a note "
+        "to the card pointing to the facility links. Also used for consistency checks "
+        "between sibling facilities.",
+        rendered=True,
     )
     external_links: list[Link] = _field(
         "Links to the facility's own pages.", rendered=True, default_factory=list

@@ -166,6 +166,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {% if t.instrument_names %}**Instruments:** {{ t.instrument_names | join(', ') }}{% endif %}
 
+          {% if t.observing_mode_label %}**Observing mode:** {{ t.observing_mode_label }}{% endif %}
+
           **Contribution ID:** {{ t.contribution_ids | join(', ') }}
 
           **First semester:** {{ t.first_semester or 'TBA' }}    **Time available:** {{ t.time_available or 'TBA' }}    **Duration:** {{ t.duration or 'TBA' }}
@@ -173,6 +175,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {{ t.summary or '' }}
 
           {% if t.contacts %}**Contact:** {% for c in t.contacts %}{{ c.name }} (`{{ c.email }} <mailto:{{ c.email }}>`_){{ ", " if not loop.last }}{% endfor %}{% endif %}
+
+          {% if t.has_separate_process %}Proposals for this facility follow a separate process from the NOIRLab call; see the facility links.{% endif %}
 
           {% if t.external_links %}**Links:** {% for link in t.external_links %}`{{ link.label }} <{{ link.url }}>`__{{ ", " if not loop.last }}{% endfor %}{% endif %}
 

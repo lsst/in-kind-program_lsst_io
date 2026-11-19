@@ -16,9 +16,11 @@ The suite has five parts:
   tree in `tests/fixtures/` (see its README) that covers every card type and opportunity phase
   on a fixed date, 2027-03-15.
 * **Card page tests** (`test_card_page_assets.py`, `test_card_page_templates.py`,
-  `test_related_links.py`): the three card page templates and their script. They check that
+  `test_related_links.py`, `test_telescope_card_text.py`): the three card page templates and
+  their script, and the text on a Telescope Access card. They check that
   the pages have no inline style or script, that table rows and map markers name an existing
-  card and carry the filter data, and that "Also see" links resolve (across pages and within one).
+  card and carry the filter data, that "Also see" links resolve (across pages and within one),
+  and what a card says (observing mode, process note, header, contacts).
 * **Link-check gate tests** (`test_linkcheck_gate.py`): the script that reads
   the link checker's report and decides whether the build passes (working
   links pass, timeouts warn, broken links fail).

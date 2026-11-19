@@ -25,6 +25,10 @@ Why the derived fields exist
   ``{"instr": ["instr-imaging"], "multiplex": []}``. The template writes each
   entry onto the facility's table row and map marker as a ``data-filter-<key>``
   attribute.
+* ``observing_mode_label``: ``observing_mode`` capitalized for display
+  ("queue" -> "Queue"), or None when the record has no observing mode.
+* ``has_separate_process``: True when ``tac_process`` is anything but
+  "default", so the card can point to the facility's own proposal process.
 * ``siblings``: links between records that share a ``contribution_id`` (for
   example KMTNet's three sites). Drift between same-facility siblings is
   reported by ``ikp_data.validate``, not by the loader.
@@ -148,6 +152,18 @@ def load_telescopes(data_dir, world_outline_svg):
         else:
             record["resolution_bin"] = None
             record["resolution_bin_label"] = None
+
+        # The YAML stores the observing mode in lower case ("queue"); the card
+        # shows it capitalized. Computed here so the template stays plain.
+        observing_mode = record.get("observing_mode")
+        # Upper-case only the first letter, so later words keep their own case.
+        record["observing_mode_label"] = (
+            str(observing_mode)[:1].upper() + str(observing_mode)[1:] if observing_mode else None
+        )
+
+        # Facilities that are not allocated through the NOIRLab call (marked
+        # with any `tac_process` other than "default") get a pointer on the card.
+        record["has_separate_process"] = record.get("tac_process", "default") != "default"
 
         # Three states are tracked: "available", "future_semester", and
         # "past_opportunity" (a facility/opportunity that has closed). A

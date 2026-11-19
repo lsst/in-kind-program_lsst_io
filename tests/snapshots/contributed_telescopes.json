@@ -136,6 +136,7 @@
         ]
       },
       "first_semester": "TBA",
+      "has_separate_process": true,
       "hemisphere": "Northern",
       "instrument_names": [
         "OSIRIS+",
@@ -153,6 +154,7 @@
       "marker_y": 170.1,
       "multiplex": true,
       "observing_mode": null,
+      "observing_mode_label": null,
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "gran telescopio canarias (gtc) la palma (roque de los muchachos observatory) spain roughly two nights per semester will be available at the gran telescopio canarias (gtc), a 10.4 meter optical/nir telescope in la palma, spain, contributed jointly via esp-bcm-s5 (barcelona-madrid) and esp-iac-s1 (iac). in-kind access to the gtc is not allocated via the noirlab tac, but via a dedicated letter-of-intent + spanish tac co-pi process (see the featured opportunity above when a call is open). this contribution is expected to be available for 10 years from the starting semester. imaging spectroscopy osiris+ emir megara hipercam esp-bcm-s5 esp-iac-s1",
@@ -220,6 +222,7 @@
         ]
       },
       "first_semester": "2026A",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -231,6 +234,7 @@
       "marker_y": 333.8,
       "multiplex": null,
       "observing_mode": "queue",
+      "observing_mode_label": "Queue",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "korean microlensing telescope network (kmtnet) cerro tololo chile roughly 150 hours per semester will be available on each of the telescopes of the korean microlensing telescope network, 1.6 meter optical imaging telescopes located in cerro tololo (chile), siding spring observatory (australia), and saao (south africa). aeon is available for all kmtnet observations, in two modes: 30 minutes at the start or end of every night, or pre-allocated aeon nights. this contribution is expected to be available for 5 years after the first semester. imaging kor-kas-s2",
@@ -310,6 +314,7 @@
         ]
       },
       "first_semester": "2026A",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -321,6 +326,7 @@
       "marker_y": 339.9,
       "multiplex": null,
       "observing_mode": "queue",
+      "observing_mode_label": "Queue",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "korean microlensing telescope network (kmtnet) saao south africa roughly 150 hours per semester will be available on each of the telescopes of the korean microlensing telescope network, 1.6 meter optical imaging telescopes located in cerro tololo (chile), siding spring observatory (australia), and saao (south africa). aeon is available for all kmtnet observations, in two modes: 30 minutes at the start or end of every night, or pre-allocated aeon nights. this contribution is expected to be available for 5 years after the first semester. imaging kor-kas-s2",
@@ -400,6 +406,7 @@
         ]
       },
       "first_semester": "2026A",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -411,6 +418,7 @@
       "marker_y": 336.9,
       "multiplex": null,
       "observing_mode": "queue",
+      "observing_mode_label": "Queue",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "korean microlensing telescope network (kmtnet) siding spring observatory australia roughly 150 hours per semester will be available on each of the telescopes of the korean microlensing telescope network, 1.6 meter optical imaging telescopes located in cerro tololo (chile), siding spring observatory (australia), and saao (south africa). aeon is available for all kmtnet observations, in two modes: 30 minutes at the start or end of every night, or pre-allocated aeon nights. this contribution is expected to be available for 5 years after the first semester. imaging kor-kas-s2",
@@ -504,6 +512,7 @@
         ]
       },
       "first_semester": "2026B",
+      "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [
         "LBC",
@@ -521,6 +530,7 @@
       "marker_y": 159.2,
       "multiplex": null,
       "observing_mode": "service",
+      "observing_mode_label": "Service",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "large binocular telescope (lbt) mt. graham usa 20 hours of open-shutter time per year will be available at the twin 8.4m large binocular telescope observatory, within inaf's reserved observing blocks, with the suite of facility imaging and spectroscopy instruments provided (only facility instruments are offered). observations are carried out in service mode by inaf staff; programs requiring a strictly fixed cadence cannot be supported. toos are executed within the inaf blocks; exceptionally urgent triggers need approval from the other lbt partners. raw/calibration data are available immediately at archive.lbto.org with a 1-year proprietary period. this contribution is expected to be available through fy2034. imaging spectroscopy lbc mods luci pepsi ita-ina-s18",
@@ -599,6 +609,7 @@
         ]
       },
       "first_semester": "2025A",
+      "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [
         "Andor iKon-L 936 CCD"
@@ -612,6 +623,7 @@
       "marker_y": 130.2,
       "multiplex": null,
       "observing_mode": "service",
+      "observing_mode_label": "Service",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "milanković telescope 1.4m astronomical station vidojevica serbia two nights per month are available on the 1.4m milanković telescope located at the astronomical station vidojevica near prokuplje, serbia. optical imaging is available with the andor ikon-l 936 ccd and johnson b, v, r, i, l filters plus h-alpha, h-alpha continuum, and sii. this facility offers aeon compatibility and is available for target-of-opportunity observations; observations are taken in service mode. raw data are available within 24 hours and fully reduced/calibrated data within 72 hours. this contribution was first made available in semester 2025a. imaging andor ikon-l 936 ccd ser-sag-s2",
@@ -688,6 +700,7 @@
         ]
       },
       "first_semester": "2026A",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -700,6 +713,7 @@
       "marker_y": 345.1,
       "multiplex": null,
       "observing_mode": null,
+      "observing_mode_label": null,
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "south african large telescope (salt) saao, sutherland south africa 25 hours per semester will be available on the 9.2 meter south african large telescope located at the south african astronomical observatory. salt has a wide range of instrumentation available. this contribution is expected to be available for 10 years from the start of the first semester of availability. imaging spectroscopy sza-saa-s1",
@@ -774,6 +788,7 @@
         ]
       },
       "first_semester": "2026A",
+      "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [
         "HSC",
@@ -789,6 +804,7 @@
       "marker_y": 194.9,
       "multiplex": true,
       "observing_mode": "mixed",
+      "observing_mode_label": "Mixed",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "subaru telescope maunakea usa a total of 2-3 nights per semester (5 nights per year on average) will be available on the 8.2-meter subaru telescope in hawaii, usa. all instruments offered for open use under subaru's common-use policy are available; hsc and pfs are primarily in queue mode, while all other instruments are in classical mode. proposers must use the gemini phase-i tool (pit), not the standard noirlab dashboard. note: while subaru operations may technically support too, the rubin community has better too access via gemini north, so this contribution isn't positioned that way. this contribution is expected to be available for 10 years from the starting semester. imaging spectroscopy hsc pfs jap-jpg-s1",
@@ -868,6 +884,7 @@
         ]
       },
       "first_semester": "2026B",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [
         "OmegaCAM"
@@ -881,6 +898,7 @@
       "marker_y": 318.4,
       "multiplex": null,
       "observing_mode": "service",
+      "observing_mode_label": "Service",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "vlt survey telescope (vst) cerro paranal chile 35 pre-allocated nights per year will be available at the 2.6 meter vlt survey telescope at paranal, chile, for imaging observations. too requests can typically be accommodated on a ~24-hour timescale, subject to instrument availability. observations are carried out in service mode by inaf staff; programs requiring a strictly fixed cadence cannot be supported. raw data are available via the eso science archive as soon as ingested, with a 1-year proprietary period. the standard reduction environment is astro-wise. this contribution is expected to be available through fy2034. imaging omegacam ita-ina-s18",
@@ -945,6 +963,7 @@
         ]
       },
       "first_semester": "TBA",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -956,6 +975,7 @@
       "marker_y": 372.2,
       "multiplex": null,
       "observing_mode": null,
+      "observing_mode_label": null,
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "mclellan 1.0m mt john observatory new zealand roughly 200 equivalent hours will be available in the november-february period on the 1.0 meter mclellan telescope at the university of canterbury's ōtehīwai mt john observatory in new zealand. this contribution is expected to be available for 10 years from the first semester of availability. imaging nzl-auk-s1",
@@ -1020,6 +1040,7 @@
         ]
       },
       "first_semester": "TBA",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -1031,6 +1052,7 @@
       "marker_y": 372.2,
       "multiplex": null,
       "observing_mode": null,
+      "observing_mode_label": null,
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "nishimura 1.8m (moa) mt john observatory new zealand approximately 10 nights per semester will be available on the moa 1.8 meter telescope at the university of canterbury's ōtehīwai mt john observatory in new zealand. this contribution is expected to be available for 10 years from the first semester of availability. imaging nzl-auk-s1",
@@ -1099,6 +1121,7 @@
         ]
       },
       "first_semester": "TBA",
+      "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [],
       "instrumentation": [
@@ -1110,6 +1133,7 @@
       "marker_y": 147.7,
       "multiplex": null,
       "observing_mode": null,
+      "observing_mode_label": null,
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "rtt150 & t100 tübi̇tak national observatory türkiye 23 nights per year will be available at the t100 and rtt150 telescopes at the tübi̇tak national observatory in southern türkiye. too is supported on predefined nights only, not as a full-time interrupt capability. this contribution is expected to be available for 10 years from the first semester of availability. imaging tur-akd-s1",
@@ -1167,6 +1191,7 @@
         ]
       },
       "first_semester": "TBA",
+      "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [],
       "instrumentation": [
@@ -1178,6 +1203,7 @@
       "marker_y": 163.8,
       "multiplex": null,
       "observing_mode": "queue",
+      "observing_mode_label": "Queue",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "trans-pacific two-meter telescope san pedro mártir mexico ncu is providing approximately 20 nights per semester for 10 years on the 2-meter trans-pacific telescope at san pedro mártir, mexico, for dedicated follow-up imaging observations complementing lsst data. observations are queue-mode (no travel required); standard calibration data are taken nightly by on-site staff. raw data are available within 24 hours and fully reduced/calibrated data within 48 hours, with photometric catalogs available on request. ncu intends to conform to aeon standards, but procedures are not yet established -- this project is still pre-first-light. a user helpdesk is currently under development. imaging tai-ncu-s1",
@@ -1240,6 +1266,7 @@
         ]
       },
       "first_semester": "TBA",
+      "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
       "instrumentation": [
@@ -1252,6 +1279,7 @@
       "marker_y": 334.7,
       "multiplex": null,
       "observing_mode": null,
+      "observing_mode_label": null,
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "various saao telescopes (1.9m-1.0m) saao, sutherland south africa approximately 26 hours per semester will be available on a network of telescopes at the south african astronomical observatory, including the 1.0 meter and 1.9 meter facilities. this contribution is expected to be available for 10 years from the start of the first semester of availability. imaging spectroscopy sza-saa-s4",
@@ -1318,6 +1346,7 @@
         ]
       },
       "first_semester": "2025A",
+      "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [
         "ALFOSC"
@@ -1331,6 +1360,7 @@
       "marker_y": 170.1,
       "multiplex": null,
       "observing_mode": "queue",
+      "observing_mode_label": "Queue",
       "resolution_bin": null,
       "resolution_bin_label": null,
       "search_text": "nordic optical telescope (not) la palma (roque de los muchachos observatory) spain 70 hours of observing time on the nordic optical telescope (not) are available for supernova classification using the alfosc instrument (low/medium resolution spectroscopy). successful pis can submit soft-too triggers for classification and follow-up of transients, primarily supernovae -- triggers should be sent the afternoon before observation; this is a next-available-night mechanism, not a hard interrupt. fully reduced spectra are uploaded to wiserep/tns within 48 hours of observation with no proprietary period. this contribution was first made available in semester 2025a. spectroscopy alfosc swe-stk-s3",
