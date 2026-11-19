@@ -103,7 +103,7 @@
   ],
   "datasets": [
     {
-      "cid_slug": "ser-sag-s1",
+      "anchor": "ds-cid-ser-sag-s1",
       "contribution_id": "SER-SAG-S1",
       "country": "Serbia",
       "curated": {
@@ -119,7 +119,25 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-available cid-ser-sag-s1 dt-value-added-catalogs wl-optical uat-astronomy-software uat-astrophysics uat-exoplanet-astronomy uat-stellar-astronomy uat-planetary-science uat-solar-system",
+      "filters": {
+        "dt": [
+          "dt-value-added-catalogs"
+        ],
+        "status": [
+          "status-available"
+        ],
+        "uat": [
+          "uat-astronomy-software",
+          "uat-astrophysics",
+          "uat-exoplanet-astronomy",
+          "uat-stellar-astronomy",
+          "uat-planetary-science",
+          "uat-solar-system"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [
           "TAP / Virtual Observatory Service",
@@ -172,7 +190,7 @@
       "title": "Science Pipeline Development for analysis of variability of celestial sources in the LSST AGN and TVS Science Collaboration (associated dataset)"
     },
     {
-      "cid_slug": "ukd-ukd-s9",
+      "anchor": "ds-cid-ukd-ukd-s9",
       "contribution_id": "UKD-UKD-S9",
       "country": "UK",
       "curated": {
@@ -190,7 +208,26 @@
           "IR"
         ]
       },
-      "filter_tokens": "status-available cid-ukd-ukd-s9 dt-value-added-catalogs wl-optical wl-nir wl-ir uat-cosmology uat-galactic-and-extragalactic-astronomy uat-interstellar-medium uat-observational-astronomy uat-stellar-astronomy",
+      "filters": {
+        "dt": [
+          "dt-value-added-catalogs"
+        ],
+        "status": [
+          "status-available"
+        ],
+        "uat": [
+          "uat-cosmology",
+          "uat-galactic-and-extragalactic-astronomy",
+          "uat-interstellar-medium",
+          "uat-observational-astronomy",
+          "uat-stellar-astronomy"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir",
+          "wl-ir"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [
           "TAP / Virtual Observatory Service",
@@ -242,7 +279,7 @@
       "title": "Science Software development: Cross-matching (associated dataset)"
     },
     {
-      "cid_slug": "ukd-ukd-s5",
+      "anchor": "ds-cid-ukd-ukd-s5",
       "contribution_id": "UKD-UKD-S5",
       "country": "United Kingdom",
       "curated": {
@@ -258,7 +295,24 @@
           "NIR"
         ]
       },
-      "filter_tokens": "status-available cid-ukd-ukd-s5 dt-value-added-catalogs dt-imaging-cutouts wl-optical wl-nir uat-galactic-and-extragalactic-astronomy uat-interdisciplinary-astronomy uat-observational-astronomy",
+      "filters": {
+        "dt": [
+          "dt-value-added-catalogs",
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-available"
+        ],
+        "uat": [
+          "uat-galactic-and-extragalactic-astronomy",
+          "uat-interdisciplinary-astronomy",
+          "uat-observational-astronomy"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [
           "Rubin Science Platform (RSP) Integration"
@@ -307,7 +361,7 @@
       "title": "Science Software development: Near infrared data fusion"
     },
     {
-      "cid_slug": "ita-ina-s29",
+      "anchor": "ds-cid-ita-ina-s29",
       "contribution_id": "ITA-INA-S29",
       "country": "Italy",
       "curated": {
@@ -319,7 +373,26 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-available cid-ita-ina-s29 dt-value-added-catalogs dt-time-series-lightcurves dt-imaging-cutouts dt-diagnostic-plots-and-recipes-to-personalise-the-extracted-data wl-optical uat-cosmology uat-galactic-and-extragalactic-astronomy uat-high-energy-astrophysics uat-observational-astronomy",
+      "filters": {
+        "dt": [
+          "dt-value-added-catalogs",
+          "dt-time-series-lightcurves",
+          "dt-imaging-cutouts",
+          "dt-diagnostic-plots-and-recipes-to-personalise-the-extracted-data"
+        ],
+        "status": [
+          "status-available"
+        ],
+        "uat": [
+          "uat-cosmology",
+          "uat-galactic-and-extragalactic-astronomy",
+          "uat-high-energy-astrophysics",
+          "uat-observational-astronomy"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [
           "Direct File Download (HTTP/FTP)",
@@ -364,7 +437,7 @@
       "title": "Toward next-generation time-domain surveys (TIMEDOMES): VST monitoring of the LSST Deep Drilling Fields"
     },
     {
-      "cid_slug": "swe-stk-s4",
+      "anchor": "ds-cid-swe-stk-s4",
       "contribution_id": "SWE-STK-S4",
       "country": "Sweden",
       "curated": {
@@ -376,7 +449,22 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-available cid-swe-stk-s4 dt-time-series-lightcurves dt-spectra wl-optical uat-cosmology uat-galactic-and-extragalactic-astronomy",
+      "filters": {
+        "dt": [
+          "dt-time-series-lightcurves",
+          "dt-spectra"
+        ],
+        "status": [
+          "status-available"
+        ],
+        "uat": [
+          "uat-cosmology",
+          "uat-galactic-and-extragalactic-astronomy"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [
           "Direct File Download (HTTP/FTP)",
@@ -417,7 +505,7 @@
       "title": "Supernova Lightcurves and low-resolution spectra for Full-sky Low-redshift Cosmography Complementing LSST"
     },
     {
-      "cid_slug": "sza-saa-s2",
+      "anchor": "ds-cid-sza-saa-s2",
       "contribution_id": "SZA-SAA-S2",
       "country": "South Africa",
       "curated": {
@@ -432,7 +520,21 @@
           "Radio"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-sza-saa-s2 dt-imaging-cutouts dt-value-added-catalogs wl-radio uat-galactic-and-extragalactic-astronomy",
+      "filters": {
+        "dt": [
+          "dt-imaging-cutouts",
+          "dt-value-added-catalogs"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-galactic-and-extragalactic-astronomy"
+        ],
+        "wl": [
+          "wl-radio"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -480,7 +582,7 @@
       "title": "MeerKAT high-level data products and services for LSST"
     },
     {
-      "cid_slug": "ukd-ukd-s10",
+      "anchor": "ds-cid-ukd-ukd-s10",
       "contribution_id": "UKD-UKD-S10",
       "country": "United Kingdom",
       "curated": {
@@ -495,7 +597,20 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ukd-ukd-s10 dt-spectra wl-optical uat-cosmology",
+      "filters": {
+        "dt": [
+          "dt-spectra"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-cosmology"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -542,7 +657,7 @@
       "title": "Science Software development: spectroscopic classification of transients and 4MOST spectra"
     },
     {
-      "cid_slug": "ger-mpe-s3",
+      "anchor": "ds-cid-ger-mpe-s3",
       "contribution_id": "GER-MPE-S3",
       "country": "Germany",
       "curated": {
@@ -555,7 +670,21 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ger-mpe-s3 dt-value-added-catalogs wl-x-ray wl-optical uat-high-energy-astrophysics",
+      "filters": {
+        "dt": [
+          "dt-value-added-catalogs"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-high-energy-astrophysics"
+        ],
+        "wl": [
+          "wl-x-ray",
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -591,7 +720,7 @@
       "title": "The LSST sources detected by eROSITA"
     },
     {
-      "cid_slug": "isr-ust-s2",
+      "anchor": "ds-cid-isr-ust-s2",
       "contribution_id": "ISR-UST-S2",
       "country": "Israel",
       "curated": {
@@ -603,7 +732,20 @@
           "UV"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-isr-ust-s2 dt-imaging-cutouts wl-uv uat-observational-astronomy",
+      "filters": {
+        "dt": [
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-observational-astronomy"
+        ],
+        "wl": [
+          "wl-uv"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -639,7 +781,7 @@
       "title": "ULTRASAT all-sky UV maps"
     },
     {
-      "cid_slug": "ita-ina-s16",
+      "anchor": "ds-cid-ita-ina-s16",
       "contribution_id": "ITA-INA-S16",
       "country": "Italy",
       "curated": {
@@ -652,7 +794,22 @@
           "NIR"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ita-ina-s16 dt-spectra dt-machine-learning-training-sets wl-optical wl-nir uat-observational-astronomy",
+      "filters": {
+        "dt": [
+          "dt-spectra",
+          "dt-machine-learning-training-sets"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-observational-astronomy"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -689,7 +846,7 @@
       "title": "The Son of X-Shooter contribution to Rubin: 2,000 spectra for Machine Learning light curve classification"
     },
     {
-      "cid_slug": "ita-ina-s17",
+      "anchor": "ds-cid-ita-ina-s17",
       "contribution_id": "ITA-INA-S17",
       "country": "Italy",
       "curated": {
@@ -701,7 +858,21 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ita-ina-s17 dt-spectra dt-imaging-cutouts wl-optical uat-galactic-and-extragalactic-astronomy",
+      "filters": {
+        "dt": [
+          "dt-spectra",
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-galactic-and-extragalactic-astronomy"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -738,7 +909,7 @@
       "title": "A Cluster Spectroscopy Hub for galaxy cluster science with LSST"
     },
     {
-      "cid_slug": "ita-ina-s27",
+      "anchor": "ds-cid-ita-ina-s27",
       "contribution_id": "ITA-INA-S27",
       "country": "Italy",
       "curated": {
@@ -750,7 +921,21 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ita-ina-s27 dt-time-series-lightcurves dt-imaging-cutouts wl-optical uat-cosmology",
+      "filters": {
+        "dt": [
+          "dt-time-series-lightcurves",
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-cosmology"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -787,7 +972,7 @@
       "title": "A VST survey to support the Legacy Survey of Space and Time"
     },
     {
-      "cid_slug": "ita-ina-s28",
+      "anchor": "ds-cid-ita-ina-s28",
       "contribution_id": "ITA-INA-S28",
       "country": "Italy",
       "curated": {
@@ -799,7 +984,21 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ita-ina-s28 dt-time-series-lightcurves dt-imaging-cutouts wl-optical uat-cosmology",
+      "filters": {
+        "dt": [
+          "dt-time-series-lightcurves",
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-cosmology"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -836,7 +1035,7 @@
       "title": "Exploiting the synergy between LSST and VST: the expansion rate and geometry of the Universe measured through time delays of strongly lensed variable sources"
     },
     {
-      "cid_slug": "jap-jpg-s10",
+      "anchor": "ds-cid-jap-jpg-s10",
       "contribution_id": "JAP-JPG-S10",
       "country": "Japan",
       "curated": {
@@ -849,7 +1048,21 @@
           "NIR"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-jap-jpg-s10 dt-spectra wl-optical wl-nir uat-cosmology",
+      "filters": {
+        "dt": [
+          "dt-spectra"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-cosmology"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -885,7 +1098,7 @@
       "title": "Subaru PFS spectroscopic follow-up survey of LSST transients in deep drilling fields"
     },
     {
-      "cid_slug": "jap-jpg-s11",
+      "anchor": "ds-cid-jap-jpg-s11",
       "contribution_id": "JAP-JPG-S11",
       "country": "Japan",
       "curated": {
@@ -898,7 +1111,22 @@
           "NIR"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-jap-jpg-s11 dt-spectra dt-machine-learning-training-sets wl-optical wl-nir uat-cosmology",
+      "filters": {
+        "dt": [
+          "dt-spectra",
+          "dt-machine-learning-training-sets"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-cosmology"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -935,7 +1163,7 @@
       "title": "Subaru PFS filler survey for LSST photo-z training dataset"
     },
     {
-      "cid_slug": "jap-jpg-s12",
+      "anchor": "ds-cid-jap-jpg-s12",
       "contribution_id": "JAP-JPG-S12",
       "country": "Japan",
       "curated": {
@@ -948,7 +1176,22 @@
           "NIR"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-jap-jpg-s12 dt-spectra dt-machine-learning-training-sets wl-optical wl-nir uat-cosmology",
+      "filters": {
+        "dt": [
+          "dt-spectra",
+          "dt-machine-learning-training-sets"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-cosmology"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -985,7 +1228,7 @@
       "title": "Contribution to the LSST photo-z calibration with the PFS-SSP galaxy evolution dataset"
     },
     {
-      "cid_slug": "nzl-auk-s2",
+      "anchor": "ds-cid-nzl-auk-s2",
       "contribution_id": "NZL-AUK-S2",
       "country": "New Zealand",
       "curated": {
@@ -997,7 +1240,21 @@
           "Optical"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-nzl-auk-s2 dt-time-series-lightcurves dt-imaging-cutouts wl-optical uat-galactic-and-extragalactic-astronomy",
+      "filters": {
+        "dt": [
+          "dt-time-series-lightcurves",
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-galactic-and-extragalactic-astronomy"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -1034,7 +1291,7 @@
       "title": "The MOA Archive: two decades of Galactic Bulge and Magellanic Clouds photometry"
     },
     {
-      "cid_slug": "ukd-oxf-s7",
+      "anchor": "ds-cid-ukd-oxf-s7",
       "contribution_id": "UKD-OXF-S7",
       "country": "United Kingdom",
       "curated": {
@@ -1046,7 +1303,21 @@
           "Radio"
         ]
       },
-      "filter_tokens": "status-not-yet-delivered cid-ukd-oxf-s7 dt-value-added-catalogs dt-imaging-cutouts wl-radio uat-galactic-and-extragalactic-astronomy",
+      "filters": {
+        "dt": [
+          "dt-value-added-catalogs",
+          "dt-imaging-cutouts"
+        ],
+        "status": [
+          "status-not-yet-delivered"
+        ],
+        "uat": [
+          "uat-galactic-and-extragalactic-astronomy"
+        ],
+        "wl": [
+          "wl-radio"
+        ]
+      },
       "form_data": {
         "access_mechanisms": [],
         "access_url": null,
@@ -1083,5 +1354,5 @@
       "title": "LSST-matched MIGHTEE data"
     }
   ],
-  "search_index_json": "{\"ser-sag-s1\": \"science pipeline development for analysis of variability of celestial sources in the lsst agn and tvs science collaboration (associated dataset) the qhx hub provides a value-added catalogue of variability for known quasars in rubin data preview 1. of about 1,500 dp1 sources cross-matched with external agn catalogues, 428 met the sampling criteria. for each, the hub serves object-level and per-band tables of light-curve features and periodicity and coherence metrics, together with images and interactive plots. the products are made with the qhx wavelet and cross-correlation pipeline (contribution ser-sag-s1), and the catalogue will grow with each lsst data release. lsst agn science collaboration value-added catalogs optical astronomy software astrophysics exoplanet astronomy stellar astronomy planetary science solar system\", \"ukd-ukd-s9\": \"science software development: cross-matching (associated dataset) probabilistic cross-match catalogues that link the full lsst object table to the vista, vphas, wise and spitzer surveys and other ancillary datasets. they are made with the macauff software, which is built for the very high number of sources per seeing disc at lsst depth. about 20 datasets are planned per data release, each produced with and without macauff's photometric-likelihood step. they will be hosted at the uk idac. lsst transients and variable stars science collaboration value-added catalogs optical nir ir cosmology galactic and extragalactic astronomy interstellar medium observational astronomy stellar astronomy\", \"ukd-ukd-s5\": \"science software development: near infrared data fusion lsst:uk will provide joint lsst+vista near infra-red catalogues produced using the lsst stack and access to vista survey images as a dataset contribution, as well as an implementation of the lsst stack pipeline reconfigured to jointly process lsst pixels with external survey pixels. noirlab csdc value-added catalogs imaging / cutouts optical nir galactic and extragalactic astronomy interdisciplinary astronomy observational astronomy\", \"ita-ina-s29\": \"toward next-generation time-domain surveys (timedomes): vst monitoring of the lsst deep drilling fields we propose to use 170 hours/year of vst time to execute a precursor survey with vst, to complement and extend in time the lsst dataset on 4 ddf, and to combine these observations with all archival data to deliver reduced images, catalogs and lightcurves lasting up to >10 years to the us/chilean communities. lsst agn science collaboration value-added catalogs time-series / lightcurves imaging / cutouts diagnostic plots and recipes to personalise the extracted data optical cosmology galactic and extragalactic astronomy high energy astrophysics observational astronomy\", \"swe-stk-s4\": \"supernova lightcurves and low-resolution spectra for full-sky low-redshift cosmography complementing lsst su will provide online data file access (anticipated to be hosted at noirlab) whereby it is possible for lsst users to download the photometry and spectroscopy tables for each ztf/ztf-ii sn (or the entire set at once), as well as the ancillary information about the host galaxy environment. we will provide machine readable files, including standard formats used by lightcurve fitters (salt2, snoopy) and fits tables. desc time-series / lightcurves spectra optical cosmology galactic and extragalactic astronomy\", \"sza-saa-s2\": \"meerkat high-level data products and services for lsst south africa will produce reduced high-level data products (images and catalogs) and services for meerkat data, as endorsed by the galaxies science collaboration, integrated into the rubin science platform. galaxies science collaboration imaging / cutouts value-added catalogs radio galactic and extragalactic astronomy\", \"ukd-ukd-s10\": \"science software development: spectroscopic classification of transients and 4most spectra to provide non-directable software development effort to the lsst desc for transient spectroscopic follow-up, developing software to ensure successful scheduling and observation of transients and their host galaxies by 4most, and the return of the transient types and redshifts to the collaboration (through the lasair broker, within 24hrs) and the final calibrated spectra as contributed data sets on an annual basis. desc spectra optical cosmology\", \"ger-mpe-s3\": \"the lsst sources detected by erosita mpe will generate and curate erosita-lsst value-added catalogs for the agn that the lsst collaboration will identify, using public erosita data that mpe itself is responsible for. lsst agn science collaboration value-added catalogs x-ray optical high energy astrophysics\", \"isr-ust-s2\": \"ultrasat all-sky uv maps rubin community will have access to the ultrasat all-sky map produced in the first six-months of operation for at least 12 months prior to the public data release. noirlab csdc imaging / cutouts uv observational astronomy\", \"ita-ina-s16\": \"the son of x-shooter contribution to rubin: 2,000 spectra for machine learning light curve classification inaf will deliver 2,000 spectra obtained with soxs from lsst targets. deliverables are the entire data acquired for the targets, including 1-d extracted spectra and spectral classification. tvs spectra machine learning training sets optical nir observational astronomy\", \"ita-ina-s17\": \"a cluster spectroscopy hub for galaxy cluster science with lsst we propose to share a vast spectroscopic database on galaxy clusters, complemented with physical metadata and other imaging (ground-based and hst) data-products, with the lsst community, effectively creating a cluster spectroscopy hub for the exploitation of lsst data for a range of cluster science cases. noirlab csdc spectra imaging / cutouts optical galactic and extragalactic astronomy\", \"ita-ina-s27\": \"a vst survey to support the legacy survey of space and time we propose to use 80 nights/year of vst time from 2026 until 2032 (with a possible extension to 2036) to execute a support survey with vst, to complement the lsst dataset improving the light curve sampling of transient and variable sources, and to deliver the data to the us/chilean communities before they are made public. desc time-series / lightcurves imaging / cutouts optical cosmology\", \"ita-ina-s28\": \"exploiting the synergy between lsst and vst: the expansion rate and geometry of the universe measured through time delays of strongly lensed variable sources we propose to use 4620 hours (i.e., 577.5 nights) of vst time over 7 years to complement the lsst dataset improving the light curve sampling of transient and variable sources strongly lensed by galaxies and galaxy clusters, and to deliver the data to the us/chilean communities before they are made public. slsc time-series / lightcurves imaging / cutouts optical cosmology\", \"jap-jpg-s10\": \"subaru pfs spectroscopic follow-up survey of lsst transients in deep drilling fields jpg will deliver the data products from the subaru pfs spectroscopic follow-up survey of lsst transients in drilling fields, to be ingested into kavli ipmu lite idac. desc spectra optical nir cosmology\", \"jap-jpg-s11\": \"subaru pfs filler survey for lsst photo-z training dataset the activity offered by jpg would involve the development of a target selection algorithm in close collaboration with the rubin photo-z coordination group and/or desc, the observation and data analysis, the ingestion of the dataset into kavli ipmu lite idac with noirlab csdc, and finally the scientific application of the dataset to improve photo-z accuracy of lsst photometric redshifts. desc spectra machine learning training sets optical nir cosmology\", \"jap-jpg-s12\": \"contribution to the lsst photo-z calibration with the pfs-ssp galaxy evolution dataset jpg will deliver the data products of pfs-ssp, based upon approval from the pfs-ssp team, to the lsst community for photo-z calibration and training datasets. desc spectra machine learning training sets optical nir cosmology\", \"nzl-auk-s2\": \"the moa archive: two decades of galactic bulge and magellanic clouds photometry the moa archive will be ingested into a locally maintained server that will provide image cutouts at the start of the lsst survey and machine calibrated photometry 12 months after the beginning of the survey, giving high cadence coverage of the galactic bulge and magellanic clouds dating back to 2006. noirlab time-series / lightcurves imaging / cutouts optical galactic and extragalactic astronomy\", \"ukd-oxf-s7\": \"lsst-matched mightee data the activity offered by oxford would involve installation of the mightee survey data at the uk dac, and subsequently, joint work with the lsst science collaborations in training photo-z (based on hi data and the incorporation of radio continuum and polarisation data) as well as user support for the lsst science community to facilitate the use of the survey data. noirlab csdc value-added catalogs imaging / cutouts radio galactic and extragalactic astronomy\"}"
+  "search_index_json": "{\"ds-cid-ser-sag-s1\": \"science pipeline development for analysis of variability of celestial sources in the lsst agn and tvs science collaboration (associated dataset) the qhx hub provides a value-added catalogue of variability for known quasars in rubin data preview 1. of about 1,500 dp1 sources cross-matched with external agn catalogues, 428 met the sampling criteria. for each, the hub serves object-level and per-band tables of light-curve features and periodicity and coherence metrics, together with images and interactive plots. the products are made with the qhx wavelet and cross-correlation pipeline (contribution ser-sag-s1), and the catalogue will grow with each lsst data release. lsst agn science collaboration value-added catalogs optical astronomy software astrophysics exoplanet astronomy stellar astronomy planetary science solar system\", \"ds-cid-ukd-ukd-s9\": \"science software development: cross-matching (associated dataset) probabilistic cross-match catalogues that link the full lsst object table to the vista, vphas, wise and spitzer surveys and other ancillary datasets. they are made with the macauff software, which is built for the very high number of sources per seeing disc at lsst depth. about 20 datasets are planned per data release, each produced with and without macauff's photometric-likelihood step. they will be hosted at the uk idac. lsst transients and variable stars science collaboration value-added catalogs optical nir ir cosmology galactic and extragalactic astronomy interstellar medium observational astronomy stellar astronomy\", \"ds-cid-ukd-ukd-s5\": \"science software development: near infrared data fusion lsst:uk will provide joint lsst+vista near infra-red catalogues produced using the lsst stack and access to vista survey images as a dataset contribution, as well as an implementation of the lsst stack pipeline reconfigured to jointly process lsst pixels with external survey pixels. noirlab csdc value-added catalogs imaging / cutouts optical nir galactic and extragalactic astronomy interdisciplinary astronomy observational astronomy\", \"ds-cid-ita-ina-s29\": \"toward next-generation time-domain surveys (timedomes): vst monitoring of the lsst deep drilling fields we propose to use 170 hours/year of vst time to execute a precursor survey with vst, to complement and extend in time the lsst dataset on 4 ddf, and to combine these observations with all archival data to deliver reduced images, catalogs and lightcurves lasting up to >10 years to the us/chilean communities. lsst agn science collaboration value-added catalogs time-series / lightcurves imaging / cutouts diagnostic plots and recipes to personalise the extracted data optical cosmology galactic and extragalactic astronomy high energy astrophysics observational astronomy\", \"ds-cid-swe-stk-s4\": \"supernova lightcurves and low-resolution spectra for full-sky low-redshift cosmography complementing lsst su will provide online data file access (anticipated to be hosted at noirlab) whereby it is possible for lsst users to download the photometry and spectroscopy tables for each ztf/ztf-ii sn (or the entire set at once), as well as the ancillary information about the host galaxy environment. we will provide machine readable files, including standard formats used by lightcurve fitters (salt2, snoopy) and fits tables. desc time-series / lightcurves spectra optical cosmology galactic and extragalactic astronomy\", \"ds-cid-sza-saa-s2\": \"meerkat high-level data products and services for lsst south africa will produce reduced high-level data products (images and catalogs) and services for meerkat data, as endorsed by the galaxies science collaboration, integrated into the rubin science platform. galaxies science collaboration imaging / cutouts value-added catalogs radio galactic and extragalactic astronomy\", \"ds-cid-ukd-ukd-s10\": \"science software development: spectroscopic classification of transients and 4most spectra to provide non-directable software development effort to the lsst desc for transient spectroscopic follow-up, developing software to ensure successful scheduling and observation of transients and their host galaxies by 4most, and the return of the transient types and redshifts to the collaboration (through the lasair broker, within 24hrs) and the final calibrated spectra as contributed data sets on an annual basis. desc spectra optical cosmology\", \"ds-cid-ger-mpe-s3\": \"the lsst sources detected by erosita mpe will generate and curate erosita-lsst value-added catalogs for the agn that the lsst collaboration will identify, using public erosita data that mpe itself is responsible for. lsst agn science collaboration value-added catalogs x-ray optical high energy astrophysics\", \"ds-cid-isr-ust-s2\": \"ultrasat all-sky uv maps rubin community will have access to the ultrasat all-sky map produced in the first six-months of operation for at least 12 months prior to the public data release. noirlab csdc imaging / cutouts uv observational astronomy\", \"ds-cid-ita-ina-s16\": \"the son of x-shooter contribution to rubin: 2,000 spectra for machine learning light curve classification inaf will deliver 2,000 spectra obtained with soxs from lsst targets. deliverables are the entire data acquired for the targets, including 1-d extracted spectra and spectral classification. tvs spectra machine learning training sets optical nir observational astronomy\", \"ds-cid-ita-ina-s17\": \"a cluster spectroscopy hub for galaxy cluster science with lsst we propose to share a vast spectroscopic database on galaxy clusters, complemented with physical metadata and other imaging (ground-based and hst) data-products, with the lsst community, effectively creating a cluster spectroscopy hub for the exploitation of lsst data for a range of cluster science cases. noirlab csdc spectra imaging / cutouts optical galactic and extragalactic astronomy\", \"ds-cid-ita-ina-s27\": \"a vst survey to support the legacy survey of space and time we propose to use 80 nights/year of vst time from 2026 until 2032 (with a possible extension to 2036) to execute a support survey with vst, to complement the lsst dataset improving the light curve sampling of transient and variable sources, and to deliver the data to the us/chilean communities before they are made public. desc time-series / lightcurves imaging / cutouts optical cosmology\", \"ds-cid-ita-ina-s28\": \"exploiting the synergy between lsst and vst: the expansion rate and geometry of the universe measured through time delays of strongly lensed variable sources we propose to use 4620 hours (i.e., 577.5 nights) of vst time over 7 years to complement the lsst dataset improving the light curve sampling of transient and variable sources strongly lensed by galaxies and galaxy clusters, and to deliver the data to the us/chilean communities before they are made public. slsc time-series / lightcurves imaging / cutouts optical cosmology\", \"ds-cid-jap-jpg-s10\": \"subaru pfs spectroscopic follow-up survey of lsst transients in deep drilling fields jpg will deliver the data products from the subaru pfs spectroscopic follow-up survey of lsst transients in drilling fields, to be ingested into kavli ipmu lite idac. desc spectra optical nir cosmology\", \"ds-cid-jap-jpg-s11\": \"subaru pfs filler survey for lsst photo-z training dataset the activity offered by jpg would involve the development of a target selection algorithm in close collaboration with the rubin photo-z coordination group and/or desc, the observation and data analysis, the ingestion of the dataset into kavli ipmu lite idac with noirlab csdc, and finally the scientific application of the dataset to improve photo-z accuracy of lsst photometric redshifts. desc spectra machine learning training sets optical nir cosmology\", \"ds-cid-jap-jpg-s12\": \"contribution to the lsst photo-z calibration with the pfs-ssp galaxy evolution dataset jpg will deliver the data products of pfs-ssp, based upon approval from the pfs-ssp team, to the lsst community for photo-z calibration and training datasets. desc spectra machine learning training sets optical nir cosmology\", \"ds-cid-nzl-auk-s2\": \"the moa archive: two decades of galactic bulge and magellanic clouds photometry the moa archive will be ingested into a locally maintained server that will provide image cutouts at the start of the lsst survey and machine calibrated photometry 12 months after the beginning of the survey, giving high cadence coverage of the galactic bulge and magellanic clouds dating back to 2006. noirlab time-series / lightcurves imaging / cutouts optical galactic and extragalactic astronomy\", \"ds-cid-ukd-oxf-s7\": \"lsst-matched mightee data the activity offered by oxford would involve installation of the mightee survey data at the uk dac, and subsequently, joint work with the lsst science collaborations in training photo-z (based on hi data and the incorporation of radio continuum and polarisation data) as well as user support for the lsst science community to facilitate the use of the survey data. noirlab csdc value-added catalogs imaging / cutouts radio galactic and extragalactic astronomy\"}"
 }

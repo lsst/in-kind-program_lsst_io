@@ -15,10 +15,13 @@ the loader adds, for every record:
 
 * ``status``: the display status (``curated.status_override`` if set, else
   "available" or "not_yet_delivered" from whether data was submitted);
-* ``cid_slug``: the contribution ID made safe for HTML ids and CSS classes;
+* ``anchor``: the id of the dataset's card on the page (``ds-cid-<contribution ID slug>``).
+  Table rows carry it as ``data-card`` so the filter script can find the card;
 * ``last_updated``: the date shown on the card (see ``ikp_data.derive``);
 * ``related``: "Also see" links, with titles looked up from the software page;
-* ``filter_tokens``: space-separated CSS-safe tokens the filter script matches;
+* ``filters``: for each filter key (the ``data-filter-key`` of a drop-down, or the
+  "available only" button), the tokens this dataset has. The template writes each
+  entry onto the table row as a ``data-filter-<key>`` attribute;
 * ``search_text``: lowercase text for the free-text search box.
 
 The context also carries the filter drop-down options as sorted ``(label, slug)``
@@ -29,6 +32,7 @@ import yaml
 
 from ikp_data.derive import (
     collect_cross_page_targets,
+    dataset_anchor,
     normalize_strings,
     option_pairs,
     record_last_updated,
@@ -74,24 +78,22 @@ def load_datasets(data_dir, today):
         all_wavelengths.update(wavelengths)
         all_uat.update(uat_categories)
 
-        cid_slug = slugify(record.get("contribution_id", ""))
-        record["cid_slug"] = cid_slug
+        record["anchor"] = dataset_anchor(path, record.get("contribution_id", ""))
         record["last_updated"] = record_last_updated(record, path)
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
             ("contributed-software.html", software_targets),
         )
 
-        # Space-separated CSS-safe tokens used by the page's filter/sort
-        # script to match table rows and cards against the active filters.
-        # cid- lets the free-text search script look a row/card back up in
-        # the search index below without needing a raw data-* attribute on
-        # sphinx-design's card markup (which only accepts CSS classes).
-        tokens = [f"status-{slugify(status)}", f"cid-{cid_slug}"]
-        tokens += [f"dt-{slugify(v)}" for v in data_types]
-        tokens += [f"wl-{slugify(v)}" for v in wavelengths]
-        tokens += [f"uat-{slugify(v)}" for v in uat_categories]
-        record["filter_tokens"] = " ".join(tokens)
+        # The tokens this dataset has for each filter, keyed by the filter's
+        # `data-filter-key`. Each token is the `value` of one option of that
+        # filter (the "available only" button asks for `status-available`).
+        record["filters"] = {
+            "status": [f"status-{slugify(status)}"],
+            "dt": [f"dt-{slugify(v)}" for v in data_types],
+            "wl": [f"wl-{slugify(v)}" for v in wavelengths],
+            "uat": [f"uat-{slugify(v)}" for v in uat_categories],
+        }
 
         # Free-text search covers the title, the curated summary/blurb, the
         # primary recipient, and the data type / wavelength / UAT "keyword"
@@ -111,7 +113,7 @@ def load_datasets(data_dir, today):
     # contributions surface first, since that's the signal visitors care
     # about. Missing dates sort to the bottom rather than the top.
     records.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
-    search_index = {r["cid_slug"]: r["search_text"] for r in records}
+    search_index = {r["anchor"]: r["search_text"] for r in records}
     return {
         "datasets": records,
         "all_data_types": option_pairs(all_data_types),

@@ -17,25 +17,25 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-filterbar">
         <label>Category
-          <select id="ikc-sw-filter-cat">
+          <select id="ikc-sw-filter-cat" data-filter-key="cat">
             <option value="">All</option>
             {% for label, slug in all_categories %}<option value="cat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>UAT keyword
-          <select id="ikc-sw-filter-uat">
+          <select id="ikc-sw-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Primary recipient
-          <select id="ikc-sw-filter-recipient">
+          <select id="ikc-sw-filter-recipient" data-filter-key="recipient">
             <option value="">All</option>
             {% for label, slug in all_recipients %}<option value="recipient-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Status
-          <select id="ikc-sw-filter-status">
+          <select id="ikc-sw-filter-status" data-filter-key="status">
             <option value="">All</option>
             <option value="status-delivered">Delivered</option>
             <option value="status-pending">In Progress</option>
@@ -59,13 +59,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </thead>
         <tbody>
           {% for item in software %}
-          <tr class="ikp-row" data-tokens="{{ item.filter_tokens }}"
+          <tr class="ikp-row" data-card="{{ item.anchor }}"{% for key, tokens in item.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
               data-title="{{ item.title }}"
               data-category="{{ item.form_data.category or '' }}"
               data-recipient="{{ item.form_data.primary_recipient_group or '' }}"
               data-status="{{ item.status }}"
               data-updated="{{ item.last_updated or '' }}">
-            <td><button type="button" class="ikp-title-link" data-cid="{{ item.cid_slug }}">{{ item.title }} ({{ item.contribution_id }})</button></td>
+            <td><button type="button" class="ikp-title-link">{{ item.title }} ({{ item.contribution_id }})</button></td>
             <td>{{ item.form_data.category or 'TBD' }}</td>
             <td>{{ item.form_data.primary_recipient_group or 'TBD' }}</td>
             <td>{% if item.status == 'delivered' %}<span class="ikp-badge ikp-badge-success">Delivered</span>{% else %}<span class="ikp-badge ikp-badge-muted">In Progress</span>{% endif %}</td>
@@ -81,10 +81,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       :gutter: 2
 
       {% for item in software %}
-      .. _sw-cid-{{ item.cid_slug }}:
+      .. _{{ item.anchor }}:
 
       .. grid-item-card:: {{ item.title }}
-          :class-item: ikp-sw-card ikp-card {{ item.filter_tokens }}
+          :class-item: ikp-sw-card ikp-card
 
           {{ item.contribution_id }}
           ^^^

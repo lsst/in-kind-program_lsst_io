@@ -112,7 +112,29 @@
       "facility": "Gran Telescopio Canarias (GTC)",
       "facility_slug": "gran-telescopio-canarias-gtc",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-northern aperture-large instr-imaging instr-spectroscopy wl-optical wl-nir multiplex-yes cid-esp-bcm-s5 cid-esp-iac-s1",
+      "filters": {
+        "aperture": [
+          "aperture-large"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-imaging",
+          "instr-spectroscopy"
+        ],
+        "multiplex": [
+          "multiplex-yes"
+        ],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "first_semester": "TBA",
       "hemisphere": "Northern",
       "instrument_names": [
@@ -178,7 +200,25 @@
       "facility": "Korean Microlensing Telescope Network (KMTNet)",
       "facility_slug": "korean-microlensing-telescope-network-kmtnet",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-southern aperture-small instr-imaging wl-optical cid-kor-kas-s2",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2026A",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -250,7 +290,25 @@
       "facility": "Korean Microlensing Telescope Network (KMTNet)",
       "facility_slug": "korean-microlensing-telescope-network-kmtnet",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-southern aperture-small instr-imaging wl-optical cid-kor-kas-s2",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2026A",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -322,7 +380,25 @@
       "facility": "Korean Microlensing Telescope Network (KMTNet)",
       "facility_slug": "korean-microlensing-telescope-network-kmtnet",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-southern aperture-small instr-imaging wl-optical cid-kor-kas-s2",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2026A",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -406,7 +482,27 @@
       "facility": "Large Binocular Telescope (LBT)",
       "facility_slug": "large-binocular-telescope-lbt",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-northern aperture-large instr-imaging instr-spectroscopy wl-optical wl-nir cid-ita-ina-s18",
+      "filters": {
+        "aperture": [
+          "aperture-large"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-imaging",
+          "instr-spectroscopy"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "first_semester": "2026B",
       "hemisphere": "Northern",
       "instrument_names": [
@@ -483,7 +579,25 @@
       "facility": "Milanković Telescope 1.4m",
       "facility_slug": "milankovi-telescope-1-4m",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-northern aperture-small instr-imaging wl-optical cid-ser-sag-s2",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2025A",
       "hemisphere": "Northern",
       "instrument_names": [
@@ -553,7 +667,26 @@
       "facility": "South African Large Telescope (SALT)",
       "facility_slug": "south-african-large-telescope-salt",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-southern aperture-large instr-imaging instr-spectroscopy wl-optical cid-sza-saa-s1",
+      "filters": {
+        "aperture": [
+          "aperture-large"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging",
+          "instr-spectroscopy"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2026A",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -617,7 +750,29 @@
       "facility": "Subaru Telescope",
       "facility_slug": "subaru-telescope",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-northern aperture-large instr-imaging instr-spectroscopy wl-optical wl-nir multiplex-yes cid-jap-jpg-s1",
+      "filters": {
+        "aperture": [
+          "aperture-large"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-imaging",
+          "instr-spectroscopy"
+        ],
+        "multiplex": [
+          "multiplex-yes"
+        ],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical",
+          "wl-nir"
+        ]
+      },
       "first_semester": "2026A",
       "hemisphere": "Northern",
       "instrument_names": [
@@ -693,7 +848,25 @@
       "facility": "VLT Survey Telescope (VST)",
       "facility_slug": "vlt-survey-telescope-vst",
       "field_of_view": null,
-      "filter_tokens": "status-available hemisphere-southern aperture-medium instr-imaging wl-optical cid-ita-ina-s18",
+      "filters": {
+        "aperture": [
+          "aperture-medium"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-available"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2026B",
       "hemisphere": "Southern",
       "instrument_names": [
@@ -752,7 +925,25 @@
       "facility": "McLellan 1.0m",
       "facility_slug": "mclellan-1-0m",
       "field_of_view": null,
-      "filter_tokens": "status-future-semester hemisphere-southern aperture-small instr-imaging wl-optical cid-nzl-auk-s1",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-future-semester"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "TBA",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -809,7 +1000,25 @@
       "facility": "Nishimura 1.8m (MOA)",
       "facility_slug": "nishimura-1-8m-moa",
       "field_of_view": null,
-      "filter_tokens": "status-future-semester hemisphere-southern aperture-small instr-imaging wl-optical cid-nzl-auk-s1",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-future-semester"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "TBA",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -870,7 +1079,25 @@
       "facility": "RTT150 & T100",
       "facility_slug": "rtt150-t100",
       "field_of_view": null,
-      "filter_tokens": "status-future-semester hemisphere-northern aperture-small instr-imaging wl-optical cid-tur-akd-s1",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-future-semester"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "TBA",
       "hemisphere": "Northern",
       "instrument_names": [],
@@ -920,7 +1147,25 @@
       "facility": "Trans-Pacific Two-Meter Telescope",
       "facility_slug": "trans-pacific-two-meter-telescope",
       "field_of_view": null,
-      "filter_tokens": "status-future-semester hemisphere-northern aperture-medium instr-imaging wl-optical cid-tai-ncu-s1",
+      "filters": {
+        "aperture": [
+          "aperture-medium"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-imaging"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-future-semester"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "TBA",
       "hemisphere": "Northern",
       "instrument_names": [],
@@ -974,7 +1219,26 @@
       "facility": "Various SAAO telescopes (1.9m-1.0m)",
       "facility_slug": "various-saao-telescopes-1-9m-1-0m",
       "field_of_view": null,
-      "filter_tokens": "status-future-semester hemisphere-southern aperture-small instr-imaging instr-spectroscopy wl-optical cid-sza-saa-s4",
+      "filters": {
+        "aperture": [
+          "aperture-small"
+        ],
+        "hemisphere": [
+          "hemisphere-southern"
+        ],
+        "instr": [
+          "instr-imaging",
+          "instr-spectroscopy"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-future-semester"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "TBA",
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -1034,7 +1298,25 @@
       "facility": "Nordic Optical Telescope (NOT)",
       "facility_slug": "nordic-optical-telescope-not",
       "field_of_view": null,
-      "filter_tokens": "status-past-opportunity hemisphere-northern aperture-medium instr-spectroscopy wl-optical cid-swe-stk-s3",
+      "filters": {
+        "aperture": [
+          "aperture-medium"
+        ],
+        "hemisphere": [
+          "hemisphere-northern"
+        ],
+        "instr": [
+          "instr-spectroscopy"
+        ],
+        "multiplex": [],
+        "res": [],
+        "status": [
+          "status-past-opportunity"
+        ],
+        "wl": [
+          "wl-optical"
+        ]
+      },
       "first_semester": "2025A",
       "hemisphere": "Northern",
       "instrument_names": [

@@ -17,19 +17,19 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-filterbar">
         <label>Data type
-          <select id="ikc-filter-dt">
+          <select id="ikc-filter-dt" data-filter-key="dt">
             <option value="">All</option>
             {% for label, slug in all_data_types %}<option value="dt-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Wavelength
-          <select id="ikc-filter-wl">
+          <select id="ikc-filter-wl" data-filter-key="wl">
             <option value="">All</option>
             {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Science case (UAT)
-          <select id="ikc-filter-uat">
+          <select id="ikc-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
@@ -54,14 +54,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </thead>
         <tbody>
           {% for ds in datasets %}
-          <tr class="ikp-row" data-tokens="{{ ds.filter_tokens }}"
+          <tr class="ikp-row" data-card="{{ ds.anchor }}"{% for key, tokens in ds.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
               data-title="{{ ds.title }}"
               data-datatype="{{ (ds.form_data.data_type or []) | join(', ') }}"
               data-wavelength="{{ (ds.curated.wavelength_regime or []) | join(', ') }}"
               data-recipient="{{ ds.curated.primary_recipient or '' }}"
               data-status="{{ ds.status }}"
               data-updated="{{ ds.last_updated or '' }}">
-            <td><button type="button" class="ikp-title-link" data-cid="{{ ds.cid_slug }}">{{ ds.title }} ({{ ds.contribution_id }})</button></td>
+            <td><button type="button" class="ikp-title-link">{{ ds.title }} ({{ ds.contribution_id }})</button></td>
             <td>{{ (ds.form_data.data_type or []) | join(', ') or 'TBD' }}</td>
             <td>{{ (ds.curated.wavelength_regime or []) | join(', ') or 'TBD' }}</td>
             <td>{{ ds.curated.primary_recipient or 'TBD' }}</td>
@@ -79,10 +79,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       {% for ds in datasets %}
       {% if ds.status == 'available' %}
-      .. _ds-cid-{{ ds.cid_slug }}:
+      .. _{{ ds.anchor }}:
 
       .. grid-item-card:: {{ ds.title }}
-          :class-item: ikp-card {{ ds.filter_tokens }}
+          :class-item: ikp-card
 
           {{ ds.contribution_id }} - {{ ds.country }}
           ^^^
@@ -138,10 +138,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           +++
           :bdg-success:`Available`
       {% else %}
-      .. _ds-cid-{{ ds.cid_slug }}:
+      .. _{{ ds.anchor }}:
 
       .. grid-item-card:: {{ ds.title }}
-          :class-item: ikp-card {{ ds.filter_tokens }}
+          :class-item: ikp-card
 
           {{ ds.contribution_id }} - {{ ds.country }}
           ^^^

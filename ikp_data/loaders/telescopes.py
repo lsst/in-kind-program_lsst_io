@@ -19,7 +19,12 @@ Why the derived fields exist
   map, projected from latitude/longitude (see ``ikp_data.derive``).
 * ``aperture_band`` and ``resolution_bin``: coarse buckets for the filters.
 * ``status``: defaults to "future_semester" when a record omits it.
-* ``filter_tokens`` and ``search_text``: what the filter and search scripts match.
+* ``filters`` and ``search_text``: what the filter and search scripts match.
+  ``filters`` maps each filter key (the ``data-filter-key`` of a drop-down on the
+  page) to the tokens this facility has for it, for example
+  ``{"instr": ["instr-imaging"], "multiplex": []}``. The template writes each
+  entry onto the facility's table row and map marker as a ``data-filter-<key>``
+  attribute.
 * ``siblings``: links between records that share a ``contribution_id`` (for
   example KMTNet's three sites). Drift between same-facility siblings is
   reported by ``ikp_data.validate``, not by the loader.
@@ -109,13 +114,10 @@ def load_telescopes(data_dir, world_outline_svg):
 
         facility_slug = slugify(record.get("facility", ""))
         record["facility_slug"] = facility_slug
-        # Normalized (lowercase, hyphenated) so this exact string can be used
-        # interchangeably as a CSS class token (`:class-item:` values are run
-        # through docutils' class-name normalizer, which lowercases and
-        # hyphenates automatically -- if `slug` weren't pre-normalized here,
-        # the card's `slug-<slug>` class would silently end up spelled
-        # differently than the raw `data-slug` attribute on the table row
-        # and map marker, breaking search/highlight/scroll-to-card matching.
+        # Normalized (lowercase, hyphenated) because it is the card's anchor id:
+        # docutils lowercases and hyphenates the ids it writes, so the value the
+        # table rows and map markers carry in `data-card` has to be spelled the
+        # way the built card's id is, or the lookup by id finds nothing.
         record["slug"] = slugify(path.stem)
 
         # The schema requires latitude, so a missing value is an error naming
@@ -154,22 +156,19 @@ def load_telescopes(data_dir, world_outline_svg):
         # that omits `status` rather than a separate "tba" bucket.
         status = record.get("status", "future_semester")
         record["status"] = status
-        tokens = [
-            f"status-{slugify(status)}",
-            f"hemisphere-{slugify(record['hemisphere'])}",
-        ]
-        if aperture_band:
-            tokens.append(f"aperture-{aperture_band}")
-        tokens += [f"instr-{slugify(v)}" for v in instrumentation]
-        tokens += [f"wl-{slugify(v)}" for v in wavelengths]
-        if record["resolution_bin"]:
-            tokens.append(f"res-{record['resolution_bin']}")
-        if record.get("multiplex") is True:
-            tokens.append("multiplex-yes")
-        for cid in contribution_ids:
-            if cid:
-                tokens.append(f"cid-{slugify(cid)}")
-        record["filter_tokens"] = " ".join(tokens)
+        # The tokens this facility has for each filter, keyed by the drop-down's
+        # `data-filter-key`. Each token is the `value` of one of that drop-down's
+        # options, so the page script can test "does the row have this token".
+        # An empty list means the facility has nothing for that filter.
+        record["filters"] = {
+            "status": [f"status-{slugify(status)}"],
+            "hemisphere": [f"hemisphere-{slugify(record['hemisphere'])}"],
+            "aperture": [f"aperture-{aperture_band}"] if aperture_band else [],
+            "instr": [f"instr-{slugify(v)}" for v in instrumentation],
+            "wl": [f"wl-{slugify(v)}" for v in wavelengths],
+            "res": [f"res-{record['resolution_bin']}"] if record["resolution_bin"] else [],
+            "multiplex": ["multiplex-yes"] if record.get("multiplex") is True else [],
+        }
 
         search_parts = [
             record.get("facility", ""),
