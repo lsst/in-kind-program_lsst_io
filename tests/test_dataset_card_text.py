@@ -140,3 +140,15 @@ def test_status_filter_tokens_keep_their_internal_values(tmp_path):
     assert 'data-status="not_yet_delivered"' in text
     available = render_card_text(tmp_path / "b")
     assert 'data-filter-status="status-available"' in available
+
+
+def test_uat_badges_use_a_style_distinct_from_data_type_and_wavelength(tmp_path):
+    text = render_card_text(
+        tmp_path,
+        form_data={"data_type": ["Catalog"], "uat_category": ["Astrophysics"]},
+        curated={"wavelength_regime": ["Optical"]},
+    )
+    assert ":bdg-light:`Catalog`" in text
+    assert ":bdg-light:`Optical`" in text
+    assert ":bdg-primary-line:`Astrophysics`" in text
+    assert ":bdg-light:`Astrophysics`" not in text

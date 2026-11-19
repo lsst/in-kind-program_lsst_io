@@ -86,7 +86,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {{ ds.contribution_id }} - {{ ds.country }}
           ^^^
-          {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
+          {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-primary-line:`{{ uc }}` {% endfor %}
 
           {% if available %}
           {{ ds.curated.summary or 'TBD' }}
