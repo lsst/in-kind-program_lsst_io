@@ -138,6 +138,7 @@ curated:
   - Astronomy software
   summary: null
   status_override: null
+  version: lsst-ir-fusion v1.0.0; obs_vista v1.2.0
   related_contribution_ids:
   - UKD-UKD-S5
   needs_review: false

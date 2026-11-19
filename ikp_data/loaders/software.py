@@ -10,7 +10,13 @@ this data set: every record here is Directable or Non-directable.
 
 Why the derived fields exist
 ----------------------------
-* ``status``: "delivered" or "pending" (or ``curated.status_override``).
+* ``status``: "available" or "pending" (or ``curated.status_override``).
+* ``display_version``: ``curated.version`` if set, otherwise
+  ``form_data.version``. The card shows it on Available cards only.
+* ``display_country``: the country as the card header spells it (for example
+  "UK" shows as "United Kingdom").
+* ``description_html``: the activity description, safe to place inside the
+  card's ``.. raw:: html`` block (see ``_description_html``).
 * ``anchor`` (``sw-cid-<contribution ID slug>``), ``last_updated``,
   ``filters`` and ``search_text``: as for datasets.
 * ``uat_keywords``: the team's own UAT answer if given, otherwise the sync
@@ -26,6 +32,7 @@ Why the derived fields exist
   telescopes.)
 """
 
+import html
 import re
 
 import yaml
@@ -33,6 +40,7 @@ import yaml
 from ikp_data.derive import (
     collect_cross_page_targets,
     dataset_anchor,
+    display_country,
     normalize_strings,
     option_pairs,
     record_last_updated,
@@ -47,7 +55,21 @@ def _software_status(record):
     curated = record.get("curated") or {}
     if curated.get("status_override"):
         return curated["status_override"]
-    return "delivered" if (record.get("form_data") or {}).get("submitted") else "pending"
+    return "available" if (record.get("form_data") or {}).get("submitted") else "pending"
+
+
+def _description_html(text):
+    """The activity description as text that is safe inside a raw HTML block.
+
+    The card writes the description straight into HTML, so any ``<`` or ``&`` in
+    a team's answer would be read as markup. Some answers already contain an
+    entity such as ``&amp;``. Decoding first, then escaping, shows each one as
+    the character the author meant, and escaping every time means a ``<script>``
+    in an answer can only ever appear as text. An empty description shows "TBD".
+    """
+    if not text:
+        return "TBD"
+    return html.escape(html.unescape(text))
 
 
 _URL_RE = re.compile(r"https?://[^\s,]+")
@@ -126,6 +148,11 @@ def load_software(data_dir, today):
 
         record["anchor"] = software_anchor(path, record.get("contribution_id", ""))
         record["last_updated"] = record_last_updated(record, path)
+        record["display_country"] = display_country(record.get("country"))
+        # A curated version wins over the form's free-text answer, which can be
+        # long or awkward to show on a card.
+        record["display_version"] = curated.get("version") or form_data.get("version")
+        record["description_html"] = _description_html(form_data.get("activity_description"))
         record["uat_keywords"] = uat_keywords
         record["software_links"] = _extract_links(form_data.get("software_url"))
         record["documentation_links"] = _extract_links(form_data.get("documentation"))

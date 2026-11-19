@@ -134,18 +134,32 @@
 /* Datasets: the extra fields hidden behind "Show more". */
 .ikp-more-fields { display: none; }
 .ikp-more-fields.ikp-expanded { display: block; }
-/* The dataset toggle is an outlined pill in the accent green. */
-.ikp-more-btn { border: 1px solid var(--ikp-green); border-radius: 1em; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0.25em 0.9em; cursor: pointer; margin: 0.4em 0; }
-.ikp-more-btn:hover { background: var(--ikp-pill-hover); }
+
+/* The expand toggles (Datasets "Show more details", Software "Read full
+   description") share one look: an outlined pill in the accent green. */
+.ikp-more-btn,
+.ikp-expand-btn { border: 1px solid var(--ikp-green); border-radius: 1em; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0.25em 0.9em; cursor: pointer; }
+.ikp-more-btn:hover,
+.ikp-expand-btn:hover { background: var(--ikp-pill-hover); }
 /* The dark green above is unreadable on the dark card, so the pill takes a light green. */
-html[data-theme=dark] .ikp-more-btn { border-color: var(--ikp-green-on-dark); color: var(--ikp-green-on-dark); }
-html[data-theme=dark] .ikp-more-btn:hover { background: var(--ikp-pill-hover-on-dark); }
+html[data-theme=dark] .ikp-more-btn,
+html[data-theme=dark] .ikp-expand-btn { border-color: var(--ikp-green-on-dark); color: var(--ikp-green-on-dark); }
+html[data-theme=dark] .ikp-more-btn:hover,
+html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-on-dark); }
+.ikp-more-btn { margin: 0.4em 0; }
 
-/* Software: the description clamped to three lines behind "Show more". */
-.ikp-desc { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0.4em; }
+/* Software: the description, clamped to three lines behind its toggle. It sits
+   below the short rows, so the toggle needs room beneath it. */
+.ikp-desc { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1em; }
 .ikp-desc.ikp-expanded { -webkit-line-clamp: unset; display: block; overflow: visible; }
-.ikp-expand-btn { border: none; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0; cursor: pointer; margin-bottom: 0.6em; }
+.ikp-expand-btn { margin: 0 0 1em; }
+/* Fade the last clamped line into the card background. A mask (not a gradient
+   painted in a colour) works in light and dark mode alike. */
+.ikp-desc:not(.ikp-expanded) { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.8em), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 1.8em), transparent); }
 
-/* "Also see" link between a dataset and its software (and back). */
-.ikp-also-see { display: inline-block; background: var(--ikp-also-see-bg); color: var(--ikp-also-see-text); font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 0.5em; text-decoration: none; }
+/* "Also see" link between a dataset and its software (and back). A block that
+   is only as wide as its text, so each link starts its own line (it does not
+   sit beside a toggle button above it) and several links stack. */
+.ikp-also-see { display: block; width: fit-content; background: var(--ikp-also-see-bg); color: var(--ikp-also-see-text); font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 1em; text-decoration: none; }
+.ikp-also-see + .ikp-also-see { margin-top: 0.4em; }
 .ikp-also-see:hover { background: var(--ikp-also-see-bg-hover); }

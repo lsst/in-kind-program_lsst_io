@@ -623,7 +623,7 @@ class Dataset(_Strict):
 # Software (docs/contribution-types/_data/software/*.yaml)
 # ---------------------------------------------------------------------------
 
-SoftwareStatus = Literal["delivered", "pending"]
+SoftwareStatus = Literal["available", "pending"]
 
 
 class SoftwareFormData(_RejectSubmitterPii):
@@ -631,7 +631,7 @@ class SoftwareFormData(_RejectSubmitterPii):
 
     submitted: bool = _field(
         "True once the contributor has submitted the software form; decides "
-        "whether the card reads 'Delivered' (unless overridden in curated).",
+        "whether the card reads 'Available' (unless overridden in curated).",
         rendered=True,
     )
     category: str | None = _field(
@@ -701,7 +701,9 @@ class SoftwareFormData(_RejectSubmitterPii):
         default=None,
     )
     support: str | None = _field(
-        "Support arrangements. Not shown on the page.", rendered=False, default=None
+        "Support arrangements; shown as the card's Support row.",
+        rendered=True,
+        default=None,
     )
     further_development: str | None = _field(
         "Plans for further development. Not shown on the page.",
@@ -722,7 +724,10 @@ class SoftwareFormData(_RejectSubmitterPii):
         default=None,
     )
     version: str | None = _field(
-        "Software version. Not shown on the page.", rendered=False, default=None
+        "Software version from the form. Shown on an Available card unless "
+        "curated.version is set.",
+        rendered=True,
+        default=None,
     )
     associated_dataset: DatasetFormData | None = _field(
         "Dataset details when the contribution also delivers a dataset. Not shown "
@@ -746,8 +751,15 @@ class SoftwareCurated(_Strict):
         default=None,
     )
     status_override: SoftwareStatus | None = _field(
-        "Force the card status instead of deriving it from the form: 'delivered' "
+        "Force the card status instead of deriving it from the form: 'available' "
         "or 'pending'. Leave empty normally.",
+        rendered=True,
+        default=None,
+    )
+    version: str | None = _field(
+        "Version shown on an Available card. Overrides form_data.version for "
+        "display, so a long or messy form answer can be tidied without editing "
+        "the form data. Leave empty to show the form's version.",
         rendered=True,
         default=None,
     )
@@ -780,8 +792,8 @@ class Software(_Strict):
     )
     title: str = _field("Software contribution title.", rendered=True)
     country: str | None = _field(
-        "Contributing country. Stored but not shown on the page.",
-        rendered=False,
+        "Contributing country; shown in the card header.",
+        rendered=True,
         default=None,
     )
     institute: str | None = _field(

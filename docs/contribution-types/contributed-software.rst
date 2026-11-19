@@ -6,7 +6,7 @@ The Vera C. Rubin Observatory In-Kind Program includes contributed software: dir
 This page lists all current software-development contributions. General pool contributions -- directable effort offered without a recipient defined ahead of time -- are listed on the :doc:`general-pool` page instead.
 
 Use the filters or the table below to browse by category, science keyword, or recipient group.
-Each entry starts with the basics from the original proposal; cards marked *Delivered* have a full team-submitted record on file, and cards marked *In Progress* are still awaiting that submission.
+Each entry starts with the basics from the original proposal; cards marked *Available* have a full team-submitted record on file, and cards marked *In progress* are still awaiting that submission.
 Some software contributions also produce a dataset -- where that's the case, the card links to the matching entry on the :doc:`contributed-datasets` page.
 
 Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have any questions about contributed software.
@@ -37,8 +37,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <label>Status
           <select id="ikp-sw-filter-status" data-filter-key="status">
             <option value="">All</option>
-            <option value="status-delivered">Delivered</option>
-            <option value="status-pending">In Progress</option>
+            <option value="status-available">Available</option>
+            <option value="status-pending">In progress</option>
           </select>
         </label>
       </div>
@@ -64,12 +64,12 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
               data-category="{{ item.form_data.category or '' }}"
               data-recipient="{{ item.form_data.primary_recipient_group or '' }}"
               data-status="{{ item.status }}"
-              data-updated="{{ item.last_updated or '' }}">
+              data-updated="{{ item.last_updated }}">
             <td><button type="button" class="ikp-title-link">{{ item.title }} ({{ item.contribution_id }})</button></td>
             <td>{{ item.form_data.category or 'TBD' }}</td>
             <td>{{ item.form_data.primary_recipient_group or 'TBD' }}</td>
-            <td>{% if item.status == 'delivered' %}<span class="ikp-badge ikp-badge-success">Delivered</span>{% else %}<span class="ikp-badge ikp-badge-muted">In Progress</span>{% endif %}</td>
-            <td>{{ item.last_updated or 'unknown' }}</td>
+            <td>{% if item.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">In progress</span>{% endif %}</td>
+            <td>{{ item.last_updated }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -86,13 +86,17 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       .. grid-item-card:: {{ item.title }}
           :class-item: ikp-sw-card ikp-card
 
-          {{ item.contribution_id }}
+          {{ item.contribution_id }}{% if item.display_country %} - {{ item.display_country }}{% endif %}
           ^^^
           {% for kw in item.uat_keywords %}:bdg-light:`{{ kw }}` {% endfor %}
 
           **Primary recipient:** {{ item.form_data.primary_recipient_group or 'TBD' }}
 
-          **Additional recipients:** {{ (item.form_data.additional_recipient_groups or []) | join(', ') or 'None' }}
+          {% if item.form_data.additional_recipient_groups %}**Additional recipients:** {{ item.form_data.additional_recipient_groups | join(', ') }}{% endif %}
+
+          **Category:** {{ item.form_data.category or 'TBD' }}
+
+          {% if item.status == 'available' and item.display_version %}**Version:** {{ item.display_version }}{% endif %}
 
           {% if item.form_data.software_name %}**Software:** {{ item.form_data.software_name }}{% endif %}
 
@@ -102,10 +106,12 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {% if item.documentation_links %}**Documentation:** {% for link in item.documentation_links %}`{{ link.label }} <{{ link.url }}>`__{{ ", " if not loop.last else "" }}{% endfor %}{% endif %}
 
+          {% if item.form_data.support %}**Support:** {{ item.form_data.support }}{% endif %}
+
           .. raw:: html
 
-             <div class="ikp-desc">{{ item.form_data.activity_description or 'TBD' }}</div>
-             <button type="button" class="ikp-expand-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
+             <div class="ikp-desc">{{ item.description_html }}</div>
+             <button type="button" class="ikp-expand-btn" data-expand-label="Read full description &#9662;" data-collapse-label="Show less &#9652;">Read full description &#9662;</button>
 
           {% for rel in item.related %}
           {% if rel.href %}
@@ -117,7 +123,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endif %}
           {% endfor %}
 
-          *Updated: {{ item.last_updated or 'unknown' }}*
+          *Updated: {{ item.last_updated }}*
           +++
-          {% if item.status == 'delivered' %}:bdg-success:`Delivered`{% else %}:bdg-muted:`In Progress`{% endif %}
+          {% if item.status == 'available' %}:bdg-success:`Available`{% else %}:bdg-muted:`In progress`{% endif %}
       {% endfor %}
