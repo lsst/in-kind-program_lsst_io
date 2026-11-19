@@ -4,7 +4,7 @@ All tests run through one entry point:
 
     tox run -e test
 
-The suite has four parts:
+The suite has five parts:
 
 * **Snapshot tests** (`test_conf_snapshots.py`): golden-file tests for the
   card loaders in `ikp_data/loaders/`. See below.
@@ -15,6 +15,10 @@ The suite has four parts:
 * **Fixture tests** (`test_fixture_data.py`, `test_telescope_loader.py`): the invented data
   tree in `tests/fixtures/` (see its README) that covers every card type and opportunity phase
   on a fixed date, 2027-03-15.
+* **Card page tests** (`test_card_page_assets.py`, `test_card_page_templates.py`,
+  `test_related_links.py`): the three card page templates and their script. They check that
+  the pages have no inline style or script, that table rows and map markers name an existing
+  card and carry the filter data, and that "Also see" links resolve (across pages and within one).
 * **Link-check gate tests** (`test_linkcheck_gate.py`): the script that reads
   the link checker's report and decides whether the build passes (working
   links pass, timeouts warn, broken links fail).
