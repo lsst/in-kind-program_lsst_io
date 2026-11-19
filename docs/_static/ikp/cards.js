@@ -89,13 +89,18 @@
   //                            as [{key, value}], for a control that is not a
   //                            drop-down (the Datasets "available only" button)
   //
-  // Returns {applyFilters}, so the page can re-apply filters after a change of
-  // its own.
+  // Returns {applyFilters, getVisibleCount}: the page can re-apply filters after
+  // a change of its own, and read how many rows pass the filters now.
   function setupFiltering(options) {
     var searchIndex = readSearchIndex();
     var selects = Array.prototype.slice.call(document.querySelectorAll('select[data-filter-key]'));
     var rows = Array.prototype.slice.call(options.table.querySelectorAll('.ikp-row'));
     var markers = Array.prototype.slice.call(document.querySelectorAll('.ikp-map-marker'));
+
+    // How many rows pass the filters. Every row is shown at the start. The count
+    // is kept up to date for a result count, which reads it through
+    // `getVisibleCount`.
+    var visibleCount = rows.length;
 
     // The tokens an item must have: one per drop-down that is not on "All".
     function requiredTokens() {
@@ -119,8 +124,10 @@
     function applyFilters() {
       var required = requiredTokens();
       var query = options.searchInput ? options.searchInput.value.trim().toLowerCase() : '';
+      visibleCount = 0;
       rows.forEach(function (row) {
         var show = itemMatches(row, required, query);
+        if (show) { visibleCount += 1; }
         setVisible(row, show);
         // A card follows its row.
         var card = cardOf(row);
@@ -134,7 +141,10 @@
     selects.forEach(function (select) { select.addEventListener('change', applyFilters); });
     if (options.searchInput) { options.searchInput.addEventListener('input', applyFilters); }
 
-    return { applyFilters: applyFilters };
+    return {
+      applyFilters: applyFilters,
+      getVisibleCount: function () { return visibleCount; }
+    };
   }
 
   // Clicking a title link in `table`, or a map marker, scrolls to that row's
@@ -160,26 +170,42 @@
   }
 
   // Make the headers of `table` (those with a `data-sort` attribute) sort the
-  // rows when clicked: first click ascending, second click on the same header
-  // descending. The rows are compared by their `data-<key>` attribute.
+  // rows when clicked: the first click on a header sorts ascending, and each
+  // further click on the same header reverses the direction. Clicking another
+  // header starts that header ascending. The rows are compared by their
+  // `data-<key>` attribute.
+  //
+  // The sort state (which header was clicked last, and which direction) is kept
+  // in one place, for an aria-sort indicator to read.
+  // Returns {sortBy, getSortState}.
   function wireTableSorting(table) {
-    var sortState = {};
-    table.querySelectorAll('th[data-sort]').forEach(function (th) {
-      th.addEventListener('click', function () {
-        var key = th.getAttribute('data-sort');
-        var tbody = table.querySelector('tbody');
-        var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
-        var asc = !sortState[key];
-        sortState = {};
-        sortState[key] = asc;
-        rows.sort(function (a, b) {
-          var av = a.getAttribute('data-' + key) || '';
-          var bv = b.getAttribute('data-' + key) || '';
-          return asc ? av.localeCompare(bv) : bv.localeCompare(av);
-        });
-        rows.forEach(function (r) { tbody.appendChild(r); });
+    var sortState = { header: null, ascending: true };
+
+    // Sort the rows by one column header, updating the sort state.
+    function sortBy(th) {
+      sortState.ascending = (sortState.header === th) ? !sortState.ascending : true;
+      sortState.header = th;
+      var key = th.getAttribute('data-sort');
+      var ascending = sortState.ascending;
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function (a, b) {
+        var av = a.getAttribute('data-' + key) || '';
+        var bv = b.getAttribute('data-' + key) || '';
+        return ascending ? av.localeCompare(bv) : bv.localeCompare(av);
       });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    }
+
+    table.querySelectorAll('th[data-sort]').forEach(function (th) {
+      th.addEventListener('click', function () { sortBy(th); });
     });
+
+    return {
+      sortBy: sortBy,
+      // A copy, so callers cannot change the state by accident.
+      getSortState: function () { return { header: sortState.header, ascending: sortState.ascending }; }
+    };
   }
 
   // Make each "Show more" button (matched by `buttonSelector`) toggle the
