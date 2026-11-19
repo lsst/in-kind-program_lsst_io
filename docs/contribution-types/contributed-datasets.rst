@@ -127,7 +127,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <button type="button" class="ikp-more-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
+             <button type="button" class="ikp-more-btn" data-expand-label="Show more details &#9662;" data-collapse-label="Show fewer details &#9652;">Show more details &#9662;</button>
           {% else %}
           {{ ds.curated.summary or 'TBD' }}
 
