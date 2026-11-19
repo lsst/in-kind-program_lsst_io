@@ -52,33 +52,33 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-filterbar">
         <label>Instrumentation
-          <select id="ikt-filter-instr">
+          <select id="ikp-filter-instr" data-filter-key="instr">
             <option value="">All</option>
             {% for label, slug in all_instrumentation %}<option value="instr-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Wavelength
-          <select id="ikt-filter-wl">
+          <select id="ikp-filter-wl" data-filter-key="wl">
             <option value="">All</option>
             {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         {% if all_resolution_bins %}
         <label>Resolution
-          <select id="ikt-filter-res">
+          <select id="ikp-filter-res" data-filter-key="res">
             <option value="">All</option>
             {% for key, label in all_resolution_bins %}<option value="res-{{ key }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         {% endif %}
         <label>Multiplex
-          <select id="ikt-filter-multiplex">
+          <select id="ikp-filter-multiplex" data-filter-key="multiplex">
             <option value="">All</option>
             <option value="multiplex-yes">Yes</option>
           </select>
         </label>
         <label>Status
-          <select id="ikt-filter-status">
+          <select id="ikp-filter-status" data-filter-key="status">
             <option value="">All</option>
             <option value="status-available">Available</option>
             <option value="status-future-semester">Future semester</option>
@@ -86,14 +86,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           </select>
         </label>
         <label>Hemisphere
-          <select id="ikt-filter-hemisphere">
+          <select id="ikp-filter-hemisphere" data-filter-key="hemisphere">
             <option value="">All</option>
             <option value="hemisphere-northern">Northern</option>
             <option value="hemisphere-southern">Southern</option>
           </select>
         </label>
         <label>Aperture
-          <select id="ikt-filter-aperture">
+          <select id="ikp-filter-aperture" data-filter-key="aperture">
             <option value="">All</option>
             {% for key, label in all_aperture_bands %}<option value="aperture-{{ key }}">{{ label }}</option>{% endfor %}
           </select>
@@ -101,7 +101,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </div>
 
       <div class="ikp-tel-actionbar">
-        <input type="text" id="ikt-search" placeholder="Search facilities, sites, instruments...">
+        <input type="text" id="ikp-search" placeholder="Search facilities, sites, instruments...">
       </div>
 
       <div class="ikp-map-wrap">
@@ -112,7 +112,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endif %}
           {% for t in telescopes %}
           {% if t.marker_x is not none %}
-          <circle class="ikp-map-marker" data-slug="{{ t.slug }}" data-tokens="{{ t.filter_tokens }}"
+          {# A marker keeps data-slug as its stable name; data-card is the id the script looks the card up by. #}
+          <circle class="ikp-map-marker" data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
                   cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"
                   fill="{{ '#1a5c33' if t.status == 'available' else ('#a12626' if t.status == 'past_opportunity' else '#8a5a00') }}"></circle>
           {% endif %}
@@ -120,7 +121,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </svg>
       </div>
 
-      <table class="ikp-telescopes-table" id="ikt-telescopes-table">
+      <table class="ikp-telescopes-table" id="ikp-telescopes-table">
         <thead>
           <tr>
             <th data-sort="facility">Facility</th>
@@ -132,13 +133,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </thead>
         <tbody>
           {% for t in telescopes %}
-          <tr class="ikp-row" data-tokens="{{ t.filter_tokens }}"
+          <tr class="ikp-row" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
               data-facility="{{ t.facility }}"
               data-location="{{ [t.site, t.country] | select | join(', ') }}"
               data-instrumentation="{{ (t.instrumentation or []) | join(', ') }}"
               data-status="{{ t.status }}"
               data-aperture="{{ t.aperture or '' }}">
-            <td><button type="button" class="ikp-title-link" data-slug="{{ t.slug }}">{{ t.facility }}</button></td>
+            <td><button type="button" class="ikp-title-link">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
             <td>{% if t.status == 'available' %}<span class="ikp-tel-badge ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-tel-badge ikp-badge-danger">Past Opportunity</span>{% else %}<span class="ikp-tel-badge ikp-badge-warning">Future semester</span>{% endif %}</td>
@@ -155,7 +156,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       {% for t in telescopes %}
       .. grid-item-card:: {{ t.facility }}
-          :class-item: ikp-card slug-{{ t.slug }} {{ t.filter_tokens }}
+          :class-item: ikp-card
 
           .. _{{ t.slug }}:
 

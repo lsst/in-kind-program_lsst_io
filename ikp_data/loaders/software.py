@@ -11,8 +11,8 @@ this data set: every record here is Directable or Non-directable.
 Why the derived fields exist
 ----------------------------
 * ``status``: "delivered" or "pending" (or ``curated.status_override``).
-* ``cid_slug``, ``last_updated``, ``filter_tokens``, ``search_text``: as for
-  datasets.
+* ``anchor`` (``sw-cid-<contribution ID slug>``), ``last_updated``,
+  ``filters`` and ``search_text``: as for datasets.
 * ``uat_keywords``: the team's own UAT answer if given, otherwise the sync
   script's guessed tags.
 * ``software_links`` and ``documentation_links``: teams type several URLs into
@@ -20,7 +20,8 @@ Why the derived fields exist
   can show real links.
 * ``approx_start``: the first fiscal year named in the free-text timeline, as a
   rough "started" hint (never a precise date).
-* ``related``: "Also see" links, with titles looked up from the datasets page.
+* ``related``: "Also see" links to dataset cards (another page) or to other
+  software cards (this page), with titles looked up from the records.
   (``ikp_data.checks`` ensures related IDs name datasets or software, never
   telescopes.)
 """
@@ -38,6 +39,7 @@ from ikp_data.derive import (
     resolve_related_titles,
     search_index_to_json,
     slugify,
+    software_anchor,
 )
 
 
@@ -90,7 +92,11 @@ def load_software(data_dir, today):
     # `today` is accepted so every loader has the same signature (and so date-based
     # features, such as expiring highlights, can use it later).
     records_dir = data_dir / "software"
+    # For the "Also see" links: a related ID is looked up on the Datasets page
+    # first (the usual case: the matching dataset card), then on this page
+    # (another software item).
     dataset_targets = collect_cross_page_targets(data_dir, "datasets", dataset_anchor)
+    software_targets = collect_cross_page_targets(data_dir, "software", software_anchor)
 
     records = []
     all_categories = set()
@@ -118,8 +124,7 @@ def load_software(data_dir, today):
         if primary_recipient:
             all_recipients.add(primary_recipient)
 
-        cid_slug = slugify(record.get("contribution_id", ""))
-        record["cid_slug"] = cid_slug
+        record["anchor"] = software_anchor(path, record.get("contribution_id", ""))
         record["last_updated"] = record_last_updated(record, path)
         record["uat_keywords"] = uat_keywords
         record["software_links"] = _extract_links(form_data.get("software_url"))
@@ -127,18 +132,20 @@ def load_software(data_dir, today):
         record["approx_start"] = _approx_start_fy(form_data.get("timeline"))
         record["related"] = resolve_related_titles(
             curated.get("related_contribution_ids"),
-            ("contributed-datasets.html", dataset_targets),
+            ("contributed-datasets.html", dataset_targets, "dataset"),
+            ("contributed-software.html", software_targets, "software"),
+            current_page="contributed-software.html",
+            own_id=record.get("contribution_id"),
         )
 
-        tokens = [
-            f"status-{slugify(status)}",
-            f"cid-{cid_slug}",
-            f"cat-{slugify(category)}",
-        ]
-        if primary_recipient:
-            tokens.append(f"recipient-{slugify(primary_recipient)}")
-        tokens += [f"uat-{slugify(v)}" for v in uat_keywords]
-        record["filter_tokens"] = " ".join(tokens)
+        # The tokens this item has for each filter, keyed by the drop-down's
+        # `data-filter-key` (see the datasets loader).
+        record["filters"] = {
+            "status": [f"status-{slugify(status)}"],
+            "cat": [f"cat-{slugify(category)}"],
+            "recipient": [f"recipient-{slugify(primary_recipient)}"] if primary_recipient else [],
+            "uat": [f"uat-{slugify(v)}" for v in uat_keywords],
+        }
 
         search_parts = [
             record.get("title", ""),
@@ -152,7 +159,7 @@ def load_software(data_dir, today):
         records.append(record)
 
     records.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
-    search_index = {r["cid_slug"]: r["search_text"] for r in records}
+    search_index = {r["anchor"]: r["search_text"] for r in records}
     return {
         "software": records,
         "all_categories": option_pairs(all_categories),

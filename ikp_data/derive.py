@@ -198,34 +198,54 @@ def software_anchor(path, cid):
     return f"sw-cid-{slugify(cid)}"
 
 
-def resolve_related_titles(related_ids, *page_lookups):
+def resolve_related_titles(related_ids, *page_lookups, current_page=None, own_id=None):
     """Label and locate each related contribution ID for a card's "Also see" links.
 
-    page_lookups is a sequence of (page_html_filename, targets) pairs, where
-    targets comes from ``collect_cross_page_targets``. They are checked in
-    order, so each returned dict knows which page to link to.
+    page_lookups is a sequence of (page_html_filename, targets, kind) triples:
+    ``targets`` comes from ``collect_cross_page_targets`` and ``kind`` is the word
+    the link uses for that record type ("dataset" or "software"). They are checked
+    in order, and the first page that has the ID wins. A caller lists the OTHER
+    page first: an ID that names both a dataset and a software record (one
+    contribution that delivers both) links across to the other page, and only an ID
+    found nowhere else links within the page.
+
+    ``current_page`` is the filename of the page the card is on. A link to a card on
+    that page is just ``#anchor``; a link to another page is ``page.html#anchor``.
+    ``own_id`` is the card's own contribution ID: a card never links to itself, so
+    that ID is skipped when it would resolve to the card's own page. (An ID that
+    names only the card itself is reported by ``ikp_data.checks``, so validation
+    catches it before it silently produces no link.)
 
     Each returned dict has:
-    * ``anchor``: the anchor on that page to link to (the first card when
-      several siblings share the ID);
+    * ``contribution_id`` and ``title``: the related ID and its record's title;
+    * ``kind``: "dataset" or "software" (the target's type), or None if the ID
+      resolved to nothing;
+    * ``href``: the link target, or None if the ID resolved to nothing;
+    * ``anchor``: the anchor on the target page (the first card when several
+      siblings share the ID);
     * ``anchors``: every sibling's anchor, for templates that want them all.
     """
     resolved = []
     for rid in related_ids or []:
         title = None
-        page_url = None
+        kind = None
+        href = None
         anchors = []
-        for page_html, targets in page_lookups:
+        for page_html, targets, target_kind in page_lookups:
+            if page_html == current_page and rid == own_id:
+                continue
             if rid in targets:
                 title = targets[rid]["title"]
-                page_url = page_html
+                kind = target_kind
                 anchors = list(targets[rid]["anchors"])
+                prefix = "" if page_html == current_page else page_html
+                href = f"{prefix}#{anchors[0]}" if anchors else None
                 break
         resolved.append({
             "contribution_id": rid,
             "title": title or rid,
-            "slug": slugify(rid),
-            "page_url": page_url,
+            "kind": kind,
+            "href": href,
             "anchor": anchors[0] if anchors else None,
             "anchors": anchors,
         })

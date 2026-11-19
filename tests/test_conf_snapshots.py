@@ -230,13 +230,16 @@ def test_related_anchors_match_each_target_pages_anchor_style():
 
     resolved = resolve_related_titles(
         [dataset_id, software_id, "NO-SUCH-ID"],
-        ("contributed-datasets.html", datasets),
-        ("contributed-software.html", software),
+        ("contributed-datasets.html", datasets, "dataset"),
+        ("contributed-software.html", software, "software"),
     )
     dataset, sw, unknown = resolved
 
-    assert dataset["page_url"] == "contributed-datasets.html"
+    assert dataset["href"] == f"contributed-datasets.html#{dataset['anchor']}"
     assert dataset["anchor"].startswith("ds-cid-")
-    assert sw["page_url"] == "contributed-software.html"
+    assert dataset["kind"] == "dataset"
+    assert sw["href"] == f"contributed-software.html#{sw['anchor']}"
     assert sw["anchor"].startswith("sw-cid-")
+    assert sw["kind"] == "software"
     assert unknown["anchor"] is None and unknown["anchors"] == []
+    assert unknown["href"] is None and unknown["kind"] is None

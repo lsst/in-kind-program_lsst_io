@@ -474,3 +474,54 @@ def test_related_ids_naming_datasets_and_software_pass_the_type_rule():
         ),
     ]
     assert checks.check_related_ids_are_datasets_or_software(records) == []
+
+
+def test_own_id_related_passes_when_the_other_type_has_a_twin():
+    records = [
+        _record(
+            "datasets",
+            "datasets/a.yaml",
+            contribution_id="X-1",
+            curated={"related_contribution_ids": ["X-1"]},
+        ),
+        _record("software", "software/a.yaml", contribution_id="X-1"),
+    ]
+    assert checks.check_related_id_is_not_only_the_record_itself(records) == []
+
+
+def test_own_id_related_without_a_twin_is_an_error_naming_the_record():
+    records = [
+        _record(
+            "datasets",
+            "datasets/a.yaml",
+            contribution_id="X-1",
+            curated={"related_contribution_ids": ["X-1"]},
+        ),
+        _record(
+            "software",
+            "software/b.yaml",
+            contribution_id="S-1",
+            curated={"related_contribution_ids": ["S-1"]},
+        ),
+        _record("software", "software/c.yaml", contribution_id="S-2"),
+    ]
+    problems = checks.check_related_id_is_not_only_the_record_itself(records)
+    assert [(p.severity, p.file) for p in problems] == [
+        ("error", "datasets/a.yaml"),
+        ("error", "software/b.yaml"),
+    ]
+    assert "X-1" in problems[0].message and "names only this record itself" in problems[0].message
+    assert "no 'Also see' link would be shown" in problems[0].message
+
+
+def test_related_ids_other_than_the_records_own_are_unaffected_by_the_own_id_rule():
+    records = [
+        _record(
+            "datasets",
+            "datasets/a.yaml",
+            contribution_id="D-1",
+            curated={"related_contribution_ids": ["D-2", "NOPE-9"]},
+        ),
+        _record("datasets", "datasets/b.yaml", contribution_id="D-2"),
+    ]
+    assert checks.check_related_id_is_not_only_the_record_itself(records) == []

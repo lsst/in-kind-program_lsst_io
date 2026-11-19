@@ -17,19 +17,19 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-filterbar">
         <label>Data type
-          <select id="ikc-filter-dt">
+          <select id="ikp-filter-dt" data-filter-key="dt">
             <option value="">All</option>
             {% for label, slug in all_data_types %}<option value="dt-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Wavelength
-          <select id="ikc-filter-wl">
+          <select id="ikp-filter-wl" data-filter-key="wl">
             <option value="">All</option>
             {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Science case (UAT)
-          <select id="ikc-filter-uat">
+          <select id="ikp-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
@@ -37,11 +37,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </div>
 
       <div class="ikp-actionbar">
-        <input type="text" id="ikc-search" placeholder="Search title, description, keywords...">
-        <button type="button" id="ikc-toggle-status" class="ikp-toggle-btn" aria-pressed="false">Show available only</button>
+        <input type="text" id="ikp-search" placeholder="Search title, description, keywords...">
+        <button type="button" id="ikp-toggle-status" class="ikp-toggle-btn" aria-pressed="false">Show available only</button>
       </div>
 
-      <table class="ikp-datasets-table" id="ikc-datasets-table">
+      <table class="ikp-datasets-table" id="ikp-datasets-table">
         <thead>
           <tr>
             <th data-sort="title">Dataset</th>
@@ -54,14 +54,14 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </thead>
         <tbody>
           {% for ds in datasets %}
-          <tr class="ikp-row" data-tokens="{{ ds.filter_tokens }}"
+          <tr class="ikp-row" data-card="{{ ds.anchor }}"{% for key, tokens in ds.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
               data-title="{{ ds.title }}"
               data-datatype="{{ (ds.form_data.data_type or []) | join(', ') }}"
               data-wavelength="{{ (ds.curated.wavelength_regime or []) | join(', ') }}"
               data-recipient="{{ ds.curated.primary_recipient or '' }}"
               data-status="{{ ds.status }}"
               data-updated="{{ ds.last_updated or '' }}">
-            <td><button type="button" class="ikp-title-link" data-cid="{{ ds.cid_slug }}">{{ ds.title }} ({{ ds.contribution_id }})</button></td>
+            <td><button type="button" class="ikp-title-link">{{ ds.title }} ({{ ds.contribution_id }})</button></td>
             <td>{{ (ds.form_data.data_type or []) | join(', ') or 'TBD' }}</td>
             <td>{{ (ds.curated.wavelength_regime or []) | join(', ') or 'TBD' }}</td>
             <td>{{ ds.curated.primary_recipient or 'TBD' }}</td>
@@ -78,16 +78,17 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       :gutter: 2
 
       {% for ds in datasets %}
-      {% if ds.status == 'available' %}
-      .. _ds-cid-{{ ds.cid_slug }}:
+      {% set available = (ds.status == 'available') %}
+      .. _{{ ds.anchor }}:
 
       .. grid-item-card:: {{ ds.title }}
-          :class-item: ikp-card {{ ds.filter_tokens }}
+          :class-item: ikp-card
 
           {{ ds.contribution_id }} - {{ ds.country }}
           ^^^
           {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
 
+          {% if available %}
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
 
           **Target audience:** {{ ds.curated.target_audience or ds.form_data.target_audience or 'TBD' }}
@@ -123,46 +124,23 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           .. raw:: html
 
              <button type="button" class="ikp-more-btn" data-expand-label="Show more" data-collapse-label="Show less">Show more</button>
-
-          {% for rel in ds.related %}
-          {% if rel.page_url %}
-
-          .. raw:: html
-
-             <a class="ikp-also-see" href="{{ rel.page_url }}#sw-cid-{{ rel.slug }}">Also see: software ({{ rel.contribution_id }}) &rarr;</a>
-
-          {% endif %}
-          {% endfor %}
-
-          *Updated: {{ ds.last_updated or 'unknown' }}*
-          +++
-          :bdg-success:`Available`
-      {% else %}
-      .. _ds-cid-{{ ds.cid_slug }}:
-
-      .. grid-item-card:: {{ ds.title }}
-          :class-item: ikp-card {{ ds.filter_tokens }}
-
-          {{ ds.contribution_id }} - {{ ds.country }}
-          ^^^
-          {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
-
+          {% else %}
           {{ ds.curated.summary or 'TBD' }}
 
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
+          {% endif %}
 
           {% for rel in ds.related %}
-          {% if rel.page_url %}
+          {% if rel.href %}
 
           .. raw:: html
 
-             <a class="ikp-also-see" href="{{ rel.page_url }}#sw-cid-{{ rel.slug }}">Also see: software ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikp-also-see" href="{{ rel.href }}">Also see: {{ rel.kind }} ({{ rel.contribution_id }}) &rarr;</a>
 
           {% endif %}
           {% endfor %}
 
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++
-          :bdg-muted:`Not yet delivered`
-      {% endif %}
+          {% if available %}:bdg-success:`Available`{% else %}:bdg-muted:`Not yet delivered`{% endif %}
       {% endfor %}
