@@ -193,8 +193,10 @@ class TelescopeContact(_Strict):
     name: str = _field("Contact person's name.", rendered=True)
     email: str = _field("Contact e-mail address (published on the page).", rendered=True)
     note: str | None = _field(
-        "Optional note shown with the contact, for example who to ask about what.",
-        rendered=False,
+        "Optional note shown after the contact, for example who to ask about what. "
+        "Shown to visitors as plain text (links and e-mail addresses are not made clickable), "
+        "so keep maintainer-only remarks in a YAML comment.",
+        rendered=True,
         default=None,
     )
 

@@ -172,7 +172,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {{ t.summary or '' }}
 
-          {% if t.contacts %}**Contact:** {% for c in t.contacts %}{{ c.name }} (`{{ c.email }} <mailto:{{ c.email }}>`_){{ ", " if not loop.last }}{% endfor %}{% endif %}
+          {% if t.contacts %}**Contact:** {% for c in t.contacts %}{{ c.name }} (`{{ c.email }} <mailto:{{ c.email }}>`_){% if c.note_rst %} — {{ c.note_rst }}{% endif %}{{ ("; " if t.contacts | selectattr('note_rst') | list else ", ") if not loop.last }}{% endfor %}{% else %}Questions: email the in-kind helpdesk (see the top of this page).{% endif %}
 
           {% if t.has_separate_process %}Proposals for this facility follow a separate process from the NOIRLab call; see the facility links.{% endif %}
 

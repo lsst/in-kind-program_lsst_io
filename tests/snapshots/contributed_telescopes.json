@@ -86,7 +86,8 @@
         {
           "email": "steven.margheim@noirlab.edu",
           "name": "Steven Margheim",
-          "note": "in-kind allocation process/eligibility questions; technical instrument questions go to the GTC website or submission portal"
+          "note": "in-kind allocation process/eligibility questions; technical instrument questions go to the GTC website or submission portal",
+          "note_rst": "in\\-kind allocation process\\/eligibility questions\\; technical instrument questions go to the GTC website or submission portal"
         }
       ],
       "contribution_id": [
@@ -180,7 +181,8 @@
       "contacts": [
         {
           "email": "msshin@kasi.re.kr",
-          "name": "Min-Su Shin"
+          "name": "Min-Su Shin",
+          "note_rst": null
         }
       ],
       "contribution_id": "KOR-KAS-S2",
@@ -272,7 +274,8 @@
       "contacts": [
         {
           "email": "msshin@kasi.re.kr",
-          "name": "Min-Su Shin"
+          "name": "Min-Su Shin",
+          "note_rst": null
         }
       ],
       "contribution_id": "KOR-KAS-S2",
@@ -364,7 +367,8 @@
       "contacts": [
         {
           "email": "msshin@kasi.re.kr",
-          "name": "Min-Su Shin"
+          "name": "Min-Su Shin",
+          "note_rst": null
         }
       ],
       "contribution_id": "KOR-KAS-S2",
@@ -456,11 +460,13 @@
       "contacts": [
         {
           "email": "felice.cusano@inaf.it",
-          "name": "Felice Cusano"
+          "name": "Felice Cusano",
+          "note_rst": null
         },
         {
           "email": "lbt-italia@inaf.it",
-          "name": "LBT-Italia (general)"
+          "name": "LBT-Italia (general)",
+          "note_rst": null
         }
       ],
       "contribution_id": "ITA-INA-S18",
@@ -563,7 +569,8 @@
       "contacts": [
         {
           "email": "mlakicevic@aob.rs",
-          "name": "Maša Lakićević"
+          "name": "Maša Lakićević",
+          "note_rst": null
         }
       ],
       "contribution_id": "SER-SAG-S2",
@@ -649,7 +656,7 @@
         {
           "email": "salthelp@salt.ac.za",
           "name": "SALT Help Desk (general queries)",
-          "note": "individual contacts from past CfPs are not used here as they go stale quickly"
+          "note_rst": null
         }
       ],
       "contribution_id": "SZA-SAA-S1",
@@ -738,11 +745,13 @@
       "contacts": [
         {
           "email": "koyama@naoj.org",
-          "name": "Yusei Koyama"
+          "name": "Yusei Koyama",
+          "note_rst": null
         },
         {
           "email": "yousuke.utsumi@nao.ac.jp",
-          "name": "Yousuke Utsumi"
+          "name": "Yousuke Utsumi",
+          "note_rst": null
         }
       ],
       "contribution_id": "JAP-JPG-S1",
@@ -830,11 +839,13 @@
       "contacts": [
         {
           "email": "felice.cusano@inaf.it",
-          "name": "Felice Cusano"
+          "name": "Felice Cusano",
+          "note_rst": null
         },
         {
           "email": "vst@inaf.it",
-          "name": "VST (general)"
+          "name": "VST (general)",
+          "note_rst": null
         }
       ],
       "contribution_id": "ITA-INA-S18",
@@ -1304,7 +1315,8 @@
       "contacts": [
         {
           "email": "jesper@astro.su.se",
-          "name": "Jesper Sollerman"
+          "name": "Jesper Sollerman",
+          "note_rst": null
         }
       ],
       "contribution_id": "SWE-STK-S3",

@@ -18,10 +18,10 @@ field_of_view: null
 aeon: false
 too_capable: true
 observing_mode: null
+# Maintainer note (SALT contact): individual contacts from past CfPs are not used here as they go stale quickly.
 contacts:
 - name: SALT Help Desk (general queries)
   email: salthelp@salt.ac.za
-  note: individual contacts from past CfPs are not used here as they go stale quickly
 first_semester: 2026A
 time_available: 25 hours/semester
 duration: 10 years
