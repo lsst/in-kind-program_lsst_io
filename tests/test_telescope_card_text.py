@@ -50,3 +50,27 @@ def test_no_observing_mode_line_when_unset(tmp_path):
 def test_process_note_appears_only_for_a_separate_process(tmp_path):
     assert SEPARATE_PROCESS_NOTE in render_card_text(tmp_path / "a", tac_process="special")
     assert SEPARATE_PROCESS_NOTE not in render_card_text(tmp_path / "b", tac_process="default")
+
+
+def test_header_shows_ids_then_aperture_then_location(tmp_path):
+    text = render_card_text(
+        tmp_path,
+        contribution_id=["AAA-BBB-S1", "CCC-DDD-S2"],
+        aperture="10.4m",
+        site="La Palma",
+        country="Spain",
+    )
+    assert "AAA-BBB-S1, CCC-DDD-S2 · 10.4m — La Palma, Spain\n" in text
+    assert "Contribution ID" not in text
+
+
+def test_header_says_tba_without_an_aperture(tmp_path):
+    text = render_card_text(tmp_path, contribution_id="AAA-BBB-S1", aperture=None)
+    assert "AAA-BBB-S1 · TBA — " in text
+
+
+def test_search_index_still_finds_a_card_by_its_id(tmp_path):
+    data_dir = tmp_path / "_data"
+    shutil.copytree(FIXTURE_DATA_DIR, data_dir)
+    context = build_contexts(data_dir, today=TODAY)["contributed_telescopes"]
+    assert "tst-fix-s1" in context["search_index_json"].lower()

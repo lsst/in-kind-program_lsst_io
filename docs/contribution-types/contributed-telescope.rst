@@ -160,15 +160,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. _{{ t.slug }}:
 
-          {{ t.aperture or 'TBA' }} — {{ [t.site, t.country] | select | join(', ') }}
+          {{ t.contribution_ids | select | join(', ') }} · {{ t.aperture or 'TBA' }} — {{ [t.site, t.country] | select | join(', ') }}
           ^^^
           {% for v in (t.instrumentation or []) %}:bdg-light:`{{ v }}` {% endfor %}{% for v in (t.wavelength_regime or []) %}:bdg-light:`{{ v }}` {% endfor %}{% if t.aeon %}:bdg-success:`AEON` {% endif %}{% if t.too_capable %}:bdg-success:`ToO` {% endif %}{% if t.multiplex %}:bdg-light:`Multiplex` {% endif %}
 
           {% if t.instrument_names %}**Instruments:** {{ t.instrument_names | join(', ') }}{% endif %}
 
           {% if t.observing_mode_label %}**Observing mode:** {{ t.observing_mode_label }}{% endif %}
-
-          **Contribution ID:** {{ t.contribution_ids | join(', ') }}
 
           **First semester:** {{ t.first_semester or 'TBA' }}    **Time available:** {{ t.time_available or 'TBA' }}    **Duration:** {{ t.duration or 'TBA' }}
 
