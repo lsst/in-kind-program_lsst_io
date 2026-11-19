@@ -17,25 +17,25 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-filterbar">
         <label>Category
-          <select id="ikc-sw-filter-cat" data-filter-key="cat">
+          <select id="ikp-sw-filter-cat" data-filter-key="cat">
             <option value="">All</option>
             {% for label, slug in all_categories %}<option value="cat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>UAT keyword
-          <select id="ikc-sw-filter-uat" data-filter-key="uat">
+          <select id="ikp-sw-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Primary recipient
-          <select id="ikc-sw-filter-recipient" data-filter-key="recipient">
+          <select id="ikp-sw-filter-recipient" data-filter-key="recipient">
             <option value="">All</option>
             {% for label, slug in all_recipients %}<option value="recipient-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Status
-          <select id="ikc-sw-filter-status" data-filter-key="status">
+          <select id="ikp-sw-filter-status" data-filter-key="status">
             <option value="">All</option>
             <option value="status-delivered">Delivered</option>
             <option value="status-pending">In Progress</option>
@@ -44,10 +44,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </div>
 
       <div class="ikp-actionbar">
-        <input type="text" id="ikc-sw-search" placeholder="Search title, description, keywords...">
+        <input type="text" id="ikp-sw-search" placeholder="Search title, description, keywords...">
       </div>
 
-      <table class="ikp-sw-table" id="ikc-sw-table">
+      <table class="ikp-sw-table" id="ikp-sw-table">
         <thead>
           <tr>
             <th data-sort="title">Software</th>

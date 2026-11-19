@@ -227,7 +227,7 @@
   // 2. Telescope Access page
   // -------------------------------------------------------------------------
   function initTelescopes(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikt-search') });
+    setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
     wireCardJumps(table);
     wireTableSorting(table);
   }
@@ -242,13 +242,13 @@
     // key (the page has no status drop-down).
     var filtering = setupFiltering({
       table: table,
-      searchInput: document.getElementById('ikc-search'),
+      searchInput: document.getElementById('ikp-search'),
       extraRequirements: function () {
         return showAvailableOnly ? [{ key: 'status', value: 'status-available' }] : [];
       }
     });
 
-    var toggleBtn = document.getElementById('ikc-toggle-status');
+    var toggleBtn = document.getElementById('ikp-toggle-status');
     if (toggleBtn) {
       toggleBtn.addEventListener('click', function () {
         showAvailableOnly = !showAvailableOnly;
@@ -267,7 +267,7 @@
   // 4. Software page
   // -------------------------------------------------------------------------
   function initSoftware(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikc-sw-search') });
+    setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search') });
     wireCardJumps(table);
     wireExpandButtons('.ikp-expand-btn');
     wireTableSorting(table);
@@ -280,11 +280,11 @@
   // Each card page is recognised by its table. A page without one (every other
   // page of the site) is left alone.
   function init() {
-    var telescopesTable = document.getElementById('ikt-telescopes-table');
+    var telescopesTable = document.getElementById('ikp-telescopes-table');
     if (telescopesTable) { initTelescopes(telescopesTable); }
-    var datasetsTable = document.getElementById('ikc-datasets-table');
+    var datasetsTable = document.getElementById('ikp-datasets-table');
     if (datasetsTable) { initDatasets(datasetsTable); }
-    var softwareTable = document.getElementById('ikc-sw-table');
+    var softwareTable = document.getElementById('ikp-sw-table');
     if (softwareTable) { initSoftware(softwareTable); }
   }
 

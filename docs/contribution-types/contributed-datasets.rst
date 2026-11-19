@@ -17,19 +17,19 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-filterbar">
         <label>Data type
-          <select id="ikc-filter-dt" data-filter-key="dt">
+          <select id="ikp-filter-dt" data-filter-key="dt">
             <option value="">All</option>
             {% for label, slug in all_data_types %}<option value="dt-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Wavelength
-          <select id="ikc-filter-wl" data-filter-key="wl">
+          <select id="ikp-filter-wl" data-filter-key="wl">
             <option value="">All</option>
             {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
         <label>Science case (UAT)
-          <select id="ikc-filter-uat" data-filter-key="uat">
+          <select id="ikp-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
@@ -37,11 +37,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </div>
 
       <div class="ikp-actionbar">
-        <input type="text" id="ikc-search" placeholder="Search title, description, keywords...">
-        <button type="button" id="ikc-toggle-status" class="ikp-toggle-btn" aria-pressed="false">Show available only</button>
+        <input type="text" id="ikp-search" placeholder="Search title, description, keywords...">
+        <button type="button" id="ikp-toggle-status" class="ikp-toggle-btn" aria-pressed="false">Show available only</button>
       </div>
 
-      <table class="ikp-datasets-table" id="ikc-datasets-table">
+      <table class="ikp-datasets-table" id="ikp-datasets-table">
         <thead>
           <tr>
             <th data-sort="title">Dataset</th>
