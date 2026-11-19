@@ -89,15 +89,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-light:`{{ uc }}` {% endfor %}
 
           {% if available %}
+          {{ ds.curated.summary or 'TBD' }}
+
           **Primary recipient:** {{ ds.curated.primary_recipient or 'TBD' }}
 
           **Target audience:** {{ ds.curated.target_audience or ds.form_data.target_audience or 'TBD' }}
-
-          {{ ds.curated.summary or 'TBD' }}
-
-          **Data volume:** {{ ds.form_data.data_volume or 'TBD' }}
-
-          **Hosting location:** {{ ds.form_data.hosting_location or 'TBD' }}
 
           **Access:** {{ ds.form_data.access_url or 'TBD' }}
 
@@ -105,11 +101,15 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Support channel:** {{ ds.form_data.support_channel or 'TBD' }}
 
-          **Citation:** {{ ds.form_data.citation or 'TBD' }}
-
-          **Maintenance plan:** {{ ds.form_data.maintenance_plan or 'TBD' }}
-
           .. container:: ikp-more-fields
+
+             **Data volume:** {{ ds.form_data.data_volume or 'TBD' }}
+
+             **Hosting location:** {{ ds.form_data.hosting_location or 'TBD' }}
+
+             **Citation:** {{ ds.form_data.citation or 'TBD' }}
+
+             **Maintenance plan:** {{ ds.form_data.maintenance_plan or 'TBD' }}
 
              **Data schema:** {{ ds.form_data.data_schema_link or 'TBD' }}
 
