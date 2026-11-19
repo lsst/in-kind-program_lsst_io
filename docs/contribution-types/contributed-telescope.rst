@@ -82,7 +82,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <option value="">All</option>
             <option value="status-available">Available</option>
             <option value="status-future-semester">Future semester</option>
-            <option value="status-past-opportunity">Past Opportunity</option>
+            <option value="status-past-opportunity">Past opportunity</option>
           </select>
         </label>
         <label>Hemisphere
@@ -142,7 +142,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td><button type="button" class="ikp-title-link">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
-            <td>{% if t.status == 'available' %}<span class="ikp-tel-badge ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-tel-badge ikp-badge-danger">Past Opportunity</span>{% else %}<span class="ikp-tel-badge ikp-badge-warning">Future semester</span>{% endif %}</td>
+            <td>{% if t.status == 'available' %}<span class="ikp-tel-badge ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-tel-badge ikp-badge-danger">Past opportunity</span>{% else %}<span class="ikp-tel-badge ikp-badge-warning">Future semester</span>{% endif %}</td>
             <td>{{ t.aperture or 'TBA' }}</td>
           </tr>
           {% endfor %}
@@ -182,6 +182,6 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
              Also available under this contribution: {% for s in t.siblings %}`{{ s.label }} <#{{ s.slug }}>`_{{ ", " if not loop.last }}{% endfor %}
           {% endif %}
           +++
-          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'past_opportunity' %}:bdg-danger:`Past Opportunity`{% else %}:bdg-warning:`Future semester`{% endif %}
+          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'past_opportunity' %}:bdg-danger:`Past opportunity`{% else %}:bdg-warning:`Future semester`{% endif %}
 
       {% endfor %}
