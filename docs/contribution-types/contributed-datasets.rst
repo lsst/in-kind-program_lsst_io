@@ -65,7 +65,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td>{{ (ds.form_data.data_type or []) | join(', ') or 'TBD' }}</td>
             <td>{{ (ds.curated.wavelength_regime or []) | join(', ') or 'TBD' }}</td>
             <td>{{ ds.curated.primary_recipient or 'TBD' }}</td>
-            <td>{% if ds.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">Not yet delivered</span>{% endif %}</td>
+            <td>{% if ds.status == 'available' %}<span class="ikp-badge ikp-badge-success">Available</span>{% else %}<span class="ikp-badge ikp-badge-muted">In progress</span>{% endif %}</td>
             <td>{{ ds.last_updated or 'unknown' }}</td>
           </tr>
           {% endfor %}
@@ -146,5 +146,5 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           *Updated: {{ ds.last_updated or 'unknown' }}*
           +++
-          {% if available %}:bdg-success:`Available`{% else %}:bdg-muted:`Not yet delivered`{% endif %}
+          {% if available %}:bdg-success:`Available`{% else %}:bdg-muted:`In progress`{% endif %}
       {% endfor %}

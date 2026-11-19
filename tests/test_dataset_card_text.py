@@ -119,3 +119,24 @@ def test_version_row_is_hidden_when_empty(tmp_path):
 def test_version_is_not_shown_on_in_progress_cards(tmp_path):
     text = render_card_text(tmp_path, form_data={"submitted": False, "version": "Data Release 2"})
     assert "**Version:**" not in text
+
+
+def test_in_progress_status_word_in_table_and_card_badge(tmp_path):
+    text = render_card_text(tmp_path, form_data={"submitted": False})
+    assert '<span class="ikp-badge ikp-badge-muted">In progress</span>' in text
+    assert ":bdg-muted:`In progress`" in text
+    assert "Not yet delivered" not in text
+
+
+def test_available_status_word_is_unchanged(tmp_path):
+    text = render_card_text(tmp_path)
+    assert '<span class="ikp-badge ikp-badge-success">Available</span>' in text
+    assert ":bdg-success:`Available`" in text
+
+
+def test_status_filter_tokens_keep_their_internal_values(tmp_path):
+    text = render_card_text(tmp_path / "a", form_data={"submitted": False})
+    assert 'data-filter-status="status-not-yet-delivered"' in text
+    assert 'data-status="not_yet_delivered"' in text
+    available = render_card_text(tmp_path / "b")
+    assert 'data-filter-status="status-available"' in available
