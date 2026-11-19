@@ -701,7 +701,9 @@ class SoftwareFormData(_RejectSubmitterPii):
         default=None,
     )
     support: str | None = _field(
-        "Support arrangements. Not shown on the page.", rendered=False, default=None
+        "Support arrangements; shown as the card's Support row.",
+        rendered=True,
+        default=None,
     )
     further_development: str | None = _field(
         "Plans for further development. Not shown on the page.",

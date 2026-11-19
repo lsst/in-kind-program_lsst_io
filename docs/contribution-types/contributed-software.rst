@@ -106,6 +106,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {% if item.documentation_links %}**Documentation:** {% for link in item.documentation_links %}`{{ link.label }} <{{ link.url }}>`__{{ ", " if not loop.last else "" }}{% endfor %}{% endif %}
 
+          {% if item.form_data.support %}**Support:** {{ item.form_data.support }}{% endif %}
+
           .. raw:: html
 
              <div class="ikp-desc">{{ item.form_data.activity_description or 'TBD' }}</div>

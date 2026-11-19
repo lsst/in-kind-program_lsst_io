@@ -157,3 +157,58 @@ def test_category_row_shows_the_category_or_tbd(tmp_path):
 def test_category_row_follows_the_recipients(tmp_path):
     text = render_card_text(tmp_path)
     assert text.index("**Additional recipients:**") < text.index("**Category:**")
+
+
+# --- Support row -----------------------------------------------------------
+
+
+def support_line(text):
+    """The card's "**Support:** ..." line from rendered text, without indentation."""
+    for line in text.splitlines():
+        if line.strip().startswith("**Support:**"):
+            return line.strip()
+    return None
+
+
+def test_support_row_follows_documentation_and_is_hidden_when_empty(tmp_path):
+    text = render_card_text(tmp_path / "a", form_data={"support": "Use the forum."})
+    assert "**Support:** Use the forum." in text
+    assert text.index("**Documentation:**") < text.index("**Support:**")
+    assert support_line(render_card_text(tmp_path / "b", form_data={"support": None})) is None
+    assert support_line(render_card_text(tmp_path / "c", form_data={"support": ""})) is None
+
+
+def test_email_addresses_in_the_support_answer_become_mailto_links(tmp_path):
+    answer = "Write to a.person@example.org or use the forum."
+    line = support_line(render_card_text(tmp_path, form_data={"support": answer}))
+    document, warnings = parse_rst(line)
+    assert warnings == ""
+    assert [r["refuri"] for r in document.findall(docutils.nodes.reference)] == [
+        "mailto:a.person@example.org"
+    ]
+
+
+def test_every_live_support_answer_renders_without_rst_warnings(tmp_path):
+    """The real answers, including emails inside "[ ... ]", must parse cleanly."""
+    live_dir = REPO_ROOT / "docs" / "contribution-types" / "_data" / "software"
+    checked = 0
+    for index, path in enumerate(sorted(live_dir.glob("*.yaml"))):
+        answer = (yaml.safe_load(path.read_text(encoding="utf-8")).get("form_data") or {}).get("support")
+        if not answer:
+            continue
+        line = support_line(render_card_text(tmp_path / str(index), form_data={"support": answer}))
+        _, warnings = parse_rst(line)
+        assert warnings == "", f"{path.name}: {warnings}"
+        checked += 1
+    assert checked >= 1
+
+
+def test_bracketed_emails_still_link_without_the_brackets(tmp_path):
+    answer = "Contact us by email at [ a.one@example.org and b.two@example.org]. Thanks."
+    line = support_line(render_card_text(tmp_path, form_data={"support": answer}))
+    document, warnings = parse_rst(line)
+    assert warnings == ""
+    assert [r["refuri"] for r in document.findall(docutils.nodes.reference)] == [
+        "mailto:a.one@example.org",
+        "mailto:b.two@example.org",
+    ]
