@@ -84,7 +84,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       .. grid-item-card:: {{ ds.title }}
           :class-item: ikp-card
 
-          {{ ds.contribution_id }} - {{ ds.country }}
+          {{ ds.contribution_id }} - {{ ds.display_country }}
           ^^^
           {% for dt in (ds.form_data.data_type or []) %}:bdg-light:`{{ dt }}` {% endfor %}{% for wl in (ds.curated.wavelength_regime or []) %}:bdg-light:`{{ wl }}` {% endfor %}{% for uc in (ds.form_data.uat_category or []) %}:bdg-primary-line:`{{ uc }}` {% endfor %}
 

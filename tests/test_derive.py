@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from ikp_data.derive import option_pairs, parse_date, search_index_to_json, slugify
+from ikp_data.derive import display_country, option_pairs, parse_date, search_index_to_json, slugify
 
 
 def test_parse_date_returns_a_date_unchanged():
@@ -45,3 +45,15 @@ def test_search_index_to_json_escapes_less_than_and_round_trips():
     assert "<" not in text  # nothing can close the surrounding <script> block
     assert "\\u003c/script" in text  # "<" is written as the JSON escape \u003c
     assert json.loads(text) == search_index  # the page script sees identical strings
+
+
+# ---------------------------------------------------------------------------
+# display_country: "UK" is spelled out, everything else is left alone
+# ---------------------------------------------------------------------------
+def test_display_country_spells_out_uk():
+    assert display_country("UK") == "United Kingdom"
+
+
+@pytest.mark.parametrize("country", ["United Kingdom", "Italy", "Examplia", "", None])
+def test_display_country_leaves_other_values_unchanged(country):
+    assert display_country(country) == country

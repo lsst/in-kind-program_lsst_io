@@ -119,6 +119,7 @@
           "Optical"
         ]
       },
+      "display_country": "Serbia",
       "filters": {
         "dt": [
           "dt-value-added-catalogs"
@@ -208,6 +209,7 @@
           "IR"
         ]
       },
+      "display_country": "United Kingdom",
       "filters": {
         "dt": [
           "dt-value-added-catalogs"
@@ -295,6 +297,7 @@
           "NIR"
         ]
       },
+      "display_country": "United Kingdom",
       "filters": {
         "dt": [
           "dt-value-added-catalogs",
@@ -373,6 +376,7 @@
           "Optical"
         ]
       },
+      "display_country": "Italy",
       "filters": {
         "dt": [
           "dt-value-added-catalogs",
@@ -449,6 +453,7 @@
           "Optical"
         ]
       },
+      "display_country": "Sweden",
       "filters": {
         "dt": [
           "dt-time-series-lightcurves",
@@ -520,6 +525,7 @@
           "Radio"
         ]
       },
+      "display_country": "South Africa",
       "filters": {
         "dt": [
           "dt-imaging-cutouts",
@@ -597,6 +603,7 @@
           "Optical"
         ]
       },
+      "display_country": "United Kingdom",
       "filters": {
         "dt": [
           "dt-spectra"
@@ -670,6 +677,7 @@
           "Optical"
         ]
       },
+      "display_country": "Germany",
       "filters": {
         "dt": [
           "dt-value-added-catalogs"
@@ -732,6 +740,7 @@
           "UV"
         ]
       },
+      "display_country": "Israel",
       "filters": {
         "dt": [
           "dt-imaging-cutouts"
@@ -794,6 +803,7 @@
           "NIR"
         ]
       },
+      "display_country": "Italy",
       "filters": {
         "dt": [
           "dt-spectra",
@@ -858,6 +868,7 @@
           "Optical"
         ]
       },
+      "display_country": "Italy",
       "filters": {
         "dt": [
           "dt-spectra",
@@ -921,6 +932,7 @@
           "Optical"
         ]
       },
+      "display_country": "Italy",
       "filters": {
         "dt": [
           "dt-time-series-lightcurves",
@@ -984,6 +996,7 @@
           "Optical"
         ]
       },
+      "display_country": "Italy",
       "filters": {
         "dt": [
           "dt-time-series-lightcurves",
@@ -1048,6 +1061,7 @@
           "NIR"
         ]
       },
+      "display_country": "Japan",
       "filters": {
         "dt": [
           "dt-spectra"
@@ -1111,6 +1125,7 @@
           "NIR"
         ]
       },
+      "display_country": "Japan",
       "filters": {
         "dt": [
           "dt-spectra",
@@ -1176,6 +1191,7 @@
           "NIR"
         ]
       },
+      "display_country": "Japan",
       "filters": {
         "dt": [
           "dt-spectra",
@@ -1240,6 +1256,7 @@
           "Optical"
         ]
       },
+      "display_country": "New Zealand",
       "filters": {
         "dt": [
           "dt-time-series-lightcurves",
@@ -1303,6 +1320,7 @@
           "Radio"
         ]
       },
+      "display_country": "United Kingdom",
       "filters": {
         "dt": [
           "dt-value-added-catalogs",

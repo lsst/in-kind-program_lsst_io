@@ -8,6 +8,7 @@ tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
 * text helpers: ``slugify``, ``option_pairs`` and ``normalize_strings``;
+* ``display_country``: the spelling of a country shown on a card header;
 * ``search_index_to_json``: dumps a page's search index so it is safe to embed in a
   ``<script>`` block;
 * cross-page lookups: ``collect_cross_page_targets`` and ``resolve_related_titles``
@@ -46,6 +47,24 @@ SIBLING_CONSISTENCY_FIELDS = (
 def slugify(value):
     """Lowercase, and turn each run of other characters into one "-"."""
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+# Country names that the data spells in a short form but a card header should
+# spell out. Anything not listed here is shown exactly as it is stored.
+COUNTRY_DISPLAY_NAMES = {
+    "UK": "United Kingdom",
+}
+
+
+def display_country(country):
+    """The country as a card header should show it.
+
+    The records spell some countries two ways (for example "UK" and "United
+    Kingdom"). Mapping at display time keeps the data files untouched, so a
+    form sync cannot undo it. A country with no entry in
+    ``COUNTRY_DISPLAY_NAMES`` (or no country at all) is returned unchanged.
+    """
+    return COUNTRY_DISPLAY_NAMES.get(country, country)
 
 
 def option_pairs(values):

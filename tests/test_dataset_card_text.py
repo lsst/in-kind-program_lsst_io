@@ -186,3 +186,22 @@ def test_no_updated_unknown_fallback_remains(tmp_path):
     assert "Updated: unknown" not in text
     assert "*Updated: 2027-03-01*" in text
     assert 'data-updated="2027-03-01"' in text
+
+
+def test_card_header_spells_out_uk_and_leaves_other_countries(tmp_path):
+    uk = render_card_text(tmp_path / "uk", country="UK")
+    assert "TST-FIX-S2 - United Kingdom\n" in uk
+    other = render_card_text(tmp_path / "other", country="Examplia")
+    assert "TST-FIX-S2 - Examplia\n" in other
+
+
+def test_loader_adds_display_country_without_changing_the_stored_country(tmp_path):
+    data_dir = tmp_path / "_data"
+    shutil.copytree(FIXTURE_DATA_DIR, data_dir)
+    record_path = next((data_dir / "datasets").glob("*.yaml"))
+    record = yaml.safe_load(record_path.read_text(encoding="utf-8"))
+    record["country"] = "UK"
+    record_path.write_text(yaml.safe_dump(record), encoding="utf-8")
+    dataset = build_contexts(data_dir, today=TODAY)["contributed_datasets"]["datasets"][0]
+    assert dataset["country"] == "UK"
+    assert dataset["display_country"] == "United Kingdom"
