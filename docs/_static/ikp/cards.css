@@ -12,7 +12,7 @@
  * Layout of this file:
  *   1. Colour variables (light mode)
  *   2. Shared pieces: filter bar, action bar, tables, badges, buttons, cards
- *   3. Telescope Access page only (ikp-tel-*, ikp-map-*, ikp-opp-*)
+ *   3. Telescope Access page only (ikp-map-*, ikp-opp-*)
  *   4. Datasets and Software pages only (expand controls, "Also see" link)
  */
 
@@ -62,11 +62,10 @@
 .ikp-filterbar label { font-size: 0.9em; }
 
 /* Row holding the search box (and, on Datasets, the status toggle). The
-   Telescope Access page uses its own variant with more space below. */
+   Telescope Access page adds `ikp-actionbar-spaced` for more space below. */
 .ikp-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1rem; }
 .ikp-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid var(--ikp-control-border); border-radius: 0.3em; font-size: 0.9em; }
-.ikp-tel-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-.ikp-tel-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid var(--ikp-control-border); border-radius: 0.3em; font-size: 0.9em; }
+.ikp-actionbar-spaced { margin-bottom: 1.5rem; }
 
 /* The three card tables share one look; each page has its own class name. */
 .ikp-telescopes-table,
@@ -79,12 +78,11 @@
 .ikp-datasets-table th,
 .ikp-sw-table th { cursor: pointer; user-select: none; }
 
-/* Status badges in the tables. The Telescope Access page uses
-   `ikp-tel-badge`, which adds a small margin so several badges can sit side by
-   side; Datasets and Software use plain `ikp-badge`. The colour classes are
-   shared. */
+/* Status badges in the tables. The Telescope Access page adds
+   `ikp-badge-spaced`, a small margin so several badges can sit side by side;
+   Datasets and Software use plain `ikp-badge`. The colour classes are shared. */
 .ikp-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 1em; font-size: 0.85em; }
-.ikp-tel-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 1em; font-size: 0.85em; margin: 0 0.2em 0.2em 0; }
+.ikp-badge-spaced { margin: 0 0.2em 0.2em 0; }
 .ikp-badge-success { background: var(--ikp-badge-success-bg); color: var(--ikp-badge-success-text); }
 .ikp-badge-muted { background: var(--ikp-badge-muted-bg); color: var(--ikp-badge-muted-text); }
 .ikp-badge-warning { background: var(--ikp-badge-warning-bg); color: var(--ikp-badge-warning-text); }

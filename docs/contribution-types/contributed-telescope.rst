@@ -100,7 +100,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </label>
       </div>
 
-      <div class="ikp-tel-actionbar">
+      <div class="ikp-actionbar ikp-actionbar-spaced">
         <input type="text" id="ikp-search" placeholder="Search facilities, sites, instruments...">
       </div>
 
@@ -142,7 +142,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td><button type="button" class="ikp-title-link">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
-            <td>{% if t.status == 'available' %}<span class="ikp-tel-badge ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-tel-badge ikp-badge-danger">Past opportunity</span>{% else %}<span class="ikp-tel-badge ikp-badge-warning">Future semester</span>{% endif %}</td>
+            <td>{% if t.status == 'available' %}<span class="ikp-badge ikp-badge-spaced ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-badge ikp-badge-spaced ikp-badge-danger">Past opportunity</span>{% else %}<span class="ikp-badge ikp-badge-spaced ikp-badge-warning">Future semester</span>{% endif %}</td>
             <td>{{ t.aperture or 'TBA' }}</td>
           </tr>
           {% endfor %}
