@@ -25,6 +25,13 @@ Why the derived fields exist
   ``{"instr": ["instr-imaging"], "multiplex": []}``. The template writes each
   entry onto the facility's table row and map marker as a ``data-filter-<key>``
   attribute.
+* ``observing_mode_label``: ``observing_mode`` capitalized for display
+  ("queue" -> "Queue"), or None when the record has no observing mode.
+* ``has_separate_process``: True when ``tac_process`` is anything but
+  "default", so the card can point to the facility's own proposal process.
+* ``contacts[].note_rst``: each contact's free-text ``note``, escaped so it
+  renders as plain text inside reStructuredText (see ``_rst_plain_text``), or
+  None when the contact has no note.
 * ``siblings``: links between records that share a ``contribution_id`` (for
   example KMTNet's three sites). Drift between same-facility siblings is
   reported by ``ikp_data.validate``, not by the loader.
@@ -33,6 +40,7 @@ Why the derived fields exist
 """
 
 import re
+import string
 
 import yaml
 
@@ -85,6 +93,22 @@ def _resolution_bin(r_min, r_max):
     if midpoint < 5000:
         return "r-1000-5000", "1,000 <= R < 5,000"
     return "r-gte-5000", "R >= 5,000"
+
+
+def _rst_plain_text(text):
+    """Escape `text` so reStructuredText shows it literally.
+
+    A contact note is free text typed by a maintainer. It is placed inside the
+    page's reStructuredText, where characters such as ``*``, backticks, ``|``,
+    ``<``, ``_`` and ``:`` start emphasis, roles, links or substitutions. Jinja's
+    HTML escape (``| e``) would not help: this is reStructuredText, not HTML, so
+    it would show ``&lt;`` on the page. Instead each ASCII punctuation character
+    gets a backslash, which reStructuredText reads as "this character, literally".
+    Whitespace (including line breaks from YAML folding) collapses to single spaces
+    so a note cannot start a new block.
+    """
+    collapsed = " ".join(str(text).split())
+    return "".join(f"\\{c}" if c in string.punctuation else c for c in collapsed)
 
 
 _STATUS_SORT_ORDER = {"available": 0, "future_semester": 1, "past_opportunity": 2}
@@ -148,6 +172,23 @@ def load_telescopes(data_dir, world_outline_svg):
         else:
             record["resolution_bin"] = None
             record["resolution_bin_label"] = None
+
+        # The YAML stores the observing mode in lower case ("queue"); the card
+        # shows it capitalized. Computed here so the template stays plain.
+        observing_mode = record.get("observing_mode")
+        # Upper-case only the first letter, so later words keep their own case.
+        record["observing_mode_label"] = (
+            str(observing_mode)[:1].upper() + str(observing_mode)[1:] if observing_mode else None
+        )
+
+        # Facilities that are not allocated through the NOIRLab call (marked
+        # with any `tac_process` other than "default") get a pointer on the card.
+        record["has_separate_process"] = record.get("tac_process", "default") != "default"
+
+        # Each contact's note, escaped for reStructuredText (see `_rst_plain_text`).
+        for contact in record.get("contacts") or []:
+            note = contact.get("note")
+            contact["note_rst"] = _rst_plain_text(note) if note else None
 
         # Three states are tracked: "available", "future_semester", and
         # "past_opportunity" (a facility/opportunity that has closed). A

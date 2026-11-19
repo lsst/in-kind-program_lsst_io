@@ -82,7 +82,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <option value="">All</option>
             <option value="status-available">Available</option>
             <option value="status-future-semester">Future semester</option>
-            <option value="status-past-opportunity">Past Opportunity</option>
+            <option value="status-past-opportunity">Past opportunity</option>
           </select>
         </label>
         <label>Hemisphere
@@ -100,7 +100,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </label>
       </div>
 
-      <div class="ikp-tel-actionbar">
+      <div class="ikp-actionbar ikp-actionbar-spaced">
         <input type="text" id="ikp-search" placeholder="Search facilities, sites, instruments...">
       </div>
 
@@ -142,7 +142,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <td><button type="button" class="ikp-title-link">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
-            <td>{% if t.status == 'available' %}<span class="ikp-tel-badge ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-tel-badge ikp-badge-danger">Past Opportunity</span>{% else %}<span class="ikp-tel-badge ikp-badge-warning">Future semester</span>{% endif %}</td>
+            <td>{% if t.status == 'available' %}<span class="ikp-badge ikp-badge-spaced ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-badge ikp-badge-spaced ikp-badge-danger">Past opportunity</span>{% else %}<span class="ikp-badge ikp-badge-spaced ikp-badge-warning">Future semester</span>{% endif %}</td>
             <td>{{ t.aperture or 'TBA' }}</td>
           </tr>
           {% endfor %}
@@ -160,19 +160,21 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. _{{ t.slug }}:
 
-          {{ t.aperture or 'TBA' }} — {{ [t.site, t.country] | select | join(', ') }}
+          {{ t.contribution_ids | select | join(', ') }} · {{ t.aperture or 'TBA' }} — {{ [t.site, t.country] | select | join(', ') }}
           ^^^
           {% for v in (t.instrumentation or []) %}:bdg-light:`{{ v }}` {% endfor %}{% for v in (t.wavelength_regime or []) %}:bdg-light:`{{ v }}` {% endfor %}{% if t.aeon %}:bdg-success:`AEON` {% endif %}{% if t.too_capable %}:bdg-success:`ToO` {% endif %}{% if t.multiplex %}:bdg-light:`Multiplex` {% endif %}
 
           {% if t.instrument_names %}**Instruments:** {{ t.instrument_names | join(', ') }}{% endif %}
 
-          **Contribution ID:** {{ t.contribution_ids | join(', ') }}
+          {% if t.observing_mode_label %}**Observing mode:** {{ t.observing_mode_label }}{% endif %}
 
           **First semester:** {{ t.first_semester or 'TBA' }}    **Time available:** {{ t.time_available or 'TBA' }}    **Duration:** {{ t.duration or 'TBA' }}
 
           {{ t.summary or '' }}
 
-          {% if t.contacts %}**Contact:** {% for c in t.contacts %}{{ c.name }} (`{{ c.email }} <mailto:{{ c.email }}>`_){{ ", " if not loop.last }}{% endfor %}{% endif %}
+          {% if t.contacts %}**Contact:** {% for c in t.contacts %}{{ c.name }} (`{{ c.email }} <mailto:{{ c.email }}>`_){% if c.note_rst %} — {{ c.note_rst }}{% endif %}{{ ("; " if t.contacts | selectattr('note_rst') | list else ", ") if not loop.last }}{% endfor %}{% else %}Questions: email the in-kind helpdesk (see the top of this page).{% endif %}
+
+          {% if t.has_separate_process %}Proposals for this facility follow a separate process from the NOIRLab call; see the facility links.{% endif %}
 
           {% if t.external_links %}**Links:** {% for link in t.external_links %}`{{ link.label }} <{{ link.url }}>`__{{ ", " if not loop.last }}{% endfor %}{% endif %}
 
@@ -182,6 +184,6 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
              Also available under this contribution: {% for s in t.siblings %}`{{ s.label }} <#{{ s.slug }}>`_{{ ", " if not loop.last }}{% endfor %}
           {% endif %}
           +++
-          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'past_opportunity' %}:bdg-danger:`Past Opportunity`{% else %}:bdg-warning:`Future semester`{% endif %}
+          {% if t.status == 'available' %}:bdg-success:`Available`{% elif t.status == 'past_opportunity' %}:bdg-danger:`Past opportunity`{% else %}:bdg-warning:`Future semester`{% endif %}
 
       {% endfor %}
