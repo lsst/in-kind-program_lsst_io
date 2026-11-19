@@ -474,8 +474,9 @@ class DatasetFormData(_RejectSubmitterPii):
         default=None,
     )
     version: str | None = _field(
-        "Dataset version, as given by the contributor. Not shown on the page.",
-        rendered=False,
+        "Dataset version, as given by the contributor. Shown as 'Version' on "
+        "Available cards when set.",
+        rendered=True,
         default=None,
     )
     data_volume: str | None = _field("Size of the dataset.", rendered=True, default=None)

@@ -95,6 +95,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Target audience:** {{ ds.curated.target_audience or ds.form_data.target_audience or 'TBD' }}
 
+          {% if ds.form_data.version %}
+          **Version:** {{ ds.form_data.version }}
+
+          {% endif %}
           **Access:** {{ ds.form_data.access_url or 'TBD' }}
 
           **Documentation:** {{ ds.form_data.tutorials_docs or 'TBD' }}

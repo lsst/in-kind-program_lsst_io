@@ -103,3 +103,19 @@ def test_in_progress_card_shows_only_summary_then_recipient_and_no_toggle(tmp_pa
     for label in SHOWN_LABELS[1:] + HIDDEN_LABELS:
         assert label not in text
     assert "ikp-more-btn" not in text
+
+
+def test_version_is_shown_between_audience_and_access_when_set(tmp_path):
+    text = render_card_text(tmp_path, form_data={"version": "Data Release 2"})
+    assert "**Version:** Data Release 2" in text
+    assert text.index("**Target audience:**") < text.index("**Version:**") < text.index("**Access:**")
+
+
+def test_version_row_is_hidden_when_empty(tmp_path):
+    assert "**Version:**" not in render_card_text(tmp_path, form_data={"version": None})
+    assert "**Version:**" not in render_card_text(tmp_path / "blank", form_data={"version": ""})
+
+
+def test_version_is_not_shown_on_in_progress_cards(tmp_path):
+    text = render_card_text(tmp_path, form_data={"submitted": False, "version": "Data Release 2"})
+    assert "**Version:**" not in text
