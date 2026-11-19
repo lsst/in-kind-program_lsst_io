@@ -790,8 +790,8 @@ class Software(_Strict):
     )
     title: str = _field("Software contribution title.", rendered=True)
     country: str | None = _field(
-        "Contributing country. Stored but not shown on the page.",
-        rendered=False,
+        "Contributing country; shown in the card header.",
+        rendered=True,
         default=None,
     )
     institute: str | None = _field(

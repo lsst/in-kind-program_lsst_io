@@ -272,6 +272,11 @@ def test_both_software_version_fields_are_rendered():
     assert schemas.SoftwareCurated.model_fields["version"].json_schema_extra["rendered"] is True
 
 
+def test_software_country_is_rendered():
+    """The country is shown in the card header, so it counts as a content update."""
+    assert schemas.Software.model_fields["country"].json_schema_extra["rendered"] is True
+
+
 def test_highlight_shape():
     record = _dataset()
     record["curated"]["highlight"] = {"reason": "Newly delivered", "until": "2026-12-01"}

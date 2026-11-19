@@ -86,13 +86,15 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       .. grid-item-card:: {{ item.title }}
           :class-item: ikp-sw-card ikp-card
 
-          {{ item.contribution_id }}
+          {{ item.contribution_id }}{% if item.display_country %} - {{ item.display_country }}{% endif %}
           ^^^
           {% for kw in item.uat_keywords %}:bdg-light:`{{ kw }}` {% endfor %}
 
           **Primary recipient:** {{ item.form_data.primary_recipient_group or 'TBD' }}
 
           **Additional recipients:** {{ (item.form_data.additional_recipient_groups or []) | join(', ') or 'None' }}
+
+          **Category:** {{ item.form_data.category or 'TBD' }}
 
           {% if item.status == 'available' and item.display_version %}**Version:** {{ item.display_version }}{% endif %}
 

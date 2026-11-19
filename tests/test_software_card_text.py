@@ -119,3 +119,41 @@ def test_every_live_version_renders_without_rst_warnings():
     for contribution_id, version in versions.items():
         _, warnings = parse_rst(f"**Version:** {version}")
         assert warnings == "", f"{contribution_id}: {warnings}"
+
+
+def test_card_header_spells_out_uk_and_leaves_other_countries(tmp_path):
+    uk = render_card_text(tmp_path / "uk", country="UK")
+    assert "TST-FIX-S3 - United Kingdom\n" in uk
+    other = render_card_text(tmp_path / "other", country="Examplia")
+    assert "TST-FIX-S3 - Examplia\n" in other
+
+
+def test_card_header_has_no_country_part_when_the_record_has_none(tmp_path):
+    text = render_card_text(tmp_path, country=None)
+    header = [line.strip() for line in text.splitlines() if line.strip().startswith("TST-FIX-S3")]
+    assert header == ["TST-FIX-S3"]
+
+
+def test_loader_adds_display_country_without_changing_the_stored_country(tmp_path):
+    data_dir = tmp_path / "_data"
+    shutil.copytree(FIXTURE_DATA_DIR, data_dir)
+    record_path = next((data_dir / "software").glob("*.yaml"))
+    record = yaml.safe_load(record_path.read_text(encoding="utf-8"))
+    record["country"] = "UK"
+    record_path.write_text(yaml.safe_dump(record), encoding="utf-8")
+    software = build_contexts(data_dir, today=TODAY)["contributed_software"]["software"][0]
+    assert software["country"] == "UK"
+    assert software["display_country"] == "United Kingdom"
+
+
+def test_category_row_shows_the_category_or_tbd(tmp_path):
+    text = render_card_text(tmp_path / "a", form_data={"category": "Non-directable SW dev"})
+    assert "**Category:** Non-directable SW dev" in text
+    for index, empty in enumerate((None, "")):
+        blank = render_card_text(tmp_path / f"b{index}", form_data={"category": empty})
+        assert "**Category:** TBD" in blank
+
+
+def test_category_row_follows_the_recipients(tmp_path):
+    text = render_card_text(tmp_path)
+    assert text.index("**Additional recipients:**") < text.index("**Category:**")
