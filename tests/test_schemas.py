@@ -266,6 +266,12 @@ def test_software_status_override_accepts_available_and_rejects_delivered():
         schemas.Software.model_validate(record)
 
 
+def test_both_software_version_fields_are_rendered():
+    """The version is shown on the card, so it counts as a content update."""
+    assert schemas.SoftwareFormData.model_fields["version"].json_schema_extra["rendered"] is True
+    assert schemas.SoftwareCurated.model_fields["version"].json_schema_extra["rendered"] is True
+
+
 def test_highlight_shape():
     record = _dataset()
     record["curated"]["highlight"] = {"reason": "Newly delivered", "until": "2026-12-01"}

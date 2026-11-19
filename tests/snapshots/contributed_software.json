@@ -213,8 +213,10 @@
         "summary": null,
         "uat_keywords": [
           "Astronomy software"
-        ]
+        ],
+        "version": "lsst-ir-fusion v1.0.0; obs_vista v1.2.0"
       },
+      "display_version": "lsst-ir-fusion v1.0.0; obs_vista v1.2.0",
       "documentation_links": [
         {
           "label": "lsst-ir-fusion documentation",
@@ -345,6 +347,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [
         {
           "label": "main software deliverable QhX documentation",
@@ -509,8 +512,10 @@
           "Cosmology",
           "Galaxy clusters",
           "Gravitational lensing"
-        ]
+        ],
+        "version": "Development version (no release yet)"
       },
+      "display_version": "Development version (no release yet)",
       "documentation_links": [
         {
           "label": "https://txpipe.readthedocs.io/en/latest/",
@@ -594,6 +599,7 @@
           "Transient detection"
         ]
       },
+      "display_version": "0.1.2",
       "documentation_links": [
         {
           "label": "https://macauff.readthedocs.io/",
@@ -727,6 +733,7 @@
           "Galaxies"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -794,6 +801,7 @@
           "Cosmology"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -865,6 +873,7 @@
           "Spectroscopy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -947,6 +956,7 @@
           "Supernovae"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1027,6 +1037,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1102,6 +1113,7 @@
           "Spectroscopy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1175,6 +1187,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1246,6 +1259,7 @@
           "Solar system astronomy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1314,6 +1328,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1385,6 +1400,7 @@
           "Cosmology"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1453,6 +1469,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1525,6 +1542,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1598,6 +1616,7 @@
           "Spectroscopy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1674,6 +1693,7 @@
           "Galaxy clusters"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1745,6 +1765,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1821,6 +1842,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1897,6 +1919,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -1974,6 +1997,7 @@
           "Galaxy clusters"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2048,6 +2072,7 @@
           "Radio astronomy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2124,6 +2149,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2198,6 +2224,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2274,6 +2301,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2347,6 +2375,7 @@
           "Astronomy software"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2415,6 +2444,7 @@
           "Galaxy clusters"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2486,6 +2516,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2559,6 +2590,7 @@
           "Galaxies"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2628,6 +2660,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2700,6 +2733,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2773,6 +2807,7 @@
           "Galaxy clusters"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2844,6 +2879,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2912,6 +2948,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -2984,6 +3021,7 @@
           "Solar system astronomy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3054,6 +3092,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3128,6 +3167,7 @@
           "Astronomy software"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3197,6 +3237,7 @@
           "Galaxy clusters"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3271,6 +3312,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3349,6 +3391,7 @@
           "Astronomy software"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3419,6 +3462,7 @@
           "Machine learning"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3489,6 +3533,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3560,6 +3605,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3636,6 +3682,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3709,6 +3756,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3778,6 +3826,7 @@
           "Galaxy clusters"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3852,6 +3901,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -3927,6 +3977,7 @@
           "Machine learning"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4000,6 +4051,7 @@
           "Data visualization"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4071,6 +4123,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4146,6 +4199,7 @@
           "Machine learning"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4222,6 +4276,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4294,6 +4349,7 @@
           "Strong gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4366,6 +4422,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4437,6 +4494,7 @@
           "Cosmology"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4505,6 +4563,7 @@
           "Variable stars"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4575,6 +4634,7 @@
           "Machine learning"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4645,6 +4705,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4714,6 +4775,7 @@
           "Stellar photometry"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4787,6 +4849,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4864,6 +4927,7 @@
           "Cosmology"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -4934,6 +4998,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5011,6 +5076,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5084,6 +5150,7 @@
           "Astronomy software"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5150,6 +5217,7 @@
           "Astronomy software"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5218,6 +5286,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5290,6 +5359,7 @@
           "Supernovae"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5366,6 +5436,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5445,6 +5516,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5528,6 +5600,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5599,6 +5672,7 @@
           "Cosmology"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5671,6 +5745,7 @@
           "Radio astronomy"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5761,6 +5836,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5840,6 +5916,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5918,6 +5995,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -5998,6 +6076,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -6082,6 +6161,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -6171,6 +6251,7 @@
           "Photometric redshift"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -6245,6 +6326,7 @@
           "Astronomy software"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -6313,6 +6395,7 @@
           "Transient detection"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -6386,6 +6469,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [
@@ -6458,6 +6542,7 @@
           "Gravitational lensing"
         ]
       },
+      "display_version": null,
       "documentation_links": [],
       "filters": {
         "cat": [

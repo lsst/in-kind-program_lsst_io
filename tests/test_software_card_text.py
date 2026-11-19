@@ -8,8 +8,12 @@ without a full build. (``test_dataset_card_text.py`` does the same for Datasets.
 """
 
 import datetime
+import io
 import shutil
+from pathlib import Path
 
+import docutils.core
+import docutils.nodes
 import jinja2
 import yaml
 
@@ -17,6 +21,7 @@ from ikp_data.loaders import build_contexts
 from tests.test_card_page_templates import FIXTURE_DATA_DIR, jinja_block
 
 TODAY = datetime.date(2027, 3, 15)
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def render_card_text(tmp_path, form_data=None, curated=None, **top_level):
@@ -61,3 +66,56 @@ def test_status_filter_tokens(tmp_path):
     in_progress = render_card_text(tmp_path / "b", form_data={"submitted": False})
     assert 'data-filter-status="status-pending"' in in_progress
     assert 'data-status="pending"' in in_progress
+
+
+def test_version_comes_from_the_form_on_available_cards(tmp_path):
+    text = render_card_text(tmp_path, form_data={"version": "0.1.2"})
+    assert "**Version:** 0.1.2" in text
+
+
+def test_curated_version_overrides_the_form_version(tmp_path):
+    text = render_card_text(
+        tmp_path, form_data={"version": "long messy form answer"}, curated={"version": "v1.0.0"}
+    )
+    assert "**Version:** v1.0.0" in text
+    assert "long messy form answer" not in text
+
+
+def test_version_row_is_hidden_when_there_is_no_version(tmp_path):
+    assert "**Version:**" not in render_card_text(tmp_path / "a", form_data={"version": None})
+    assert "**Version:**" not in render_card_text(tmp_path / "b", form_data={"version": ""})
+
+
+def test_version_is_not_shown_on_in_progress_cards(tmp_path):
+    text = render_card_text(
+        tmp_path, form_data={"submitted": False, "version": "0.1.2"}, curated={"version": "v1"}
+    )
+    assert "**Version:**" not in text
+
+
+def test_version_is_on_the_card_only_not_in_the_table(tmp_path):
+    text = render_card_text(tmp_path, form_data={"version": "0.1.2"})
+    # The only line that mentions the version is the card's Version row.
+    lines_with_version = [line.strip() for line in text.splitlines() if "0.1.2" in line]
+    assert lines_with_version == ["**Version:** 0.1.2"]
+
+
+def parse_rst(source):
+    """Parse reStructuredText with docutils; return (document, warnings text)."""
+    warnings = io.StringIO()
+    document = docutils.core.publish_doctree(
+        source, settings_overrides={"warning_stream": warnings, "report_level": 1}
+    )
+    return document, warnings.getvalue()
+
+
+def test_every_live_version_renders_without_rst_warnings():
+    """A future form sync that brings in reStructuredText markup must fail here,
+    not reach the page. Each live display_version is parsed as the card's row."""
+    live_data_dir = REPO_ROOT / "docs" / "contribution-types" / "_data"
+    records = build_contexts(live_data_dir, today=TODAY)["contributed_software"]["software"]
+    versions = {r["contribution_id"]: r["display_version"] for r in records if r["display_version"]}
+    assert versions, "expected at least one live version"
+    for contribution_id, version in versions.items():
+        _, warnings = parse_rst(f"**Version:** {version}")
+        assert warnings == "", f"{contribution_id}: {warnings}"

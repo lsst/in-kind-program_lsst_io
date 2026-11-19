@@ -94,6 +94,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           **Additional recipients:** {{ (item.form_data.additional_recipient_groups or []) | join(', ') or 'None' }}
 
+          {% if item.status == 'available' and item.display_version %}**Version:** {{ item.display_version }}{% endif %}
+
           {% if item.form_data.software_name %}**Software:** {{ item.form_data.software_name }}{% endif %}
 
           {% if item.approx_start %}**Start (approx.):** {{ item.approx_start }}{% endif %}

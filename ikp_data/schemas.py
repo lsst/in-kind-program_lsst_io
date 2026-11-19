@@ -722,7 +722,10 @@ class SoftwareFormData(_RejectSubmitterPii):
         default=None,
     )
     version: str | None = _field(
-        "Software version. Not shown on the page.", rendered=False, default=None
+        "Software version from the form. Shown on an Available card unless "
+        "curated.version is set.",
+        rendered=True,
+        default=None,
     )
     associated_dataset: DatasetFormData | None = _field(
         "Dataset details when the contribution also delivers a dataset. Not shown "
@@ -748,6 +751,13 @@ class SoftwareCurated(_Strict):
     status_override: SoftwareStatus | None = _field(
         "Force the card status instead of deriving it from the form: 'available' "
         "or 'pending'. Leave empty normally.",
+        rendered=True,
+        default=None,
+    )
+    version: str | None = _field(
+        "Version shown on an Available card. Overrides form_data.version for "
+        "display, so a long or messy form answer can be tidied without editing "
+        "the form data. Leave empty to show the form's version.",
         rendered=True,
         default=None,
     )

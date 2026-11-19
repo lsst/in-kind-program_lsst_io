@@ -11,6 +11,8 @@ this data set: every record here is Directable or Non-directable.
 Why the derived fields exist
 ----------------------------
 * ``status``: "available" or "pending" (or ``curated.status_override``).
+* ``display_version``: ``curated.version`` if set, otherwise
+  ``form_data.version``. The card shows it on Available cards only.
 * ``anchor`` (``sw-cid-<contribution ID slug>``), ``last_updated``,
   ``filters`` and ``search_text``: as for datasets.
 * ``uat_keywords``: the team's own UAT answer if given, otherwise the sync
@@ -126,6 +128,9 @@ def load_software(data_dir, today):
 
         record["anchor"] = software_anchor(path, record.get("contribution_id", ""))
         record["last_updated"] = record_last_updated(record, path)
+        # A curated version wins over the form's free-text answer, which can be
+        # long or awkward to show on a card.
+        record["display_version"] = curated.get("version") or form_data.get("version")
         record["uat_keywords"] = uat_keywords
         record["software_links"] = _extract_links(form_data.get("software_url"))
         record["documentation_links"] = _extract_links(form_data.get("documentation"))
