@@ -8,6 +8,8 @@ visible when records are compared with each other:
 * two datasets using the same contribution ID;
 * a "related contribution" that points at an ID that does not exist, or (on a
   dataset or software record) at a telescope instead of a dataset or software record;
+* a dataset (or software) record whose related IDs name only itself, with no software
+  (or dataset) record of the same ID to link to;
 * sibling facilities that are meant to be described identically but have drifted;
 * an opportunity whose ``id`` differs from its file name;
 * an opportunity whose milestones are in an impossible order (results announced
@@ -364,6 +366,44 @@ def check_opportunity_id_matches_file_name(records: list[RecordFile]) -> list[Pr
     return problems
 
 
+def check_related_id_is_not_only_the_record_itself(records: list[RecordFile]) -> list[Problem]:
+    """A related ID equal to the record's own ID needs a twin of the other type.
+
+    One contribution can deliver both a dataset and a software item, with the same
+    ``contribution_id``. A dataset that lists its own ID links to that software
+    item (and the reverse). If there is no such twin, the ID names only the record
+    itself; a card never links to itself, so no "Also see" link would be shown.
+    That is reported as an error.
+    """
+    # record type -> (the type that must hold the twin, how to name that type)
+    twin_of = {"datasets": ("software", "software"), "software": ("datasets", "dataset")}
+    ids_by_type = {
+        record_type: {cid for r in _records_of(records, record_type) for cid in _contribution_ids(r.data)}
+        for record_type in twin_of
+    }
+
+    problems: list[Problem] = []
+    for record_type, (twin_type, twin_name) in twin_of.items():
+        for record in _records_of(records, record_type):
+            curated = record.data.get("curated")
+            related = curated.get("related_contribution_ids") if isinstance(curated, dict) else None
+            if not isinstance(related, list):
+                continue
+            own_ids = set(_contribution_ids(record.data))
+            for rid in related:
+                if rid in own_ids and rid not in ids_by_type[twin_type]:
+                    problems.append(
+                        Problem(
+                            "error",
+                            record.file,
+                            f"curated.related_contribution_ids contains '{rid}', which names only "
+                            f"this record itself (there is no {twin_name} record with that ID), "
+                            "so no 'Also see' link would be shown",
+                        )
+                    )
+    return problems
+
+
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
@@ -375,6 +415,7 @@ def run_all_checks(records: list[RecordFile]) -> list[Problem]:
     problems.extend(check_unique_ids(records))
     problems.extend(check_related_ids_resolve(records))
     problems.extend(check_related_ids_are_datasets_or_software(records))
+    problems.extend(check_related_id_is_not_only_the_record_itself(records))
     problems.extend(check_telescope_siblings(records))
     problems.extend(check_opportunity_milestones(records))
     problems.extend(check_opportunity_id_matches_file_name(records))

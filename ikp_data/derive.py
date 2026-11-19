@@ -212,7 +212,9 @@ def resolve_related_titles(related_ids, *page_lookups, current_page=None, own_id
     ``current_page`` is the filename of the page the card is on. A link to a card on
     that page is just ``#anchor``; a link to another page is ``page.html#anchor``.
     ``own_id`` is the card's own contribution ID: a card never links to itself, so
-    that ID is skipped when it would resolve to the card's own page.
+    that ID is skipped when it would resolve to the card's own page. (An ID that
+    names only the card itself is reported by ``ikp_data.checks``, so validation
+    catches it before it silently produces no link.)
 
     Each returned dict has:
     * ``contribution_id`` and ``title``: the related ID and its record's title;
