@@ -152,3 +152,37 @@ def test_uat_badges_use_a_style_distinct_from_data_type_and_wavelength(tmp_path)
     assert ":bdg-light:`Optical`" in text
     assert ":bdg-primary-line:`Astrophysics`" in text
     assert ":bdg-light:`Astrophysics`" not in text
+
+
+def test_available_card_shows_tbd_for_every_empty_expected_row(tmp_path):
+    empty = {
+        "access_url": None,
+        "tutorials_docs": "",
+        "support_channel": None,
+        "data_volume": None,
+        "hosting_location": None,
+        "citation": None,
+        "maintenance_plan": None,
+        "data_schema_link": None,
+        "access_mechanisms": [],
+        "authentication": None,
+        "generation_methods": None,
+        "validation_limitations": None,
+        "target_audience": None,
+    }
+    text = render_card_text(tmp_path, form_data=empty, curated={"target_audience": None})
+    for label in SHOWN_LABELS[1:] + HIDDEN_LABELS:
+        assert f"{label} TBD\n" in text, label
+
+
+def test_a_lone_dot_is_shown_as_given_not_treated_as_empty(tmp_path):
+    # Placeholder dots are cleared in the data, not special-cased by the page.
+    text = render_card_text(tmp_path, form_data={"access_url": "."})
+    assert "**Access:** .\n" in text
+
+
+def test_no_updated_unknown_fallback_remains(tmp_path):
+    text = render_card_text(tmp_path)
+    assert "Updated: unknown" not in text
+    assert "*Updated: 2027-03-01*" in text
+    assert 'data-updated="2027-03-01"' in text
