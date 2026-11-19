@@ -146,6 +146,9 @@ html[data-theme=dark] .ikp-more-btn:hover { background: var(--ikp-pill-hover-on-
 .ikp-desc.ikp-expanded { -webkit-line-clamp: unset; display: block; overflow: visible; }
 .ikp-expand-btn { border: none; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0; cursor: pointer; margin-bottom: 0.6em; }
 
-/* "Also see" link between a dataset and its software (and back). */
-.ikp-also-see { display: inline-block; background: var(--ikp-also-see-bg); color: var(--ikp-also-see-text); font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 0.5em; text-decoration: none; }
+/* "Also see" link between a dataset and its software (and back). A block that
+   is only as wide as its text, so each link starts its own line (it does not
+   sit beside a toggle button above it) and several links stack. */
+.ikp-also-see { display: block; width: fit-content; background: var(--ikp-also-see-bg); color: var(--ikp-also-see-text); font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 1em; text-decoration: none; }
+.ikp-also-see + .ikp-also-see { margin-top: 0.4em; }
 .ikp-also-see:hover { background: var(--ikp-also-see-bg-hover); }
