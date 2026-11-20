@@ -20,8 +20,8 @@
 /* ---------------------------------------------------------------------------
  * 1. Colour variables
  *
- * These variables hold the colours used by the rules in this file. The map's
- * SVG fill attributes are still set in the Telescope Access template.
+ * These variables hold the colours used by the rules in this file, including
+ * the map's (the template's SVG carries classes, not colours).
  * --------------------------------------------------------------------------- */
 :root {
   --ikp-green: #1a5c33;              /* accents, highlight outline */
@@ -34,6 +34,12 @@
   --ikp-control-border: #999;        /* the search box */
   --ikp-table-border: #ddd;
   --ikp-map-background: #eef2f0;
+  --ikp-map-land: #d7ded9;
+  --ikp-map-land-stroke: #c3ccc5;
+  --ikp-map-marker-available: #1a5c33;
+  --ikp-map-marker-past: #a12626;
+  --ikp-map-marker-future: #8a5a00;
+  --ikp-map-marker-hover: #1a1a1a;   /* outline of a hovered marker */
 
   --ikp-badge-success-bg: #d9f2e3;
   --ikp-badge-success-text: #1a5c33;
@@ -149,7 +155,13 @@
 /* World map. */
 .ikp-map-wrap { margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; background: var(--ikp-map-background); }
 .ikp-map-marker { cursor: pointer; }
-.ikp-map-marker:hover { stroke: var(--ikp-text); stroke-width: 1.5; }
+.ikp-map-marker:hover { stroke: var(--ikp-map-marker-hover); stroke-width: 1.5; }
+/* The map's colours live here, not in the SVG, so dark mode can change them. */
+.ikp-map-bg { fill: var(--ikp-map-background); }
+.ikp-map-land { fill: var(--ikp-map-land); stroke: var(--ikp-map-land-stroke); }
+.ikp-map-marker-available { fill: var(--ikp-map-marker-available); }
+.ikp-map-marker-past { fill: var(--ikp-map-marker-past); }
+.ikp-map-marker-future { fill: var(--ikp-map-marker-future); }
 
 /* "Also available under this contribution" note on a telescope card. */
 .ikp-siblings { font-size: 0.85em; color: var(--ikp-siblings-text); margin-top: 0.6em; }

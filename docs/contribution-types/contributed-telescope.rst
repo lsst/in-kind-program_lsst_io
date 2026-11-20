@@ -110,16 +110,16 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-map-wrap">
         <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map showing facility locations">
-          <rect x="0" y="0" width="1000" height="500" fill="#eef2f0"></rect>
+          <rect class="ikp-map-bg" x="0" y="0" width="1000" height="500"></rect>
           {% if world_outline_path %}
-          <path d="{{ world_outline_path }}" fill="#d7ded9" stroke="#c3ccc5" stroke-width="0.5"></path>
+          <path class="ikp-map-land" d="{{ world_outline_path }}" stroke-width="0.5"></path>
           {% endif %}
           {% for t in telescopes %}
           {% if t.marker_x is not none %}
-          {# A marker keeps data-slug as its stable name; data-card is the id the script looks the card up by. #}
-          <circle class="ikp-map-marker" data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
-                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"
-                  fill="{{ '#1a5c33' if t.status == 'available' else ('#a12626' if t.status == 'past_opportunity' else '#8a5a00') }}"></circle>
+          {# A marker keeps data-slug as its stable name; data-card is the id the script looks the card up by.
+             The status class picks the marker colour in cards.css. #}
+          <circle class="ikp-map-marker {{ 'ikp-map-marker-available' if t.status == 'available' else ('ikp-map-marker-past' if t.status == 'past_opportunity' else 'ikp-map-marker-future') }}" data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
+                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"></circle>
           {% endif %}
           {% endfor %}
         </svg>
