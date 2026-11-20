@@ -137,7 +137,7 @@
           "wl-nir"
         ]
       },
-      "first_semester": "TBA",
+      "first_semester": "TBD",
       "has_separate_process": true,
       "hemisphere": "Northern",
       "instrument_names": [
@@ -983,7 +983,7 @@
           "wl-optical"
         ]
       },
-      "first_semester": "TBA",
+      "first_semester": "TBD",
       "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -1061,7 +1061,7 @@
           "wl-optical"
         ]
       },
-      "first_semester": "TBA",
+      "first_semester": "TBD",
       "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],
@@ -1143,7 +1143,7 @@
           "wl-optical"
         ]
       },
-      "first_semester": "TBA",
+      "first_semester": "TBD",
       "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [],
@@ -1214,7 +1214,7 @@
           "wl-optical"
         ]
       },
-      "first_semester": "TBA",
+      "first_semester": "TBD",
       "has_separate_process": false,
       "hemisphere": "Northern",
       "instrument_names": [],
@@ -1290,7 +1290,7 @@
           "wl-optical"
         ]
       },
-      "first_semester": "TBA",
+      "first_semester": "TBD",
       "has_separate_process": false,
       "hemisphere": "Southern",
       "instrument_names": [],

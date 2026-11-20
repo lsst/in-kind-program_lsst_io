@@ -177,7 +177,6 @@ html[data-theme=dark] {
 
 /* Outline shown briefly on a card after its title or map marker is clicked. */
 .ikp-card.ikp-highlight .sd-card { outline: 3px solid var(--ikp-green); outline-offset: 2px; transition: outline-color 1.2s ease; }
-.ikp-sw-card.ikp-highlight .sd-card { outline: 3px solid var(--ikp-green); outline-offset: 2px; transition: outline-color 1.2s ease; }
 
 /* ---------------------------------------------------------------------------
  * 3. Telescope Access page
