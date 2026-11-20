@@ -18,6 +18,10 @@ Why the derived fields exist
 * ``date_text`` (on each milestone): the date as the banner shows it. A
   ``display_date`` written in the record wins (for example "March 2027");
   otherwise the date is written like "30 Sep 2026".
+* ``status_line``: one short sentence for the top of the banner that says what
+  the phase means for the reader, for example "Deadline 30 Sep 2026" (see
+  ``phase_status_line``). Empty when the record lacks the milestone the phase
+  needs, in which case the banner shows no status line.
 * ``next_milestone_date``: the soonest milestone that is today or later, so
   banners sort soonest-first.
 
@@ -76,6 +80,8 @@ def load_opportunities(data_dir, today):
             if isinstance(milestone, dict):
                 milestone["passed"] = milestone_passed(milestone, today)
                 milestone["date_text"] = milestone_date_text(milestone)
+
+        record["status_line"] = phase_status_line(record)
 
         dated_milestones = _dated_milestones(record.get("milestones"))
         future_dates = [d for d in dated_milestones if d >= today]
@@ -174,3 +180,70 @@ def opportunity_phase(record, today):
         return "in_review"
 
     return "closed"
+
+
+# ---------------------------------------------------------------------------
+# The status line at the top of a banner
+# ---------------------------------------------------------------------------
+
+
+def _milestone_with_role(record, role, pick, skip_passed=False):
+    """The milestone with this role whose date `pick` chooses (`min` or `max`).
+
+    Milestones without a readable date are ignored. With `skip_passed`, so are
+    milestones the loader has marked `passed`. Returns None if no milestone is
+    left.
+    """
+    dated = [
+        (parse_date(m.get("date")), m)
+        for m in record.get("milestones") or []
+        if isinstance(m, dict)
+        and m.get("role") == role
+        and not (skip_passed and m.get("passed"))
+    ]
+    dated = [(date, m) for date, m in dated if date is not None]
+    if not dated:
+        return None
+    # Compare dates only: two milestones are never compared with each other.
+    return pick(dated, key=lambda pair: pair[0])[1]
+
+
+def phase_status_line(record):
+    """The sentence at the top of a banner, for the record's (stored) phase.
+
+    The dates come from the milestones that decide the phase: the earliest
+    "opens", the next "deadline" that has not passed (a call with two deadlines
+    shows the first until it passes, then the second), the latest "results" and
+    the earliest "next". They are written the way the milestone list shows
+    them (``date_text``, so a ``display_date`` such as "March 2027" is used as
+    written). If the milestone a phase needs is missing,
+    that part of the sentence is left out rather than printing a blank or
+    "None". Returns "" when nothing is left to say.
+    """
+    phase = record.get("phase")
+
+    if phase == "upcoming":
+        opens = _milestone_with_role(record, "opens", min)
+        return f"Opens {milestone_date_text(opens)}" if opens else ""
+
+    if phase == "open":
+        # An open call has at least one deadline still ahead (it stays open
+        # through the last one), so this finds the next one to meet.
+        deadline = _milestone_with_role(record, "deadline", min, skip_passed=True)
+        return f"Deadline {milestone_date_text(deadline)}" if deadline else ""
+
+    if phase == "in_review":
+        sentence = "Submissions closed; review in progress"
+        results = _milestone_with_role(record, "results", max)
+        if results:
+            sentence += f". Results expected {milestone_date_text(results)}"
+        return sentence
+
+    if phase == "closed":
+        sentence = "Closed"
+        next_call = _milestone_with_role(record, "next", min)
+        if next_call:
+            sentence += f". Next opportunity expected {milestone_date_text(next_call)}"
+        return sentence
+
+    return ""

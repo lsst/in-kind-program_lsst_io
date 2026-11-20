@@ -15,8 +15,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-opp-row">
       {% for opp in opportunities %}
-        <div class="ikp-opp-card{% if opp.accent %} ikp-opp-card-{{ opp.accent }}{% endif %}" id="opp-{{ opp.slug }}">
+        {# A banner that is under review or closed is muted, so the open ones stand out. #}
+        <div class="ikp-opp-card ikp-opp-phase-{{ opp.phase | replace('_', '-') }}{% if opp.accent %} ikp-opp-card-{{ opp.accent }}{% endif %}{% if opp.phase in ('in_review', 'closed') %} ikp-opp-card-muted{% endif %}" id="opp-{{ opp.slug }}">
           <p class="ikp-opp-title">{{ opp.title }}</p>
+          {# The status line sits under the title and says what the phase means ("Deadline 30 Sep 2026"). It is empty when the record lacks the milestone the phase needs. #}
+          {% if opp.status_line %}<p class="ikp-opp-status">{{ opp.status_line | e }}</p>{% endif %}
           <p>{{ opp.summary }}</p>
           {% if opp.milestones %}
           <ul class="ikp-opp-milestones">

@@ -37,6 +37,7 @@
       "TST-FIX-S1"
     ],
     "slug": "fixture-in-review-call",
+    "status_line": "Submissions closed; review in progress. Results expected 1 Apr 2027",
     "summary": "Invented opportunity used by the test fixtures (in review on 2027-03-15).",
     "title": "Fixture call under review",
     "visible_until": "2027-12-31"
@@ -79,6 +80,7 @@
       "TST-FIX-S1"
     ],
     "slug": "fixture-upcoming-call",
+    "status_line": "Opens 1 Apr 2027",
     "summary": "Invented opportunity used by the test fixtures (upcoming on 2027-03-15).",
     "title": "Fixture call that has not opened yet",
     "visible_until": "2027-12-31"
@@ -121,6 +123,7 @@
       "TST-FIX-S1"
     ],
     "slug": "fixture-open-call",
+    "status_line": "Deadline 15 Apr 2027",
     "summary": "Invented opportunity used by the test fixtures (open on 2027-03-15).",
     "title": "Fixture call that is open",
     "visible_until": "2027-12-31"
@@ -163,6 +166,7 @@
       "TST-FIX-S1"
     ],
     "slug": "fixture-closed-call",
+    "status_line": "Closed",
     "summary": "Invented opportunity used by the test fixtures (closed on 2027-03-15).",
     "title": "Fixture call that has closed",
     "visible_until": "2027-12-31"

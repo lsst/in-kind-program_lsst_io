@@ -19,7 +19,7 @@ from pathlib import Path
 import pytest
 
 from ikp_data.loaders import build_contexts
-from ikp_data.loaders.opportunities import milestone_date_text
+from ikp_data.loaders.opportunities import load_opportunities, milestone_date_text, phase_status_line
 from snapshot_helpers import SNAPSHOT_DIR, dump
 
 FIXTURE_DATA_DIR = Path(__file__).resolve().parent / "fixtures" / "docs" / "contribution-types" / "_data"
@@ -121,3 +121,98 @@ def test_display_date_wins_over_the_formatted_date():
 def test_an_unreadable_date_is_shown_as_written():
     assert milestone_date_text({"date": "spring"}) == "spring"
     assert milestone_date_text({"label": "no date at all"}) == ""
+
+
+# ---------------------------------------------------------------------------
+# The status line at the top of each banner
+# ---------------------------------------------------------------------------
+
+
+def test_each_fixture_phase_has_its_status_line():
+    banners = _banners(FIXTURE_TODAY)
+    assert {slug: r["status_line"] for slug, r in banners.items()} == {
+        "fixture-upcoming-call": "Opens 1 Apr 2027",
+        "fixture-open-call": "Deadline 15 Apr 2027",
+        "fixture-in-review-call": "Submissions closed; review in progress. Results expected 1 Apr 2027",
+        # The closed fixture has no "next" milestone, so only "Closed" is left.
+        "fixture-closed-call": "Closed",
+    }
+
+
+def _record(phase, milestones):
+    return {"phase": phase, "milestones": milestones}
+
+
+def test_closed_status_line_names_the_next_opportunity_as_written():
+    record = _record(
+        "closed",
+        [{"date": "2027-03-01", "display_date": "March 2027", "role": "next"}],
+    )
+    assert phase_status_line(record) == "Closed. Next opportunity expected March 2027"
+
+
+def test_closed_status_line_uses_the_earliest_next_milestone():
+    record = _record(
+        "closed",
+        [{"date": "2027-09-01", "role": "next"}, {"date": "2027-03-01", "role": "next"}],
+    )
+    assert phase_status_line(record) == "Closed. Next opportunity expected 1 Mar 2027"
+
+
+def test_open_status_line_shows_the_next_deadline_that_has_not_passed():
+    deadlines = [
+        {"date": "2026-10-01", "role": "deadline", "passed": False},
+        {"date": "2026-08-07", "role": "deadline", "passed": True},
+    ]
+    assert phase_status_line(_record("open", deadlines)) == "Deadline 1 Oct 2026"
+    # With neither passed, the earlier one is the next to meet.
+    for deadline in deadlines:
+        deadline["passed"] = False
+    assert phase_status_line(_record("open", deadlines)) == "Deadline 7 Aug 2026"
+
+
+TWO_DEADLINE_CALL = """\
+title: Call with two deadlines
+milestones:
+- label: Letters of intent due
+  date: '2026-08-07'
+  role: deadline
+- label: Full proposals due
+  date: '2026-10-01'
+  role: deadline
+visible_until: '2026-10-01'
+"""
+
+
+def test_two_deadline_call_changes_its_line_when_the_first_deadline_passes(tmp_path):
+    # A record of its own (shaped like a real two-deadline call), so the test
+    # does not depend on a live record that is removed once it expires.
+    (tmp_path / "opportunities").mkdir()
+    (tmp_path / "opportunities" / "two-deadline-call.yaml").write_text(TWO_DEADLINE_CALL, encoding="utf-8")
+
+    def line(iso):
+        return load_opportunities(tmp_path, _day(iso))["opportunities"][0]["status_line"]
+
+    assert line("2026-08-01") == "Deadline 7 Aug 2026"
+    assert line("2026-08-07") == "Deadline 7 Aug 2026"  # the deadline day itself
+    assert line("2026-08-15") == "Deadline 1 Oct 2026"
+
+
+@pytest.mark.parametrize(
+    ("phase", "expected"),
+    [
+        ("upcoming", ""),  # nothing to say without an opening date
+        ("open", ""),  # nothing to say without a deadline
+        ("in_review", "Submissions closed; review in progress"),  # no results date to add
+        ("closed", "Closed"),
+    ],
+)
+def test_missing_milestones_are_left_out_without_printing_none(phase, expected):
+    line = phase_status_line(_record(phase, [{"date": "2026-09-01", "label": "Informational"}]))
+    assert line == expected
+    assert "None" not in line
+
+
+def test_an_unknown_or_hidden_phase_has_no_status_line():
+    assert phase_status_line(_record("hidden", [])) == ""
+    assert phase_status_line({}) == ""

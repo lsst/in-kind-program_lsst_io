@@ -52,6 +52,11 @@
   --ikp-milestone-passed-label: #a12626;
   --ikp-opp-warning-border: #8a5a00;
   --ikp-opp-warning-bg: #fdeecb;
+  --ikp-opp-status-text: #1a1a1a;    /* status line of a banner that is upcoming or open */
+  --ikp-opp-deadline-text: #1a5c33;  /* the deadline line of an open banner, emphasized */
+  --ikp-opp-muted-border: #a9b3ad;   /* banner under review or closed */
+  --ikp-opp-muted-bg: #f4f5f4;
+  --ikp-opp-muted-text: #555;
   --ikp-siblings-text: #555;
 }
 
@@ -110,9 +115,24 @@
 .ikp-opp-milestones li { padding: 0.15em 0; }
 .ikp-opp-milestones .approx::after { content: " (approx.)"; color: var(--ikp-milestone-approx); }
 .ikp-opp-milestones .passed { text-decoration: line-through; color: var(--ikp-milestone-passed); }
-.ikp-opp-milestones .passed::after { content: " (passed)"; text-decoration: none; color: var(--ikp-milestone-passed-label); }
+/* A passed milestone shows only "(passed)", even when it is also approximate: this
+   rule comes after the "(approx.)" rule above and replaces its content. The
+   inline-block stops the strike-through of the milestone text from running
+   through the label; a margin gives the gap instead of a leading space, so a
+   label that wraps to a new line starts almost flush (a 0.3em indent). */
+.ikp-opp-milestones .passed::after { content: "(passed)"; display: inline-block; margin-left: 0.3em; text-decoration: none; color: var(--ikp-milestone-passed-label); }
 .ikp-opp-links a { margin-right: 1em; font-size: 0.9em; color: var(--ikp-green-link); }
 .ikp-opp-card-warning { border-color: var(--ikp-opp-warning-border); background: var(--ikp-opp-warning-bg); }
+/* The status line under the title. An open banner emphasizes its deadline. */
+.ikp-opp-status { margin: 0 0 0.6em; color: var(--ikp-opp-status-text); }
+.ikp-opp-phase-open .ikp-opp-status { font-weight: 700; color: var(--ikp-opp-deadline-text); }
+/* A banner under review or closed is muted. This rule comes after the accent
+   rule above, so it also overrides the warning colours. Every banner paints its
+   own light background with dark text in both themes, so these colours stay
+   readable in dark mode and need no html[data-theme=dark] override. */
+.ikp-opp-card-muted { border-color: var(--ikp-opp-muted-border); background: var(--ikp-opp-muted-bg); color: var(--ikp-opp-muted-text); }
+.ikp-opp-card-muted .ikp-opp-title,
+.ikp-opp-card-muted .ikp-opp-status { color: var(--ikp-opp-muted-text); }
 
 /* World map. */
 .ikp-map-wrap { margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; background: var(--ikp-map-background); }
