@@ -57,6 +57,7 @@
   --ikp-opp-muted-border: #a9b3ad;   /* banner under review or closed */
   --ikp-opp-muted-bg: #f4f5f4;
   --ikp-opp-muted-text: #555;
+  --ikp-opp-related-text: #666;      /* the "Related facility" line */
   --ikp-siblings-text: #555;
 }
 
@@ -123,6 +124,9 @@
 .ikp-opp-milestones .passed::after { content: "(passed)"; display: inline-block; margin-left: 0.3em; text-decoration: none; color: var(--ikp-milestone-passed-label); }
 .ikp-opp-links a { margin-right: 1em; font-size: 0.9em; color: var(--ikp-green-link); }
 .ikp-opp-card-warning { border-color: var(--ikp-opp-warning-border); background: var(--ikp-opp-warning-bg); }
+/* "Related facility" links at the foot of a banner. Like the rest of the banner it
+   sits on a light background in both themes, so this grey stays readable. */
+.ikp-opp-related { font-size: 0.85em; color: var(--ikp-opp-related-text); margin-top: 0.6em; }
 /* The status line under the title. An open banner emphasizes its deadline. */
 .ikp-opp-status { margin: 0 0 0.6em; color: var(--ikp-opp-status-text); }
 .ikp-opp-phase-open .ikp-opp-status { font-weight: 700; color: var(--ikp-opp-deadline-text); }
