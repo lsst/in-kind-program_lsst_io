@@ -22,7 +22,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             {% for label, slug in all_categories %}<option value="cat-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
-        <label>UAT keyword
+        <label>Science keyword (UAT)
           <select id="ikp-sw-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}

@@ -28,7 +28,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             {% for label, slug in all_wavelengths %}<option value="wl-{{ slug }}">{{ label }}</option>{% endfor %}
           </select>
         </label>
-        <label>Science case (UAT)
+        <label>Science keyword (UAT)
           <select id="ikp-filter-uat" data-filter-key="uat">
             <option value="">All</option>
             {% for label, slug in all_uat %}<option value="uat-{{ slug }}">{{ label }}</option>{% endfor %}
