@@ -27,9 +27,12 @@
  * again on every `pageshow` event, so the list always matches the restored
  * controls (see `keepListInSync`).
  *
- * Links to a hidden card: a same-page "Also see" link to a card that the
- * filters or search hide clears them first, so the card shows (see
- * `wireHiddenCardLinks`). A `#card` in the address never clears them.
+ * Links to a hidden card: a same-page "Also see" link, or a link in the
+ * "Highlighted" teaser row, to a card that the filters or search hide clears
+ * them first, so the card shows (see `wireHiddenCardLinks`). A `#card` in the
+ * address never clears them. A teaser link also outlines its card, as a table
+ * title does (see `wireTeaserLinks`). The teaser row is not a row or a card, so
+ * the filters never touch it.
  *
  * Class hooks: `ikp-row` and `ikp-map-marker` are used only by this script and
  * have no CSS rules, so do not remove them as unused.
@@ -196,27 +199,52 @@
     });
   }
 
-  // Scroll a card into view and outline it for a moment.
-  function highlightCard(card) {
-    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Outline a card for a moment.
+  function outlineCard(card) {
     card.classList.add('ikp-highlight');
     setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
   }
 
-  // Make a same-page "Also see" link to a card that the filters or search are
-  // hiding still work. When the link is clicked, the filters and search are
-  // cleared first (before the browser follows the link), so the card shows and
-  // the browser scrolls to it. A link to another page is left alone, and so is
-  // a click that opens a new tab or window: that page starts with no filters.
-  // `filtering` is the object returned by `setupFiltering`.
+  // Scroll a card into view and outline it for a moment.
+  function highlightCard(card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    outlineCard(card);
+  }
+
+  // True for a click that opens a new tab or window (a modifier key or a
+  // non-primary button): the card on this page is not the one that opens.
+  function opensElsewhere(event) {
+    return event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0;
+  }
+
+  // Make a same-page "Also see" or teaser link to a card that the filters or
+  // search are hiding still work. When the link is clicked, the filters and
+  // search are cleared first (before the browser follows the link), so the card
+  // shows and the browser scrolls to it. A link to another page is left alone,
+  // and so is a click that opens a new tab or window: that page starts with no
+  // filters. `filtering` is the object returned by `setupFiltering`.
   function wireHiddenCardLinks(filtering) {
-    document.querySelectorAll('.ikp-also-see').forEach(function (link) {
+    document.querySelectorAll('.ikp-also-see, .ikp-teaser-link').forEach(function (link) {
       link.addEventListener('click', function (event) {
-        var opensElsewhere = event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0;
-        if (opensElsewhere || link.pathname !== window.location.pathname) { return; }
+        if (opensElsewhere(event) || link.pathname !== window.location.pathname) { return; }
         // Card ids are plain ASCII, so the hash is used as it is.
         var card = cardById(link.hash.slice(1));
         if (card && card.style.display === 'none') { filtering.resetFilters(); }
+      });
+    });
+  }
+
+  // A click on a link in the "Highlighted" teaser row outlines the card it
+  // names, like a click on a table title. It does not scroll: the link's own
+  // jump to its `#card` does that, and also updates the address and where
+  // keyboard focus starts. A click that opens a new tab or window is left alone.
+  // Call this after `wireHiddenCardLinks`, so the card is shown first.
+  function wireTeaserLinks() {
+    document.querySelectorAll('.ikp-teaser-link').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        if (opensElsewhere(event)) { return; }
+        var card = cardById(link.hash.slice(1));
+        if (card) { outlineCard(card); }
       });
     });
   }
@@ -312,6 +340,7 @@
     wireTableSorting(table);
     keepListInSync(filtering);
     wireHiddenCardLinks(filtering);
+    wireTeaserLinks();
   }
 
   // -------------------------------------------------------------------------
@@ -324,6 +353,7 @@
     wireTableSorting(table);
     keepListInSync(filtering);
     wireHiddenCardLinks(filtering);
+    wireTeaserLinks();
   }
 
   // -------------------------------------------------------------------------

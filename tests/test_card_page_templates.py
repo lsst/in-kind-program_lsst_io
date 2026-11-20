@@ -12,7 +12,9 @@ check the structure the page script relies on:
 * every filter drop-down's key is a ``data-filter-<key>`` attribute on the rows;
 * control ids use the ``ikp-`` prefix (no ``ikt-`` or ``ikc-`` ids), and the script
   does not match class names;
-* a same-page "Also see" link renders from the loader's ``kind`` and ``href``.
+* a same-page "Also see" link renders from the loader's ``kind`` and ``href``;
+* the "Highlighted" teaser row is absent without a highlight, escapes its text
+  and reuses no card id.
 
 Only the structure is checked. The text is rendered by Jinja alone, not by
 Sphinx, so these tests are quick and need no browser.
@@ -248,3 +250,88 @@ def test_a_banner_shows_plain_text_as_text_and_the_summary_as_html():
     # The phase class uses a hyphen, and a banner under review is muted.
     assert "ikp-opp-phase-in-review" in rendered
     assert "ikp-opp-card-muted" in rendered
+
+
+# ---------------------------------------------------------------------------
+# The "Highlighted" teaser row on the Datasets and Software pages
+# ---------------------------------------------------------------------------
+
+TEASER_PAGES = [
+    pytest.param("contributed-datasets.rst", "datasets", "ds-cid-", id="datasets"),
+    pytest.param("contributed-software.rst", "software", "sw-cid-", id="software"),
+]
+
+
+def write_highlighted_record(data_dir, folder, contribution_id, title, reason, until="2027-04-30"):
+    """Write the smallest valid record with a highlight into `folder`."""
+    record = {
+        "contribution_id": contribution_id,
+        "title": title,
+        "last_updated": "2027-03-01",
+        "form_data": {},
+        "curated": {"highlight": {"reason": reason, "until": until}},
+    }
+    (data_dir / folder).mkdir(parents=True, exist_ok=True)
+    (data_dir / folder / f"{contribution_id}.yaml").write_text(yaml.safe_dump(record), encoding="utf-8")
+
+
+@pytest.mark.parametrize("page, folder, anchor_prefix", TEASER_PAGES)
+def test_the_teaser_row_is_absent_without_a_highlight(page, folder, anchor_prefix):
+    # The live data has no highlighted record, so the page shows no row at all.
+    assert "ikp-teaser" not in render_page(page, LIVE_DATA_DIR)
+
+
+@pytest.mark.parametrize("page, folder, anchor_prefix", TEASER_PAGES)
+def test_the_teaser_row_shows_each_highlight_above_the_filters(page, folder, anchor_prefix):
+    rendered = render_page(page, FIXTURE_DATA_DIR)
+    assert rendered.count('class="ikp-teaser"') == 1
+    assert ">Highlighted<" in rendered
+    assert f'class="ikp-teaser-link" href="#{anchor_prefix}tst-fix-' in rendered
+    assert rendered.index("ikp-teasers") < rendered.index("ikp-filterbar")
+
+
+@pytest.mark.parametrize("page, folder, anchor_prefix", TEASER_PAGES)
+def test_the_teaser_row_escapes_its_values(tmp_path, page, folder, anchor_prefix):
+    write_highlighted_record(tmp_path, folder, "TST-AAA-S1", "<b>Bold</b> & co", "<script>x</script>")
+    rendered = render_page(page, tmp_path)
+    teaser = rendered[rendered.index('class="ikp-teasers"'):rendered.index("ikp-filterbar")]
+    assert "&lt;b&gt;Bold&lt;/b&gt; &amp; co" in teaser
+    assert "&lt;script&gt;x&lt;/script&gt;" in teaser
+    assert "<b>" not in teaser and "<script>" not in teaser
+
+
+@pytest.mark.parametrize("page, folder, anchor_prefix", TEASER_PAGES)
+def test_a_teaser_adds_no_id_and_links_to_an_existing_card(tmp_path, page, folder, anchor_prefix):
+    write_highlighted_record(tmp_path, folder, "TST-AAA-S1", "One", "Newly delivered")
+    write_highlighted_record(tmp_path, folder, "TST-AAA-S2", "Two", "Widely used")
+    rendered = render_page(page, tmp_path)
+    teaser = rendered[rendered.index('class="ikp-teasers"'):rendered.index("ikp-filterbar")]
+    # No id attribute inside the row, so no card id (or any other id) is repeated.
+    assert "id=" not in teaser
+    # Each link names a card that the page does render.
+    anchors = re.findall(r'class="ikp-teaser-link" href="#([^"]+)"', teaser)
+    assert anchors == [f"{anchor_prefix}tst-aaa-s1", f"{anchor_prefix}tst-aaa-s2"]
+    assert set(anchors) <= set(card_anchors(rendered))
+
+
+def test_the_script_covers_teaser_links_without_filtering_them():
+    script = CARDS_JS.read_text(encoding="utf-8")
+    # A teaser link to a hidden card clears the filters, like an "Also see" link.
+    assert "'.ikp-also-see, .ikp-teaser-link'" in script
+    # Both the Datasets and the Software setup wire the teaser links.
+    assert script.count("wireTeaserLinks();") == 2
+    # The teaser row carries no filter data and is not a table row.
+    for page in ("contributed-datasets.rst", "contributed-software.rst"):
+        block = jinja_block(page, CARD_PAGES[page][0])
+        row = block[block.index("ikp-teasers"):block.index("ikp-filterbar")]
+        assert "data-filter-" not in row and "data-card" not in row and "ikp-row" not in row
+
+
+@pytest.mark.parametrize("page, folder, anchor_prefix", TEASER_PAGES)
+def test_a_teaser_with_no_reason_shows_no_badge(tmp_path, page, folder, anchor_prefix):
+    write_highlighted_record(tmp_path, folder, "TST-AAA-S1", "One", None)
+    rendered = render_page(page, tmp_path)
+    teaser = rendered[rendered.index('class="ikp-teasers"'):rendered.index("ikp-filterbar")]
+    assert 'class="ikp-teaser-link"' in teaser
+    assert "ikp-teaser-reason" not in teaser
+    assert "None" not in teaser
