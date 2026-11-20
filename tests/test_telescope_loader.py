@@ -59,3 +59,13 @@ def test_complete_record_gets_a_map_marker(tmp_path):
     data_dir, _ = _data_dir_with_one_telescope(tmp_path)
     (record,) = _load(data_dir)["telescopes"]
     assert "marker_x" in record and "marker_y" in record
+
+
+def test_aperture_value_is_the_largest_metre_value_or_none(tmp_path):
+    data_dir, _ = _data_dir_with_one_telescope(tmp_path, aperture="2 x 8.4m")
+    assert _load(data_dir)["telescopes"][0]["aperture_value"] == 8.4
+
+    other = tmp_path / "other"
+    other.mkdir()
+    data_dir, _ = _data_dir_with_one_telescope(other, aperture="DELETE")
+    assert _load(data_dir)["telescopes"][0]["aperture_value"] is None

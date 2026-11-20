@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from ikp_data.derive import display_country, option_pairs, parse_date, search_index_to_json, slugify
+from ikp_data.derive import display_country, largest_metre_value, option_pairs, parse_date, search_index_to_json, slugify
 
 
 def test_parse_date_returns_a_date_unchanged():
@@ -57,3 +57,53 @@ def test_display_country_spells_out_uk():
 @pytest.mark.parametrize("country", ["United Kingdom", "Italy", "Examplia", "", None])
 def test_display_country_leaves_other_values_unchanged(country):
     assert display_country(country) == country
+
+
+# ---------------------------------------------------------------------------
+# largest_metre_value: the number the Aperture column sorts by
+# ---------------------------------------------------------------------------
+
+# The distinct aperture strings on the live Telescope Access page, with the
+# number each should sort as.
+LIVE_APERTURES = [
+    ("10.4m", 10.4),
+    ("1.6m", 1.6),
+    ("2 x 8.4m", 8.4),
+    ("1.4m", 1.4),
+    ("9.2m", 9.2),
+    ("8.2m", 8.2),
+    ("2.6m", 2.6),
+    ("1.0m", 1.0),
+    ("1.8m", 1.8),
+    ("1.5m / 1.0m", 1.5),
+    ("2m", 2.0),
+    ("1.9m-1.0m", 1.9),
+    ("2.56m", 2.56),
+]
+
+
+@pytest.mark.parametrize("text, expected", LIVE_APERTURES)
+def test_largest_metre_value_reads_the_live_aperture_strings(text, expected):
+    assert largest_metre_value(text) == expected
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("2.4 m", 2.4),  # a space before the unit is fine
+        ("0.5m, 3m", 3.0),  # the largest, not the first
+        ("8.4m x 2", 8.4),  # a bare count is not a size
+        ("10m (with 2m spare)", 10.0),
+        # Not in the data, but pinned so a change is deliberate: a bare ".5m"
+        # reads as 5, and a decimal comma ("8,4m") reads as 4.
+        (".5m", 5.0),
+        ("8,4m", 4.0),
+    ],
+)
+def test_largest_metre_value_handles_other_layouts(text, expected):
+    assert largest_metre_value(text) == expected
+
+
+@pytest.mark.parametrize("text", [None, "", "TBA", "8", "2 x 8", "300mm", "4 meters"])
+def test_largest_metre_value_is_none_without_a_size_in_metres(text):
+    assert largest_metre_value(text) is None

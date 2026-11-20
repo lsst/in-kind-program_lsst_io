@@ -8,6 +8,8 @@ tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
 * text helpers: ``slugify``, ``option_pairs`` and ``normalize_strings``;
+* ``largest_metre_value``: the number a telescope table sorts its Aperture
+  column by;
 * ``display_country``: the spelling of a country shown on a card header;
 * ``search_index_to_json``: dumps a page's search index so it is safe to embed in a
   ``<script>`` block;
@@ -47,6 +49,26 @@ SIBLING_CONSISTENCY_FIELDS = (
 def slugify(value):
     """Lowercase, and turn each run of other characters into one "-"."""
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+# A size in metres: a number directly followed by "m" (an optional space is
+# allowed, and "mm" or "meters" do not count). A number with no "m" after it,
+# such as the "2" in "2 x 8.4m", is a count, not a size.
+_METRE_VALUE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*m(?![A-Za-z])")
+
+
+def largest_metre_value(text):
+    """The largest size in metres named in free text, as a float, or None.
+
+    "2 x 8.4m" gives 8.4, "1.5m / 1.0m" gives 1.5 and "1.9m-1.0m" gives 1.9.
+    Text with no size (or no text) gives None, so the table can sort such rows last.
+    Only "digits, optional point, digits" is read: ".5m" gives 5 and a decimal
+    comma ("8,4m") gives 4. Neither spelling is used in the data.
+    """
+    if not text:
+        return None
+    values = [float(number) for number in _METRE_VALUE_RE.findall(text)]
+    return max(values) if values else None
 
 
 # Country names that the data spells in a short form but a card header should

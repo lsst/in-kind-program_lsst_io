@@ -170,7 +170,9 @@
   // rows when clicked: the first click on a header sorts ascending, and each
   // further click on the same header reverses the direction. Clicking another
   // header starts that header ascending. The rows are compared by their
-  // `data-<key>` attribute.
+  // `data-<key>` attribute, as text; a header with `data-sort-type="number"`
+  // compares the attribute as a number instead, and rows with no number come
+  // last in either direction.
   //
   // The sort state (which header was clicked last, and which direction) is kept
   // in one place, for an aria-sort indicator to read.
@@ -183,12 +185,14 @@
       sortState.ascending = (sortState.header === th) ? !sortState.ascending : true;
       sortState.header = th;
       var key = th.getAttribute('data-sort');
+      var isNumber = th.getAttribute('data-sort-type') === 'number';
       var ascending = sortState.ascending;
       var tbody = table.querySelector('tbody');
       var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
       rows.sort(function (a, b) {
         var av = a.getAttribute('data-' + key) || '';
         var bv = b.getAttribute('data-' + key) || '';
+        if (isNumber) { return compareNumbers(av, bv, ascending); }
         return ascending ? av.localeCompare(bv) : bv.localeCompare(av);
       });
       rows.forEach(function (r) { tbody.appendChild(r); });
@@ -203,6 +207,18 @@
       // A copy, so callers cannot change the state by accident.
       getSortState: function () { return { header: sortState.header, ascending: sortState.ascending }; }
     };
+  }
+
+  // Compare two attribute values as numbers. A blank (or unreadable) value goes
+  // after every number whichever way the column is sorted, so a row with no
+  // value never ends up at the top.
+  function compareNumbers(a, b, ascending) {
+    var an = parseFloat(a);
+    var bn = parseFloat(b);
+    var aBlank = isNaN(an);
+    var bBlank = isNaN(bn);
+    if (aBlank || bBlank) { return (aBlank ? 1 : 0) - (bBlank ? 1 : 0); }
+    return ascending ? an - bn : bn - an;
   }
 
   // Make each "Show more" button (matched by `buttonSelector`) toggle the
