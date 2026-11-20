@@ -1,7 +1,7 @@
 /*
  * cards.js: shared behaviour for the card pages of the In-Kind Program site
  * (Telescope Access, Datasets and Software): filters, search, sorting,
- * jump-to-card highlighting and the "Show more" buttons.
+ * jump-to-card highlighting, links to hidden cards and the "Show more" buttons.
  *
  * Sphinx adds this file to every page of the site (see conf.py), so it must do
  * nothing on a page that has no cards. Each page's setup below runs only when
@@ -20,6 +20,16 @@
  * contains the search box text. A card is shown or hidden together with its row
  * (it is found by `data-card`), so cards carry no filter data and no class
  * names are matched.
+ *
+ * Back and forward: the Back and Forward buttons make the browser restore the
+ * drop-down and search values the visitor had, and it does so after the
+ * scripts have run. Each page therefore applies its filters when it sets up and
+ * again on every `pageshow` event, so the list always matches the restored
+ * controls (see `keepListInSync`).
+ *
+ * Links to a hidden card: a same-page "Also see" link to a card that the
+ * filters or search hide clears them first, so the card shows (see
+ * `wireHiddenCardLinks`). A `#card` in the address never clears them.
  *
  * Class hooks: `ikp-row` and `ikp-map-marker` are used only by this script and
  * have no CSS rules, so do not remove them as unused.
@@ -75,7 +85,13 @@
   // `sd-col` wrapper) around the element whose id is the item's `data-card`.
   // Returns null if there is no such card.
   function cardOf(item) {
-    var anchor = document.getElementById(item.getAttribute('data-card'));
+    return cardById(item.getAttribute('data-card'));
+  }
+
+  // The card whose anchor has this id: the grid item around that element.
+  // Returns null if there is no such card.
+  function cardById(id) {
+    var anchor = document.getElementById(id);
     return anchor ? anchor.closest('.sd-col') : null;
   }
 
@@ -83,14 +99,12 @@
   // `select[data-filter-key]`), its search box and its rows, cards and map
   // markers.
   //
-  // options.table              the page's table
-  // options.searchInput        the search box, or null
-  // options.extraRequirements  optional function returning more required tokens
-  //                            as [{key, value}], for a control that is not a
-  //                            drop-down (the Datasets "available only" button)
+  // options.table        the page's table
+  // options.searchInput  the search box, or null
   //
-  // Returns {applyFilters, getVisibleCount}: the page can re-apply filters after
-  // a change of its own, and read how many rows pass the filters now.
+  // Returns {applyFilters, resetFilters, getVisibleCount}: the page can
+  // re-apply filters after a change of its own, clear them all, and read how
+  // many rows pass the filters now.
   function setupFiltering(options) {
     var searchIndex = readSearchIndex();
     var selects = Array.prototype.slice.call(document.querySelectorAll('select[data-filter-key]'));
@@ -108,7 +122,7 @@
       selects.forEach(function (select) {
         if (select.value) { required.push({ key: select.getAttribute('data-filter-key'), value: select.value }); }
       });
-      return required.concat(options.extraRequirements ? options.extraRequirements() : []);
+      return required;
     }
 
     // True if the item has every required token and matches the search text.
@@ -141,10 +155,30 @@
     selects.forEach(function (select) { select.addEventListener('change', applyFilters); });
     if (options.searchInput) { options.searchInput.addEventListener('input', applyFilters); }
 
+    // Put every drop-down back on "All", empty the search box and show
+    // everything again.
+    function resetFilters() {
+      selects.forEach(function (select) { select.value = ''; });
+      if (options.searchInput) { options.searchInput.value = ''; }
+      applyFilters();
+    }
+
     return {
       applyFilters: applyFilters,
+      resetFilters: resetFilters,
       getVisibleCount: function () { return visibleCount; }
     };
+  }
+
+  // Keep a page's list in step with its controls: apply the filters now, and
+  // again on every `pageshow`. The browser restores form values after Back or
+  // Forward only after the scripts have run, so the values read at setup can be
+  // the defaults. (`pageshow` fires after a normal load too, and when the page
+  // comes back from the browser's cache.) `filtering` is the object returned
+  // by `setupFiltering`.
+  function keepListInSync(filtering) {
+    filtering.applyFilters();
+    window.addEventListener('pageshow', function () { filtering.applyFilters(); });
   }
 
   // Clicking a title link in `table`, or a map marker, scrolls to that row's
@@ -169,11 +203,31 @@
     setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
   }
 
+  // Make a same-page "Also see" link to a card that the filters or search are
+  // hiding still work. When the link is clicked, the filters and search are
+  // cleared first (before the browser follows the link), so the card shows and
+  // the browser scrolls to it. A link to another page is left alone, and so is
+  // a click that opens a new tab or window: that page starts with no filters.
+  // `filtering` is the object returned by `setupFiltering`.
+  function wireHiddenCardLinks(filtering) {
+    document.querySelectorAll('.ikp-also-see').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var opensElsewhere = event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0;
+        if (opensElsewhere || link.pathname !== window.location.pathname) { return; }
+        // Card ids are plain ASCII, so the hash is used as it is.
+        var card = cardById(link.hash.slice(1));
+        if (card && card.style.display === 'none') { filtering.resetFilters(); }
+      });
+    });
+  }
+
   // Make the headers of `table` (those with a `data-sort` attribute) sort the
   // rows when clicked: the first click on a header sorts ascending, and each
   // further click on the same header reverses the direction. Clicking another
   // header starts that header ascending. The rows are compared by their
-  // `data-<key>` attribute.
+  // `data-<key>` attribute, as text; a header with `data-sort-type="number"`
+  // compares the attribute as a number instead, and rows with no number come
+  // last in either direction.
   //
   // The sort state (which header was clicked last, and which direction) is kept
   // in one place, for an aria-sort indicator to read.
@@ -186,12 +240,14 @@
       sortState.ascending = (sortState.header === th) ? !sortState.ascending : true;
       sortState.header = th;
       var key = th.getAttribute('data-sort');
+      var isNumber = th.getAttribute('data-sort-type') === 'number';
       var ascending = sortState.ascending;
       var tbody = table.querySelector('tbody');
       var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
       rows.sort(function (a, b) {
         var av = a.getAttribute('data-' + key) || '';
         var bv = b.getAttribute('data-' + key) || '';
+        if (isNumber) { return compareNumbers(av, bv, ascending); }
         return ascending ? av.localeCompare(bv) : bv.localeCompare(av);
       });
       rows.forEach(function (r) { tbody.appendChild(r); });
@@ -206,6 +262,18 @@
       // A copy, so callers cannot change the state by accident.
       getSortState: function () { return { header: sortState.header, ascending: sortState.ascending }; }
     };
+  }
+
+  // Compare two attribute values as numbers. A blank (or unreadable) value goes
+  // after every number whichever way the column is sorted, so a row with no
+  // value never ends up at the top.
+  function compareNumbers(a, b, ascending) {
+    var an = parseFloat(a);
+    var bn = parseFloat(b);
+    var aBlank = isNaN(an);
+    var bBlank = isNaN(bn);
+    if (aBlank || bBlank) { return (aBlank ? 1 : 0) - (bBlank ? 1 : 0); }
+    return ascending ? an - bn : bn - an;
   }
 
   // Make each "Show more" button (matched by `buttonSelector`) toggle the
@@ -227,50 +295,35 @@
   // 2. Telescope Access page
   // -------------------------------------------------------------------------
   function initTelescopes(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
     wireCardJumps(table);
     wireTableSorting(table);
+    keepListInSync(filtering);
+    wireHiddenCardLinks(filtering);
   }
 
   // -------------------------------------------------------------------------
   // 3. Datasets page
   // -------------------------------------------------------------------------
   function initDatasets(table) {
-    var showAvailableOnly = false;
-
-    // The "available only" button asks for one more token, under the `status`
-    // key (the page has no status drop-down).
-    var filtering = setupFiltering({
-      table: table,
-      searchInput: document.getElementById('ikp-search'),
-      extraRequirements: function () {
-        return showAvailableOnly ? [{ key: 'status', value: 'status-available' }] : [];
-      }
-    });
-
-    var toggleBtn = document.getElementById('ikp-toggle-status');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', function () {
-        showAvailableOnly = !showAvailableOnly;
-        toggleBtn.setAttribute('aria-pressed', showAvailableOnly ? 'true' : 'false');
-        toggleBtn.textContent = showAvailableOnly ? 'Include future datasets' : 'Show available only';
-        filtering.applyFilters();
-      });
-    }
-
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
     wireCardJumps(table);
     wireExpandButtons('.ikp-more-btn');
     wireTableSorting(table);
+    keepListInSync(filtering);
+    wireHiddenCardLinks(filtering);
   }
 
   // -------------------------------------------------------------------------
   // 4. Software page
   // -------------------------------------------------------------------------
   function initSoftware(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search') });
     wireCardJumps(table);
     wireExpandButtons('.ikp-expand-btn');
     wireTableSorting(table);
+    keepListInSync(filtering);
+    wireHiddenCardLinks(filtering);
   }
 
   // -------------------------------------------------------------------------

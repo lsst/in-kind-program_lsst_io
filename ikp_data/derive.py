@@ -8,6 +8,8 @@ tools live here once instead of being copied into every loader (and into the
 cross-record checks):
 
 * text helpers: ``slugify``, ``option_pairs`` and ``normalize_strings``;
+* ``largest_metre_value``: the number a telescope table sorts its Aperture
+  column by;
 * ``display_country``: the spelling of a country shown on a card header;
 * ``search_index_to_json``: dumps a page's search index so it is safe to embed in a
   ``<script>`` block;
@@ -17,6 +19,8 @@ cross-record checks):
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
 * ``require_field``: reads a required field, or raises an error naming the file;
+* ``sort_cards``: the order of the cards and table rows on the Datasets and
+  Software pages;
 * ``record_last_updated``: reads a card's explicit ``last_updated`` date;
 * ``parse_date``: reads a date that may be a date object or an ISO string.
 
@@ -47,6 +51,26 @@ SIBLING_CONSISTENCY_FIELDS = (
 def slugify(value):
     """Lowercase, and turn each run of other characters into one "-"."""
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+# A size in metres: a number directly followed by "m" (an optional space is
+# allowed, and "mm" or "meters" do not count). A number with no "m" after it,
+# such as the "2" in "2 x 8.4m", is a count, not a size.
+_METRE_VALUE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*m(?![A-Za-z])")
+
+
+def largest_metre_value(text):
+    """The largest size in metres named in free text, as a float, or None.
+
+    "2 x 8.4m" gives 8.4, "1.5m / 1.0m" gives 1.5 and "1.9m-1.0m" gives 1.9.
+    Text with no size (or no text) gives None, so the table can sort such rows last.
+    Only "digits, optional point, digits" is read: ".5m" gives 5 and a decimal
+    comma ("8,4m") gives 4. Neither spelling is used in the data.
+    """
+    if not text:
+        return None
+    values = [float(number) for number in _METRE_VALUE_RE.findall(text)]
+    return max(values) if values else None
 
 
 # Country names that the data spells in a short form but a card header should
@@ -165,6 +189,36 @@ def record_last_updated(record, path):
             "see ADR 0007. Run `tox run -e validate` for details."
         )
     return str(explicit)
+
+
+def _natural_key(text):
+    """A sort key that compares the digit runs in `text` as numbers.
+
+    "ITA-INA-S2" sorts before "ITA-INA-S10", as a reader expects, where plain
+    text order would put "S10" first. The key splits the text into pieces, such
+    as ["ITA-INA-S", 2, ""], and a split always alternates text and number, so
+    two keys compare piece by piece without ever comparing text with a number.
+    """
+    return [int(piece) if piece.isdigit() else piece for piece in re.split(r"(\d+)", text)]
+
+
+def sort_cards(records):
+    """Return `records` in page order: Available first, then the most recently
+    updated, then by contribution ID (A to Z, with numbers in order: S2 before S10) so
+    equal dates keep a stable order.
+
+    The cards and the table rows are built from the same list, so they share
+    this order. `last_updated` is an ISO date string, so text order is date
+    order. The loaders always give a record a date (`record_last_updated` raises
+    without one), but a record with no date would come last in its group.
+    """
+    # Python's sort is stable: sorting by the least important key first and the
+    # most important key last gives the combined order. The date key needs a
+    # reversed sort, which is why this is three passes and not one tuple key.
+    ordered = sorted(records, key=lambda r: _natural_key(r.get("contribution_id") or ""))
+    ordered.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
+    ordered.sort(key=lambda r: r.get("status") != "available")
+    return ordered
 
 
 def collect_cross_page_targets(data_dir, subdir_name, anchor_for):

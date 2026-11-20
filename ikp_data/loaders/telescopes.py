@@ -18,6 +18,8 @@ Why the derived fields exist
 * ``hemisphere``, ``marker_x`` / ``marker_y``: where the facility sits on the
   map, projected from latitude/longitude (see ``ikp_data.derive``).
 * ``aperture_band`` and ``resolution_bin``: coarse buckets for the filters.
+* ``aperture_value``: the largest size in metres in the free-text ``aperture``
+  (a float, or None). The table sorts its Aperture column by it.
 * ``status``: defaults to "future_semester" when a record omits it.
 * ``filters`` and ``search_text``: what the filter and search scripts match.
   ``filters`` maps each filter key (the ``data-filter-key`` of a drop-down on the
@@ -45,6 +47,7 @@ import string
 import yaml
 
 from ikp_data.derive import (
+    largest_metre_value,
     load_world_outline_path,
     normalize_strings,
     offset_clustered_markers,
@@ -156,6 +159,7 @@ def load_telescopes(data_dir, world_outline_svg):
 
         aperture_band = _aperture_band(record.get("aperture"))
         record["aperture_band"] = aperture_band
+        record["aperture_value"] = largest_metre_value(record.get("aperture"))
 
         instrumentation = record.get("instrumentation") or []
         wavelengths = record.get("wavelength_regime") or []

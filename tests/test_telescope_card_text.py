@@ -18,7 +18,7 @@ from docutils.core import publish_doctree
 
 from ikp_data.loaders import build_contexts
 from ikp_data.loaders.telescopes import _rst_plain_text
-from tests.test_card_page_templates import FIXTURE_DATA_DIR, jinja_block
+from tests.test_card_page_templates import FIXTURE_DATA_DIR, jinja_block, read_structure
 
 TODAY = datetime.date(2027, 3, 15)
 SEPARATE_PROCESS_NOTE = (
@@ -165,3 +165,15 @@ def test_escaped_note_parses_back_to_the_same_text():
         assert len(doctree.children) == 1 and len(paragraphs) == 1, text
         assert paragraphs[0].astext() == text, text
         assert warnings.getvalue() == "", (text, warnings.getvalue())
+
+
+def test_aperture_header_asks_for_a_numeric_sort_by_the_row_value(tmp_path):
+    text = render_card_text(tmp_path)
+    assert '<th data-sort="aperture-value" data-sort-type="number">Aperture</th>' in text
+
+
+def test_rows_carry_the_aperture_value_and_leave_it_blank_without_one(tmp_path):
+    with_size = read_structure(render_card_text(tmp_path / "a", aperture="2 x 8.4m")).rows[0]
+    assert with_size["data-aperture-value"] == "8.4"
+    without_size = read_structure(render_card_text(tmp_path / "b", aperture=None)).rows[0]
+    assert without_size["data-aperture-value"] == ""

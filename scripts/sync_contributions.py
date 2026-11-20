@@ -278,7 +278,7 @@ LIST_VALUED_DATASET_FIELDS = {"data_type", "access_mechanisms"}
 # associated_dataset block needs its own copy of this too -- without it, a
 # companion card auto-drafted (or updated) from a Software submission's
 # data-products answers silently shows no UAT badges and never matches the
-# "Science case (UAT)" filter, even though the parent Software card's own
+# "Science keyword (UAT)" filter, even though the parent Software card's own
 # card looks correct. See build_associated_dataset() below.
 ASSOCIATED_DATASET_UAT_FIELD_MAP = {
     "uat_category": "uat_category",

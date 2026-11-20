@@ -82,6 +82,7 @@
       "aeon": false,
       "aperture": "10.4m",
       "aperture_band": "large",
+      "aperture_value": 10.4,
       "contacts": [
         {
           "email": "steven.margheim@noirlab.edu",
@@ -178,6 +179,7 @@
       "aeon": true,
       "aperture": "1.6m",
       "aperture_band": "small",
+      "aperture_value": 1.6,
       "contacts": [
         {
           "email": "msshin@kasi.re.kr",
@@ -271,6 +273,7 @@
       "aeon": true,
       "aperture": "1.6m",
       "aperture_band": "small",
+      "aperture_value": 1.6,
       "contacts": [
         {
           "email": "msshin@kasi.re.kr",
@@ -364,6 +367,7 @@
       "aeon": true,
       "aperture": "1.6m",
       "aperture_band": "small",
+      "aperture_value": 1.6,
       "contacts": [
         {
           "email": "msshin@kasi.re.kr",
@@ -457,6 +461,7 @@
       "aeon": false,
       "aperture": "2 x 8.4m",
       "aperture_band": "large",
+      "aperture_value": 8.4,
       "contacts": [
         {
           "email": "felice.cusano@inaf.it",
@@ -566,6 +571,7 @@
       "aeon": true,
       "aperture": "1.4m",
       "aperture_band": "small",
+      "aperture_value": 1.4,
       "contacts": [
         {
           "email": "mlakicevic@aob.rs",
@@ -652,6 +658,7 @@
       "aeon": false,
       "aperture": "9.2m",
       "aperture_band": "large",
+      "aperture_value": 9.2,
       "contacts": [
         {
           "email": "salthelp@salt.ac.za",
@@ -742,6 +749,7 @@
       "aeon": false,
       "aperture": "8.2m",
       "aperture_band": "large",
+      "aperture_value": 8.2,
       "contacts": [
         {
           "email": "koyama@naoj.org",
@@ -836,6 +844,7 @@
       "aeon": false,
       "aperture": "2.6m",
       "aperture_band": "medium",
+      "aperture_value": 2.6,
       "contacts": [
         {
           "email": "felice.cusano@inaf.it",
@@ -938,6 +947,7 @@
       "aeon": true,
       "aperture": "1.0m",
       "aperture_band": "small",
+      "aperture_value": 1.0,
       "contacts": [],
       "contribution_id": "NZL-AUK-S1",
       "contribution_ids": [
@@ -1015,6 +1025,7 @@
       "aeon": true,
       "aperture": "1.8m",
       "aperture_band": "small",
+      "aperture_value": 1.8,
       "contacts": [],
       "contribution_id": "NZL-AUK-S1",
       "contribution_ids": [
@@ -1092,6 +1103,7 @@
       "aeon": true,
       "aperture": "1.5m / 1.0m",
       "aperture_band": "small",
+      "aperture_value": 1.5,
       "contacts": [],
       "contribution_id": "TUR-AKD-S1",
       "contribution_ids": [
@@ -1166,6 +1178,7 @@
       "aeon": null,
       "aperture": "2m",
       "aperture_band": "medium",
+      "aperture_value": 2.0,
       "contacts": [],
       "contribution_id": "TAI-NCU-S1",
       "contribution_ids": [
@@ -1236,6 +1249,7 @@
       "aeon": true,
       "aperture": "1.9m-1.0m",
       "aperture_band": "small",
+      "aperture_value": 1.9,
       "contacts": [],
       "contribution_id": "SZA-SAA-S4",
       "contribution_ids": [
@@ -1312,6 +1326,7 @@
       "aeon": false,
       "aperture": "2.56m",
       "aperture_band": "medium",
+      "aperture_value": 2.56,
       "contacts": [
         {
           "email": "jesper@astro.su.se",

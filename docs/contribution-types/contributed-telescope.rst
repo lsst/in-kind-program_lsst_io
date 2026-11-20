@@ -128,7 +128,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <th data-sort="location">Location</th>
             <th data-sort="instrumentation">Instrumentation</th>
             <th data-sort="status">Status</th>
-            <th data-sort="aperture">Aperture</th>
+            <th data-sort="aperture-value" data-sort-type="number">Aperture</th>
           </tr>
         </thead>
         <tbody>
@@ -138,7 +138,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
               data-location="{{ [t.site, t.country] | select | join(', ') }}"
               data-instrumentation="{{ (t.instrumentation or []) | join(', ') }}"
               data-status="{{ t.status }}"
-              data-aperture="{{ t.aperture or '' }}">
+              data-aperture-value="{{ t.aperture_value if t.aperture_value is not none else '' }}">
             <td><button type="button" class="ikp-title-link">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
             <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>

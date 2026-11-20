@@ -23,15 +23,14 @@
  * SVG fill attributes are still set in the Telescope Access template.
  * --------------------------------------------------------------------------- */
 :root {
-  --ikp-green: #1a5c33;              /* accents, pressed toggle, highlight outline */
+  --ikp-green: #1a5c33;              /* accents, highlight outline */
   --ikp-green-link: #145c33;         /* links inside opportunity cards */
   --ikp-green-tint: #f3faf6;         /* opportunity card background */
   --ikp-green-on-dark: #7fd6a0;      /* the green used for text and outlines in dark mode */
   --ikp-pill-hover: #e6e6e6;         /* outlined pill, hovered */
   --ikp-pill-hover-on-dark: rgba(255, 255, 255, 0.1);  /* outlined pill, hovered, dark mode */
   --ikp-text: #1a1a1a;
-  --ikp-white: #fff;
-  --ikp-control-border: #999;        /* inputs and toggle buttons */
+  --ikp-control-border: #999;        /* the search box */
   --ikp-table-border: #ddd;
   --ikp-map-background: #eef2f0;
 
@@ -64,8 +63,8 @@
 .ikp-filterbar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
 .ikp-filterbar label { font-size: 0.9em; }
 
-/* Row holding the search box (and, on Datasets, the status toggle). The
-   Telescope Access page adds `ikp-actionbar-spaced` for more space below. */
+/* Row holding the search box. The Telescope Access page adds
+   `ikp-actionbar-spaced` for more space below. */
 .ikp-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1rem; }
 .ikp-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid var(--ikp-control-border); border-radius: 0.3em; font-size: 0.9em; }
 .ikp-actionbar-spaced { margin-bottom: 1.5rem; }
@@ -90,10 +89,6 @@
 .ikp-badge-muted { background: var(--ikp-badge-muted-bg); color: var(--ikp-badge-muted-text); }
 .ikp-badge-warning { background: var(--ikp-badge-warning-bg); color: var(--ikp-badge-warning-text); }
 .ikp-badge-danger { background: var(--ikp-badge-danger-bg); color: var(--ikp-badge-danger-text); }
-
-/* Datasets page: "Show available only" toggle button. */
-.ikp-toggle-btn { padding: 0.4em 0.9em; border-radius: 1em; border: 1px solid var(--ikp-control-border); background: var(--ikp-white); color: var(--ikp-text); cursor: pointer; font-size: 0.9em; white-space: nowrap; }
-.ikp-toggle-btn[aria-pressed="true"] { background: var(--ikp-green); border-color: var(--ikp-green); color: var(--ikp-white); }
 
 /* A table row's title, a button styled to look like plain text. */
 .ikp-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }

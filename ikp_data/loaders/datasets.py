@@ -23,10 +23,13 @@ the loader adds, for every record:
   only: the free-text search does not cover the country;
 * ``related``: "Also see" links to software cards (another page) or to other
   dataset cards (this page), with titles looked up from the records;
-* ``filters``: for each filter key (the ``data-filter-key`` of a drop-down, or the
-  "available only" button), the tokens this dataset has. The template writes each
-  entry onto the table row as a ``data-filter-<key>`` attribute;
+* ``filters``: for each filter key (the ``data-filter-key`` of a drop-down), the
+  tokens this dataset has. The template writes each entry onto the table row as a
+  ``data-filter-<key>`` attribute;
 * ``search_text``: lowercase text for the free-text search box.
+
+The records are in page order, Available first (see ``ikp_data.derive.sort_cards``);
+the cards and the table rows share it.
 
 The context also carries the filter drop-down options as sorted ``(label, slug)``
 pairs and the search index as JSON.
@@ -45,6 +48,7 @@ from ikp_data.derive import (
     search_index_to_json,
     slugify,
     software_anchor,
+    sort_cards,
 )
 
 
@@ -96,7 +100,7 @@ def load_datasets(data_dir, today):
 
         # The tokens this dataset has for each filter, keyed by the filter's
         # `data-filter-key`. Each token is the `value` of one option of that
-        # filter (the "available only" button asks for `status-available`).
+        # filter.
         record["filters"] = {
             "status": [f"status-{slugify(status)}"],
             "dt": [f"dt-{slugify(v)}" for v in data_types],
@@ -118,10 +122,8 @@ def load_datasets(data_dir, today):
         record["search_text"] = " ".join(search_parts).lower()
 
         records.append(record)
-    # Reverse chronological by last-updated -- the most recently touched
-    # contributions surface first, since that's the signal visitors care
-    # about. Missing dates sort to the bottom rather than the top.
-    records.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
+    # Available first, then the most recently updated (see `sort_cards`).
+    records = sort_cards(records)
     search_index = {r["anchor"]: r["search_text"] for r in records}
     return {
         "datasets": records,

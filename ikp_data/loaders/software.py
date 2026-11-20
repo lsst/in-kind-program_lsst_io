@@ -30,6 +30,9 @@ Why the derived fields exist
   software cards (this page), with titles looked up from the records.
   (``ikp_data.checks`` ensures related IDs name datasets or software, never
   telescopes.)
+
+The records are in page order, Available first (see ``ikp_data.derive.sort_cards``);
+the cards and the table rows share it.
 """
 
 import html
@@ -48,6 +51,7 @@ from ikp_data.derive import (
     search_index_to_json,
     slugify,
     software_anchor,
+    sort_cards,
 )
 
 
@@ -185,7 +189,8 @@ def load_software(data_dir, today):
 
         records.append(record)
 
-    records.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
+    # Available first, then the most recently updated (see `sort_cards`).
+    records = sort_cards(records)
     search_index = {r["anchor"]: r["search_text"] for r in records}
     return {
         "software": records,
