@@ -13,7 +13,8 @@
  *   1. Colour variables (light mode)
  *   2. Shared pieces: filter bar, action bar, tables, badges, buttons, cards
  *   3. Telescope Access page only (ikp-map-*, ikp-opp-*)
- *   4. Datasets and Software pages only (expand controls, "Also see" link)
+ *   4. Datasets and Software pages only (expand controls, "Also see" link,
+ *      the "Highlighted" teaser row)
  */
 
 /* ---------------------------------------------------------------------------
@@ -46,6 +47,13 @@
   --ikp-also-see-bg: #e6e6e6;
   --ikp-also-see-bg-hover: #d9d9d9;
   --ikp-also-see-text: #333;
+
+  --ikp-teaser-bg: #f3faf6;          /* the "Highlighted" row */
+  --ikp-teaser-border: #b7dcc5;
+  --ikp-teaser-heading-text: #1a5c33;
+  --ikp-teaser-link-text: #145c33;
+  --ikp-teaser-reason-bg: #d9f2e3;
+  --ikp-teaser-reason-text: #1a5c33;
 
   --ikp-milestone-approx: #666;
   --ikp-milestone-passed: #888;
@@ -182,3 +190,20 @@ html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-o
 .ikp-also-see { display: block; width: fit-content; background: var(--ikp-also-see-bg); color: var(--ikp-also-see-text); font-size: 0.85em; padding: 0.3em 0.8em; border-radius: 1em; margin-top: 1em; text-decoration: none; }
 .ikp-also-see + .ikp-also-see { margin-top: 0.4em; }
 .ikp-also-see:hover { background: var(--ikp-also-see-bg-hover); }
+
+/* The "Highlighted" row above the filters: a small heading, then up to three
+   compact teasers that each link to a card on this page. The names start with
+   `ikp-teaser-` because `ikp-highlight` is the outline shown after a jump. The
+   row sits outside the filtered table and grid, so the filters never hide it. */
+.ikp-teasers { margin-bottom: 1.5rem; padding: 0.6em 1em 0.8em; border: 1px solid var(--ikp-teaser-border); border-radius: 0.5rem; background: var(--ikp-teaser-bg); }
+.ikp-teaser-heading { margin: 0 0 0.4em; font-size: 0.8em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ikp-teaser-heading-text); }
+/* One column on a phone; side by side, wrapping, from tablet width up. */
+.ikp-teaser-list { display: flex; flex-direction: column; gap: 0.4em 2em; margin: 0; padding: 0; list-style: none; }
+.ikp-teaser { margin: 0; }
+.ikp-teaser-link { color: var(--ikp-teaser-link-text); font-weight: 600; overflow-wrap: anywhere; }
+.ikp-teaser-reason { display: inline-block; padding: 0.1em 0.6em; border-radius: 1em; font-size: 0.8em; background: var(--ikp-teaser-reason-bg); color: var(--ikp-teaser-reason-text); }
+@media (min-width: 40em) {
+  .ikp-teaser-list { flex-direction: row; flex-wrap: wrap; }
+}
+/* On the dark page background the light-mode greens are too dark to read. */
+html[data-theme=dark] .ikp-teasers { --ikp-teaser-bg: rgba(127, 214, 160, 0.08); --ikp-teaser-border: rgba(127, 214, 160, 0.4); --ikp-teaser-heading-text: var(--ikp-green-on-dark); --ikp-teaser-link-text: var(--ikp-green-on-dark); --ikp-teaser-reason-bg: rgba(127, 214, 160, 0.18); --ikp-teaser-reason-text: #d4f2e0; }

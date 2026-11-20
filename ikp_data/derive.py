@@ -21,6 +21,8 @@ cross-record checks):
 * ``require_field``: reads a required field, or raises an error naming the file;
 * ``sort_cards``: the order of the cards and table rows on the Datasets and
   Software pages;
+* ``active_highlights``: the short list behind the "Highlighted" teaser row on
+  those two pages;
 * ``record_last_updated``: reads a card's explicit ``last_updated`` date;
 * ``parse_date``: reads a date that may be a date object or an ISO string;
 * ``format_date``: writes a date for readers, as "30 Sep 2026".
@@ -242,6 +244,47 @@ def sort_cards(records):
     ordered.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
     ordered.sort(key=lambda r: r.get("status") != "available")
     return ordered
+
+
+# The most teasers the "Highlighted" row shows on one page.
+MAX_HIGHLIGHTS = 3
+
+
+def active_highlights(records, today):
+    """The teasers for the "Highlighted" row: one dictionary per active highlight.
+
+    A record is highlighted when ``curated.highlight`` has a readable ``until``
+    date that is not before `today`. The ``until`` day itself still counts, as
+    ``visible_until`` does for a banner. The list is ordered soonest-expiring
+    first, with ties broken by contribution ID (numbers in order, as
+    ``sort_cards`` does), and holds at most ``MAX_HIGHLIGHTS`` entries. Each
+    entry has the card's ``title``, the badge ``reason`` and the card's
+    ``anchor``, which the template uses as the link target.
+
+    `records` are the loaders' records, which already carry an ``anchor``.
+    A highlight with no readable date, or one that is not a mapping, is
+    skipped: ``ikp_data.validate`` is where a bad one is reported.
+    """
+    candidates = []
+    for record in records:
+        highlight = (record.get("curated") or {}).get("highlight")
+        # A highlight that is not a mapping is malformed: treat it as absent.
+        # (``ikp_data.validate`` reports it.)
+        if not isinstance(highlight, dict):
+            continue
+        until = parse_date(highlight.get("until"))
+        if until is None or until < today:
+            continue
+        candidates.append((until, record, highlight))
+    candidates.sort(key=lambda c: (c[0], _natural_key(c[1].get("contribution_id") or "")))
+    return [
+        {
+            "title": record.get("title", ""),
+            "reason": highlight.get("reason") or "",
+            "anchor": record["anchor"],
+        }
+        for _, record, highlight in candidates[:MAX_HIGHLIGHTS]
+    ]
 
 
 def collect_cross_page_targets(data_dir, subdir_name, anchor_for):

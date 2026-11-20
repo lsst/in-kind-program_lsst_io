@@ -32,12 +32,15 @@ The records are in page order, Available first (see ``ikp_data.derive.sort_cards
 the cards and the table rows share it.
 
 The context also carries the filter drop-down options as sorted ``(label, slug)``
-pairs and the search index as JSON.
+pairs, the search index as JSON, and ``highlights``: the teasers for the
+"Highlighted" row above the filters (active ``curated.highlight`` entries only; see
+``ikp_data.derive.active_highlights``).
 """
 
 import yaml
 
 from ikp_data.derive import (
+    active_highlights,
     collect_cross_page_targets,
     dataset_anchor,
     display_country,
@@ -54,8 +57,7 @@ from ikp_data.derive import (
 
 def load_datasets(data_dir, today):
     """Build the `contributed_datasets` context from `data_dir`/datasets."""
-    # `today` is accepted so every loader has the same signature (and so date-based
-    # features, such as expiring highlights, can use it later).
+    # `today` decides which highlights are still active.
     records_dir = data_dir / "datasets"
     # For the "Also see" links: a related ID is looked up on the Software page
     # first (the usual case: the matching software card), then on this page
@@ -130,5 +132,6 @@ def load_datasets(data_dir, today):
         "all_data_types": option_pairs(all_data_types),
         "all_wavelengths": option_pairs(all_wavelengths),
         "all_uat": option_pairs(all_uat),
+        "highlights": active_highlights(records, today),
         "search_index_json": search_index_to_json(search_index),
     }

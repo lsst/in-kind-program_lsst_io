@@ -15,6 +15,17 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
    .. raw:: html
 
+      {% if highlights %}
+      <div class="ikp-teasers">
+        <p class="ikp-teaser-heading">Highlighted</p>
+        <ul class="ikp-teaser-list">
+          {% for item in highlights %}
+          <li class="ikp-teaser"><a class="ikp-teaser-link" href="#{{ item.anchor | e }}">{{ item.title | e }}</a>{% if item.reason %} <span class="ikp-teaser-reason">{{ item.reason | e }}</span>{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
       <div class="ikp-filterbar">
         <label>Category
           <select id="ikp-sw-filter-cat" data-filter-key="cat">

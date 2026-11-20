@@ -22,3 +22,6 @@ curated:
   status_override: null
   related_contribution_ids:
   - TST-FIX-S2
+  highlight:
+    reason: Widely used
+    until: '2027-05-31'
