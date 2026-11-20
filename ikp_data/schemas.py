@@ -287,7 +287,7 @@ class Telescope(_Strict):
         "People to contact about this facility.", rendered=True, default_factory=list
     )
     first_semester: str = _field(
-        "First semester the facility is available, for example '2026A', or 'TBA'.",
+        "First semester the facility is available, for example '2026A', or 'TBD'.",
         rendered=True,
     )
     time_available: str = _field(
