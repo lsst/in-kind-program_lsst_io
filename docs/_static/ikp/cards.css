@@ -10,7 +10,7 @@
  * use this file.
  *
  * Layout of this file:
- *   1. Colour variables (light mode)
+ *   1. Colour variables (light mode, then the dark-mode block)
  *   2. Shared pieces: filter bar, action bar, tables, badges, buttons, cards
  *   3. Telescope Access page only (ikp-map-*, ikp-opp-*)
  *   4. Datasets and Software pages only (expand controls, "Also see" link,
@@ -20,8 +20,8 @@
 /* ---------------------------------------------------------------------------
  * 1. Colour variables
  *
- * These variables hold the colours used by the rules in this file. The map's
- * SVG fill attributes are still set in the Telescope Access template.
+ * These variables hold the colours used by the rules in this file, including
+ * the map's (the template's SVG carries classes, not colours).
  * --------------------------------------------------------------------------- */
 :root {
   --ikp-green: #1a5c33;              /* accents, highlight outline */
@@ -34,6 +34,12 @@
   --ikp-control-border: #999;        /* the search box */
   --ikp-table-border: #ddd;
   --ikp-map-background: #eef2f0;
+  --ikp-map-land: #d7ded9;
+  --ikp-map-land-stroke: #c3ccc5;
+  --ikp-map-marker-available: #1a5c33;
+  --ikp-map-marker-past: #a12626;
+  --ikp-map-marker-future: #8a5a00;
+  --ikp-map-marker-hover: #1a1a1a;   /* outline of a hovered marker */
 
   --ikp-badge-success-bg: #d9f2e3;
   --ikp-badge-success-text: #1a5c33;
@@ -67,6 +73,67 @@
   --ikp-opp-muted-text: #555;
   --ikp-opp-related-text: #666;      /* the "Related facility" line */
   --ikp-siblings-text: #555;
+}
+
+/* Dark mode. pydata-sphinx-theme sets data-theme="dark" on <html>; redefining the
+ * light-only variables here makes our badges, pills, banners and map follow it.
+ * Every text colour below reaches at least 4.5:1 against the background it is
+ * drawn on, and the map markers at least 3:1 against the map panel and land
+ * (tests/test_card_page_dark_mode.py checks this). The theme's own page and card
+ * backgrounds are #14181e and #222832.
+ * Variables not redefined here are listed, with reasons, in
+ * tests/test_card_page_dark_mode.py. */
+html[data-theme=dark] {
+  --ikp-green: #7fd6a0;              /* accents: banner border, jump-highlight outline, expand pills */
+  --ikp-green-link: #8fe0ae;
+  --ikp-green-tint: #14281d;         /* opportunity card background */
+  --ikp-text: #e8eaed;
+  --ikp-table-border: #364150;       /* the theme's own table-border grey */
+
+  /* Status badges: a dark tint of the hue, with light text of the same hue. */
+  --ikp-badge-success-bg: #1f4a31;
+  --ikp-badge-success-text: #bfeccf;
+  --ikp-badge-muted-bg: #3a3f44;
+  --ikp-badge-muted-text: #d8dce0;
+  --ikp-badge-warning-bg: #4d3a0c;
+  --ikp-badge-warning-text: #f5d68a;
+  --ikp-badge-danger-bg: #5a2222;
+  --ikp-badge-danger-text: #ffc4c4;
+
+  --ikp-also-see-bg: #3a3f44;
+  --ikp-also-see-bg-hover: #4a5056;
+  --ikp-also-see-text: #e6e8ea;
+
+  /* The "Highlighted" row: translucent green over the page background. */
+  --ikp-teaser-bg: rgba(127, 214, 160, 0.08);
+  --ikp-teaser-border: rgba(127, 214, 160, 0.4);
+  --ikp-teaser-heading-text: var(--ikp-green-on-dark);
+  --ikp-teaser-link-text: var(--ikp-green-on-dark);
+  --ikp-teaser-reason-bg: rgba(127, 214, 160, 0.18);
+  --ikp-teaser-reason-text: #d4f2e0;
+
+  /* Opportunity banners: dark background, coloured border, light text. */
+  --ikp-milestone-approx: #aab0b5;
+  --ikp-milestone-passed: #959ca2;
+  --ikp-milestone-passed-label: #ff9a9a;
+  --ikp-opp-warning-border: #d9a441;
+  --ikp-opp-warning-bg: #33270a;
+  --ikp-opp-status-text: #e8eaed;
+  --ikp-opp-deadline-text: var(--ikp-green-on-dark);
+  --ikp-opp-muted-border: #6b756f;
+  --ikp-opp-muted-bg: #23272b;
+  --ikp-opp-muted-text: #c9cdd1;
+  --ikp-opp-related-text: #aab0b5;
+  --ikp-siblings-text: #b0b5ba;
+
+  /* The map: a dark panel with dim land, so the brighter markers stand out. */
+  --ikp-map-background: #1c232c;
+  --ikp-map-land: #2f3a46;
+  --ikp-map-land-stroke: #3d4a58;
+  --ikp-map-marker-available: #4fd47e;
+  --ikp-map-marker-past: #ff6b6b;
+  --ikp-map-marker-future: #f0b429;
+  --ikp-map-marker-hover: #ffffff;
 }
 
 /* ---------------------------------------------------------------------------
@@ -132,16 +199,14 @@
 .ikp-opp-milestones .passed::after { content: "(passed)"; display: inline-block; margin-left: 0.3em; text-decoration: none; color: var(--ikp-milestone-passed-label); }
 .ikp-opp-links a { margin-right: 1em; font-size: 0.9em; color: var(--ikp-green-link); }
 .ikp-opp-card-warning { border-color: var(--ikp-opp-warning-border); background: var(--ikp-opp-warning-bg); }
-/* "Related facility" links at the foot of a banner. Like the rest of the banner it
-   sits on a light background in both themes, so this grey stays readable. */
+/* "Related facility" links at the foot of a banner. */
 .ikp-opp-related { font-size: 0.85em; color: var(--ikp-opp-related-text); margin-top: 0.6em; }
 /* The status line under the title. An open banner emphasizes its deadline. */
 .ikp-opp-status { margin: 0 0 0.6em; color: var(--ikp-opp-status-text); }
 .ikp-opp-phase-open .ikp-opp-status { font-weight: 700; color: var(--ikp-opp-deadline-text); }
 /* A banner under review or closed is muted. This rule comes after the accent
-   rule above, so it also overrides the warning colours. Every banner paints its
-   own light background with dark text in both themes, so these colours stay
-   readable in dark mode and need no html[data-theme=dark] override. */
+   rule above, so it also overrides the warning colours. The colours come from the
+   variables, so dark mode restyles every banner through the block at the top. */
 .ikp-opp-card-muted { border-color: var(--ikp-opp-muted-border); background: var(--ikp-opp-muted-bg); color: var(--ikp-opp-muted-text); }
 .ikp-opp-card-muted .ikp-opp-title,
 .ikp-opp-card-muted .ikp-opp-status { color: var(--ikp-opp-muted-text); }
@@ -149,7 +214,13 @@
 /* World map. */
 .ikp-map-wrap { margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; background: var(--ikp-map-background); }
 .ikp-map-marker { cursor: pointer; }
-.ikp-map-marker:hover { stroke: var(--ikp-text); stroke-width: 1.5; }
+.ikp-map-marker:hover { stroke: var(--ikp-map-marker-hover); stroke-width: 1.5; }
+/* The map's colours live here, not in the SVG, so dark mode can change them. */
+.ikp-map-bg { fill: var(--ikp-map-background); }
+.ikp-map-land { fill: var(--ikp-map-land); stroke: var(--ikp-map-land-stroke); }
+.ikp-map-marker-available { fill: var(--ikp-map-marker-available); }
+.ikp-map-marker-past { fill: var(--ikp-map-marker-past); }
+.ikp-map-marker-future { fill: var(--ikp-map-marker-future); }
 
 /* "Also available under this contribution" note on a telescope card. */
 .ikp-siblings { font-size: 0.85em; color: var(--ikp-siblings-text); margin-top: 0.6em; }
@@ -168,9 +239,8 @@
 .ikp-expand-btn { border: 1px solid var(--ikp-green); border-radius: 1em; background: none; color: var(--ikp-green); font-size: 0.85em; padding: 0.25em 0.9em; cursor: pointer; }
 .ikp-more-btn:hover,
 .ikp-expand-btn:hover { background: var(--ikp-pill-hover); }
-/* The dark green above is unreadable on the dark card, so the pill takes a light green. */
-html[data-theme=dark] .ikp-more-btn,
-html[data-theme=dark] .ikp-expand-btn { border-color: var(--ikp-green-on-dark); color: var(--ikp-green-on-dark); }
+/* In dark mode --ikp-green is the light green, so the pill needs no colour override;
+   only the hover tint changes, because the light grey would be a bright patch. */
 html[data-theme=dark] .ikp-more-btn:hover,
 html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-on-dark); }
 .ikp-more-btn { margin: 0.4em 0; }
@@ -205,5 +275,3 @@ html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-o
 @media (min-width: 40em) {
   .ikp-teaser-list { flex-direction: row; flex-wrap: wrap; }
 }
-/* On the dark page background the light-mode greens are too dark to read. */
-html[data-theme=dark] .ikp-teasers { --ikp-teaser-bg: rgba(127, 214, 160, 0.08); --ikp-teaser-border: rgba(127, 214, 160, 0.4); --ikp-teaser-heading-text: var(--ikp-green-on-dark); --ikp-teaser-link-text: var(--ikp-green-on-dark); --ikp-teaser-reason-bg: rgba(127, 214, 160, 0.18); --ikp-teaser-reason-text: #d4f2e0; }
