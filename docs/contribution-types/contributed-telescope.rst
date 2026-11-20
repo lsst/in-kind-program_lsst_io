@@ -145,9 +145,9 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
               data-aperture-value="{{ t.aperture_value if t.aperture_value is not none else '' }}">
             <td><button type="button" class="ikp-title-link">{{ t.facility }}</button></td>
             <td>{{ [t.site, t.country] | select | join(', ') }}</td>
-            <td>{{ (t.instrumentation or []) | join(', ') or 'TBA' }}</td>
+            <td>{{ (t.instrumentation or []) | join(', ') or 'TBD' }}</td>
             <td>{% if t.status == 'available' %}<span class="ikp-badge ikp-badge-spaced ikp-badge-success">Available</span>{% elif t.status == 'past_opportunity' %}<span class="ikp-badge ikp-badge-spaced ikp-badge-danger">Past opportunity</span>{% else %}<span class="ikp-badge ikp-badge-spaced ikp-badge-warning">Future semester</span>{% endif %}</td>
-            <td>{{ t.aperture or 'TBA' }}</td>
+            <td>{{ t.aperture or 'TBD' }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -164,7 +164,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. _{{ t.slug }}:
 
-          {{ t.contribution_ids | select | join(', ') }} · {{ t.aperture or 'TBA' }} — {{ [t.site, t.country] | select | join(', ') }}
+          {{ t.contribution_ids | select | join(', ') }} · {{ t.aperture or 'TBD' }} — {{ [t.site, t.country] | select | join(', ') }}
           ^^^
           {% for v in (t.instrumentation or []) %}:bdg-light:`{{ v }}` {% endfor %}{% for v in (t.wavelength_regime or []) %}:bdg-light:`{{ v }}` {% endfor %}{% if t.aeon %}:bdg-success:`AEON` {% endif %}{% if t.too_capable %}:bdg-success:`ToO` {% endif %}{% if t.multiplex %}:bdg-light:`Multiplex` {% endif %}
 
@@ -172,7 +172,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           {% if t.observing_mode_label %}**Observing mode:** {{ t.observing_mode_label }}{% endif %}
 
-          **First semester:** {{ t.first_semester or 'TBA' }}    **Time available:** {{ t.time_available or 'TBA' }}    **Duration:** {{ t.duration or 'TBA' }}
+          **First semester:** {{ t.first_semester or 'TBD' }}    **Time available:** {{ t.time_available or 'TBD' }}    **Duration:** {{ t.duration or 'TBD' }}
 
           {{ t.summary or '' }}
 
