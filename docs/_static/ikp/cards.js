@@ -21,6 +21,12 @@
  * (it is found by `data-card`), so cards carry no filter data and no class
  * names are matched.
  *
+ * Back and forward: the Back and Forward buttons make the browser restore the
+ * drop-down and search values the visitor had, and it does so after the
+ * scripts have run. Each page therefore applies its filters when it sets up and
+ * again on every `pageshow` event, so the list always matches the restored
+ * controls (see `keepListInSync`).
+ *
  * Class hooks: `ikp-row` and `ikp-map-marker` are used only by this script and
  * have no CSS rules, so do not remove them as unused.
  *
@@ -159,6 +165,16 @@
     });
   }
 
+  // Keep a page's list in step with its controls. The filters are applied now,
+  // and again on every `pageshow`: the browser restores form values after
+  // Back or Forward only after the scripts have run, so the values read at
+  // setup can be the defaults. (`pageshow` fires after a normal load too, and
+  // when the page comes back from the browser's cache.)
+  function keepListInSync(filtering) {
+    filtering.applyFilters();
+    window.addEventListener('pageshow', function () { filtering.applyFilters(); });
+  }
+
   // Scroll a card into view and outline it for a moment.
   function highlightCard(card) {
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -240,29 +256,32 @@
   // 2. Telescope Access page
   // -------------------------------------------------------------------------
   function initTelescopes(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
     wireCardJumps(table);
     wireTableSorting(table);
+    keepListInSync(filtering);
   }
 
   // -------------------------------------------------------------------------
   // 3. Datasets page
   // -------------------------------------------------------------------------
   function initDatasets(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
     wireCardJumps(table);
     wireExpandButtons('.ikp-more-btn');
     wireTableSorting(table);
+    keepListInSync(filtering);
   }
 
   // -------------------------------------------------------------------------
   // 4. Software page
   // -------------------------------------------------------------------------
   function initSoftware(table) {
-    setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search') });
     wireCardJumps(table);
     wireExpandButtons('.ikp-expand-btn');
     wireTableSorting(table);
+    keepListInSync(filtering);
   }
 
   // -------------------------------------------------------------------------
