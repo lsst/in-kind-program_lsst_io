@@ -13,8 +13,9 @@ HOW IT WORKS
       its `jinja_contexts` equal the package output. That proves conf.py is wired
       to the package correctly. conf.py star-imports `documenteer.conf.guide`,
       so run these tests where documenteer is installed: `tox run -e test`.
-    * Output is made deterministic by `to_stable_json` (sorted keys, dates as
-      ISO strings, callables as placeholders, sets as sorted lists).
+    * Output is made deterministic by `to_stable_json` in snapshot_helpers.py
+      (sorted keys, dates as ISO strings, callables as placeholders, sets as
+      sorted lists).
 
 TO UPDATE THE GOLDEN FILES (intended, reviewed changes only):
     tox run -e test -- --update-snapshots
@@ -22,7 +23,6 @@ TO UPDATE THE GOLDEN FILES (intended, reviewed changes only):
 
 import datetime
 import importlib.util
-import json
 import os
 from pathlib import Path
 
@@ -31,9 +31,9 @@ import time_machine
 import yaml
 
 from ikp_data.loaders import build_contexts
+from snapshot_helpers import SNAPSHOT_DIR, dump
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SNAPSHOT_DIR = Path(__file__).resolve().parent / "snapshots"
 DATA_DIR = REPO_ROOT / "docs" / "contribution-types" / "_data"
 
 # The contexts conf.py defines, one golden file each.
@@ -61,37 +61,6 @@ TODAY = datetime.date(2026, 9, 15)
 # freezegun: it is faster, patches at the C level so `datetime.date.today()` is
 # covered without import-order tricks, and is a small, test-only dependency.
 FROZEN_NOW = datetime.datetime(2026, 9, 15, 12, 0, 0, tzinfo=datetime.timezone.utc)
-
-
-def to_stable_json(value):
-    """Convert any loader output to a JSON-serializable, deterministic form."""
-    if isinstance(value, dict):
-        # Keys are stringified so non-string keys (rare) don't break sorting.
-        return {str(k): to_stable_json(v) for k, v in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [to_stable_json(v) for v in value]
-    if isinstance(value, (set, frozenset)):
-        # Sets have no defined order; sort by the JSON form of each element.
-        return sorted(
-            (to_stable_json(v) for v in value),
-            key=lambda v: json.dumps(v, sort_keys=True),
-        )
-    if isinstance(value, (datetime.datetime, datetime.date)):
-        return value.isoformat()
-    if callable(value):
-        # Safety net only: test_contexts_are_plain_data forbids callables in
-        # a context. If one slips in, record just that a callable was present
-        # (its identity is not data) rather than failing in the snapshot code.
-        name = getattr(value, "__name__", "unknown")
-        return f"<callable {name}>"
-    if value is None or isinstance(value, (str, int, float, bool)):
-        return value
-    raise TypeError(f"No stable JSON conversion for {type(value).__name__}: {value!r}")
-
-
-def dump(value):
-    """The exact text stored in (and compared with) a golden file."""
-    return json.dumps(to_stable_json(value), sort_keys=True, indent=2, ensure_ascii=False) + "\n"
 
 
 @pytest.fixture(scope="session")

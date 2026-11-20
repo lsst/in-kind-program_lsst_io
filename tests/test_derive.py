@@ -2,10 +2,11 @@
 
 import datetime
 import json
+import locale
 
 import pytest
 
-from ikp_data.derive import display_country, largest_metre_value, option_pairs, parse_date, search_index_to_json, slugify, sort_cards
+from ikp_data.derive import display_country, format_date, largest_metre_value, option_pairs, parse_date, search_index_to_json, slugify, sort_cards
 
 
 def test_parse_date_returns_a_date_unchanged():
@@ -167,3 +168,44 @@ def test_sort_cards_breaks_date_ties_in_natural_id_order():
     ]
     ordered = [c["contribution_id"] for c in sort_cards(cards)]
     assert ordered == ["ESP-BCM-S12", "ITA-INA-S1", "ITA-INA-S2", "ITA-INA-S10", "ITA-OXF-S3"]
+
+
+# ---------------------------------------------------------------------------
+# format_date
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        (datetime.date(2026, 9, 30), "30 Sep 2026"),
+        (datetime.date(2026, 9, 1), "1 Sep 2026"),  # no leading zero on the day
+        ("2027-03-05", "5 Mar 2027"),  # an ISO string, as YAML gives for a quoted date
+        (datetime.datetime(2026, 12, 31, 23, 59), "31 Dec 2026"),
+        (datetime.date(2026, 5, 7), "7 May 2026"),
+    ],
+)
+def test_format_date(value, expected):
+    assert format_date(value) == expected
+
+
+def test_format_date_names_all_twelve_months():
+    months = [format_date(datetime.date(2026, m, 15)).split()[1] for m in range(1, 13)]
+    assert months == ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def test_format_date_ignores_the_machine_locale():
+    previous = locale.setlocale(locale.LC_TIME)
+    try:
+        try:
+            locale.setlocale(locale.LC_TIME, "de_DE.UTF-8")
+        except locale.Error:
+            pytest.skip("German locale is not installed here")
+        assert format_date(datetime.date(2026, 3, 5)) == "5 Mar 2026"
+    finally:
+        locale.setlocale(locale.LC_TIME, previous)
+
+
+@pytest.mark.parametrize("value", [None, "", "soon", "2026-13-01", 20260930])
+def test_format_date_returns_none_for_an_unreadable_date(value):
+    assert format_date(value) is None

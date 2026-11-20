@@ -350,13 +350,6 @@ class Milestone(_Strict):
         rendered=False,
         default=None,
     )
-    passed: bool | None = _field(
-        "DEPRECATED. Hand-set 'this date has passed' flag that currently adds a "
-        "strike-through. It will be computed from the date once the template does "
-        "so, and then removed; do not add it to new records.",
-        rendered=True,
-        default=None,
-    )
 
 
 class Opportunity(_Strict):

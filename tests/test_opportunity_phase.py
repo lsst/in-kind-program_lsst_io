@@ -186,6 +186,6 @@ def test_loader_keeps_a_record_visible_when_visible_until_is_unreadable(tmp_path
     )
     context = load_opportunities(tmp_path, _day("2027-03-15"))
     (record,) = context["opportunities"]
-    assert record["is_visible"] is True
+    assert record["phase"] == "open"
     # Only the readable milestone date counts.
     assert record["next_milestone_date"] == _day("2027-05-01")

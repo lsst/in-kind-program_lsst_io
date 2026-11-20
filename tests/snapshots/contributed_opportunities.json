@@ -44,7 +44,6 @@
   "opportunities": [
     {
       "id": "noirlab-cfp-2027a",
-      "is_visible": true,
       "kind": "general_cfp",
       "links": [
         {
@@ -55,19 +54,25 @@
       "milestones": [
         {
           "date": "2026-09-30",
+          "date_text": "30 Sep 2026",
           "label": "Proposal submission deadline (11:59 pm MST)",
+          "passed": false,
           "role": "deadline"
         },
         {
           "date": "2027-03-01",
+          "date_text": "March 2027",
           "display_date": "March 2027",
           "label": "Expected next opportunity",
+          "passed": false,
           "role": "next"
         }
       ],
       "next_milestone_date": "2026-09-30",
+      "phase": "open",
       "related_contribution_ids": [],
       "slug": "noirlab-cfp-2027a",
+      "status_line": "Deadline 30 Sep 2026",
       "summary": "NOIRLab has issued the Call for Proposals for Semester 2027A, which includes access to many Rubin In-kind contributed facilities. <strong>New in 2027A</strong>: In addition to regular single-semester proposals, PIs are invited to request long-term status (up to three semesters) on proposals to observe with in-kind contributed facilities. Full details on the proposal process, and specific details on each facility and instrument availability can be found on the Call for Proposal web page.",
       "title": "NOIRLab Call for Proposals -- Semester 2027A",
       "visible_until": "2026-10-15"
@@ -75,7 +80,6 @@
     {
       "accent": "warning",
       "id": "gtc-2026b-special-call",
-      "is_visible": true,
       "kind": "special_call",
       "links": [
         {
@@ -94,6 +98,7 @@
       "milestones": [
         {
           "date": "2026-08-07",
+          "date_text": "7 Aug 2026",
           "label": "Letters of Intent due",
           "passed": true,
           "role": "deadline"
@@ -101,30 +106,40 @@
         {
           "approximate": true,
           "date": "2026-08-31",
-          "label": "Matchmaking & feasibility notifications"
+          "date_text": "31 Aug 2026",
+          "label": "Matchmaking & feasibility notifications",
+          "passed": true
         },
         {
           "date": "2026-09-01",
-          "label": "GTC Call for Proposals opens"
+          "date_text": "1 Sep 2026",
+          "label": "GTC Call for Proposals opens",
+          "passed": true
         },
         {
           "date": "2026-10-01",
+          "date_text": "1 Oct 2026",
           "label": "Spanish TAC submission deadline",
+          "passed": false,
           "role": "deadline"
         },
         {
           "date": "2027-02-01",
+          "date_text": "Feb 2027",
           "display_date": "Feb 2027",
           "label": "Expected next opportunity",
+          "passed": false,
           "role": "next"
         }
       ],
       "next_milestone_date": "2026-10-01",
+      "phase": "open",
       "related_contribution_ids": [
         "ESP-BCM-S5",
         "ESP-IAC-S1"
       ],
       "slug": "gtc-2026b-special-call",
+      "status_line": "Deadline 1 Oct 2026",
       "summary": "A special allocation of ~2 nights/semester on the 10.4m Gran Telescopio Canarias (GTC) is available to the US and Chilean community via a Letter-of-Intent + Spanish TAC co-PI process.",
       "title": "GTC Observing Time Opportunity for the US and Chilean Community",
       "visible_until": "2026-10-01"

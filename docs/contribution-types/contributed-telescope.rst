@@ -15,29 +15,33 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       <div class="ikp-opp-row">
       {% for opp in opportunities %}
-        <div class="ikp-opp-card{% if opp.accent %} ikp-opp-card-{{ opp.accent }}{% endif %}" id="opp-{{ opp.slug }}">
-          <p class="ikp-opp-title">{{ opp.title }}</p>
+        {# A banner that is under review or closed is muted, so the open ones stand out. #}
+        <div class="ikp-opp-card ikp-opp-phase-{{ opp.phase | replace('_', '-') }}{% if opp.accent %} ikp-opp-card-{{ opp.accent }}{% endif %}{% if opp.phase in ('in_review', 'closed') %} ikp-opp-card-muted{% endif %}" id="opp-{{ opp.slug }}">
+          <p class="ikp-opp-title">{{ opp.title | e }}</p>
+          {# The status line sits under the title and says what the phase means ("Deadline 30 Sep 2026"). It is empty when the record lacks the milestone the phase needs. #}
+          {% if opp.status_line %}<p class="ikp-opp-status">{{ opp.status_line | e }}</p>{% endif %}
+          {# The summary is deliberately not escaped: it is authored HTML (for example <strong>). Every other field below is plain text and is escaped. #}
           <p>{{ opp.summary }}</p>
           {% if opp.milestones %}
           <ul class="ikp-opp-milestones">
             {% for m in opp.milestones %}
             {% set m_classes = [] %}
             {% if m.get('approximate') %}{% set _ = m_classes.append('approx') %}{% endif %}
-            {% if m.get('passed') %}{% set _ = m_classes.append('passed') %}{% endif %}
-            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.display_date or m.date }}</strong> &mdash; {{ m.label }}</li>
+            {% if m.passed %}{% set _ = m_classes.append('passed') %}{% endif %}
+            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.date_text | e }}</strong> &mdash; {{ m.label | e }}</li>
             {% endfor %}
           </ul>
           {% endif %}
           <div class="ikp-opp-links">
           {% for link in (opp.links or []) %}
-            <a href="{{ link.url }}">{{ link.label }}</a>
+            <a href="{{ link.url | e }}">{{ link.label | e }}</a>
           {% endfor %}
           </div>
           {% if opp.related_contribution_ids %}
-          <p style="font-size: 0.85em; color: #666; margin-top: 0.6em;">
+          <p class="ikp-opp-related">
             Related facility:
             {% for cid in opp.related_contribution_ids %}
-              {% for slug in (cid_to_slugs.get(cid) or []) %}<a href="#{{ slug }}">{{ cid }}</a> {% endfor %}
+              {% for slug in (cid_to_slugs.get(cid) or []) %}<a href="#{{ slug }}">{{ cid | e }}</a> {% endfor %}
             {% endfor %}
           </p>
           {% endif %}

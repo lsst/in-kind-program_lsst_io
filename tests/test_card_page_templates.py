@@ -195,3 +195,56 @@ def test_the_script_does_not_match_class_names():
     script = CARDS_JS.read_text(encoding="utf-8")
     for needle in ("className", "data-tokens", "'.slug-'", "'.cid-'"):
         assert needle not in script, f"cards.js still mentions {needle!r}"
+
+
+# ---------------------------------------------------------------------------
+# The opportunity banner on the Telescope Access page
+# ---------------------------------------------------------------------------
+
+TELESCOPE_PAGE = "contributed-telescope.rst"
+
+
+def test_the_banner_has_no_inline_style():
+    assert "style=" not in jinja_block(TELESCOPE_PAGE, "contributed_opportunities")
+
+
+def test_the_banner_escapes_its_plain_text_but_not_the_summary():
+    block = jinja_block(TELESCOPE_PAGE, "contributed_opportunities")
+    for expression in (
+        "opp.title",
+        "opp.status_line",
+        "m.date_text",
+        "m.label",
+        "link.url",
+        "link.label",
+        "cid",
+    ):
+        assert "{{ " + expression + " | e }}" in block, f"{expression} is not escaped"
+    # The summary is authored HTML (it may hold <strong>), so it is printed as written.
+    assert "{{ opp.summary }}" in block
+
+
+def test_a_banner_shows_plain_text_as_text_and_the_summary_as_html():
+    opportunity = {
+        "slug": "x",
+        "phase": "in_review",
+        "title": "Call <i>A</i> & B",
+        "status_line": "Closed & <waiting>",
+        "summary": "Open <strong>now</strong>",
+        "milestones": [{"label": "Due <soon>", "date_text": "1 Sep 2026", "passed": False}],
+        "links": [{"label": "Read <this>", "url": "https://example.org/?a=1&b=2"}],
+        "related_contribution_ids": [],
+    }
+    block = jinja_block(TELESCOPE_PAGE, "contributed_opportunities")
+    rendered = jinja2.Environment().from_string(block).render(
+        opportunities=[opportunity], cid_to_slugs={}
+    )
+    assert "Call &lt;i&gt;A&lt;/i&gt; &amp; B" in rendered
+    assert "Closed &amp; &lt;waiting&gt;" in rendered
+    assert "Due &lt;soon&gt;" in rendered
+    assert "Read &lt;this&gt;" in rendered
+    assert 'href="https://example.org/?a=1&amp;b=2"' in rendered
+    assert "<strong>now</strong>" in rendered
+    # The phase class uses a hyphen, and a banner under review is muted.
+    assert "ikp-opp-phase-in-review" in rendered
+    assert "ikp-opp-card-muted" in rendered
