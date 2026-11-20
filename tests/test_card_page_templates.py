@@ -335,3 +335,13 @@ def test_a_teaser_with_no_reason_shows_no_badge(tmp_path, page, folder, anchor_p
     assert 'class="ikp-teaser-link"' in teaser
     assert "ikp-teaser-reason" not in teaser
     assert "None" not in teaser
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_the_map_markup_has_no_inline_fill_or_stroke_colour(data_dir):
+    """The map's colours come from cards.css classes, so dark mode can change them."""
+    rendered = render_page("contributed-telescope.rst", data_dir)
+    svg = re.search(r"<svg.*?</svg>", rendered, flags=re.S).group(0)
+    # `stroke-width` is a size, not a colour, so only whole `fill=` / `stroke=` attributes count.
+    assert not re.search(r'\b(?:fill|stroke)\s*=', svg), "the map SVG has an inline fill or stroke colour"
+    assert "ikp-map-bg" in svg and "ikp-map-marker-" in svg  # the classes that replace them are there
