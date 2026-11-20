@@ -54,12 +54,14 @@
       "milestones": [
         {
           "date": "2026-09-30",
+          "date_text": "30 Sep 2026",
           "label": "Proposal submission deadline (11:59 pm MST)",
           "passed": false,
           "role": "deadline"
         },
         {
           "date": "2027-03-01",
+          "date_text": "March 2027",
           "display_date": "March 2027",
           "label": "Expected next opportunity",
           "passed": false,
@@ -95,6 +97,7 @@
       "milestones": [
         {
           "date": "2026-08-07",
+          "date_text": "7 Aug 2026",
           "label": "Letters of Intent due",
           "passed": true,
           "role": "deadline"
@@ -102,22 +105,26 @@
         {
           "approximate": true,
           "date": "2026-08-31",
+          "date_text": "31 Aug 2026",
           "label": "Matchmaking & feasibility notifications",
           "passed": true
         },
         {
           "date": "2026-09-01",
+          "date_text": "1 Sep 2026",
           "label": "GTC Call for Proposals opens",
           "passed": true
         },
         {
           "date": "2026-10-01",
+          "date_text": "1 Oct 2026",
           "label": "Spanish TAC submission deadline",
           "passed": false,
           "role": "deadline"
         },
         {
           "date": "2027-02-01",
+          "date_text": "Feb 2027",
           "display_date": "Feb 2027",
           "label": "Expected next opportunity",
           "passed": false,

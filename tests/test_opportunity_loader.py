@@ -19,6 +19,7 @@ from pathlib import Path
 import pytest
 
 from ikp_data.loaders import build_contexts
+from ikp_data.loaders.opportunities import milestone_date_text
 from snapshot_helpers import SNAPSHOT_DIR, dump
 
 FIXTURE_DATA_DIR = Path(__file__).resolve().parent / "fixtures" / "docs" / "contribution-types" / "_data"
@@ -101,3 +102,22 @@ def test_the_visible_until_day_is_still_shown():
     # fixture-hidden-call is visible through 2027-03-01 (as "closed").
     assert _banners(_day("2027-03-01"))["fixture-hidden-call"]["phase"] == "closed"
     assert "fixture-hidden-call" not in _banners(_day("2027-03-02"))
+
+
+# ---------------------------------------------------------------------------
+# Dates as the banner shows them
+# ---------------------------------------------------------------------------
+
+
+def test_milestone_dates_are_formatted_for_readers():
+    milestones = _banners(FIXTURE_TODAY)["fixture-open-call"]["milestones"]
+    assert [m["date_text"] for m in milestones] == ["1 Mar 2027", "15 Apr 2027", "15 May 2027"]
+
+
+def test_display_date_wins_over_the_formatted_date():
+    assert milestone_date_text({"date": "2027-03-01", "display_date": "March 2027"}) == "March 2027"
+
+
+def test_an_unreadable_date_is_shown_as_written():
+    assert milestone_date_text({"date": "spring"}) == "spring"
+    assert milestone_date_text({"label": "no date at all"}) == ""

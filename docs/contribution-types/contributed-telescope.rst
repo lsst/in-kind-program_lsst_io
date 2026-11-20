@@ -24,7 +24,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             {% set m_classes = [] %}
             {% if m.get('approximate') %}{% set _ = m_classes.append('approx') %}{% endif %}
             {% if m.passed %}{% set _ = m_classes.append('passed') %}{% endif %}
-            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.display_date or m.date }}</strong> &mdash; {{ m.label }}</li>
+            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.date_text }}</strong> &mdash; {{ m.label }}</li>
             {% endfor %}
           </ul>
           {% endif %}

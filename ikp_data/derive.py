@@ -22,7 +22,8 @@ cross-record checks):
 * ``sort_cards``: the order of the cards and table rows on the Datasets and
   Software pages;
 * ``record_last_updated``: reads a card's explicit ``last_updated`` date;
-* ``parse_date``: reads a date that may be a date object or an ISO string.
+* ``parse_date``: reads a date that may be a date object or an ISO string;
+* ``format_date``: writes a date for readers, as "30 Sep 2026".
 
 Nothing in this module reads the clock, runs git, or locates files by itself:
 callers pass in the dates and paths they want used.
@@ -121,6 +122,28 @@ def parse_date(value):
         except ValueError:
             return None
     return None
+
+
+# English month abbreviations, written out so the result never depends on the
+# machine's locale (``strftime("%b")`` follows the locale).
+_MONTH_ABBREVIATIONS = (
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+)
+
+
+def format_date(value):
+    """A date written for readers: "30 Sep 2026" (day, month, four-digit year).
+
+    The day has no leading zero ("1 Sep 2026") and the month is the English
+    three-letter abbreviation. `value` may be anything ``parse_date`` accepts.
+    Returns None when `value` is not a readable date, so the caller can decide
+    what to show instead.
+    """
+    date = parse_date(value)
+    if date is None:
+        return None
+    return f"{date.day} {_MONTH_ABBREVIATIONS[date.month - 1]} {date.year:04d}"
 
 
 def normalize_strings(obj):

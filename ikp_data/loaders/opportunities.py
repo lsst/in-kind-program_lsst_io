@@ -15,6 +15,9 @@ Why the derived fields exist
   context, so the banner appears only while ``today <= visible_until``.
 * ``passed`` (on each milestone): true once the milestone's date is before
   today, from ``milestone_passed`` (below); it drives the strike-through.
+* ``date_text`` (on each milestone): the date as the banner shows it. A
+  ``display_date`` written in the record wins (for example "March 2027");
+  otherwise the date is written like "30 Sep 2026".
 * ``next_milestone_date``: the soonest milestone that is today or later, so
   banners sort soonest-first.
 
@@ -27,13 +30,27 @@ can link to facility cards; ``ikp_data.loaders.build_contexts`` adds it.
 
 import yaml
 
-from ikp_data.derive import normalize_strings, parse_date
+from ikp_data.derive import format_date, normalize_strings, parse_date
 
 
 def _dated_milestones(milestones):
     """The dates of every milestone that has a readable date (past or future)."""
     dates = (parse_date(m.get("date")) for m in milestones or [] if isinstance(m, dict))
     return [d for d in dates if d is not None]
+
+
+def milestone_date_text(milestone):
+    """The date of one milestone as the banner shows it.
+
+    A `display_date` written in the record wins, because it can say what a
+    precise date cannot ("March 2027"). Otherwise the date is formatted like
+    "30 Sep 2026". A date that cannot be read is shown as written, so the banner
+    never goes blank (``ikp_data.validate`` reports the bad date).
+    """
+    if milestone.get("display_date"):
+        return milestone["display_date"]
+    raw_date = milestone.get("date")
+    return format_date(raw_date) or ("" if raw_date is None else str(raw_date))
 
 
 def load_opportunities(data_dir, today):
@@ -58,6 +75,7 @@ def load_opportunities(data_dir, today):
         for milestone in record.get("milestones") or []:
             if isinstance(milestone, dict):
                 milestone["passed"] = milestone_passed(milestone, today)
+                milestone["date_text"] = milestone_date_text(milestone)
 
         dated_milestones = _dated_milestones(record.get("milestones"))
         future_dates = [d for d in dated_milestones if d >= today]
