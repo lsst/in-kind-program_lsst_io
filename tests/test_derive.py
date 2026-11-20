@@ -154,3 +154,16 @@ def test_sort_cards_puts_a_record_without_a_date_last_in_its_status_group():
     ]
     ordered = [c["contribution_id"] for c in sort_cards(cards)]
     assert ordered == ["BBB-S1", "AAA-S1", "DDD-S1", "CCC-S1"]
+
+
+def test_sort_cards_breaks_date_ties_in_natural_id_order():
+    cards = [
+        _card("ITA-INA-S10", "pending", "2026-07-22"),
+        _card("ITA-INA-S2", "pending", "2026-07-22"),
+        _card("ITA-INA-S1", "pending", "2026-07-22"),
+        # A different prefix sorts by the prefix first, whatever the numbers are.
+        _card("ESP-BCM-S12", "pending", "2026-07-22"),
+        _card("ITA-OXF-S3", "pending", "2026-07-22"),
+    ]
+    ordered = [c["contribution_id"] for c in sort_cards(cards)]
+    assert ordered == ["ESP-BCM-S12", "ITA-INA-S1", "ITA-INA-S2", "ITA-INA-S10", "ITA-OXF-S3"]

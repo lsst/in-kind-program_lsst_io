@@ -191,9 +191,21 @@ def record_last_updated(record, path):
     return str(explicit)
 
 
+def _natural_key(text):
+    """A sort key that compares the digit runs in `text` as numbers.
+
+    "ITA-INA-S2" sorts before "ITA-INA-S10", as a reader expects, where plain
+    text order would put "S10" first. The key splits the text into pieces, such
+    as ["ITA-INA-S", 2, ""], and a split always alternates text and number, so
+    two keys compare piece by piece without ever comparing text with a number.
+    """
+    return [int(piece) if piece.isdigit() else piece for piece in re.split(r"(\d+)", text)]
+
+
 def sort_cards(records):
     """Return `records` in page order: Available first, then the most recently
-    updated, then by contribution ID (A to Z) so equal dates keep a stable order.
+    updated, then by contribution ID (A to Z, with numbers in order: S2 before S10) so
+    equal dates keep a stable order.
 
     The cards and the table rows are built from the same list, so they share
     this order. `last_updated` is an ISO date string, so text order is date
@@ -203,7 +215,7 @@ def sort_cards(records):
     # Python's sort is stable: sorting by the least important key first and the
     # most important key last gives the combined order. The date key needs a
     # reversed sort, which is why this is three passes and not one tuple key.
-    ordered = sorted(records, key=lambda r: r.get("contribution_id") or "")
+    ordered = sorted(records, key=lambda r: _natural_key(r.get("contribution_id") or ""))
     ordered.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
     ordered.sort(key=lambda r: r.get("status") != "available")
     return ordered
