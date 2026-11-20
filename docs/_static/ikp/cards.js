@@ -83,11 +83,8 @@
   // `select[data-filter-key]`), its search box and its rows, cards and map
   // markers.
   //
-  // options.table              the page's table
-  // options.searchInput        the search box, or null
-  // options.extraRequirements  optional function returning more required tokens
-  //                            as [{key, value}], for a control that is not a
-  //                            drop-down (the Datasets "available only" button)
+  // options.table        the page's table
+  // options.searchInput  the search box, or null
   //
   // Returns {applyFilters, getVisibleCount}: the page can re-apply filters after
   // a change of its own, and read how many rows pass the filters now.
@@ -108,7 +105,7 @@
       selects.forEach(function (select) {
         if (select.value) { required.push({ key: select.getAttribute('data-filter-key'), value: select.value }); }
       });
-      return required.concat(options.extraRequirements ? options.extraRequirements() : []);
+      return required;
     }
 
     // True if the item has every required token and matches the search text.
@@ -236,28 +233,7 @@
   // 3. Datasets page
   // -------------------------------------------------------------------------
   function initDatasets(table) {
-    var showAvailableOnly = false;
-
-    // The "available only" button asks for one more token, under the `status`
-    // key (the page has no status drop-down).
-    var filtering = setupFiltering({
-      table: table,
-      searchInput: document.getElementById('ikp-search'),
-      extraRequirements: function () {
-        return showAvailableOnly ? [{ key: 'status', value: 'status-available' }] : [];
-      }
-    });
-
-    var toggleBtn = document.getElementById('ikp-toggle-status');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', function () {
-        showAvailableOnly = !showAvailableOnly;
-        toggleBtn.setAttribute('aria-pressed', showAvailableOnly ? 'true' : 'false');
-        toggleBtn.textContent = showAvailableOnly ? 'Include future datasets' : 'Show available only';
-        filtering.applyFilters();
-      });
-    }
-
+    setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
     wireCardJumps(table);
     wireExpandButtons('.ikp-more-btn');
     wireTableSorting(table);

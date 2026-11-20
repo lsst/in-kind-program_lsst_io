@@ -147,7 +147,7 @@ def test_every_filter_key_is_an_attribute_on_the_rows(page, data_dir):
 
 @pytest.mark.parametrize("data_dir", DATA_DIRS)
 def test_every_dataset_row_has_a_status_token(data_dir):
-    """The "available only" button filters on `status`, and the page has no status drop-down."""
+    """The Status drop-down filters on the `status` tokens, so every row needs one."""
     rows = read_structure(render_page("contributed-datasets.rst", data_dir)).rows
     assert rows
     for row in rows:

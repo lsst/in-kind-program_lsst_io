@@ -65,6 +65,20 @@ def card_part(text, start_marker, end_marker):
     return text[text.index(start_marker) : text.index(end_marker)]
 
 
+def test_status_select_options_match_the_tokens_the_rows_carry(tmp_path):
+    available = render_card_text(tmp_path / "a", form_data={"submitted": True})
+    in_progress = render_card_text(tmp_path / "b", form_data={"submitted": False})
+    # The select offers All, Available and In progress, in that order.
+    start = available.index('id="ikp-filter-status"')
+    select = available[start : available.index("</select>", start)]
+    assert select.index('value=""') < select.index("status-available") < select.index("In progress")
+    # Each option value is exactly the token a row of that status carries.
+    assert '<option value="status-available">Available</option>' in available
+    assert 'data-filter-status="status-available"' in available
+    assert '<option value="status-not-yet-delivered">In progress</option>' in in_progress
+    assert 'data-filter-status="status-not-yet-delivered"' in in_progress
+
+
 def test_summary_comes_first_and_has_no_label(tmp_path):
     text = render_card_text(tmp_path, curated={"summary": "A distinctive summary."})
     summary_at = text.index("A distinctive summary.")

@@ -23,9 +23,9 @@ the loader adds, for every record:
   only: the free-text search does not cover the country;
 * ``related``: "Also see" links to software cards (another page) or to other
   dataset cards (this page), with titles looked up from the records;
-* ``filters``: for each filter key (the ``data-filter-key`` of a drop-down, or the
-  "available only" button), the tokens this dataset has. The template writes each
-  entry onto the table row as a ``data-filter-<key>`` attribute;
+* ``filters``: for each filter key (the ``data-filter-key`` of a drop-down), the
+  tokens this dataset has. The template writes each entry onto the table row as a
+  ``data-filter-<key>`` attribute;
 * ``search_text``: lowercase text for the free-text search box.
 
 The context also carries the filter drop-down options as sorted ``(label, slug)``
@@ -96,7 +96,7 @@ def load_datasets(data_dir, today):
 
         # The tokens this dataset has for each filter, keyed by the filter's
         # `data-filter-key`. Each token is the `value` of one option of that
-        # filter (the "available only" button asks for `status-available`).
+        # filter.
         record["filters"] = {
             "status": [f"status-{slugify(status)}"],
             "dt": [f"dt-{slugify(v)}" for v in data_types],
