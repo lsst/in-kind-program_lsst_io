@@ -73,3 +73,13 @@ def test_one_dataset_is_highlighted_through_the_fixed_date():
     highlight = record["curated"]["highlight"]
     assert highlight["reason"]
     assert datetime.date.fromisoformat(highlight["until"]) >= FIXTURE_TODAY
+
+
+def test_the_software_record_is_highlighted_past_the_dataset_highlight():
+    contexts = build_contexts(FIXTURE_DATA_DIR, today=FIXTURE_TODAY)
+    (dataset,) = contexts["contributed_datasets"]["datasets"]
+    (software,) = contexts["contributed_software"]["software"]
+    software_highlight = software["curated"]["highlight"]
+    assert software_highlight["reason"]
+    # The two end dates differ, so a date can fall between them and show one row only.
+    assert software_highlight["until"] > dataset["curated"]["highlight"]["until"]
