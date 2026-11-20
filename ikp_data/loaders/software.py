@@ -33,6 +33,10 @@ Why the derived fields exist
 
 The records are in page order, Available first (see ``ikp_data.derive.sort_cards``);
 the cards and the table rows share it.
+
+The context also carries ``highlights``: the teasers for the "Highlighted" row
+above the filters (active ``curated.highlight`` entries only; see
+``ikp_data.derive.active_highlights``).
 """
 
 import html
@@ -41,6 +45,7 @@ import re
 import yaml
 
 from ikp_data.derive import (
+    active_highlights,
     collect_cross_page_targets,
     dataset_anchor,
     display_country,
@@ -115,8 +120,7 @@ def _approx_start_fy(timeline_text):
 
 def load_software(data_dir, today):
     """Build the `contributed_software` context from `data_dir`/software."""
-    # `today` is accepted so every loader has the same signature (and so date-based
-    # features, such as expiring highlights, can use it later).
+    # `today` decides which highlights are still active.
     records_dir = data_dir / "software"
     # For the "Also see" links: a related ID is looked up on the Datasets page
     # first (the usual case: the matching dataset card), then on this page
@@ -197,5 +201,6 @@ def load_software(data_dir, today):
         "all_categories": option_pairs(all_categories),
         "all_uat": option_pairs(all_uat),
         "all_recipients": option_pairs(all_recipients),
+        "highlights": active_highlights(records, today),
         "search_index_json": search_index_to_json(search_index),
     }
