@@ -1,7 +1,7 @@
 /*
  * cards.js: shared behaviour for the card pages of the In-Kind Program site
  * (Telescope Access, Datasets and Software): filters, search, sorting,
- * jump-to-card highlighting and the "Show more" buttons.
+ * jump-to-card highlighting, links to hidden cards and the "Show more" buttons.
  *
  * Sphinx adds this file to every page of the site (see conf.py), so it must do
  * nothing on a page that has no cards. Each page's setup below runs only when
@@ -26,6 +26,10 @@
  * scripts have run. Each page therefore applies its filters when it sets up and
  * again on every `pageshow` event, so the list always matches the restored
  * controls (see `keepListInSync`).
+ *
+ * Links to a hidden card: a same-page "Also see" link to a card that the
+ * filters or search hide clears them first, so the card shows (see
+ * `wireHiddenCardLinks`). A `#card` in the address never clears them.
  *
  * Class hooks: `ikp-row` and `ikp-map-marker` are used only by this script and
  * have no CSS rules, so do not remove them as unused.
@@ -81,7 +85,13 @@
   // `sd-col` wrapper) around the element whose id is the item's `data-card`.
   // Returns null if there is no such card.
   function cardOf(item) {
-    var anchor = document.getElementById(item.getAttribute('data-card'));
+    return cardById(item.getAttribute('data-card'));
+  }
+
+  // The card whose anchor has this id: the grid item around that element.
+  // Returns null if there is no such card.
+  function cardById(id) {
+    var anchor = document.getElementById(id);
     return anchor ? anchor.closest('.sd-col') : null;
   }
 
@@ -92,8 +102,9 @@
   // options.table        the page's table
   // options.searchInput  the search box, or null
   //
-  // Returns {applyFilters, getVisibleCount}: the page can re-apply filters after
-  // a change of its own, and read how many rows pass the filters now.
+  // Returns {applyFilters, resetFilters, getVisibleCount}: the page can
+  // re-apply filters after a change of its own, clear them all, and read how
+  // many rows pass the filters now.
   function setupFiltering(options) {
     var searchIndex = readSearchIndex();
     var selects = Array.prototype.slice.call(document.querySelectorAll('select[data-filter-key]'));
@@ -144,10 +155,30 @@
     selects.forEach(function (select) { select.addEventListener('change', applyFilters); });
     if (options.searchInput) { options.searchInput.addEventListener('input', applyFilters); }
 
+    // Put every drop-down back on "All", empty the search box and show
+    // everything again.
+    function resetFilters() {
+      selects.forEach(function (select) { select.value = ''; });
+      if (options.searchInput) { options.searchInput.value = ''; }
+      applyFilters();
+    }
+
     return {
       applyFilters: applyFilters,
+      resetFilters: resetFilters,
       getVisibleCount: function () { return visibleCount; }
     };
+  }
+
+  // Keep a page's list in step with its controls: apply the filters now, and
+  // again on every `pageshow`. The browser restores form values after Back or
+  // Forward only after the scripts have run, so the values read at setup can be
+  // the defaults. (`pageshow` fires after a normal load too, and when the page
+  // comes back from the browser's cache.) `filtering` is the object returned
+  // by `setupFiltering`.
+  function keepListInSync(filtering) {
+    filtering.applyFilters();
+    window.addEventListener('pageshow', function () { filtering.applyFilters(); });
   }
 
   // Clicking a title link in `table`, or a map marker, scrolls to that row's
@@ -165,21 +196,29 @@
     });
   }
 
-  // Keep a page's list in step with its controls. The filters are applied now,
-  // and again on every `pageshow`: the browser restores form values after
-  // Back or Forward only after the scripts have run, so the values read at
-  // setup can be the defaults. (`pageshow` fires after a normal load too, and
-  // when the page comes back from the browser's cache.)
-  function keepListInSync(filtering) {
-    filtering.applyFilters();
-    window.addEventListener('pageshow', function () { filtering.applyFilters(); });
-  }
-
   // Scroll a card into view and outline it for a moment.
   function highlightCard(card) {
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     card.classList.add('ikp-highlight');
     setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
+  }
+
+  // Make a same-page "Also see" link to a card that the filters or search are
+  // hiding still work. When the link is clicked, the filters and search are
+  // cleared first (before the browser follows the link), so the card shows and
+  // the browser scrolls to it. A link to another page is left alone, and so is
+  // a click that opens a new tab or window: that page starts with no filters.
+  // `filtering` is the object returned by `setupFiltering`.
+  function wireHiddenCardLinks(filtering) {
+    document.querySelectorAll('.ikp-also-see').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var opensElsewhere = event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0;
+        if (opensElsewhere || link.pathname !== window.location.pathname) { return; }
+        // Card ids are plain ASCII, so the hash is used as it is.
+        var card = cardById(link.hash.slice(1));
+        if (card && card.style.display === 'none') { filtering.resetFilters(); }
+      });
+    });
   }
 
   // Make the headers of `table` (those with a `data-sort` attribute) sort the
@@ -260,6 +299,7 @@
     wireCardJumps(table);
     wireTableSorting(table);
     keepListInSync(filtering);
+    wireHiddenCardLinks(filtering);
   }
 
   // -------------------------------------------------------------------------
@@ -271,6 +311,7 @@
     wireExpandButtons('.ikp-more-btn');
     wireTableSorting(table);
     keepListInSync(filtering);
+    wireHiddenCardLinks(filtering);
   }
 
   // -------------------------------------------------------------------------
@@ -282,6 +323,7 @@
     wireExpandButtons('.ikp-expand-btn');
     wireTableSorting(table);
     keepListInSync(filtering);
+    wireHiddenCardLinks(filtering);
   }
 
   // -------------------------------------------------------------------------
