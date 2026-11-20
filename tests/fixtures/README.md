@@ -24,3 +24,6 @@ On that date the five opportunity records in `opportunities/` are in these phase
 `datasets/TST-FIX-S2.yaml` carries a `curated.highlight` that runs until 2027-04-30.
 
 If you change a date here, update the table and `tests/test_fixture_data.py`.
+The golden snapshot of these banners is `tests/snapshots/fixture_opportunities.json`, checked by
+`tests/test_opportunity_loader.py`. After an intended change, regenerate it with
+`tox run -e test -- --update-snapshots` and review the diff.

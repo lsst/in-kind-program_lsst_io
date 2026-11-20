@@ -1,0 +1,158 @@
+[
+  {
+    "id": "fixture-in-review-call",
+    "kind": "special_call",
+    "links": [
+      {
+        "label": "Fixture announcement",
+        "url": "https://example.org/fixture-announcement"
+      }
+    ],
+    "milestones": [
+      {
+        "date": "2027-01-15",
+        "label": "Call opens",
+        "passed": true,
+        "role": "opens"
+      },
+      {
+        "date": "2027-03-01",
+        "label": "Proposal deadline",
+        "passed": true,
+        "role": "deadline"
+      },
+      {
+        "date": "2027-04-01",
+        "label": "Results announced",
+        "passed": false,
+        "role": "results"
+      }
+    ],
+    "next_milestone_date": "2027-04-01",
+    "phase": "in_review",
+    "related_contribution_ids": [
+      "TST-FIX-S1"
+    ],
+    "slug": "fixture-in-review-call",
+    "summary": "Invented opportunity used by the test fixtures (in review on 2027-03-15).",
+    "title": "Fixture call under review",
+    "visible_until": "2027-12-31"
+  },
+  {
+    "id": "fixture-upcoming-call",
+    "kind": "special_call",
+    "links": [
+      {
+        "label": "Fixture announcement",
+        "url": "https://example.org/fixture-announcement"
+      }
+    ],
+    "milestones": [
+      {
+        "date": "2027-04-01",
+        "label": "Call opens",
+        "passed": false,
+        "role": "opens"
+      },
+      {
+        "date": "2027-05-01",
+        "label": "Proposal deadline",
+        "passed": false,
+        "role": "deadline"
+      },
+      {
+        "date": "2027-06-01",
+        "label": "Results announced",
+        "passed": false,
+        "role": "results"
+      }
+    ],
+    "next_milestone_date": "2027-04-01",
+    "phase": "upcoming",
+    "related_contribution_ids": [
+      "TST-FIX-S1"
+    ],
+    "slug": "fixture-upcoming-call",
+    "summary": "Invented opportunity used by the test fixtures (upcoming on 2027-03-15).",
+    "title": "Fixture call that has not opened yet",
+    "visible_until": "2027-12-31"
+  },
+  {
+    "id": "fixture-open-call",
+    "kind": "special_call",
+    "links": [
+      {
+        "label": "Fixture announcement",
+        "url": "https://example.org/fixture-announcement"
+      }
+    ],
+    "milestones": [
+      {
+        "date": "2027-03-01",
+        "label": "Call opens",
+        "passed": true,
+        "role": "opens"
+      },
+      {
+        "date": "2027-04-15",
+        "label": "Proposal deadline",
+        "passed": false,
+        "role": "deadline"
+      },
+      {
+        "date": "2027-05-15",
+        "label": "Results announced",
+        "passed": false,
+        "role": "results"
+      }
+    ],
+    "next_milestone_date": "2027-04-15",
+    "phase": "open",
+    "related_contribution_ids": [
+      "TST-FIX-S1"
+    ],
+    "slug": "fixture-open-call",
+    "summary": "Invented opportunity used by the test fixtures (open on 2027-03-15).",
+    "title": "Fixture call that is open",
+    "visible_until": "2027-12-31"
+  },
+  {
+    "id": "fixture-closed-call",
+    "kind": "special_call",
+    "links": [
+      {
+        "label": "Fixture announcement",
+        "url": "https://example.org/fixture-announcement"
+      }
+    ],
+    "milestones": [
+      {
+        "date": "2026-12-01",
+        "label": "Call opens",
+        "passed": true,
+        "role": "opens"
+      },
+      {
+        "date": "2027-01-15",
+        "label": "Proposal deadline",
+        "passed": true,
+        "role": "deadline"
+      },
+      {
+        "date": "2027-02-15",
+        "label": "Results announced",
+        "passed": true,
+        "role": "results"
+      }
+    ],
+    "next_milestone_date": null,
+    "phase": "closed",
+    "related_contribution_ids": [
+      "TST-FIX-S1"
+    ],
+    "slug": "fixture-closed-call",
+    "summary": "Invented opportunity used by the test fixtures (closed on 2027-03-15).",
+    "title": "Fixture call that has closed",
+    "visible_until": "2027-12-31"
+  }
+]

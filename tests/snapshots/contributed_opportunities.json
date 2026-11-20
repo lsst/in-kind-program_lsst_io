@@ -44,7 +44,6 @@
   "opportunities": [
     {
       "id": "noirlab-cfp-2027a",
-      "is_visible": true,
       "kind": "general_cfp",
       "links": [
         {
@@ -56,16 +55,19 @@
         {
           "date": "2026-09-30",
           "label": "Proposal submission deadline (11:59 pm MST)",
+          "passed": false,
           "role": "deadline"
         },
         {
           "date": "2027-03-01",
           "display_date": "March 2027",
           "label": "Expected next opportunity",
+          "passed": false,
           "role": "next"
         }
       ],
       "next_milestone_date": "2026-09-30",
+      "phase": "open",
       "related_contribution_ids": [],
       "slug": "noirlab-cfp-2027a",
       "summary": "NOIRLab has issued the Call for Proposals for Semester 2027A, which includes access to many Rubin In-kind contributed facilities. <strong>New in 2027A</strong>: In addition to regular single-semester proposals, PIs are invited to request long-term status (up to three semesters) on proposals to observe with in-kind contributed facilities. Full details on the proposal process, and specific details on each facility and instrument availability can be found on the Call for Proposal web page.",
@@ -75,7 +77,6 @@
     {
       "accent": "warning",
       "id": "gtc-2026b-special-call",
-      "is_visible": true,
       "kind": "special_call",
       "links": [
         {
@@ -101,25 +102,30 @@
         {
           "approximate": true,
           "date": "2026-08-31",
-          "label": "Matchmaking & feasibility notifications"
+          "label": "Matchmaking & feasibility notifications",
+          "passed": true
         },
         {
           "date": "2026-09-01",
-          "label": "GTC Call for Proposals opens"
+          "label": "GTC Call for Proposals opens",
+          "passed": true
         },
         {
           "date": "2026-10-01",
           "label": "Spanish TAC submission deadline",
+          "passed": false,
           "role": "deadline"
         },
         {
           "date": "2027-02-01",
           "display_date": "Feb 2027",
           "label": "Expected next opportunity",
+          "passed": false,
           "role": "next"
         }
       ],
       "next_milestone_date": "2026-10-01",
+      "phase": "open",
       "related_contribution_ids": [
         "ESP-BCM-S5",
         "ESP-IAC-S1"

@@ -315,10 +315,12 @@ def test_opportunity_contact_block_is_not_declared():
         schemas.Opportunity.model_validate(record)
 
 
-def test_deprecated_passed_flag_is_still_accepted():
+def test_hand_set_passed_flag_is_rejected():
+    # "passed" is computed from the date by the loader, so a record must not set it.
     record = _opportunity()
     record["milestones"][0]["passed"] = True
-    schemas.Opportunity.model_validate(record)
+    with pytest.raises(ValidationError):
+        schemas.Opportunity.model_validate(record)
 
 
 # ---------------------------------------------------------------------------

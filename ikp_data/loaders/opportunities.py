@@ -2,21 +2,24 @@
 
 What the page needs
 -------------------
-The Telescopes page shows a banner for each open call (an observing
-opportunity with a deadline and a list of milestones), taken from
+The Telescopes page shows a banner for each opportunity that is still visible
+(an observing call with a deadline and a list of milestones), taken from
 ``_data/opportunities/<name>.yaml``.
 
 Why the derived fields exist
 ----------------------------
 * ``slug``: the file name, used as the banner's anchor.
-* ``is_visible``: false once ``visible_until`` has passed (the banner is then
-  hidden); needs today's date, which the caller passes in.
-* ``next_milestone_date``: the soonest milestone that is today or later, so the
-  banner can show "next: ..." and so banners sort soonest-first.
+* ``phase``: where the opportunity is in its lifecycle on today's date
+  ("upcoming", "open", "in_review", "closed" or "hidden"), from
+  ``opportunity_phase`` (below). A hidden opportunity is left out of the
+  context, so the banner appears only while ``today <= visible_until``.
+* ``passed`` (on each milestone): true once the milestone's date is before
+  today, from ``milestone_passed`` (below); it drives the strike-through.
+* ``next_milestone_date``: the soonest milestone that is today or later, so
+  banners sort soonest-first.
 
-* ``opportunity_phase`` and ``milestone_passed`` (below): pure functions for the
-  card lifecycle. They are tested but **not yet used by the loader or the
-  template**; a later milestone wires them into the context.
+``opportunity_phase`` and ``milestone_passed`` are pure functions, so they can be
+tested without any files. Today's date comes from the caller.
 
 The context also needs ``cid_to_slugs`` from the telescopes context so a banner
 can link to facility cards; ``ikp_data.loaders.build_contexts`` adds it.
@@ -47,15 +50,21 @@ def load_opportunities(data_dir, today):
         record = normalize_strings(record)
         record["slug"] = path.stem
 
-        visible_until = parse_date(record.get("visible_until"))
-        record["is_visible"] = visible_until is None or today <= visible_until
+        # The phase also decides visibility: "hidden" means `visible_until` is
+        # before today, so such a record is dropped below.
+        record["phase"] = opportunity_phase(record, today)
+
+        # `passed` is computed from the date, so it can never go stale.
+        for milestone in record.get("milestones") or []:
+            if isinstance(milestone, dict):
+                milestone["passed"] = milestone_passed(milestone, today)
 
         dated_milestones = _dated_milestones(record.get("milestones"))
         future_dates = [d for d in dated_milestones if d >= today]
         record["next_milestone_date"] = min(future_dates, default=None)
         records.append(record)
 
-    visible_records = [r for r in records if r["is_visible"]]
+    visible_records = [r for r in records if r["phase"] != "hidden"]
     visible_records.sort(
         key=lambda r: (r["next_milestone_date"] is None, r["next_milestone_date"])
     )
@@ -64,7 +73,7 @@ def load_opportunities(data_dir, today):
 
 
 # ---------------------------------------------------------------------------
-# Card lifecycle (pure functions; not yet part of the context)
+# Card lifecycle (pure functions; the loader above stores their results)
 # ---------------------------------------------------------------------------
 #
 # The phases and the rules for incomplete records come from the opportunity
@@ -83,7 +92,12 @@ def load_opportunities(data_dir, today):
 # proposal due that day is still welcome), the `results` day is still
 # `in_review`, and the `visible_until` day is still shown. This matches
 # `milestone_passed`, which treats a milestone as passed only once its date is
-# strictly before today, and the loader's `today <= visible_until` visibility.
+# strictly before today, and the loader's visibility rule: a card is shown
+# through its `visible_until` day.
+#
+# A milestone whose banner text is a month-level `display_date` ("March 2027")
+# still carries an exact date, so it is marked passed from the day after that
+# exact date, not from the first of the month.
 #
 # Incomplete records:
 #   * no `opens`: never `upcoming` (open from the start);
