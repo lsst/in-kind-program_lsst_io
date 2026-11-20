@@ -67,11 +67,6 @@ if _LINKCHECK_FULL:
     linkcheck_timeout = 60
 
 _project_linkcheck_ignore = [
-    # 2026-11-17: Mt John Observatory wiki (McLellan and Nishimura telescope
-    # cards). The university moved its wiki: this address now redirects to the
-    # new wiki's front page, and GitHub Actions runners get 403. Ignored until
-    # the observatory's new page is found and the cards are updated.
-    r'^https://wiki\.canterbury\.ac\.nz/pages/viewpage\.action\?pageId=152307302$',
     # 2026-10-16: WISeREP (NOT telescope card) returns 403 to GitHub Actions
     # runners even with a browser User-Agent, though it works from a desktop.
     # The block is by network, not by agent string, so it can't be fixed here.
@@ -99,7 +94,7 @@ _project_linkcheck_ignore = [
     r'^https://zenodo\.org/',
     r'^https://doi\.org/10\.5281/zenodo\.',
     # 2026-10-20: project.lsst.org is down because of a vulnerability.
-    r'^https://project.lsst.org/$',
+    r'^https://project\.lsst\.org/$',
     # 2026-10-20: SER-SAG data link, ignored until the reason it fails is understood.
     r'^https://ser-sag\.pmf\.kg\.ac\.rs:8081/agn_catalogue\.php/?$',
 ]
