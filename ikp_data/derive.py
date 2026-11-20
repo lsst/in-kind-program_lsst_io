@@ -19,6 +19,8 @@ cross-record checks):
 * map geometry: projecting latitude/longitude onto the world-outline SVG and
   nudging markers that would overlap;
 * ``require_field``: reads a required field, or raises an error naming the file;
+* ``sort_cards``: the order of the cards and table rows on the Datasets and
+  Software pages;
 * ``record_last_updated``: reads a card's explicit ``last_updated`` date;
 * ``parse_date``: reads a date that may be a date object or an ISO string.
 
@@ -187,6 +189,24 @@ def record_last_updated(record, path):
             "see ADR 0007. Run `tox run -e validate` for details."
         )
     return str(explicit)
+
+
+def sort_cards(records):
+    """Return `records` in page order: Available first, then the most recently
+    updated, then by contribution ID (A to Z) so equal dates keep a stable order.
+
+    The cards and the table rows are built from the same list, so they share
+    this order. `last_updated` is an ISO date string, so text order is date
+    order. The loaders always give a record a date (`record_last_updated` raises
+    without one), but a record with no date would come last in its group.
+    """
+    # Python's sort is stable: sorting by the least important key first and the
+    # most important key last gives the combined order. The date key needs a
+    # reversed sort, which is why this is three passes and not one tuple key.
+    ordered = sorted(records, key=lambda r: r.get("contribution_id") or "")
+    ordered.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
+    ordered.sort(key=lambda r: r.get("status") != "available")
+    return ordered
 
 
 def collect_cross_page_targets(data_dir, subdir_name, anchor_for):

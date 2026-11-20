@@ -28,6 +28,9 @@ the loader adds, for every record:
   ``data-filter-<key>`` attribute;
 * ``search_text``: lowercase text for the free-text search box.
 
+The records are in page order, Available first (see ``ikp_data.derive.sort_cards``);
+the cards and the table rows share it.
+
 The context also carries the filter drop-down options as sorted ``(label, slug)``
 pairs and the search index as JSON.
 """
@@ -45,6 +48,7 @@ from ikp_data.derive import (
     search_index_to_json,
     slugify,
     software_anchor,
+    sort_cards,
 )
 
 
@@ -118,10 +122,8 @@ def load_datasets(data_dir, today):
         record["search_text"] = " ".join(search_parts).lower()
 
         records.append(record)
-    # Reverse chronological by last-updated -- the most recently touched
-    # contributions surface first, since that's the signal visitors care
-    # about. Missing dates sort to the bottom rather than the top.
-    records.sort(key=lambda r: r.get("last_updated") or "", reverse=True)
+    # Available first, then the most recently updated (see `sort_cards`).
+    records = sort_cards(records)
     search_index = {r["anchor"]: r["search_text"] for r in records}
     return {
         "datasets": records,

@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from ikp_data.derive import display_country, largest_metre_value, option_pairs, parse_date, search_index_to_json, slugify
+from ikp_data.derive import display_country, largest_metre_value, option_pairs, parse_date, search_index_to_json, slugify, sort_cards
 
 
 def test_parse_date_returns_a_date_unchanged():
@@ -107,3 +107,50 @@ def test_largest_metre_value_handles_other_layouts(text, expected):
 @pytest.mark.parametrize("text", [None, "", "TBA", "8", "2 x 8", "300mm", "4 meters"])
 def test_largest_metre_value_is_none_without_a_size_in_metres(text):
     assert largest_metre_value(text) is None
+
+
+# ---------------------------------------------------------------------------
+# sort_cards: the order of the cards and table rows
+# ---------------------------------------------------------------------------
+
+
+def _card(contribution_id, status, last_updated):
+    return {"contribution_id": contribution_id, "status": status, "last_updated": last_updated}
+
+
+def test_sort_cards_puts_available_first_even_when_older():
+    cards = [
+        _card("AAA-S1", "pending", "2026-11-01"),
+        _card("BBB-S1", "available", "2026-01-01"),
+    ]
+    assert [c["contribution_id"] for c in sort_cards(cards)] == ["BBB-S1", "AAA-S1"]
+
+
+def test_sort_cards_orders_each_group_by_newest_date_then_contribution_id():
+    cards = [
+        _card("CCC-S1", "available", "2026-03-01"),
+        _card("BBB-S2", "available", "2026-05-01"),
+        _card("BBB-S1", "available", "2026-05-01"),
+        _card("DDD-S1", "pending", "2026-06-01"),
+        _card("AAA-S1", "pending", "2026-06-01"),
+        _card("EEE-S1", "pending", "2026-02-01"),
+    ]
+    ordered = [c["contribution_id"] for c in sort_cards(cards)]
+    assert ordered == ["BBB-S1", "BBB-S2", "CCC-S1", "AAA-S1", "DDD-S1", "EEE-S1"]
+
+
+def test_sort_cards_does_not_change_the_list_it_is_given():
+    cards = [_card("B", "pending", "2026-01-01"), _card("A", "available", "2026-01-01")]
+    sort_cards(cards)
+    assert [c["contribution_id"] for c in cards] == ["B", "A"]
+
+
+def test_sort_cards_puts_a_record_without_a_date_last_in_its_status_group():
+    cards = [
+        _card("AAA-S1", "available", None),
+        _card("BBB-S1", "available", "2026-01-01"),
+        _card("CCC-S1", "pending", None),
+        _card("DDD-S1", "pending", "2026-01-01"),
+    ]
+    ordered = [c["contribution_id"] for c in sort_cards(cards)]
+    assert ordered == ["BBB-S1", "AAA-S1", "DDD-S1", "CCC-S1"]
