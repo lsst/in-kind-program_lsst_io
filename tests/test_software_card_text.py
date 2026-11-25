@@ -292,7 +292,7 @@ def test_an_empty_description_shows_tbd(tmp_path):
 
 def test_the_card_shows_the_escaped_description(tmp_path):
     text = render_card_text(tmp_path, form_data={"activity_description": "x <script> y"})
-    assert 'x &lt;script&gt; y</div>' in text
+    assert '-desc">x &lt;script&gt; y</div>' in text
     assert "<script>" not in text.replace('<script type="application/json"', "")
 
 

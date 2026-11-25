@@ -290,7 +290,9 @@ html[data-theme=dark] {
 html[data-theme=dark] .ikp-more-btn:hover,
 html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-on-dark); }
 .ikp-more-btn { margin: 0.4em 0; }
-/* The buttons carry the `hidden` attribute until the script shows them. */
+/* The buttons carry the `hidden` attribute until the script shows them. This
+   rule keeps it effective, so a later `display` on these buttons cannot
+   override `hidden`. */
 .ikp-more-btn[hidden],
 .ikp-expand-btn[hidden] { display: none; }
 

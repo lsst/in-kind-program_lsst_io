@@ -36,6 +36,7 @@ from ikp_data.loaders import build_contexts
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PAGES_DIR = REPO_ROOT / "docs" / "contribution-types"
 CARDS_JS = REPO_ROOT / "docs" / "_static" / "ikp" / "cards.js"
+CARDS_CSS = REPO_ROOT / "docs" / "_static" / "ikp" / "cards.css"
 LIVE_DATA_DIR = PAGES_DIR / "_data"
 FIXTURE_DATA_DIR = Path(__file__).resolve().parent / "fixtures" / "docs" / "contribution-types" / "_data"
 TODAY = datetime.date(2027, 3, 15)
@@ -459,7 +460,9 @@ def test_each_toggle_button_is_collapsed_hidden_and_names_one_region(page, data_
         assert 'type="button"' in attributes
         assert re.search(r"\bhidden\b", attributes), f"{page}: a toggle button is not hidden at load"
         assert 'aria-expanded="false"' in attributes
-        region_id = re.search(r'aria-controls="([^"]+)"', attributes).group(1)
+        controls = re.search(r'aria-controls="([^"]+)"', attributes)
+        assert controls is not None, f"{page}: a toggle button has no aria-controls"
+        region_id = controls.group(1)
         assert region_id.endswith(suffix)
         controlled.append(region_id)
         # Software renders the region as raw HTML; Datasets names the container directive.
@@ -483,3 +486,45 @@ def test_the_script_finds_each_toggle_region_through_aria_controls():
     script = CARDS_JS.read_text(encoding="utf-8")
     assert "previousElementSibling" not in script
     assert "aria-controls" in script
+
+
+def css_rules_mentioning(css, needle):
+    """The selector text of every CSS rule whose declarations contain `needle`.
+
+    Simple approach: split the file on "}" so each chunk is one rule, "selector { declarations",
+    and keep the part before "{". The file has no nested rules, so this is enough.
+    """
+    selectors = []
+    for chunk in css.split("}"):
+        if "{" not in chunk:
+            continue
+        selector, declarations = chunk.split("{", 1)
+        if needle in declarations:
+            # Drop any comment text that sits in front of the selector.
+            selectors.append(selector.split("*/")[-1].strip())
+    return selectors
+
+
+def test_the_collapsing_css_applies_only_once_the_script_has_run():
+    """Without JavaScript the fields and descriptions must show in full and no button may appear."""
+    css = CARDS_CSS.read_text(encoding="utf-8")
+
+    hiding = [s for s in css_rules_mentioning(css, "display: none") if ".ikp-more-fields" in s]
+    assert hiding, "no rule hides .ikp-more-fields"
+    for selector in hiding:
+        assert ".ikp-collapsible" in selector, f"{selector!r} hides the fields without the script"
+
+    clamping = [s for s in css_rules_mentioning(css, "-webkit-line-clamp") if ".ikp-desc" in s]
+    assert clamping, "no rule clamps .ikp-desc"
+    for selector in clamping:
+        assert ".ikp-collapsible" in selector, f"{selector!r} clamps the text without the script"
+
+    fading = [s for s in css_rules_mentioning(css, "mask-image") if ".ikp-desc" in s]
+    assert fading, "no rule masks .ikp-desc"
+    for selector in fading:
+        assert ".ikp-faded" in selector, f"{selector!r} masks the text without the script"
+
+    # The buttons stay hidden until the script shows them.
+    hidden_rules = css_rules_mentioning(css, "display: none")
+    for button_class in (".ikp-more-btn", ".ikp-expand-btn"):
+        assert any(f"{button_class}[hidden]" in s for s in hidden_rules), f"no [hidden] rule for {button_class}"

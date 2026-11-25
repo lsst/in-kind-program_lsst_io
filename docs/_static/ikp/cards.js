@@ -442,7 +442,11 @@
   // `ikp-expanded` class on the region it controls, keep its own
   // `aria-expanded` in step, and swap its label between the `data-expand-label`
   // and `data-collapse-label` texts.
-  function wireExpandButtons(buttonSelector) {
+  //
+  // `afterToggle` is optional. When given, it is called after each click with
+  // the button, the region and the new expanded state, once the class,
+  // `aria-expanded` and label are updated.
+  function wireExpandButtons(buttonSelector, afterToggle) {
     document.querySelectorAll(buttonSelector).forEach(function (btn) {
       var region = regionFor(btn);
       if (!region) { return; }
@@ -452,6 +456,7 @@
         setToggleContent(btn,
           btn.getAttribute(expanded ? 'data-collapse-label' : 'data-expand-label'),
           expanded ? GLYPH_UP : GLYPH_DOWN);
+        if (afterToggle) { afterToggle(btn, region, expanded); }
       });
     });
   }
@@ -483,22 +488,32 @@
     if (region.getClientRects().length === 0) { return; }
     var overflows = region.scrollHeight > region.clientHeight + 1;
     region.classList.toggle('ikp-faded', overflows);
+    // Hiding a button that has focus (on a resize, or when the description
+    // collapses) is accepted: focus falls to the body, and the next Tab goes to
+    // the next control in the same card, so the keyboard position is kept.
     btn.hidden = !overflows;
   }
 
+  // Software: pair each button with its description, and measure the
+  // descriptions at load, after the fonts load, and on size changes.
   function enableDescriptionToggles() {
     var pairs = [];
+    // The same pairs, found by the id of the description (for the size observer).
+    var pairByRegionId = {};
     document.querySelectorAll('.ikp-expand-btn').forEach(function (btn) {
       var region = regionFor(btn);
-      if (region) { pairs.push({ region: region, btn: btn }); }
+      if (!region) { return; }
+      var pair = { region: region, btn: btn };
+      pairs.push(pair);
+      pairByRegionId[region.id] = pair;
     });
 
     function measureAll() {
       pairs.forEach(function (pair) { measureDescription(pair.region, pair.btn); });
     }
 
-    // Measure straight away, so a long description is clamped before the first
-    // paint and nothing shifts at load.
+    // Measure as soon as the script runs, so a long description is clamped as
+    // early as possible.
     measureAll();
 
     // The text can wrap differently once the web fonts arrive.
@@ -512,9 +527,8 @@
     if (typeof ResizeObserver === 'function') {
       var observer = new ResizeObserver(function (entries) {
         entries.forEach(function (entry) {
-          pairs.forEach(function (pair) {
-            if (pair.region === entry.target) { measureDescription(pair.region, pair.btn); }
-          });
+          var pair = pairByRegionId[entry.target.id];
+          if (pair) { measureDescription(pair.region, pair.btn); }
         });
       });
       pairs.forEach(function (pair) { observer.observe(pair.region); });
@@ -562,7 +576,11 @@
       noun: 'software contributions', noneText: 'No software contributions match the filters' });
     wireCardJumps(table);
     enableDescriptionToggles();
-    wireExpandButtons('.ikp-expand-btn');
+    // A description that collapses may already fit in three lines, so its size
+    // does not change and the size observer stays silent. Measure it again here.
+    wireExpandButtons('.ikp-expand-btn', function (btn, region, expanded) {
+      if (!expanded) { measureDescription(region, btn); }
+    });
     wireTableSorting(table);
     keepListInSync(filtering);
     wireHiddenCardLinks(filtering);
