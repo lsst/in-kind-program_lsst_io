@@ -491,14 +491,17 @@ def test_the_script_finds_each_toggle_region_through_aria_controls():
 def css_rules_mentioning(css, needle):
     """The selector text of every CSS rule whose declarations contain `needle`.
 
-    Simple approach: split the file on "}" so each chunk is one rule, "selector { declarations",
-    and keep the part before "{". The file has no nested rules, so this is enough.
+    Simple approach: split the file on "}" so each chunk ends with one rule, "selector { declarations",
+    and keep the text between the last two "{". The first rule inside an "@media (...) {" block
+    arrives as "@media (...) { selector { declarations", so taking the last "{" keeps its own
+    selector rather than the media query.
     """
     selectors = []
     for chunk in css.split("}"):
         if "{" not in chunk:
             continue
-        selector, declarations = chunk.split("{", 1)
+        before, declarations = chunk.rsplit("{", 1)
+        selector = before.rsplit("{", 1)[-1]
         if needle in declarations:
             # Drop any comment text that sits in front of the selector.
             selectors.append(selector.split("*/")[-1].strip())
