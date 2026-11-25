@@ -66,11 +66,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <table class="ikp-sw-table" id="ikp-sw-table">
         <thead>
           <tr>
-            <th data-sort="title">Software</th>
-            <th data-sort="category">Category</th>
-            <th data-sort="recipient">Primary recipient</th>
-            <th data-sort="status">Status</th>
-            <th data-sort="updated">Updated</th>
+            <th scope="col" data-sort="title"><button type="button" class="ikp-sort-btn">Software<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="category"><button type="button" class="ikp-sort-btn">Category<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="recipient"><button type="button" class="ikp-sort-btn">Primary recipient<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="status"><button type="button" class="ikp-sort-btn">Status<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="updated"><button type="button" class="ikp-sort-btn">Updated<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
           </tr>
         </thead>
         <tbody>

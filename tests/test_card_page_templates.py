@@ -399,3 +399,29 @@ def test_the_script_knows_each_pages_noun_and_zero_results_text(page):
     # The template renders the noun and the script rewrites it; they must agree.
     assert f"noun: '{noun}'" in script
     assert none_text in script
+
+
+# The sortable headers: each holds a real button (so the keyboard and screen readers can use it) and
+# an empty, hidden arrow that the script fills after a sort (WCAG 2.1.1, 4.1.2).
+SORT_HEADER = re.compile(r"<th\b([^>]*\bdata-sort=[^>]*)>(.*?)</th>", flags=re.DOTALL)
+SORT_BUTTON_CONTENT = re.compile(
+    r'<button type="button" class="ikp-sort-btn">[^<]+<span class="ikp-sort-arrow" aria-hidden="true"></span></button>'
+)
+SORTABLE_COLUMN_COUNTS = {
+    "contributed-telescope.rst": 5,
+    "contributed-datasets.rst": 6,
+    "contributed-software.rst": 5,
+}
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", SORTABLE_COLUMN_COUNTS)
+def test_each_sortable_header_is_a_column_header_holding_one_button_and_an_empty_arrow(page, data_dir):
+    rendered = render_page(page, data_dir)
+    headers = SORT_HEADER.findall(rendered)
+    assert len(headers) == SORTABLE_COLUMN_COUNTS[page]
+    for attributes, content in headers:
+        assert 'scope="col"' in attributes, f"{page}: a sortable header lacks scope=col"
+        assert SORT_BUTTON_CONTENT.fullmatch(content), f"{page}: unexpected header content {content!r}"
+    # No header is marked as sorted at load; the script sets this after a sort.
+    assert "aria-sort=" not in rendered

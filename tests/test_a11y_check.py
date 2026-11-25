@@ -322,6 +322,15 @@ def test_report_header_has_versions_and_blocked_request_count():
     assert "Blocked non-file requests: 1" in text and "fallback font" in text
 
 
+def test_report_says_whether_the_expanded_scan_sorted_the_first_column():
+    sorted_scan = {**scan(state="expanded"), "sorted_first_column": True}
+    plain_scan = scan(state="expanded")
+    assert "first column sorted: yes" in a11y.format_report(RUN_INFO, [sorted_scan], [], OK_REFLOW, 0)
+    assert "first column sorted: no sortable column" in a11y.format_report(
+        RUN_INFO, [plain_scan], [], OK_REFLOW, 0
+    )
+
+
 def test_report_shows_counts_targets_and_result():
     scans = [
         scan(

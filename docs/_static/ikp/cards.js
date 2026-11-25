@@ -40,12 +40,18 @@
  * the page's "No ... match the filters" text), so it always matches the list.
  * Screen readers are told through a separate, visually hidden status region
  * (`<p class="ikp-visually-hidden ikp-status" role="status">`), which starts
- * empty so nothing is announced at load. `announce` puts text in it: at once
- * after a drop-down change, a reset or a `pageshow`, but only after a pause of
- * half a second while the visitor types, so a reader is not interrupted at every
- * key. It sets the text only when it differs from the last announcement, so a
- * `pageshow` re-apply that changes nothing stays silent. Other messages (for
- * example a sort message) can use the same `announce`.
+ * empty so nothing is announced at load. `announceCount` puts the count in it:
+ * at once after a drop-down change, a reset or a `pageshow`, but only after a
+ * pause of half a second while the visitor types, so a reader is not
+ * interrupted at every key. A count equal to the last count announced is
+ * skipped, so a `pageshow` re-apply that changes nothing stays silent. A sort
+ * is announced separately ("Sorted by Status, ascending"): `announce` writes it
+ * at once, and it neither delays nor disturbs the count announcement.
+ *
+ * Sorting: each sortable header holds a button, so the keyboard can reach it.
+ * The sorted column's header carries `aria-sort` and an arrow (hidden from
+ * screen readers, which get `aria-sort` and the announcement); no header has
+ * either until a sort is made.
  *
  * Class hooks: `ikp-row` and `ikp-map-marker` are used only by this script and
  * have no CSS rules, so do not remove them as unused.
@@ -77,26 +83,31 @@
   }
 
   // The hidden status region that screen readers announce from (see "Result
-  // count" above), the pause before a delayed announcement, and the text last
-  // announced. `lastAnnounced` starts as the visible count line's text (see
-  // `setupFiltering`), so the first, unchanged count is not announced.
+  // count" above), the pause before a delayed count announcement, and the count
+  // text last announced. `lastCount` starts as the visible count line's text
+  // (see `setupFiltering`), so the first, unchanged count is not announced.
   var ANNOUNCE_DELAY_MS = 500;
-  var announcer = { region: null, timer: null, lastAnnounced: '' };
+  var announcer = { region: null, timer: null, lastCount: '' };
 
-  // Tell screen readers `text` through the status region. Pass
-  // `{delay: true}` to wait for a pause of ANNOUNCE_DELAY_MS first (each call
-  // restarts the wait); without it the text is set at once. Text equal to the
-  // last announcement is skipped, because setting identical text makes no
-  // announcement anyway. Does nothing on a page without the region.
-  function announce(text, options) {
+  // Put `text` in the status region at once. Does nothing without the region.
+  // A sort message needs no duplicate check: two sort messages in a row always
+  // differ (the same header flips direction; another header changes the name).
+  function announce(text) {
     announcer.region = announcer.region || document.querySelector('.ikp-status');
-    if (!announcer.region) { return; }
+    if (announcer.region) { announcer.region.textContent = text; }
+  }
+
+  // Announce the result count. A count equal to the last one announced is
+  // skipped, so a re-apply that changes nothing stays silent, whatever other
+  // message (a sort) was announced in between. `{delay: true}` waits for a
+  // typing pause first; each call restarts the wait.
+  function announceCount(text, options) {
     clearTimeout(announcer.timer);
     announcer.timer = null;
     function write() {
-      if (text === announcer.lastAnnounced) { return; }
-      announcer.lastAnnounced = text;
-      announcer.region.textContent = text;
+      if (text === announcer.lastCount) { return; }
+      announcer.lastCount = text;
+      announce(text);
     }
     if (options && options.delay) {
       announcer.timer = setTimeout(write, ANNOUNCE_DELAY_MS);
@@ -166,7 +177,7 @@
     // The visible result count line. Its rendered text (the full count) counts
     // as already known, so only a change from it is announced.
     var countElement = document.querySelector('.ikp-result-count');
-    if (countElement) { announcer.lastAnnounced = countElement.textContent; }
+    if (countElement) { announcer.lastCount = countElement.textContent; }
 
     // Rewrite the visible count line at once from the current `visibleCount`, and
     // announce the same text (after a typing pause if `options.delay` is true).
@@ -176,7 +187,7 @@
         ? options.noneText
         : 'Showing ' + visibleCount + ' of ' + rows.length + ' ' + options.noun;
       if (countElement.textContent !== text) { countElement.textContent = text; }
-      announce(text, announceOptions);
+      announceCount(text, announceOptions);
     }
 
     // The tokens an item must have: one per drop-down that is not on "All".
@@ -332,10 +343,33 @@
   // last in either direction.
   //
   // The sort state (which header was clicked last, and which direction) is kept
-  // in one place, for an aria-sort indicator to read.
+  // in one place. It drives the `aria-sort` attribute and arrow on the headers.
+  // The click listener is on the button inside each header (a native button
+  // also answers Enter and Space).
   // Returns {sortBy, getSortState}.
   function wireTableSorting(table) {
     var sortState = { header: null, ascending: true };
+    var headers = Array.prototype.slice.call(table.querySelectorAll('th[data-sort]'));
+
+    // Each column's name for the announcement. Read once, now, while the button
+    // holds only the name (the arrow is empty until a sort is made). The
+    // template gives every sortable header a button; a test checks it.
+    var columnNames = new Map();
+    headers.forEach(function (th) {
+      columnNames.set(th, th.querySelector('button').textContent.trim());
+    });
+
+    // Show the sort state: clear `aria-sort` and the arrow from every header of
+    // this table, then mark the sorted one. The arrow is a visual cue only; the
+    // `aria-sort` attribute and the announcement carry the same information.
+    function showSortState(sortedHeader, ascending) {
+      headers.forEach(function (th) {
+        th.removeAttribute('aria-sort');
+        th.querySelector('.ikp-sort-arrow').textContent = '';
+      });
+      sortedHeader.setAttribute('aria-sort', ascending ? 'ascending' : 'descending');
+      sortedHeader.querySelector('.ikp-sort-arrow').textContent = ascending ? '\u25B2' : '\u25BC';
+    }
 
     // Sort the rows by one column header, updating the sort state.
     function sortBy(th) {
@@ -353,10 +387,14 @@
         return ascending ? av.localeCompare(bv) : bv.localeCompare(av);
       });
       rows.forEach(function (r) { tbody.appendChild(r); });
+
+      showSortState(th, ascending);
+      // VoiceOver does not reliably announce an `aria-sort` change, so say it.
+      announce('Sorted by ' + columnNames.get(th) + ', ' + (ascending ? 'ascending' : 'descending'));
     }
 
-    table.querySelectorAll('th[data-sort]').forEach(function (th) {
-      th.addEventListener('click', function () { sortBy(th); });
+    headers.forEach(function (th) {
+      th.querySelector('button').addEventListener('click', function () { sortBy(th); });
     });
 
     return {
