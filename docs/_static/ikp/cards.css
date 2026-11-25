@@ -178,9 +178,8 @@ html[data-theme=dark] {
 .ikp-sw-table th, .ikp-sw-table td { text-align: left; padding: 0.5em 0.75em; border-bottom: 1px solid var(--ikp-table-border); }
 
 /* A sortable header holds a real button, so the keyboard and screen readers can
-   use it. The cell's padding moves into the button, so the button fills the
-   whole cell (the full cell is clickable) and the header looks as it did before.
-   The cell keeps its bottom border. */
+   use it. The button carries the cell's padding, so it fills the whole cell and
+   the full cell is clickable. The cell keeps its bottom border. */
 .ikp-telescopes-table th[data-sort],
 .ikp-datasets-table th[data-sort],
 .ikp-sw-table th[data-sort] { padding: 0; }
