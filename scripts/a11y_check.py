@@ -21,8 +21,9 @@ It also checks "reflow": at a 320 px wide window the page must not need a
 horizontal scrollbar (WCAG 1.4.10).
 
 Each page is scanned twice per theme: once as loaded, and once "expanded", after
-clicking every "Show more" and "Read full description" button, so the hidden
-text is checked too.
+clicking every "Show more" and "Read full description" button and sorting the
+first sortable column, so the hidden text and the sorted state (``aria-sort`` and
+the arrow) are checked too.
 
 It passes (exit 0) only when every violation is exempt, there are no stale
 exemption entries, and there is no reflow overflow. Two kinds of exemption:
@@ -482,6 +483,8 @@ def format_report(run_info: dict, scans, stale, reflows, exit_code) -> str:
             lines.append(f"  FAIL: {scan['expand_failures']} expand button(s) could not be clicked")
         elif scan["state"] == "expanded":
             lines.append(f"  expand buttons clicked: {scan.get('expand_clicked', 0)}")
+            sort_text = "yes" if scan.get("sorted_first_column") else "no sortable column"
+            lines.append(f"  first column sorted: {sort_text}")
         for violation in scan["violations"]:
             lines.append(
                 f"  VIOLATION {violation['id']} ({violation['impact']}): "
@@ -627,6 +630,28 @@ def _expand_all(page) -> tuple[int, int]:
     return clicked, failed
 
 
+def _sort_first_column(page) -> tuple[bool, bool]:
+    """Click the first sortable column header's button, if the page has one.
+
+    Returns (clicked, failed). A page with no sortable header returns
+    (False, False). A button that exists but cannot be clicked returns
+    (False, True), and the caller counts it like a failed expand click.
+    """
+    buttons = page.locator("th[data-sort] button")
+    if buttons.count() == 0:
+        return False, False
+    try:
+        buttons.first.click(timeout=3000)
+        # The click scrolls the page up, which makes the theme's back-to-top
+        # button appear. Scroll back to the top, where the theme hides it again,
+        # so the scan sees the sorted table and not that transient button.
+        page.evaluate("window.scrollTo(0, 0)")
+        page.wait_for_selector("#pst-back-to-top", state="hidden", timeout=3000)
+        return True, False
+    except Exception:  # not clickable: report it and go on
+        return False, True
+
+
 def _simplify_nodes(page, nodes: list[dict]) -> list[dict]:
     """Turn axe nodes into plain dicts, each with its owner category."""
     simplified = []
@@ -682,6 +707,8 @@ def _reflow_result(page, relative: str, state: str, expand_failures: int = 0) ->
 def run_browser_scan(html_dir: Path, pages: list[str]):
     """Run axe (load and expanded states, light and dark) and the 320 px reflow check.
 
+    The expanded state also has the first sortable column sorted.
+
     Returns ``(run_info, scans, reflows)``; ``run_info`` has the axe-core and
     theme versions and the list of blocked requests.
     """
@@ -704,7 +731,7 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
     scans, reflows = [], []
     run_info = {"axe_version": "unknown", "theme_version": "unknown"}
 
-    def scan_page(page, relative, theme, state, clicked=0, failed=0):
+    def scan_page(page, relative, theme, state, clicked=0, failed=0, sorted_first=False):
         response = axe.run(page, options=axe_options).response
         run_info["axe_version"] = response.get("testEngine", {}).get("version", "unknown")
         scans.append(
@@ -716,6 +743,7 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
                 "incomplete": _simplify_results(page, response["incomplete"]),
                 "expand_clicked": clicked,
                 "expand_failures": failed,
+                "sorted_first_column": sorted_first,
             }
         )
 
@@ -740,9 +768,11 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
                     )
                 scan_page(page, relative, theme, "load")
                 clicked, failed = _expand_all(page)
+                sorted_first, sort_failed = _sort_first_column(page)
+                failed += sort_failed
                 # Park the mouse so no button is measured in its hover state.
                 page.mouse.move(0, 0)
-                scan_page(page, relative, theme, "expanded", clicked, failed)
+                scan_page(page, relative, theme, "expanded", clicked, failed, sorted_first)
             page.context.close()
 
         page = _new_page(browser, "light", REFLOW_VIEWPORT, blocked)
@@ -750,6 +780,8 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
             _open(page, html_dir, relative)
             reflows.append(_reflow_result(page, relative, "load"))
             _clicked, failed = _expand_all(page)
+            _sorted, sort_failed = _sort_first_column(page)
+            failed += sort_failed
             reflows.append(_reflow_result(page, relative, "expanded", failed))
         page.context.close()
         browser.close()

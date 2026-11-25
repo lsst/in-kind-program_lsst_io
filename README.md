@@ -63,7 +63,7 @@ tox run -e a11y            # or: tox run -e a11y -- path/to/other/html
 
 The check is not part of the default `tox` run, because it needs a browser. If Playwright says Chromium is missing, install it once with `.tox/a11y/bin/python -m playwright install chromium`. The browser blocks every request that is not a local file, so the web font is not loaded and the check runs with the fallback font. Add `--json report.json` to the script to keep a machine-readable report. The check can also be started by hand from the Actions tab ("Accessibility check").
 
-Each page is scanned as loaded and again "expanded" (after every "Show more" and "Read full description" button is clicked), in light and dark mode. Each finding is sorted by owner:
+Each page is scanned as loaded and again "expanded" (after every "Show more" and "Read full description" button is clicked and the first sortable column is sorted), in light and dark mode. Each finding is sorted by owner:
 
 - **ours**: anything inside the article body, including the intro text and its links, plus our `ikp-` markup and the cards (`.sd-card`). We fix these.
 - **sphinx-design**: `sd-` components that are not inside an `ikp-` element or a card. We fix these too, with CSS, JavaScript or a different component role.
@@ -74,7 +74,7 @@ The run fails if any violation is not exempt (including a theme one), if a page 
 - The `EXEMPTIONS` list at the top of the script holds theme findings we accept, each with the rule id, a part of the selector and the reason. An entry that no longer matches anything is reported as stale, so the list cannot outlive the problem. Review the list whenever the theme is upgraded.
 - A colour-contrast finding whose text colour is exactly the theme's link colour (`#058B8C`, 4.13:1 on white) is exempt wherever it appears (as long as the measured ratio is at least 3:1), and is counted in its own "exempt: theme colour" group so it stays visible.
 
-Items axe marks "needs review" are listed for a person to judge and are never exempted; today that is one colour-contrast item on the navbar search button's keyboard-shortcut hint. The check passes on live data today. The remaining gaps (keyboard sorting, names, status messages) are ones axe cannot see, and later changes fix them. Automated checks find only part of the problems, so keyboard and screen reader checks are still needed.
+Items axe marks "needs review" are listed for a person to judge and are never exempted; today that is one colour-contrast item on the navbar search button's keyboard-shortcut hint. The check passes on live data today. axe cannot see every problem (for example whether a control works from the keyboard), so keyboard and screen reader checks are still needed.
 
 ## Card data validation
 
