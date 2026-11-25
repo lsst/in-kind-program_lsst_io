@@ -74,7 +74,7 @@ The run fails if any violation is not exempt (including a theme one), if a page 
 - The `EXEMPTIONS` list at the top of the script holds theme findings we accept, each with the rule id, a part of the selector and the reason. An entry that no longer matches anything is reported as stale, so the list cannot outlive the problem. Review the list whenever the theme is upgraded.
 - A colour-contrast finding whose text colour is exactly the theme's link colour (`#058B8C`, 4.13:1 on white) is exempt wherever it appears (as long as the measured ratio is at least 3:1), and is counted in its own "exempt: theme colour" group so it stays visible.
 
-Items axe marks "needs review" are listed for a person to judge and are never exempted; today these are colour-contrast items on the navbar search button's keyboard-shortcut hint and on the sort arrow in a sorted table header (a symbol in the header text colour, which passes when measured). The check passes on live data today. axe cannot see every problem (for example whether a control works from the keyboard), so keyboard and screen reader checks are still needed.
+Items axe marks "needs review" are listed for a person to judge and are never exempted; today these are colour-contrast items on the navbar search button's keyboard-shortcut hint, the sort arrow in a sorted table header, and the arrows in the "Show more" buttons and "Also see" links. Our arrows are symbols in the colour of the text beside them, which pass when measured. The check passes on live data today. axe cannot see every problem (for example whether a control works from the keyboard), so keyboard and screen reader checks are still needed.
 
 ## Card data validation
 
