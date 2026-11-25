@@ -51,6 +51,31 @@ In pull requests, the link check fails only on broken links. Timeouts are report
 A few known-bad URLs are ignored in `conf.py`. A weekly GitHub Actions run (`linkcheck-weekly.yaml`) re-checks every link, including the ignored ones.
 To run that full check locally, use `IKP_LINKCHECK_FULL=1 tox run -e linkcheck`.
 
+## Accessibility check
+
+`scripts/a11y_check.py` opens the Telescope Access, Contributed Datasets and Contributed Software pages from a built site in headless Chromium, in light and dark mode, and runs axe-core (WCAG 2.0 and 2.1, levels A and AA) on each whole page. It also checks that each page does not scroll sideways at 320 px wide.
+Build the site first, then run the check:
+
+```bash
+tox run -e html
+tox run -e a11y            # or: tox run -e a11y -- path/to/other/html
+```
+
+The check is not part of the default `tox` run, because it needs a browser. If Playwright says Chromium is missing, install it once with `.tox/a11y/bin/python -m playwright install chromium`. The browser blocks every request that is not a local file, so the web font is not loaded and the check runs with the fallback font. Add `--json report.json` to the script to keep a machine-readable report. The check can also be started by hand from the Actions tab ("Accessibility check").
+
+Each page is scanned as loaded and again "expanded" (after every "Show more" and "Read full description" button is clicked), in light and dark mode. Each finding is sorted by owner:
+
+- **ours**: anything inside the article body, including the intro text and its links, plus our `ikp-` markup and the cards (`.sd-card`). We fix these.
+- **sphinx-design**: `sd-` components that are not inside an `ikp-` element or a card. We fix these too, with CSS, JavaScript or a different component role.
+- **theme**: only the chrome outside the article (header, navigation, sidebars, prev/next links, footer).
+
+The run fails if any violation is not exempt (including a theme one), if a page needs horizontal scrolling at 320 px, if an exemption entry is stale, or if an expand button cannot be clicked. Exit code 2 means the check could not run (for example a missing build or browser). Two kinds of exemption exist:
+
+- The `EXEMPTIONS` list at the top of the script holds theme findings we accept, each with the rule id, a part of the selector and the reason. An entry that no longer matches anything is reported as stale, so the list cannot outlive the problem. Review the list whenever the theme is upgraded.
+- A colour-contrast finding whose text colour is exactly the theme's link colour (`#058B8C`, 4.13:1 on white) is exempt wherever it appears (as long as the measured ratio is at least 3:1), and is counted in its own "exempt: theme colour" group so it stays visible.
+
+Items axe marks "needs review" are listed for a person to judge and are never exempted; today that is one colour-contrast item on the navbar search button's keyboard-shortcut hint. The check passes on live data today. The remaining gaps (keyboard sorting, names, status messages) are ones axe cannot see, and later changes fix them. Automated checks find only part of the problems, so keyboard and screen reader checks are still needed.
+
 ## Card data validation
 
 Every card YAML file under `docs/contribution-types/_data/` must match its schema in `ikp_data/schemas.py`. CI runs `tox run -e validate`, and the pre-commit hook runs the same check. A malformed card (for example, one with an unknown field, a missing `last_updated`, or a misspelled status) fails with a message that names the file and the field. Run the check locally before you commit with `tox run -e validate`.
