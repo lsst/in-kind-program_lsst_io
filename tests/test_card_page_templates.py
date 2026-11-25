@@ -345,3 +345,20 @@ def test_the_map_markup_has_no_inline_fill_or_stroke_colour(data_dir):
     # `stroke-width` is a size, not a colour, so only whole `fill=` / `stroke=` attributes count.
     assert not re.search(r'\b(?:fill|stroke)\s*=', svg), "the map SVG has an inline fill or stroke colour"
     assert "ikp-map-bg" in svg and "ikp-map-marker-" in svg  # the classes that replace them are there
+
+
+# page file -> (id of the search box, text of its visually hidden label)
+SEARCH_LABELS = {
+    "contributed-telescope.rst": ("ikp-search", "Search facilities"),
+    "contributed-datasets.rst": ("ikp-search", "Search datasets"),
+    "contributed-software.rst": ("ikp-sw-search", "Search software"),
+}
+
+
+@pytest.mark.parametrize("page", SEARCH_LABELS)
+def test_each_search_box_has_a_visually_hidden_label(page):
+    """The placeholder is not a name; a label gives the box one (WCAG 4.1.2, 3.3.2)."""
+    input_id, label_text = SEARCH_LABELS[page]
+    rendered = render_page(page, FIXTURE_DATA_DIR)
+    assert f'<label for="{input_id}" class="ikp-visually-hidden">{label_text}</label>' in rendered
+    assert f'<input type="text" id="{input_id}"' in rendered  # still type="text"

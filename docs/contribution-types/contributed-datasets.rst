@@ -55,6 +55,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </div>
 
       <div class="ikp-actionbar">
+        <label for="ikp-search" class="ikp-visually-hidden">Search datasets</label>
         <input type="text" id="ikp-search" placeholder="Search title, description, keywords...">
       </div>
 

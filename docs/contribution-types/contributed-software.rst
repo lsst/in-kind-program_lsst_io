@@ -55,6 +55,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       </div>
 
       <div class="ikp-actionbar">
+        <label for="ikp-sw-search" class="ikp-visually-hidden">Search software</label>
         <input type="text" id="ikp-sw-search" placeholder="Search title, description, keywords...">
       </div>
 
