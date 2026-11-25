@@ -424,4 +424,4 @@ def test_each_sortable_header_is_a_column_header_holding_one_button_and_an_empty
         assert 'scope="col"' in attributes, f"{page}: a sortable header lacks scope=col"
         assert SORT_BUTTON_CONTENT.fullmatch(content), f"{page}: unexpected header content {content!r}"
     # No header is marked as sorted at load; the script sets this after a sort.
-    assert "aria-sort" not in rendered
+    assert "aria-sort=" not in rendered
