@@ -362,3 +362,40 @@ def test_each_search_box_has_a_visually_hidden_label(page):
     rendered = render_page(page, FIXTURE_DATA_DIR)
     assert f'<label for="{input_id}" class="ikp-visually-hidden">{label_text}</label>' in rendered
     assert f'<input type="text" id="{input_id}"' in rendered  # still type="text"
+
+
+# page file -> (noun in the count line, the page's "no results" text)
+RESULT_COUNT_TEXT = {
+    "contributed-telescope.rst": ("facilities", "No facilities match the filters"),
+    "contributed-datasets.rst": ("datasets", "No datasets match the filters"),
+    "contributed-software.rst": ("software contributions", "No software contributions match the filters"),
+}
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", RESULT_COUNT_TEXT)
+def test_the_template_renders_the_full_count_for_use_without_js(page, data_dir):
+    noun, _ = RESULT_COUNT_TEXT[page]
+    rendered = render_page(page, data_dir)
+    total = len(read_structure(rendered).rows)
+    assert total > 0
+    assert f'<p class="ikp-result-count">Showing {total} of {total} {noun}</p>' in rendered
+    assert rendered.count("ikp-result-count") == 1
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", RESULT_COUNT_TEXT)
+def test_only_the_hidden_announcer_is_a_status_region_and_it_starts_empty(page, data_dir):
+    rendered = render_page(page, data_dir)
+    # The visible count is plain text; the hidden announcer is the one status region.
+    assert rendered.count('role="status"') == 1
+    assert '<p class="ikp-visually-hidden ikp-status" role="status"></p>' in rendered
+
+
+@pytest.mark.parametrize("page", RESULT_COUNT_TEXT)
+def test_the_script_knows_each_pages_noun_and_zero_results_text(page):
+    noun, none_text = RESULT_COUNT_TEXT[page]
+    script = CARDS_JS.read_text(encoding="utf-8")
+    # The template renders the noun and the script rewrites it; they must agree.
+    assert f"noun: '{noun}'" in script
+    assert none_text in script

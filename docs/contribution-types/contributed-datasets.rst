@@ -59,6 +59,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <input type="text" id="ikp-search" placeholder="Search title, description, keywords...">
       </div>
 
+      {# Result count: rendered here so it is right without JS; cards.js updates it as the filters change. The hidden status line below it is what screen readers announce. #}
+      <p class="ikp-result-count">Showing {{ datasets | length }} of {{ datasets | length }} datasets</p>
+      <p class="ikp-visually-hidden ikp-status" role="status"></p>
+
       <table class="ikp-datasets-table" id="ikp-datasets-table">
         <thead>
           <tr>

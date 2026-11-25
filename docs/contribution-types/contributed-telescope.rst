@@ -109,6 +109,10 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         <input type="text" id="ikp-search" placeholder="Search facilities, sites, instruments...">
       </div>
 
+      {# Result count: rendered here so it is right without JS; cards.js updates it as the filters change. The hidden status line below it is what screen readers announce. #}
+      <p class="ikp-result-count">Showing {{ telescopes | length }} of {{ telescopes | length }} facilities</p>
+      <p class="ikp-visually-hidden ikp-status" role="status"></p>
+
       <div class="ikp-map-wrap">
         <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map showing facility locations">
           <rect class="ikp-map-bg" x="0" y="0" width="1000" height="500"></rect>
