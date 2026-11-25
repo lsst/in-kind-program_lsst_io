@@ -66,12 +66,12 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <table class="ikp-datasets-table" id="ikp-datasets-table">
         <thead>
           <tr>
-            <th data-sort="title">Dataset</th>
-            <th data-sort="datatype">Data type</th>
-            <th data-sort="wavelength">Wavelength</th>
-            <th data-sort="recipient">Primary recipient</th>
-            <th data-sort="status">Status</th>
-            <th data-sort="updated">Updated</th>
+            <th scope="col" data-sort="title"><button type="button" class="ikp-sort-btn">Dataset<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="datatype"><button type="button" class="ikp-sort-btn">Data type<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="wavelength"><button type="button" class="ikp-sort-btn">Wavelength<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="recipient"><button type="button" class="ikp-sort-btn">Primary recipient<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="status"><button type="button" class="ikp-sort-btn">Status<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="updated"><button type="button" class="ikp-sort-btn">Updated<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
           </tr>
         </thead>
         <tbody>

@@ -188,7 +188,8 @@ def test_escaped_note_parses_back_to_the_same_text():
 
 def test_aperture_header_asks_for_a_numeric_sort_by_the_row_value(tmp_path):
     text = render_card_text(tmp_path)
-    assert '<th data-sort="aperture-value" data-sort-type="number">Aperture</th>' in text
+    assert '<th scope="col" data-sort="aperture-value" data-sort-type="number">' in text
+    assert "Aperture<span" in text  # the header's label sits in its sort button
 
 
 def test_rows_carry_the_aperture_value_and_leave_it_blank_without_one(tmp_path):

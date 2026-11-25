@@ -176,9 +176,36 @@ html[data-theme=dark] {
 .ikp-telescopes-table th, .ikp-telescopes-table td,
 .ikp-datasets-table th, .ikp-datasets-table td,
 .ikp-sw-table th, .ikp-sw-table td { text-align: left; padding: 0.5em 0.75em; border-bottom: 1px solid var(--ikp-table-border); }
-.ikp-telescopes-table th,
-.ikp-datasets-table th,
-.ikp-sw-table th { cursor: pointer; user-select: none; }
+
+/* A sortable header holds a real button, so the keyboard and screen readers can
+   use it. The cell's padding moves into the button, so the button fills the
+   whole cell (the full cell is clickable) and the header looks as it did before.
+   The cell keeps its bottom border. */
+.ikp-telescopes-table th[data-sort],
+.ikp-datasets-table th[data-sort],
+.ikp-sw-table th[data-sort] { padding: 0; }
+.ikp-sort-btn {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.5em 0.75em;
+  border: 0;
+  background: none;
+  /* Buttons do not inherit text styling by default; take the header's. */
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+}
+/* The focus ring is left to the browser and theme. */
+
+/* The sort arrow (a state indicator, so it keeps the text colour). Empty until
+   a column is sorted, and then it takes no space. */
+.ikp-sort-arrow { margin-left: 0.3em; }
+.ikp-sort-arrow:empty { display: none; }
 
 /* Status badges in the tables. The Telescope Access page adds
    `ikp-badge-spaced`, a small margin so several badges can sit side by side;

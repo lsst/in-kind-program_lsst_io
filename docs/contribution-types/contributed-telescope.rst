@@ -133,11 +133,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <table class="ikp-telescopes-table" id="ikp-telescopes-table">
         <thead>
           <tr>
-            <th data-sort="facility">Facility</th>
-            <th data-sort="location">Location</th>
-            <th data-sort="instrumentation">Instrumentation</th>
-            <th data-sort="status">Status</th>
-            <th data-sort="aperture-value" data-sort-type="number">Aperture</th>
+            <th scope="col" data-sort="facility"><button type="button" class="ikp-sort-btn">Facility<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="location"><button type="button" class="ikp-sort-btn">Location<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="instrumentation"><button type="button" class="ikp-sort-btn">Instrumentation<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="status"><button type="button" class="ikp-sort-btn">Status<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
+            <th scope="col" data-sort="aperture-value" data-sort-type="number"><button type="button" class="ikp-sort-btn">Aperture<span class="ikp-sort-arrow" aria-hidden="true"></span></button></th>
           </tr>
         </thead>
         <tbody>
