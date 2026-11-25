@@ -635,16 +635,19 @@ def _sort_first_column(page) -> tuple[bool, bool]:
 
     Returns (clicked, failed). A page with no sortable header returns
     (False, False). A button that exists but cannot be clicked returns
-    (False, True), and the caller counts it like a failed expand click.
+    (False, True), and the caller counts it like a failed expand click; so
+    does a theme back-to-top button that stays visible after the scroll back.
     """
     buttons = page.locator("th[data-sort] button")
     if buttons.count() == 0:
         return False, False
     try:
         buttons.first.click(timeout=3000)
-        # The click scrolls the page up, which makes the theme's back-to-top
-        # button appear. Scroll back to the top, where the theme hides it again,
-        # so the scan sees the sorted table and not that transient button.
+        # Clicking scrolls the page, which makes the theme's back-to-top button
+        # appear. Scroll to the top, where the theme hides it, so both scans see
+        # the page in the same position. That button is therefore not scanned;
+        # it is theme chrome with a known contrast shortfall (white on #ed4c4c,
+        # 3.65:1), noted in the README.
         page.evaluate("window.scrollTo(0, 0)")
         page.wait_for_selector("#pst-back-to-top", state="hidden", timeout=3000)
         return True, False
