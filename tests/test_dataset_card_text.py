@@ -209,6 +209,14 @@ def test_card_header_spells_out_uk_and_leaves_other_countries(tmp_path):
     assert "TST-FIX-S2 - Examplia\n" in other
 
 
+def test_card_header_shows_the_id_alone_when_there_is_no_country(tmp_path):
+    for name, country in (("none", None), ("empty", "")):
+        text = render_card_text(tmp_path / name, country=country)
+        assert "TST-FIX-S2\n" in text
+        assert "TST-FIX-S2 - None" not in text
+        assert "TST-FIX-S2 - " not in text
+
+
 def test_loader_adds_display_country_without_changing_the_stored_country(tmp_path):
     data_dir = tmp_path / "_data"
     shutil.copytree(FIXTURE_DATA_DIR, data_dir)

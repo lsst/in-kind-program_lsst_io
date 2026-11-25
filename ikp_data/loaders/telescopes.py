@@ -41,7 +41,6 @@ Why the derived fields exist
   opportunities banner to link to facility cards.
 """
 
-import re
 import string
 
 import yaml
@@ -67,14 +66,18 @@ _APERTURE_BAND_LABELS = {
 
 def _aperture_band(aperture_str):
     """Bucket a free-text aperture string (e.g. "2 x 8.4m", "1.9m-1.0m")
-    into a coarse band using the largest diameter mentioned, since that's
-    the figure that matters most for feasibility at a glance."""
-    if not aperture_str:
+    into a coarse band: small (under 2 m), medium (2 to 8 m) or large (over 8 m).
+
+    The band uses the largest diameter in metres, since that is the figure that
+    matters most for feasibility at a glance. It reads the size with
+    ``largest_metre_value``, the same rule the table's Aperture sort uses. Both
+    the filter and the sort therefore agree on one number: "12 x 1m" is a 1 m
+    facility for both, never "large" in the filter and 1 m in the sort. Text
+    with no size in metres gives no band.
+    """
+    largest = largest_metre_value(aperture_str)
+    if largest is None:
         return None
-    numbers = [float(n) for n in re.findall(r"\d+\.?\d*", aperture_str)]
-    if not numbers:
-        return None
-    largest = max(numbers)
     if largest < 2:
         return "small"
     if largest <= 8:
