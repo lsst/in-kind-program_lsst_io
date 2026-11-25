@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from ikp_data.loaders.telescopes import load_telescopes
+from ikp_data.loaders.telescopes import _aperture_band, load_telescopes
 
 # The invented fixture records (see tests/fixtures/README.md), so these tests do
 # not depend on the real, changing card data.
@@ -69,3 +69,38 @@ def test_aperture_value_is_the_largest_metre_value_or_none(tmp_path):
     other.mkdir()
     data_dir, _ = _data_dir_with_one_telescope(other, aperture="DELETE")
     assert _load(data_dir)["telescopes"][0]["aperture_value"] is None
+
+
+def test_filter_and_sort_read_the_aperture_with_one_rule(tmp_path):
+    # "12 x 1m" is a 1 m facility: small in the filter and 1 in the sort. The bare 12
+    # is a count, not a size, so it must not make the facility "large".
+    data_dir, _ = _data_dir_with_one_telescope(tmp_path, aperture="12 x 1m")
+    record = _load(data_dir)["telescopes"][0]
+    assert record["aperture_band"] == "small"
+    assert record["aperture_value"] == 1
+
+
+def test_aperture_with_no_metre_value_has_no_band():
+    assert _aperture_band("TBD") is None
+    assert _aperture_band("") is None
+    assert _aperture_band(None) is None
+
+
+def test_live_aperture_values_keep_their_bands():
+    expected = {
+        "1.0m": "small",
+        "1.4m": "small",
+        "1.5m / 1.0m": "small",
+        "1.6m": "small",
+        "1.8m": "small",
+        "1.9m-1.0m": "small",
+        "2m": "medium",
+        "2.56m": "medium",
+        "2.6m": "medium",
+        "2 x 8.4m": "large",
+        "8.2m": "large",
+        "9.2m": "large",
+        "10.4m": "large",
+    }
+    for aperture, band in expected.items():
+        assert _aperture_band(aperture) == band, aperture
