@@ -416,19 +416,115 @@
     return ascending ? an - bn : bn - an;
   }
 
+  // The glyphs shown after a toggle button's label. They sit in an
+  // `aria-hidden` span, so a screen reader announces the label only.
+  var GLYPH_DOWN = '\u25BE';
+  var GLYPH_UP = '\u25B4';
+
+  // Set a toggle button's content to its label, a space and the glyph. The
+  // content is built with DOM methods so the label is always handled as text.
+  function setToggleContent(btn, label, glyph) {
+    var glyphSpan = document.createElement('span');
+    glyphSpan.setAttribute('aria-hidden', 'true');
+    glyphSpan.textContent = glyph;
+    btn.textContent = '';
+    btn.appendChild(document.createTextNode(label + ' '));
+    btn.appendChild(glyphSpan);
+  }
+
+  // The region a toggle button opens and closes: the element named by its
+  // `aria-controls`.
+  function regionFor(btn) {
+    return document.getElementById(btn.getAttribute('aria-controls'));
+  }
+
   // Make each "Show more" button (matched by `buttonSelector`) toggle the
-  // `ikp-expanded` class on the element just before it, and swap its own label
-  // between the `data-expand-label` and `data-collapse-label` texts.
+  // `ikp-expanded` class on the region it controls, keep its own
+  // `aria-expanded` in step, and swap its label between the `data-expand-label`
+  // and `data-collapse-label` texts.
   function wireExpandButtons(buttonSelector) {
     document.querySelectorAll(buttonSelector).forEach(function (btn) {
+      var region = regionFor(btn);
+      if (!region) { return; }
       btn.addEventListener('click', function () {
-        var target = btn.previousElementSibling;
-        var expanded = target.classList.toggle('ikp-expanded');
-        btn.textContent = expanded
-          ? btn.getAttribute('data-collapse-label')
-          : btn.getAttribute('data-expand-label');
+        var expanded = region.classList.toggle('ikp-expanded');
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        setToggleContent(btn,
+          btn.getAttribute(expanded ? 'data-collapse-label' : 'data-expand-label'),
+          expanded ? GLYPH_UP : GLYPH_DOWN);
       });
     });
+  }
+
+  // Datasets: the extra fields are always there to open, so each region becomes
+  // collapsible (the CSS hides it) and its button is shown. Without this script
+  // the fields stay visible and the buttons stay hidden.
+  function enableDatasetToggles() {
+    document.querySelectorAll('.ikp-more-btn').forEach(function (btn) {
+      var region = regionFor(btn);
+      if (!region) { return; }
+      region.classList.add('ikp-collapsible');
+      btn.hidden = false;
+    });
+  }
+
+  // Software: clamp a description to three lines, and show its button and the
+  // fade only if the text is longer than that. A short description is left
+  // whole, with neither.
+  function measureDescription(region, btn) {
+    // Never re-measure an open description: its text is not clamped, so it
+    // cannot show whether it overflows. Its button stays shown.
+    if (region.classList.contains('ikp-expanded')) { return; }
+    // The clamp stays on whenever the description is collapsed. Only the fade
+    // and the button change, so measuring never alters the size being measured.
+    region.classList.add('ikp-collapsible');
+    // A card hidden by a filter has no box to measure. The size observer runs
+    // again when a filter shows it.
+    if (region.getClientRects().length === 0) { return; }
+    var overflows = region.scrollHeight > region.clientHeight + 1;
+    region.classList.toggle('ikp-faded', overflows);
+    btn.hidden = !overflows;
+  }
+
+  function enableDescriptionToggles() {
+    var pairs = [];
+    document.querySelectorAll('.ikp-expand-btn').forEach(function (btn) {
+      var region = regionFor(btn);
+      if (region) { pairs.push({ region: region, btn: btn }); }
+    });
+
+    function measureAll() {
+      pairs.forEach(function (pair) { measureDescription(pair.region, pair.btn); });
+    }
+
+    // Measure straight away, so a long description is clamped before the first
+    // paint and nothing shifts at load.
+    measureAll();
+
+    // The text can wrap differently once the web fonts arrive.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measureAll);
+    }
+
+    // Measure again when a description changes size: a resized window, or a
+    // card that a filter has just shown. Browsers without ResizeObserver fall
+    // back to a debounced window resize.
+    if (typeof ResizeObserver === 'function') {
+      var observer = new ResizeObserver(function (entries) {
+        entries.forEach(function (entry) {
+          pairs.forEach(function (pair) {
+            if (pair.region === entry.target) { measureDescription(pair.region, pair.btn); }
+          });
+        });
+      });
+      pairs.forEach(function (pair) { observer.observe(pair.region); });
+    } else {
+      var timer = null;
+      window.addEventListener('resize', function () {
+        clearTimeout(timer);
+        timer = setTimeout(measureAll, 150);
+      });
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -450,6 +546,7 @@
     var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search'),
       noun: 'datasets', noneText: 'No datasets match the filters' });
     wireCardJumps(table);
+    enableDatasetToggles();
     wireExpandButtons('.ikp-more-btn');
     wireTableSorting(table);
     keepListInSync(filtering);
@@ -464,6 +561,7 @@
     var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search'),
       noun: 'software contributions', noneText: 'No software contributions match the filters' });
     wireCardJumps(table);
+    enableDescriptionToggles();
     wireExpandButtons('.ikp-expand-btn');
     wireTableSorting(table);
     keepListInSync(filtering);

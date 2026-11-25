@@ -242,10 +242,11 @@ def test_short_rows_come_before_the_description_in_page_order(tmp_path):
 
 def test_description_toggle_labels_have_arrows(tmp_path):
     text = render_card_text(tmp_path)
-    # &#9662; is the down-pointing small triangle and &#9652; the up-pointing one.
-    assert 'data-expand-label="Read full description &#9662;"' in text
-    assert 'data-collapse-label="Show less &#9652;"' in text
-    assert ">Read full description &#9662;</button>" in text
+    # The labels are bare words; the script adds the glyph. &#9662; is the down-pointing small
+    # triangle, shown in an aria-hidden span so a screen reader does not read it.
+    assert 'data-expand-label="Read full description"' in text
+    assert 'data-collapse-label="Show less"' in text
+    assert '>Read full description <span aria-hidden="true">&#9662;</span></button>' in text
 
 
 def test_description_toggle_does_not_say_show_more(tmp_path):
@@ -291,7 +292,7 @@ def test_an_empty_description_shows_tbd(tmp_path):
 
 def test_the_card_shows_the_escaped_description(tmp_path):
     text = render_card_text(tmp_path, form_data={"activity_description": "x <script> y"})
-    assert '<div class="ikp-desc">x &lt;script&gt; y</div>' in text
+    assert 'x &lt;script&gt; y</div>' in text
     assert "<script>" not in text.replace('<script type="application/json"', "")
 
 

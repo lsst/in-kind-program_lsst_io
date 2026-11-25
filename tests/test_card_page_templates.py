@@ -425,3 +425,61 @@ def test_each_sortable_header_is_a_column_header_holding_one_button_and_an_empty
         assert SORT_BUTTON_CONTENT.fullmatch(content), f"{page}: unexpected header content {content!r}"
     # No header is marked as sorted at load; the script sets this after a sort.
     assert "aria-sort=" not in rendered
+
+
+# The "Show more" toggles: each button names the region it opens (`aria-controls`), starts collapsed and
+# hidden (the script shows it), and keeps its glyphs out of the accessible name (WCAG 4.1.2).
+TOGGLE_PAGES = {
+    # page -> (button class, region id suffix)
+    "contributed-software.rst": ("ikp-expand-btn", "-desc"),
+    "contributed-datasets.rst": ("ikp-more-btn", "-more"),
+}
+TOGGLE_BUTTON = re.compile(r"<button\b([^>]*)>(.*?)</button>", flags=re.DOTALL)
+HIDDEN_GLYPH_SPAN = re.compile(r'<span aria-hidden="true">[^<]*</span>')
+TOGGLE_GLYPHS = ["▾", "&#9662;", "▴", "&#9652;", "→", "&rarr;"]
+
+
+def toggle_buttons(rendered, button_class):
+    """The attribute text of every toggle button of `button_class` in the rendered page."""
+    return [
+        attributes for attributes, _ in TOGGLE_BUTTON.findall(rendered)
+        if f'class="{button_class}"' in attributes
+    ]
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", TOGGLE_PAGES)
+def test_each_toggle_button_is_collapsed_hidden_and_names_one_region(page, data_dir):
+    button_class, suffix = TOGGLE_PAGES[page]
+    rendered = render_page(page, data_dir)
+    buttons = toggle_buttons(rendered, button_class)
+    assert buttons, f"{page}: no toggle buttons found"
+    controlled = []
+    for attributes in buttons:
+        assert 'type="button"' in attributes
+        assert re.search(r"\bhidden\b", attributes), f"{page}: a toggle button is not hidden at load"
+        assert 'aria-expanded="false"' in attributes
+        region_id = re.search(r'aria-controls="([^"]+)"', attributes).group(1)
+        assert region_id.endswith(suffix)
+        controlled.append(region_id)
+        # Software renders the region as raw HTML; Datasets names the container directive.
+        region_markers = [f'id="{region_id}"', f":name: {region_id}"]
+        assert sum(rendered.count(marker) for marker in region_markers) == 1, (
+            f"{page}: {region_id} is not defined exactly once"
+        )
+    assert len(controlled) == len(set(controlled)), f"{page}: two buttons control the same region"
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", ["contributed-software.rst", "contributed-datasets.rst"])
+def test_toggle_and_also_see_glyphs_appear_only_inside_aria_hidden_spans(page, data_dir):
+    rendered = render_page(page, data_dir)
+    without_hidden_spans = HIDDEN_GLYPH_SPAN.sub("", rendered)
+    for glyph in TOGGLE_GLYPHS:
+        assert glyph not in without_hidden_spans, f"{page}: {glyph!r} is outside an aria-hidden span"
+
+
+def test_the_script_finds_each_toggle_region_through_aria_controls():
+    script = CARDS_JS.read_text(encoding="utf-8")
+    assert "previousElementSibling" not in script
+    assert "aria-controls" in script
