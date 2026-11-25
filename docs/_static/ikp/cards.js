@@ -34,6 +34,19 @@
  * title does (see `wireTeaserLinks`). The teaser row is not a row or a card, so
  * the filters never touch it.
  *
+ * Result count: each page has a visible line, `<p class="ikp-result-count">`,
+ * rendered by the template with the full count ("Showing N of N ..."). After
+ * every change the script rewrites it at once ("Showing 3 of 15 facilities", or
+ * the page's "No ... match the filters" text), so it always matches the list.
+ * Screen readers are told through a separate, visually hidden status region
+ * (`<p class="ikp-visually-hidden ikp-status" role="status">`), which starts
+ * empty so nothing is announced at load. `announce` puts text in it: at once
+ * after a drop-down change, a reset or a `pageshow`, but only after a pause of
+ * half a second while the visitor types, so a reader is not interrupted at every
+ * key. It sets the text only when it differs from the last announcement, so a
+ * `pageshow` re-apply that changes nothing stays silent. Other messages (for
+ * example a sort message) can use the same `announce`.
+ *
  * Class hooks: `ikp-row` and `ikp-map-marker` are used only by this script and
  * have no CSS rules, so do not remove them as unused.
  *
@@ -61,6 +74,35 @@
   function readSearchIndex() {
     var block = document.querySelector('script[type="application/json"][data-ikp="search-index"]');
     return block ? JSON.parse(block.textContent) : {};
+  }
+
+  // The hidden status region that screen readers announce from (see "Result
+  // count" above), the pause before a delayed announcement, and the text last
+  // announced. `lastAnnounced` starts as the visible count line's text (see
+  // `setupFiltering`), so the first, unchanged count is not announced.
+  var ANNOUNCE_DELAY_MS = 500;
+  var announcer = { region: null, timer: null, lastAnnounced: '' };
+
+  // Tell screen readers `text` through the status region. Pass
+  // `{delay: true}` to wait for a pause of ANNOUNCE_DELAY_MS first (each call
+  // restarts the wait); without it the text is set at once. Text equal to the
+  // last announcement is skipped, because setting identical text makes no
+  // announcement anyway. Does nothing on a page without the region.
+  function announce(text, options) {
+    announcer.region = announcer.region || document.querySelector('.ikp-status');
+    if (!announcer.region) { return; }
+    clearTimeout(announcer.timer);
+    announcer.timer = null;
+    function write() {
+      if (text === announcer.lastAnnounced) { return; }
+      announcer.lastAnnounced = text;
+      announcer.region.textContent = text;
+    }
+    if (options && options.delay) {
+      announcer.timer = setTimeout(write, ANNOUNCE_DELAY_MS);
+    } else {
+      write();
+    }
   }
 
   // Show or hide an element.
@@ -104,6 +146,8 @@
   //
   // options.table        the page's table
   // options.searchInput  the search box, or null
+  // options.noun         the plural noun for the count line ("facilities")
+  // options.noneText     the count line when no row passes ("No facilities match the filters")
   //
   // Returns {applyFilters, resetFilters, getVisibleCount}: the page can
   // re-apply filters after a change of its own, clear them all, and read how
@@ -115,9 +159,25 @@
     var markers = Array.prototype.slice.call(document.querySelectorAll('.ikp-map-marker'));
 
     // How many rows pass the filters. Every row is shown at the start. The count
-    // is kept up to date for a result count, which reads it through
-    // `getVisibleCount`.
+    // is kept up to date for the result count line, and the page can read it
+    // through `getVisibleCount`.
     var visibleCount = rows.length;
+
+    // The visible result count line. Its rendered text (the full count) counts
+    // as already known, so only a change from it is announced.
+    var countElement = document.querySelector('.ikp-result-count');
+    if (countElement) { announcer.lastAnnounced = countElement.textContent; }
+
+    // Rewrite the visible count line at once from the current `visibleCount`, and
+    // announce the same text (after a typing pause if `options.delay` is true).
+    function updateResultCount(announceOptions) {
+      if (!countElement) { return; }
+      var text = (visibleCount === 0)
+        ? options.noneText
+        : 'Showing ' + visibleCount + ' of ' + rows.length + ' ' + options.noun;
+      if (countElement.textContent !== text) { countElement.textContent = text; }
+      announce(text, announceOptions);
+    }
 
     // The tokens an item must have: one per drop-down that is not on "All".
     function requiredTokens() {
@@ -138,7 +198,8 @@
       return text.indexOf(query) !== -1;
     }
 
-    function applyFilters() {
+    // Show or hide the rows, cards and markers. Leaves the count line alone.
+    function filterRows() {
       var required = requiredTokens();
       var query = options.searchInput ? options.searchInput.value.trim().toLowerCase() : '';
       visibleCount = 0;
@@ -155,8 +216,21 @@
       });
     }
 
+    // Filter, and update the count line and its announcement at once.
+    function applyFilters() {
+      filterRows();
+      updateResultCount();
+    }
+
     selects.forEach(function (select) { select.addEventListener('change', applyFilters); });
-    if (options.searchInput) { options.searchInput.addEventListener('input', applyFilters); }
+    // Typing filters and updates the visible count at once, but the
+    // announcement waits for a pause.
+    if (options.searchInput) {
+      options.searchInput.addEventListener('input', function () {
+        filterRows();
+        updateResultCount({ delay: true });
+      });
+    }
 
     // Put every drop-down back on "All", empty the search box and show
     // everything again.
@@ -323,7 +397,8 @@
   // 2. Telescope Access page
   // -------------------------------------------------------------------------
   function initTelescopes(table) {
-    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search'),
+      noun: 'facilities', noneText: 'No facilities match the filters' });
     wireCardJumps(table);
     wireTableSorting(table);
     keepListInSync(filtering);
@@ -334,7 +409,8 @@
   // 3. Datasets page
   // -------------------------------------------------------------------------
   function initDatasets(table) {
-    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-search'),
+      noun: 'datasets', noneText: 'No datasets match the filters' });
     wireCardJumps(table);
     wireExpandButtons('.ikp-more-btn');
     wireTableSorting(table);
@@ -347,7 +423,8 @@
   // 4. Software page
   // -------------------------------------------------------------------------
   function initSoftware(table) {
-    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search') });
+    var filtering = setupFiltering({ table: table, searchInput: document.getElementById('ikp-sw-search'),
+      noun: 'software contributions', noneText: 'No software contributions match the filters' });
     wireCardJumps(table);
     wireExpandButtons('.ikp-expand-btn');
     wireTableSorting(table);

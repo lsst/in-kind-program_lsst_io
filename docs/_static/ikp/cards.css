@@ -150,6 +150,25 @@ html[data-theme=dark] {
 .ikp-actionbar input[type="text"] { flex: 1; min-width: 220px; padding: 0.4em 0.6em; border: 1px solid var(--ikp-control-border); border-radius: 0.3em; font-size: 0.9em; }
 .ikp-actionbar-spaced { margin-bottom: 1.5rem; }
 
+/* "Showing N of M ..." line under the search box. Body-colour text, so it follows
+   --ikp-text in light and dark mode. It is not a control, so it has no focus style. */
+.ikp-result-count { margin: 0 0 1rem; font-size: 0.9em; color: var(--ikp-text); }
+
+/* Hides an element from the screen but keeps it for screen readers (the
+   standard "clip" pattern). Used for the search boxes' labels. */
+.ikp-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* The three card tables share one look; each page has its own class name. */
 .ikp-telescopes-table,
 .ikp-datasets-table,
