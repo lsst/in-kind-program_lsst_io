@@ -231,7 +231,8 @@ def test_loader_adds_display_country_without_changing_the_stored_country(tmp_pat
 
 def test_show_more_button_labels_say_details_with_arrows(tmp_path):
     text = render_card_text(tmp_path)
-    # &#9662; is the down-pointing small triangle and &#9652; the up-pointing one.
-    assert 'data-expand-label="Show more details &#9662;"' in text
-    assert 'data-collapse-label="Show fewer details &#9652;"' in text
-    assert ">Show more details &#9662;</button>" in text
+    # The labels are bare words; the script adds the glyph. &#9662; is the down-pointing small
+    # triangle, shown in an aria-hidden span so a screen reader does not read it.
+    assert 'data-expand-label="Show more details"' in text
+    assert 'data-collapse-label="Show fewer details"' in text
+    assert '>Show more details <span aria-hidden="true">&#9662;</span></button>' in text

@@ -126,15 +126,15 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <div class="ikp-desc">{{ item.description_html }}</div>
-             <button type="button" class="ikp-expand-btn" data-expand-label="Read full description &#9662;" data-collapse-label="Show less &#9652;">Read full description &#9662;</button>
+             <div class="ikp-desc" id="{{ item.anchor }}-desc">{{ item.description_html }}</div>
+             <button type="button" class="ikp-expand-btn" aria-controls="{{ item.anchor }}-desc" aria-expanded="false" hidden data-expand-label="Read full description" data-collapse-label="Show less">Read full description <span aria-hidden="true">&#9662;</span></button>
 
           {% for rel in item.related %}
           {% if rel.href %}
 
           .. raw:: html
 
-             <a class="ikp-also-see" href="{{ rel.href }}">Also see: {{ rel.kind }} ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikp-also-see" href="{{ rel.href }}">Also see: {{ rel.kind }} ({{ rel.contribution_id }}) <span aria-hidden="true">&rarr;</span></a>
 
           {% endif %}
           {% endfor %}

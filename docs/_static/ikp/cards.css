@@ -273,9 +273,11 @@ html[data-theme=dark] {
  * 4. Datasets and Software pages
  * --------------------------------------------------------------------------- */
 
-/* Datasets: the extra fields hidden behind "Show more". */
-.ikp-more-fields { display: none; }
-.ikp-more-fields.ikp-expanded { display: block; }
+/* Datasets: the extra fields hidden behind "Show more". The script adds
+   `ikp-collapsible` (and unhides the button), so without JavaScript the fields
+   show in full and no button appears. */
+.ikp-more-fields.ikp-collapsible { display: none; }
+.ikp-more-fields.ikp-collapsible.ikp-expanded { display: block; }
 
 /* The expand toggles (Datasets "Show more details", Software "Read full
    description") share one look: an outlined pill in the accent green. */
@@ -288,15 +290,22 @@ html[data-theme=dark] {
 html[data-theme=dark] .ikp-more-btn:hover,
 html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-on-dark); }
 .ikp-more-btn { margin: 0.4em 0; }
+/* The buttons carry the `hidden` attribute until the script shows them. This
+   rule keeps it effective, so a later `display` on these buttons cannot
+   override `hidden`. */
+.ikp-more-btn[hidden],
+.ikp-expand-btn[hidden] { display: none; }
 
-/* Software: the description, clamped to three lines behind its toggle. It sits
-   below the short rows, so the toggle needs room beneath it. */
-.ikp-desc { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1em; }
-.ikp-desc.ikp-expanded { -webkit-line-clamp: unset; display: block; overflow: visible; }
+/* Software: the description. Without JavaScript it shows in full. The script
+   adds `ikp-collapsible` to clamp it to three lines behind its toggle, and
+   `ikp-faded` when the text really overflows those lines. It sits below the
+   short rows, so the toggle needs room beneath it. */
+.ikp-desc { margin-bottom: 1em; }
+.ikp-desc.ikp-collapsible:not(.ikp-expanded) { -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
 .ikp-expand-btn { margin: 0 0 1em; }
 /* Fade the last clamped line into the card background. A mask (not a gradient
    painted in a colour) works in light and dark mode alike. */
-.ikp-desc:not(.ikp-expanded) { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.8em), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 1.8em), transparent); }
+.ikp-desc.ikp-faded:not(.ikp-expanded) { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.8em), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 1.8em), transparent); }
 
 /* "Also see" link between a dataset and its software (and back). A block that
    is only as wide as its text, so each link starts its own line (it does not

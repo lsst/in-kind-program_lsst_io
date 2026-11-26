@@ -128,6 +128,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           **Support channel:** {{ ds.form_data.support_channel or 'TBD' }}
 
           .. container:: ikp-more-fields
+             :name: {{ ds.anchor }}-more
 
              **Data volume:** {{ ds.form_data.data_volume or 'TBD' }}
 
@@ -149,7 +150,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <button type="button" class="ikp-more-btn" data-expand-label="Show more details &#9662;" data-collapse-label="Show fewer details &#9652;">Show more details &#9662;</button>
+             <button type="button" class="ikp-more-btn" aria-controls="{{ ds.anchor }}-more" aria-expanded="false" hidden data-expand-label="Show more details" data-collapse-label="Show fewer details">Show more details <span aria-hidden="true">&#9662;</span></button>
           {% else %}
           {{ ds.curated.summary or 'TBD' }}
 
@@ -161,7 +162,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
           .. raw:: html
 
-             <a class="ikp-also-see" href="{{ rel.href }}">Also see: {{ rel.kind }} ({{ rel.contribution_id }}) &rarr;</a>
+             <a class="ikp-also-see" href="{{ rel.href }}">Also see: {{ rel.kind }} ({{ rel.contribution_id }}) <span aria-hidden="true">&rarr;</span></a>
 
           {% endif %}
           {% endfor %}

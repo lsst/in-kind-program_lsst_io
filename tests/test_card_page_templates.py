@@ -36,6 +36,7 @@ from ikp_data.loaders import build_contexts
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PAGES_DIR = REPO_ROOT / "docs" / "contribution-types"
 CARDS_JS = REPO_ROOT / "docs" / "_static" / "ikp" / "cards.js"
+CARDS_CSS = REPO_ROOT / "docs" / "_static" / "ikp" / "cards.css"
 LIVE_DATA_DIR = PAGES_DIR / "_data"
 FIXTURE_DATA_DIR = Path(__file__).resolve().parent / "fixtures" / "docs" / "contribution-types" / "_data"
 TODAY = datetime.date(2027, 3, 15)
@@ -425,3 +426,108 @@ def test_each_sortable_header_is_a_column_header_holding_one_button_and_an_empty
         assert SORT_BUTTON_CONTENT.fullmatch(content), f"{page}: unexpected header content {content!r}"
     # No header is marked as sorted at load; the script sets this after a sort.
     assert "aria-sort=" not in rendered
+
+
+# The "Show more" toggles: each button names the region it opens (`aria-controls`), starts collapsed and
+# hidden (the script shows it), and keeps its glyphs out of the accessible name (WCAG 4.1.2).
+TOGGLE_PAGES = {
+    # page -> (button class, region id suffix)
+    "contributed-software.rst": ("ikp-expand-btn", "-desc"),
+    "contributed-datasets.rst": ("ikp-more-btn", "-more"),
+}
+TOGGLE_BUTTON = re.compile(r"<button\b([^>]*)>(.*?)</button>", flags=re.DOTALL)
+HIDDEN_GLYPH_SPAN = re.compile(r'<span aria-hidden="true">[^<]*</span>')
+TOGGLE_GLYPHS = ["▾", "&#9662;", "▴", "&#9652;", "→", "&rarr;"]
+
+
+def toggle_buttons(rendered, button_class):
+    """The attribute text of every toggle button of `button_class` in the rendered page."""
+    return [
+        attributes for attributes, _ in TOGGLE_BUTTON.findall(rendered)
+        if f'class="{button_class}"' in attributes
+    ]
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", TOGGLE_PAGES)
+def test_each_toggle_button_is_collapsed_hidden_and_names_one_region(page, data_dir):
+    button_class, suffix = TOGGLE_PAGES[page]
+    rendered = render_page(page, data_dir)
+    buttons = toggle_buttons(rendered, button_class)
+    assert buttons, f"{page}: no toggle buttons found"
+    controlled = []
+    for attributes in buttons:
+        assert 'type="button"' in attributes
+        assert re.search(r"\bhidden\b", attributes), f"{page}: a toggle button is not hidden at load"
+        assert 'aria-expanded="false"' in attributes
+        controls = re.search(r'aria-controls="([^"]+)"', attributes)
+        assert controls is not None, f"{page}: a toggle button has no aria-controls"
+        region_id = controls.group(1)
+        assert region_id.endswith(suffix)
+        controlled.append(region_id)
+        # Software renders the region as raw HTML; Datasets names the container directive.
+        region_markers = [f'id="{region_id}"', f":name: {region_id}"]
+        assert sum(rendered.count(marker) for marker in region_markers) == 1, (
+            f"{page}: {region_id} is not defined exactly once"
+        )
+    assert len(controlled) == len(set(controlled)), f"{page}: two buttons control the same region"
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", ["contributed-software.rst", "contributed-datasets.rst"])
+def test_toggle_and_also_see_glyphs_appear_only_inside_aria_hidden_spans(page, data_dir):
+    rendered = render_page(page, data_dir)
+    without_hidden_spans = HIDDEN_GLYPH_SPAN.sub("", rendered)
+    for glyph in TOGGLE_GLYPHS:
+        assert glyph not in without_hidden_spans, f"{page}: {glyph!r} is outside an aria-hidden span"
+
+
+def test_the_script_finds_each_toggle_region_through_aria_controls():
+    script = CARDS_JS.read_text(encoding="utf-8")
+    assert "previousElementSibling" not in script
+    assert "aria-controls" in script
+
+
+def css_rules_mentioning(css, needle):
+    """The selector text of every CSS rule whose declarations contain `needle`.
+
+    Simple approach: split the file on "}" so each chunk ends with one rule, "selector { declarations",
+    and keep the text between the last two "{". The first rule inside an "@media (...) {" block
+    arrives as "@media (...) { selector { declarations", so taking the last "{" keeps its own
+    selector rather than the media query.
+    """
+    selectors = []
+    for chunk in css.split("}"):
+        if "{" not in chunk:
+            continue
+        before, declarations = chunk.rsplit("{", 1)
+        selector = before.rsplit("{", 1)[-1]
+        if needle in declarations:
+            # Drop any comment text that sits in front of the selector.
+            selectors.append(selector.split("*/")[-1].strip())
+    return selectors
+
+
+def test_the_collapsing_css_applies_only_once_the_script_has_run():
+    """Without JavaScript the fields and descriptions must show in full and no button may appear."""
+    css = CARDS_CSS.read_text(encoding="utf-8")
+
+    hiding = [s for s in css_rules_mentioning(css, "display: none") if ".ikp-more-fields" in s]
+    assert hiding, "no rule hides .ikp-more-fields"
+    for selector in hiding:
+        assert ".ikp-collapsible" in selector, f"{selector!r} hides the fields without the script"
+
+    clamping = [s for s in css_rules_mentioning(css, "-webkit-line-clamp") if ".ikp-desc" in s]
+    assert clamping, "no rule clamps .ikp-desc"
+    for selector in clamping:
+        assert ".ikp-collapsible" in selector, f"{selector!r} clamps the text without the script"
+
+    fading = [s for s in css_rules_mentioning(css, "mask-image") if ".ikp-desc" in s]
+    assert fading, "no rule masks .ikp-desc"
+    for selector in fading:
+        assert ".ikp-faded" in selector, f"{selector!r} masks the text without the script"
+
+    # The buttons stay hidden until the script shows them.
+    hidden_rules = css_rules_mentioning(css, "display: none")
+    for button_class in (".ikp-more-btn", ".ikp-expand-btn"):
+        assert any(f"{button_class}[hidden]" in s for s in hidden_rules), f"no [hidden] rule for {button_class}"
