@@ -53,7 +53,7 @@ To run that full check locally, use `IKP_LINKCHECK_FULL=1 tox run -e linkcheck`.
 
 ## Accessibility check
 
-`scripts/a11y_check.py` opens the Telescope Access, Contributed Datasets and Contributed Software pages from a built site in headless Chromium, in light and dark mode, and runs axe-core (WCAG 2.0 and 2.1, levels A and AA) on each whole page. It also checks that each page does not scroll sideways at 320 px wide.
+`scripts/a11y_check.py` opens the Telescope Access, Contributed Datasets and Contributed Software pages from a built site in headless Chromium, in light and dark mode, and runs axe-core (WCAG 2.0 and 2.1, levels A and AA) on each whole page. It also checks reflow at 320 px wide: the document and the article container must not scroll sideways, and nothing outside a table's `ikp-table-scroll` wrapper may reach past the window edge (the tables may scroll in their own box).
 Build the site first, then run the check:
 
 ```bash
@@ -69,7 +69,7 @@ Each page is scanned as loaded and again "expanded" (after every "Show more" and
 - **sphinx-design**: `sd-` components that are not inside an `ikp-` element or a card. We fix these too, with CSS, JavaScript or a different component role.
 - **theme**: only the chrome outside the article (header, navigation, sidebars, prev/next links, footer).
 
-The run fails if any violation is not exempt (including a theme one), if a page needs horizontal scrolling at 320 px, if an exemption entry is stale, or if an expand button cannot be clicked. Exit code 2 means the check could not run (for example a missing build or browser). Two kinds of exemption exist:
+The run fails if any violation is not exempt (including a theme one), if a page overflows at 320 px (see above), if an exemption entry is stale, or if an expand button cannot be clicked. Exit code 2 means the check could not run (for example a missing build or browser). Two kinds of exemption exist:
 
 - The `EXEMPTIONS` list at the top of the script holds theme findings we accept, each with the rule id, a part of the selector and the reason. An entry that no longer matches anything is reported as stale, so the list cannot outlive the problem. Review the list whenever the theme is upgraded.
 - A colour-contrast finding whose text colour is exactly the theme's link colour (`#058B8C`, 4.13:1 on white) is exempt wherever it appears (as long as the measured ratio is at least 3:1), and is counted in its own "exempt: theme colour" group so it stays visible.

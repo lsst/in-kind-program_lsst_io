@@ -175,6 +175,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         </ul>
       </div>
 
+      {# Only the table scrolls sideways on a narrow screen (WCAG 1.4.10); see .ikp-table-scroll in cards.css. #}
+      <div class="ikp-table-scroll">
       <table class="ikp-telescopes-table" id="ikp-telescopes-table">
         <thead>
           <tr>
@@ -202,6 +204,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endfor %}
         </tbody>
       </table>
+      </div>
 
       <script type="application/json" data-ikp="search-index">{{ search_index_json }}</script>
 
