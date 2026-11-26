@@ -531,7 +531,7 @@ def test_each_status_is_drawn_with_its_own_shape_size_title_and_centre():
         synthetic_record("d", "something_new", facility="Delta", site="Site D", **position),
     ]
     markers = {m["data-slug"]: m for m in read_structure(render_telescopes(records)).markers}
-    # slug -> (tag, ring class present, size attributes, centre, title)
+    # slug -> (tag, ring class present, size attributes, title); every centre must be the position above
     expected = {
         "a": ("circle", False, {"r": "6"}, "Alpha, Site A: Available"),
         "b": ("circle", True, {"r": str(RING_RADIUS)}, "Beta: Future semester"),
@@ -546,6 +546,8 @@ def test_each_status_is_drawn_with_its_own_shape_size_title_and_centre():
         assert {key: marker[key] for key in size} == size
         assert marker_centre(marker, shape_of(marker, tag)) == pytest.approx((444.3, 170.1), abs=1e-9)
         assert marker["_titles"] == [title]
+        # The colour class follows the status named in the title (an unknown status is Future semester).
+        assert STATUS_CLASSES[title.rsplit(": ", 1)[1]] in marker["class"].split()
     # The square's corner is printed without float noise.
     assert (markers["c"]["x"], markers["c"]["y"]) == ("439.3", "165.1")
 
@@ -569,6 +571,9 @@ def test_legend_symbols_use_the_same_shapes_as_the_markers(data_dir):
     entries = legend_entries(render_page("contributed-telescope.rst", data_dir))
     kinds = {text: shape_of({"class": attrs["class"]}, tag) for text, tag, attrs, _ in entries}
     assert kinds == {"Available": "disc", "Future semester": "ring", "Past opportunity": "square"}
+    # The legend ring has the map ring's radius, so the two can't drift apart.
+    ring_attrs = next(attrs for text, _, attrs, _ in entries if text == "Future semester")
+    assert ring_attrs["r"] == str(RING_RADIUS)
 
 
 def test_the_ring_is_an_outline_and_a_hollow_middle_still_takes_the_pointer():
@@ -577,10 +582,12 @@ def test_the_ring_is_an_outline_and_a_hollow_middle_still_takes_the_pointer():
     assert "fill: none" in ring_rule
     assert "stroke: var(--ikp-map-marker-future)" in ring_rule
     assert "pointer-events: all" in ring_rule
-    assert "stroke-width: 3" in ring_rule
-    # The hover rule must exist, or the ring's own stroke would cancel the hover outline.
+    assert re.search(r"stroke-width:\s*3\s*;", ring_rule)
+    # The hover rule must exist, or the ring's own stroke would cancel the hover outline. It keeps the
+    # ring's width, so a hovered ring stays a ring.
     hover_rule = re.search(r"\.ikp-map-marker\.ikp-map-marker-ring:hover\s*\{([^}]*)\}", css).group(1)
     assert "stroke: var(--ikp-map-marker-hover)" in hover_rule
+    assert re.search(r"stroke-width:\s*3\s*;", hover_rule)
 
 
 # page file -> (id of the search box, text of its visually hidden label)
