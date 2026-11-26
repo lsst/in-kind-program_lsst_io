@@ -114,7 +114,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <p class="ikp-visually-hidden ikp-status" role="status"></p>
 
       <div class="ikp-map-wrap">
-        <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map showing facility locations">
+        <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map of facility locations; the table below lists every facility">
           <rect class="ikp-map-bg" x="0" y="0" width="1000" height="500"></rect>
           {% if world_outline_path %}
           <path class="ikp-map-land" d="{{ world_outline_path }}" stroke-width="0.5"></path>
@@ -122,12 +122,24 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% for t in telescopes %}
           {% if t.marker_x is not none %}
           {# A marker keeps data-slug as its stable name; data-card is the id the script looks the card up by.
-             The status class picks the marker colour in cards.css. #}
+             The status class picks the marker colour in cards.css. The <title> is the tooltip a mouse user
+             sees on hover (the map is one image to a screen reader, so it is not read out). Its status
+             wording matches the table badges. #}
+          {% set status_label = 'Available' if t.status == 'available' else ('Past opportunity' if t.status == 'past_opportunity' else 'Future semester') %}
           <circle class="ikp-map-marker {{ 'ikp-map-marker-available' if t.status == 'available' else ('ikp-map-marker-past' if t.status == 'past_opportunity' else 'ikp-map-marker-future') }}" data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
-                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"></circle>
+                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"><title>{{ t.facility | e }}: {{ status_label }}</title></circle>
           {% endif %}
           {% endfor %}
         </svg>
+        {# The map key. Its symbols are decoration for the text beside them, so they are hidden from screen
+           readers. They carry the status colour classes only: the script treats anything with the
+           ikp-map-marker class as a clickable, filterable marker, and these must not be. The key does not
+           change when the filters change. Same order as the Status filter. #}
+        <ul class="ikp-map-legend" aria-label="Map key">
+          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-available" cx="6" cy="6" r="6"></circle></svg>Available</li>
+          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-future" cx="6" cy="6" r="6"></circle></svg>Future semester</li>
+          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-past" cx="6" cy="6" r="6"></circle></svg>Past opportunity</li>
+        </ul>
       </div>
 
       <table class="ikp-telescopes-table" id="ikp-telescopes-table">

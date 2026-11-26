@@ -40,6 +40,7 @@
   --ikp-map-marker-past: #a12626;
   --ikp-map-marker-future: #8a5a00;
   --ikp-map-marker-hover: #1a1a1a;   /* outline of a hovered marker */
+  --ikp-map-legend-text: #1a1a1a;    /* the map key's text, on the map panel */
 
   --ikp-badge-success-bg: #d9f2e3;
   --ikp-badge-success-text: #1a5c33;
@@ -134,6 +135,7 @@ html[data-theme=dark] {
   --ikp-map-marker-past: #ff6b6b;
   --ikp-map-marker-future: #f0b429;
   --ikp-map-marker-hover: #ffffff;
+  --ikp-map-legend-text: #e8eaed;
 }
 
 /* ---------------------------------------------------------------------------
@@ -265,6 +267,12 @@ html[data-theme=dark] {
 .ikp-map-marker-available { fill: var(--ikp-map-marker-available); }
 .ikp-map-marker-past { fill: var(--ikp-map-marker-past); }
 .ikp-map-marker-future { fill: var(--ikp-map-marker-future); }
+/* The map key under the map: one row of symbol + text, wrapping on a narrow screen.
+ * Its symbols reuse the marker colour classes above, so the key can never drift
+ * from the map. The text colour is its own variable so a test can check its contrast. */
+.ikp-map-legend { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0; padding: 0.5rem 0.75rem; list-style: none; font-size: 0.85em; color: var(--ikp-map-legend-text); }
+.ikp-map-legend li { display: flex; align-items: center; gap: 0.4em; margin: 0; padding: 0; }
+.ikp-map-legend-symbol { width: 0.8em; height: 0.8em; flex: none; }
 
 /* "Also available under this contribution" note on a telescope card. */
 .ikp-siblings { font-size: 0.85em; color: var(--ikp-siblings-text); margin-top: 0.6em; }

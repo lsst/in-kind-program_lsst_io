@@ -80,22 +80,46 @@ def render_page(page, data_dir):
 
 
 class StructureReader(HTMLParser):
-    """Collects the attributes of table rows, map markers and filter drop-downs."""
+    """Collects the attributes of table rows, map markers and filter drop-downs.
+
+    A map marker is any element with the `ikp-map-marker` class token, whatever its
+    tag (the script finds markers the same way). The legend's symbols carry only the
+    status colour classes, so they are not counted. For each marker the reader also
+    keeps its tag, its child <title> texts, and `_tag` / `_titles` as private keys.
+    """
 
     def __init__(self):
         super().__init__()
         self.rows = []
         self.markers = []
         self.select_keys = []
+        self._open_marker = None  # the marker whose children are being read
+        self._in_title = False
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
         if tag == "tr" and "data-card" in attributes:
             self.rows.append(attributes)
-        elif tag == "circle" and "data-card" in attributes:
+        elif "ikp-map-marker" in attributes.get("class", "").split() and "data-card" in attributes:
+            attributes["_tag"] = tag
+            attributes["_titles"] = []
             self.markers.append(attributes)
+            self._open_marker = attributes
+        elif tag == "title" and self._open_marker is not None:
+            self._open_marker["_titles"].append("")
+            self._in_title = True
         elif tag == "select" and "data-filter-key" in attributes:
             self.select_keys.append(attributes["data-filter-key"])
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self._in_title = False
+        elif self._open_marker is not None and tag == self._open_marker["_tag"]:
+            self._open_marker = None
+
+    def handle_data(self, data):
+        if self._in_title:
+            self._open_marker["_titles"][-1] += data
 
 
 def read_structure(rendered):
@@ -342,10 +366,122 @@ def test_a_teaser_with_no_reason_shows_no_badge(tmp_path, page, folder, anchor_p
 def test_the_map_markup_has_no_inline_fill_or_stroke_colour(data_dir):
     """The map's colours come from cards.css classes, so dark mode can change them."""
     rendered = render_page("contributed-telescope.rst", data_dir)
-    svg = re.search(r"<svg.*?</svg>", rendered, flags=re.S).group(0)
+    # The map SVG and the legend's SVGs: everything inside the map panel.
+    svg = map_panel(rendered)
     # `stroke-width` is a size, not a colour, so only whole `fill=` / `stroke=` attributes count.
     assert not re.search(r'\b(?:fill|stroke)\s*=', svg), "the map SVG has an inline fill or stroke colour"
     assert "ikp-map-bg" in svg and "ikp-map-marker-" in svg  # the classes that replace them are there
+
+
+# --- The map's label, tooltips and legend ---------------------------------------------
+
+MAP_LABEL = "World map of facility locations; the table below lists every facility"
+# status value in the data -> the wording of the table badges (anything else is "Future semester")
+STATUS_LABELS = {"available": "Available", "future_semester": "Future semester", "past_opportunity": "Past opportunity"}
+# the colour class of each status label
+STATUS_CLASSES = {
+    "Available": "ikp-map-marker-available",
+    "Future semester": "ikp-map-marker-future",
+    "Past opportunity": "ikp-map-marker-past",
+}
+
+
+def map_panel(rendered):
+    """The markup of the map panel: the map SVG, the legend and their wrapper."""
+    start = rendered.index('class="ikp-map-wrap"')
+    return rendered[start:rendered.index("<table", start)]
+
+
+def render_telescopes(telescopes):
+    """Render the Telescope Access block with the given list of records."""
+    context = dict(contexts_for(LIVE_DATA_DIR)["contributed_telescopes"], telescopes=telescopes)
+    return jinja2.Environment().from_string(jinja_block("contributed-telescope.rst", "contributed_telescopes")).render(**context)
+
+
+def status_label(record):
+    return STATUS_LABELS.get(record["status"], "Future semester")
+
+
+def telescopes_with_markers(data_dir):
+    context = contexts_for(data_dir)["contributed_telescopes"]
+    return [t for t in context["telescopes"] if t["marker_x"] is not None]
+
+
+def legend_entries(rendered):
+    """(text, symbol classes, symbol attributes) of each legend item, in order."""
+    legend = re.search(r'<ul class="ikp-map-legend" aria-label="Map key">(.*?)</ul>', rendered, flags=re.S)
+    assert legend, "the map has no legend named 'Map key'"
+    entries = []
+    for item in re.findall(r"<li>(.*?)</li>", legend.group(1), flags=re.S):
+        symbol = re.search(r"<svg ([^>]*)>(.*?)</svg>", item, flags=re.S)
+        assert symbol, "a legend item has no symbol"
+        text = item.replace(symbol.group(0), "").strip()
+        shape = re.search(r"<(circle|rect)\b([^>]*)>", symbol.group(2))
+        entries.append((text, shape.group(1), dict(re.findall(r'([\w-]+)="([^"]*)"', shape.group(2))), symbol.group(1)))
+    return entries
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_the_map_is_one_labelled_image_that_points_to_the_table(data_dir):
+    panel = map_panel(render_page("contributed-telescope.rst", data_dir))
+    svg_tag = re.search(r"<svg [^>]*>", panel).group(0)
+    assert 'role="img"' in svg_tag
+    assert f'aria-label="{MAP_LABEL}"' in svg_tag
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_every_marker_has_one_title_naming_its_facility_and_status(data_dir):
+    markers = read_structure(render_page("contributed-telescope.rst", data_dir)).markers
+    records = {t["slug"]: t for t in telescopes_with_markers(data_dir)}
+    assert markers and len(markers) == len(records)
+    for marker in markers:
+        record = records[marker["data-slug"]]
+        expected = f"{record['facility']}: {status_label(record)}"
+        assert marker["_titles"] == [expected]
+
+
+def test_a_marker_title_escapes_the_facility_name():
+    record = {
+        "slug": "odd", "facility": "A<b> & C", "status": "available", "marker_x": 10, "marker_y": 20,
+        "filters": {}, "site": None, "country": None, "instrumentation": [],
+    }
+    rendered = render_telescopes([record])
+    assert "<title>A&lt;b&gt; &amp; C: Available</title>" in rendered
+    assert "<b>" not in map_panel(rendered)
+    assert read_structure(rendered).markers[0]["_titles"] == ["A<b> & C: Available"]
+
+
+def test_an_unknown_status_is_labelled_future_semester():
+    record = {
+        "slug": "odd", "facility": "Odd", "status": "something_new", "marker_x": 10, "marker_y": 20,
+        "filters": {}, "site": None, "country": None, "instrumentation": [],
+    }
+    marker = read_structure(render_telescopes([record])).markers[0]
+    assert marker["_titles"] == ["Odd: Future semester"]
+    assert "ikp-map-marker-future" in marker["class"].split()
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_the_legend_lists_the_statuses_in_the_filter_order_with_matching_colours(data_dir):
+    rendered = render_page("contributed-telescope.rst", data_dir)
+    # The Status drop-down's options, after "All", give the order.
+    status_select = re.search(r'<select id="ikp-filter-status".*?</select>', rendered, flags=re.S).group(0)
+    filter_order = re.findall(r'<option value="status-[^"]+">([^<]+)</option>', status_select)
+    entries = legend_entries(rendered)
+    assert [text for text, *_ in entries] == filter_order == list(STATUS_CLASSES)
+    for text, _shape, shape_attributes, svg_attributes in entries:
+        assert STATUS_CLASSES[text] in shape_attributes["class"].split()
+        assert 'aria-hidden="true"' in svg_attributes and 'focusable="false"' in svg_attributes
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_legend_symbols_are_not_markers(data_dir):
+    """The script treats `.ikp-map-marker` elements as clickable, filterable markers."""
+    rendered = render_page("contributed-telescope.rst", data_dir)
+    legend = re.search(r'<ul class="ikp-map-legend".*?</ul>', rendered, flags=re.S).group(0)
+    assert not re.search(r'ikp-map-marker(?![\w-])|data-slug|data-card', legend)
+    # And the reader counts the same markers as there are facilities with a position.
+    assert len(read_structure(rendered).markers) == len(telescopes_with_markers(data_dir))
 
 
 # page file -> (id of the search box, text of its visually hidden label)
