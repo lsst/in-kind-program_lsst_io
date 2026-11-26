@@ -337,6 +337,14 @@ def count_violation_nodes(violations: list[dict]) -> dict:
     return counts
 
 
+def skipped_expand_text(skipped: int) -> str:
+    """Describe the hidden expand buttons the scan skipped, or "" if there were none."""
+    if not skipped:
+        return ""
+    noun = "button" if skipped == 1 else "buttons"
+    return f"{skipped} hidden \"Read full description\" {noun} skipped (the text fits)"
+
+
 def reflow_failures(reflows: list[dict]) -> list[dict]:
     """Return the reflow results that overflowed."""
     return [result for result in reflows if result["overflow"]]
@@ -483,6 +491,9 @@ def format_report(run_info: dict, scans, stale, reflows, exit_code) -> str:
             lines.append(f"  FAIL: {scan['expand_failures']} expand button(s) could not be clicked")
         elif scan["state"] == "expanded":
             lines.append(f"  expand buttons clicked: {scan.get('expand_clicked', 0)}")
+            skipped_line = skipped_expand_text(scan.get("expand_skipped", 0))
+            if skipped_line:
+                lines.append(f"  {skipped_line}")
             sort_text = "yes" if scan.get("sorted_first_column") else "no sortable column"
             lines.append(f"  first column sorted: {sort_text}")
         for violation in scan["violations"]:
@@ -613,21 +624,32 @@ def _open(page, html_dir: Path, relative: str, expected_theme: str | None = None
             )
 
 
-def _expand_all(page) -> tuple[int, int]:
-    """Click every "Show more" and "Read full description" button (the page's own JS runs).
+def _expand_all(page) -> tuple[int, int, int]:
+    """Click every visible "Show more" and "Read full description" button (the page's own JS runs).
 
-    Returns (clicked, failed). "Clicked" proves the click landed, not that the
-    content expanded; a later PR will assert ``aria-expanded`` for that.
+    Returns (clicked, failed, skipped). A hidden "Read full description" button
+    is skipped, not counted as a failure: the page hides it when the
+    description fits in its clamp, so there is nothing to reveal. Only that
+    button may be hidden. A hidden "Show more details" button still goes to the
+    click and fails, because the page always shows those once its script runs,
+    so a hidden one means the script did not. "Clicked" proves the click
+    landed, not that the content expanded; a later PR will assert
+    ``aria-expanded`` for that.
     """
     buttons = page.locator(EXPAND_BUTTON_SELECTOR)
-    clicked = failed = 0
+    clicked = failed = skipped = 0
     for index in range(buttons.count()):
+        button = buttons.nth(index)
+        may_be_hidden = button.evaluate("b => b.classList.contains('ikp-expand-btn')")
+        if may_be_hidden and not button.is_visible():
+            skipped += 1
+            continue
         try:
             buttons.nth(index).click(timeout=3000)
             clicked += 1
         except Exception:  # not clickable: count it and go on
             failed += 1
-    return clicked, failed
+    return clicked, failed, skipped
 
 
 def _sort_first_column(page) -> tuple[bool, bool]:
@@ -734,7 +756,7 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
     scans, reflows = [], []
     run_info = {"axe_version": "unknown", "theme_version": "unknown"}
 
-    def scan_page(page, relative, theme, state, clicked=0, failed=0, sorted_first=False):
+    def scan_page(page, relative, theme, state, clicked=0, failed=0, sorted_first=False, skipped=0):
         response = axe.run(page, options=axe_options).response
         run_info["axe_version"] = response.get("testEngine", {}).get("version", "unknown")
         scans.append(
@@ -746,6 +768,7 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
                 "incomplete": _simplify_results(page, response["incomplete"]),
                 "expand_clicked": clicked,
                 "expand_failures": failed,
+                "expand_skipped": skipped,
                 "sorted_first_column": sorted_first,
             }
         )
@@ -770,19 +793,19 @@ def run_browser_scan(html_dir: Path, pages: list[str]):
                         page.evaluate(_THEME_VERSION_JS)
                     )
                 scan_page(page, relative, theme, "load")
-                clicked, failed = _expand_all(page)
+                clicked, failed, skipped = _expand_all(page)
                 sorted_first, sort_failed = _sort_first_column(page)
                 failed += sort_failed
                 # Park the mouse so no button is measured in its hover state.
                 page.mouse.move(0, 0)
-                scan_page(page, relative, theme, "expanded", clicked, failed, sorted_first)
+                scan_page(page, relative, theme, "expanded", clicked, failed, sorted_first, skipped)
             page.context.close()
 
         page = _new_page(browser, "light", REFLOW_VIEWPORT, blocked)
         for relative in pages:
             _open(page, html_dir, relative)
             reflows.append(_reflow_result(page, relative, "load"))
-            _clicked, failed = _expand_all(page)
+            _clicked, failed, _skipped = _expand_all(page)
             _sorted, sort_failed = _sort_first_column(page)
             failed += sort_failed
             reflows.append(_reflow_result(page, relative, "expanded", failed))

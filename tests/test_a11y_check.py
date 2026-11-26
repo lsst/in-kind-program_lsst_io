@@ -447,3 +447,15 @@ def test_main_suppresses_stale_entries_when_a_page_subset_is_given(tmp_path, mon
     site = make_site(tmp_path, a11y.DEFAULT_PAGES)
     fake_scan(monkeypatch)
     assert a11y.main([str(site), "--pages", a11y.DEFAULT_PAGES[0]]) == 0
+
+
+def test_skipped_expand_buttons_are_reported_not_failed():
+    assert a11y.skipped_expand_text(0) == ""
+    assert a11y.skipped_expand_text(1) == '1 hidden "Read full description" button skipped (the text fits)'
+    assert a11y.skipped_expand_text(3) == '3 hidden "Read full description" buttons skipped (the text fits)'
+    # A skipped button is not a failure: the exit code ignores the count.
+    skipped_only = {**scan(state="expanded"), "expand_skipped": 2, "expand_failures": 0}
+    assert a11y.decide_exit_code([skipped_only], [], []) == 0
+    # The report says so, so the log stays honest about what was not clicked.
+    text = a11y.format_report(RUN_INFO, [skipped_only], [], OK_REFLOW, 0)
+    assert a11y.skipped_expand_text(2) in text
