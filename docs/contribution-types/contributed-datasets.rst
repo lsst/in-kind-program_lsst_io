@@ -17,8 +17,9 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
 
       {% if highlights %}
       <div class="ikp-teasers">
-        <p class="ikp-teaser-heading">Highlighted</p>
-        <ul class="ikp-teaser-list">
+        <p class="ikp-teaser-heading" id="ikp-teasers-heading">Highlighted</p>
+        {# aria-labelledby names the list after the visible label. role="list" is explicit because Safari drops the list semantics (and with them the name) from a list styled list-style: none. #}
+        <ul class="ikp-teaser-list" role="list" aria-labelledby="ikp-teasers-heading">
           {% for item in highlights %}
           <li class="ikp-teaser"><a class="ikp-teaser-link" href="#{{ item.anchor | e }}">{{ item.title | e }}</a>{% if item.reason %} <span class="ikp-teaser-reason">{{ item.reason | e }}</span>{% endif %}</li>
           {% endfor %}

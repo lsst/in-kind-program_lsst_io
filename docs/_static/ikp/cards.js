@@ -587,6 +587,20 @@
     wireTeaserLinks();
   }
 
+  // Make each card's title a level-2 heading, so a screen-reader user can jump
+  // from card to card. sphinx-design writes the title as a <div>, and the page
+  // source gives us no way to change that, so it is done here. Only titles inside
+  // our own `.ikp-card` cards are touched: this file loads on every page, and the
+  // cards on other pages (such as the IDAC resources page) must stay as they are.
+  // It does not depend on the filters, and running it twice changes nothing.
+  // Without JavaScript the titles stay plain text.
+  function markCardTitlesAsHeadings() {
+    document.querySelectorAll('.ikp-card .sd-card-title').forEach(function (title) {
+      title.setAttribute('role', 'heading');
+      title.setAttribute('aria-level', '2');
+    });
+  }
+
   // -------------------------------------------------------------------------
   // 5. Start-up
   // -------------------------------------------------------------------------
@@ -594,6 +608,7 @@
   // Each card page is recognised by its table. A page without one (every other
   // page of the site) is left alone.
   function init() {
+    markCardTitlesAsHeadings();
     var telescopesTable = document.getElementById('ikp-telescopes-table');
     if (telescopesTable) { initTelescopes(telescopesTable); }
     var datasetsTable = document.getElementById('ikp-datasets-table');

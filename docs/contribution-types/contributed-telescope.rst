@@ -17,18 +17,21 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       {% for opp in opportunities %}
         {# A banner that is under review or closed is muted, so the open ones stand out. #}
         <div class="ikp-opp-card ikp-opp-phase-{{ opp.phase | replace('_', '-') }}{% if opp.accent %} ikp-opp-card-{{ opp.accent }}{% endif %}{% if opp.phase in ('in_review', 'closed') %} ikp-opp-card-muted{% endif %}" id="opp-{{ opp.slug }}">
-          <p class="ikp-opp-title">{{ opp.title | e }}</p>
+          {# The title is a real level-2 heading, so a screen-reader user can jump from banner to banner. cards.css makes it look like the paragraph it replaced. #}
+          <h2 class="ikp-opp-title">{{ opp.title | e }}</h2>
           {# The status line sits under the title and says what the phase means ("Deadline 30 Sep 2026"). It is empty when the record lacks the milestone the phase needs. #}
           {% if opp.status_line %}<p class="ikp-opp-status">{{ opp.status_line | e }}</p>{% endif %}
           {# The summary is deliberately not escaped: it is authored HTML (for example <strong>). Every other field below is plain text and is escaped. #}
           <p>{{ opp.summary }}</p>
           {% if opp.milestones %}
-          <ul class="ikp-opp-milestones">
+          {# role="list" is explicit because Safari drops the list semantics from a list styled list-style: none. #}
+          <ul class="ikp-opp-milestones" role="list">
             {% for m in opp.milestones %}
             {% set m_classes = [] %}
             {% if m.get('approximate') %}{% set _ = m_classes.append('approx') %}{% endif %}
             {% if m.passed %}{% set _ = m_classes.append('passed') %}{% endif %}
-            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.date_text | e }}</strong> &mdash; {{ m.label | e }}</li>
+            {# "(passed)" and "(approx.)" are real text, so screen readers read them and copy and paste keeps them. A passed milestone shows only "(passed)", even when it is also approximate. There is no whitespace between the label and the span: the approximate span carries its own leading space. #}
+            <li{% if m_classes %} class="{{ m_classes | join(' ') }}"{% endif %}><strong>{{ m.date_text | e }}</strong> &mdash; {{ m.label | e }}{% if m.passed %}<span class="ikp-milestone-passed">(passed)</span>{% elif m.get('approximate') %}<span class="ikp-milestone-approx"> (approx.)</span>{% endif %}</li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -37,12 +40,15 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
             <a href="{{ link.url | e }}">{{ link.label | e }}</a>
           {% endfor %}
           </div>
-          {% if opp.related_contribution_ids %}
+          {# Collect the related ids that match a card first, so the line is not shown with nothing after "Related facility:". #}
+          {% set related_links = [] %}
+          {% for cid in (opp.related_contribution_ids or []) %}
+            {% for slug in (cid_to_slugs.get(cid) or []) %}{% set _ = related_links.append((cid, slug)) %}{% endfor %}
+          {% endfor %}
+          {% if related_links %}
           <p class="ikp-opp-related">
             Related facility:
-            {% for cid in opp.related_contribution_ids %}
-              {% for slug in (cid_to_slugs.get(cid) or []) %}<a href="#{{ slug }}">{{ cid | e }}</a> {% endfor %}
-            {% endfor %}
+            {% for cid, slug in related_links %}<a href="#{{ slug }}">{{ cid | e }}</a> {% endfor %}
           </p>
           {% endif %}
         </div>
