@@ -1,7 +1,7 @@
 /*
  * cards.js: shared behaviour for the card pages of the In-Kind Program site
  * (Telescope Access, Datasets and Software): filters, search, sorting,
- * jump-to-card highlighting, links to hidden cards, the "Show more" buttons and
+ * jump-to-card highlighting (the card also takes keyboard focus), links to hidden cards, the "Show more" buttons and
  * card titles as headings.
  *
  * Sphinx adds this file to every page of the site (see conf.py), so it must do
@@ -293,10 +293,29 @@
     setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
   }
 
-  // Scroll a card into view and outline it for a moment.
+  // Scroll a card into view, outline it for a moment, and move keyboard focus
+  // to it.
+  //
+  // Focus moves because a screen reader follows focus: it reads the card the
+  // visitor jumped to, and the next Tab goes into that card instead of
+  // starting again from the table. The card (the grid item that gets the
+  // outline) is not focusable by default, so it gets `tabindex="-1"` (focusable
+  // by script, not part of the Tab order) at the moment of the jump, not at page
+  // load. `preventScroll` leaves the scrolling to `scrollIntoView`, which is
+  // the call that sets the animation.
+  //
+  // A mouse click shows no focus ring, because browsers draw `:focus-visible`
+  // only after keyboard use. The theme's ring shows around the card for a
+  // keyboard user, which is kept by choice.
+  //
+  // The scroll is instant when the visitor has asked for reduced motion. This
+  // is read at each jump, not at page load, so a changed setting applies at once.
   function highlightCard(card) {
-    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    card.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     outlineCard(card);
+    if (!card.hasAttribute('tabindex')) { card.setAttribute('tabindex', '-1'); }
+    card.focus({ preventScroll: true });
   }
 
   // True for a click that opens a new tab or window (a modifier key or a
