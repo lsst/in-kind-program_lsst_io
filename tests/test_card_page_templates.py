@@ -484,6 +484,56 @@ def test_legend_symbols_are_not_markers(data_dir):
     assert len(read_structure(rendered).markers) == len(telescopes_with_markers(data_dir))
 
 
+# --- The map's shapes: one per status, so colour is not the only cue ---------------------
+# Available is a filled circle ("disc"), Future semester a ring (a circle with the outline class),
+# Past opportunity a square (a rect).
+
+def shape_of(attributes, tag):
+    """The shape's kind: "disc", "ring" or "square", read from its tag and classes."""
+    classes = attributes["class"].split()
+    if tag == "rect":
+        return "square"
+    return "ring" if "ikp-map-marker-ring" in classes else "disc"
+
+
+def test_every_marker_shape_matches_its_status_and_keeps_its_position():
+    data_dir = LIVE_DATA_DIR
+    records = {t["slug"]: t for t in telescopes_with_markers(data_dir)}
+    markers = read_structure(render_page("contributed-telescope.rst", data_dir)).markers
+    expected_shape = {"available": "disc", "future_semester": "ring", "past_opportunity": "square"}
+    seen = set()
+    for marker in markers:
+        record = records[marker["data-slug"]]
+        kind = shape_of(marker, marker["_tag"])
+        assert kind == expected_shape.get(record["status"], "ring")
+        seen.add(kind)
+        classes = marker["class"].split()
+        assert STATUS_CLASSES[status_label(record)] in classes
+        if kind == "square":
+            assert (float(marker["width"]), float(marker["height"])) == (10, 10)
+            centre = (float(marker["x"]) + 5, float(marker["y"]) + 5)
+        else:
+            assert float(marker["r"]) == (6 if kind == "disc" else 4.75)
+            centre = (float(marker["cx"]), float(marker["cy"]))
+        assert centre == pytest.approx((record["marker_x"], record["marker_y"]), abs=0.01)
+    assert seen == {"disc", "ring", "square"}, "the live data should exercise all three shapes"
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_legend_symbols_use_the_same_shapes_as_the_markers(data_dir):
+    entries = legend_entries(render_page("contributed-telescope.rst", data_dir))
+    kinds = {text: shape_of({"class": attrs["class"]}, tag) for text, tag, attrs, _ in entries}
+    assert kinds == {"Available": "disc", "Future semester": "ring", "Past opportunity": "square"}
+
+
+def test_the_ring_is_an_outline_and_a_hollow_middle_still_takes_the_pointer():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    ring_rule = re.search(r"\.ikp-map-marker-ring\.ikp-map-marker-future\s*\{([^}]*)\}", css).group(1)
+    assert "fill: none" in ring_rule
+    assert "stroke: var(--ikp-map-marker-future)" in ring_rule
+    assert "pointer-events: all" in ring_rule
+
+
 # page file -> (id of the search box, text of its visually hidden label)
 SEARCH_LABELS = {
     "contributed-telescope.rst": ("ikp-search", "Search facilities"),

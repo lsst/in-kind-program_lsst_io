@@ -126,8 +126,21 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
              sees on hover (the map is one image to a screen reader, so it is not read out). Its status
              wording matches the table badges. #}
           {% set status_label = 'Available' if t.status == 'available' else ('Past opportunity' if t.status == 'past_opportunity' else 'Future semester') %}
-          <circle class="ikp-map-marker {{ 'ikp-map-marker-available' if t.status == 'available' else ('ikp-map-marker-past' if t.status == 'past_opportunity' else 'ikp-map-marker-future') }}" data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}
+          {# One shape per status, so colour is not the only cue: Available is a filled circle, Future semester
+             a ring (circle, no fill, a coloured outline, outer edge the same size as the dot) and Past opportunity
+             a square. All three are centred on the same point (marker_x, marker_y). The status class sets the
+             colour in cards.css; the ring class makes that colour an outline instead of a fill. #}
+          {% set marker_attributes %}data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}{% endset %}
+          {% if t.status == 'available' %}
+          <circle class="ikp-map-marker ikp-map-marker-available" {{ marker_attributes }}
                   cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"><title>{{ t.facility | e }}: {{ status_label }}</title></circle>
+          {% elif t.status == 'past_opportunity' %}
+          <rect class="ikp-map-marker ikp-map-marker-past" {{ marker_attributes }}
+                x="{{ (t.marker_x - 5) | round(2) }}" y="{{ (t.marker_y - 5) | round(2) }}" width="10" height="10"><title>{{ t.facility | e }}: {{ status_label }}</title></rect>
+          {% else %}
+          <circle class="ikp-map-marker ikp-map-marker-ring ikp-map-marker-future" {{ marker_attributes }}
+                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="4.75"><title>{{ t.facility | e }}: {{ status_label }}</title></circle>
+          {% endif %}
           {% endif %}
           {% endfor %}
         </svg>
@@ -137,8 +150,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
            change when the filters change. Same order as the Status filter. #}
         <ul class="ikp-map-legend" aria-label="Map key">
           <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-available" cx="6" cy="6" r="6"></circle></svg>Available</li>
-          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-future" cx="6" cy="6" r="6"></circle></svg>Future semester</li>
-          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-past" cx="6" cy="6" r="6"></circle></svg>Past opportunity</li>
+          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-ring ikp-map-marker-future" cx="6" cy="6" r="4.75"></circle></svg>Future semester</li>
+          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><rect class="ikp-map-marker-past" x="1" y="1" width="10" height="10"></rect></svg>Past opportunity</li>
         </ul>
       </div>
 

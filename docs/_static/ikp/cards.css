@@ -267,6 +267,14 @@ html[data-theme=dark] {
 .ikp-map-marker-available { fill: var(--ikp-map-marker-available); }
 .ikp-map-marker-past { fill: var(--ikp-map-marker-past); }
 .ikp-map-marker-future { fill: var(--ikp-map-marker-future); }
+/* The ring (Future semester): same colour variable, but as an outline with no fill, so
+ * filled vs hollow tells it apart from the other statuses without colour. The doubled
+ * class beats the single-class fill rule above. `pointer-events: all` lets a hover or
+ * click on the hollow middle count, so the ring is as easy to hit as a dot. */
+.ikp-map-marker-ring.ikp-map-marker-future { fill: none; stroke: var(--ikp-map-marker-future); stroke-width: 2.5; pointer-events: all; }
+/* Hovered ring: only the colour changes (the dot's hover also thickens its outline, which would
+ * fatten the ring), so it stays a ring. */
+.ikp-map-marker.ikp-map-marker-ring:hover { stroke: var(--ikp-map-marker-hover); stroke-width: 2.5; }
 /* The map key under the map: one row of symbol + text, wrapping on a narrow screen.
  * Its symbols reuse the marker colour classes above, so the key can never drift
  * from the map. The text colour is its own variable so a test can check its contrast. */
