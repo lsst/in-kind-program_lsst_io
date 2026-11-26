@@ -31,7 +31,7 @@
   --ikp-pill-hover: #e6e6e6;         /* outlined pill, hovered */
   --ikp-pill-hover-on-dark: rgba(255, 255, 255, 0.1);  /* outlined pill, hovered, dark mode */
   --ikp-text: #1a1a1a;
-  --ikp-control-border: #999;        /* the search box */
+  --ikp-control-border: #767676;     /* the search box; a control's border needs 3:1 against the page (4.54:1 on white) */
   --ikp-table-border: #ddd;
   --ikp-map-background: #eef2f0;
   --ikp-map-land: #d7ded9;
@@ -63,7 +63,7 @@
   --ikp-teaser-reason-text: #1a5c33;
 
   --ikp-milestone-approx: #666;
-  --ikp-milestone-passed: #888;
+  --ikp-milestone-passed: #696969;   /* struck-through text; 4.5:1 or more on all three banner backgrounds */
   --ikp-milestone-passed-label: #a12626;
   --ikp-opp-warning-border: #8a5a00;
   --ikp-opp-warning-bg: #fdeecb;
@@ -112,6 +112,9 @@ html[data-theme=dark] {
   --ikp-teaser-link-text: var(--ikp-green-on-dark);
   --ikp-teaser-reason-bg: rgba(127, 214, 160, 0.18);
   --ikp-teaser-reason-text: #d4f2e0;
+
+  /* A lighter grey in dark mode: 6.25:1 on the dark page. */
+  --ikp-control-border: #999;
 
   /* Opportunity banners: dark background, coloured border, light text. */
   --ikp-milestone-approx: #aab0b5;
@@ -224,6 +227,11 @@ html[data-theme=dark] {
 
 /* Outline shown briefly on a card after its title or map marker is clicked. */
 .ikp-card.ikp-highlight .sd-card { outline: 3px solid var(--ikp-green); outline-offset: 2px; transition: outline-color 1.2s ease; }
+/* No fade for visitors who ask for reduced motion (the scroll to the card is
+   already instant for them; see highlightCard in cards.js). */
+@media (prefers-reduced-motion: reduce) {
+  .ikp-card.ikp-highlight .sd-card { transition: none; }
+}
 
 /* ---------------------------------------------------------------------------
  * 3. Telescope Access page

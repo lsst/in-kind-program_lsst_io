@@ -30,7 +30,6 @@ NO_DARK_VALUE_NEEDED = {
     "--ikp-green-on-dark": "already the dark-mode green; the dark block refers to it",
     "--ikp-pill-hover": "the light-mode hover of the expand buttons; dark mode uses --ikp-pill-hover-on-dark",
     "--ikp-pill-hover-on-dark": "already a dark-mode value",
-    "--ikp-control-border": "a mid grey (#999) that stays visible on a light and a dark page",
 }
 
 
@@ -229,3 +228,48 @@ def test_light_map_markers_reach_3_to_1(marker, surface):
     """The markers sit on the panel and on the land; the legend's symbols use the same colours."""
     ratio = contrast(parse_colour(LIGHT[marker], LIGHT)[:3], parse_colour(LIGHT[surface], LIGHT)[:3])
     assert ratio >= 3.0, f"{marker} on {surface} (light): {ratio:.2f}:1"
+
+
+# --- Light-mode contrast and the search box border ---------------------------------
+
+def light_rgb(name):
+    """A light-mode colour variable as opaque (r, g, b).
+
+    The alpha channel is dropped, which is safe because every colour in
+    TEXT_PAIRS is opaque in light mode.
+    """
+    return parse_colour(LIGHT[name], LIGHT)[:3]
+
+
+@pytest.mark.parametrize("text, background", TEXT_PAIRS)
+def test_light_text_on_its_background_reaches_4_5_to_1(text, background):
+    # The same pairs as the dark matrix, read from the `:root` block.
+    ratio = contrast(light_rgb(text), light_rgb(background))
+    assert ratio >= 4.5, f"{text} on {background} (light): {ratio:.2f}:1"
+
+
+def test_the_light_matrix_covers_the_struck_through_milestone_text():
+    for text in ("--ikp-milestone-passed", "--ikp-milestone-approx", "--ikp-milestone-passed-label"):
+        for background in BANNER_BACKGROUNDS:
+            assert (text, background) in TEXT_PAIRS
+
+
+@pytest.mark.parametrize("theme, variables, page_background", [
+    ("light", LIGHT, "#ffffff"),
+    ("dark", {**LIGHT, **DARK}, DARK_PAGE_BG),
+])
+def test_the_search_box_border_reaches_3_to_1_on_the_page(theme, variables, page_background):
+    # A control's border needs 3:1 (WCAG 1.4.11).
+    border = parse_colour(variables["--ikp-control-border"], variables)[:3]
+    page = parse_colour(page_background, variables)[:3]
+    ratio = contrast(border, page)
+    assert ratio >= 3.0, f"{theme}: search box border on the page {ratio:.2f}:1"
+
+
+# --- Jumping to a card: focus and reduced motion -----------------------------------
+
+def test_the_highlight_fade_is_off_under_reduced_motion():
+    css = re.sub(r"/\*.*?\*/", "", CARDS_CSS.read_text(encoding="utf-8"), flags=re.S)
+    block = re.search(r"@media \(prefers-reduced-motion: reduce\)\s*\{(.*?)\}\s*\}", css + "}", flags=re.S)
+    assert block, "no reduced-motion media block"
+    assert re.search(r"\.ikp-card\.ikp-highlight \.sd-card\s*\{\s*transition:\s*none;", block.group(1))

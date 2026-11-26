@@ -1,8 +1,8 @@
 /*
  * cards.js: shared behaviour for the card pages of the In-Kind Program site
  * (Telescope Access, Datasets and Software): filters, search, sorting,
- * jump-to-card highlighting, links to hidden cards, the "Show more" buttons and
- * card titles as headings.
+ * jump-to-card highlighting (the card also takes keyboard focus), links to
+ * hidden cards, the "Show more" buttons and card titles as headings.
  *
  * Sphinx adds this file to every page of the site (see conf.py), so it must do
  * nothing on a page that has none of our cards. Each page's setup below runs
@@ -293,10 +293,40 @@
     setTimeout(function () { card.classList.remove('ikp-highlight'); }, 1500);
   }
 
-  // Scroll a card into view and outline it for a moment.
+  // Move keyboard focus to a card, outline it for a moment, and scroll it into
+  // view.
+  //
+  // Focus moves because a screen reader follows focus: its position moves with
+  // it to the card the visitor jumped to, and the next Tab goes into that card
+  // instead of starting again from the table. The card (the grid item that gets
+  // the outline) is not focusable by default, so it gets `tabindex="-1"`
+  // (focusable by script, not part of the Tab order) at the moment of the jump,
+  // not at page load. If the script added it, it removes it again when the card
+  // loses focus: a card that kept the attribute would take focus on later
+  // clicks inside it and on later `#card` jumps, unlike the other cards.
+  //
+  // Focus comes first, with `preventScroll`, and `scrollIntoView` comes last, so
+  // the smooth scroll is always the final scroll instruction, even in a browser
+  // that ignores `preventScroll`.
+  //
+  // Browsers generally draw the focus ring only after keyboard use, so a mouse
+  // jump usually shows none. The theme's ring shows around the card for a
+  // keyboard user, which is kept by choice.
+  //
+  // The scroll is instant when the visitor has asked for reduced motion:
+  // 'auto' follows the page's CSS, which the theme makes instant for them. The
+  // setting is read at each jump, not at page load, so a change applies at once.
   function highlightCard(card) {
-    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!card.hasAttribute('tabindex')) {
+      card.setAttribute('tabindex', '-1');
+      card.addEventListener('blur', function () {
+        card.removeAttribute('tabindex');
+      }, { once: true });
+    }
+    card.focus({ preventScroll: true });
     outlineCard(card);
+    card.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   }
 
   // True for a click that opens a new tab or window (a modifier key or a
