@@ -24,7 +24,16 @@ alone never shows an overflow. The check therefore fails if the document is
 wider than the window, if the article container scrolls sideways, or if any
 element in the article that is not inside an ``.ikp-table-scroll`` wrapper
 reaches past the right edge of the window. Tables scroll in their wrapper,
-which the WCAG exception for data tables allows.
+which the WCAG exception for data tables allows. If the container is missing
+or no element in the article was examined (the theme's structure changed), the
+check fails rather than passing on nothing.
+
+Limits of the reflow check: through the container signal it catches overflow
+from absolute, fixed or transformed elements and long words. It misses content
+clipped by an ``overflow:hidden`` ancestor, and fixed theme chrome outside
+``<article>``. Any other scroller inside the article (a code block, say) is
+flagged, which is the safe direction. Only the loaded state and the
+expanded-and-sorted state are measured.
 
 Each page is scanned twice per theme: once as loaded, and once "expanded", after
 clicking every "Show more" and "Read full description" button and sorting the
@@ -588,8 +597,10 @@ _REFLOW_MEASURE_JS = """
     };
   };
   const overflowing = [];
+  let elementsChecked = 0;
   for (const element of document.querySelectorAll("article *")) {
     if (element.closest(".ikp-table-scroll")) continue;
+    elementsChecked += 1;
     const box = element.getBoundingClientRect();
     if (box.width === 0 || box.height === 0) continue;
     if (getComputedStyle(element).display === "none") continue;
@@ -601,6 +612,8 @@ _REFLOW_MEASURE_JS = """
   return {
     document_scroll_width: document.documentElement.scrollWidth,
     window_width: windowWidth,
+    container_found: container !== null,
+    elements_checked: elementsChecked,
     container_scroll_width: container ? container.scrollWidth : null,
     container_client_width: container ? container.clientWidth : null,
     offenders: innermost.map(describe),
@@ -621,14 +634,25 @@ def evaluate_reflow(measurement: dict) -> tuple[bool, str]:
     without a browser.
     """
     reasons = []
-    if measurement["document_scroll_width"] > measurement["window_width"]:
+    # A theme change that removes the container or the article must fail the
+    # check (not raise a setup error), because a pass would mean nothing.
+    if not measurement["container_found"]:
+        reasons.append(
+            "the theme's article container was not found, so overflow can't be measured"
+        )
+    if measurement["elements_checked"] == 0:
+        reasons.append(
+            "no elements were examined in the article, so overflow can't be measured"
+        )
+    # Same 1 px tolerance as the container and element checks, for sub-pixel rounding.
+    if measurement["document_scroll_width"] > measurement["window_width"] + 1:
         reasons.append(
             f"the document is {measurement['document_scroll_width']} px wide "
             f"in a {measurement['window_width']} px window"
         )
     container_scroll = measurement.get("container_scroll_width")
     container_client = measurement.get("container_client_width")
-    if container_scroll is not None and container_scroll > container_client + 1:
+    if measurement["container_found"] and container_scroll > container_client + 1:
         reasons.append(
             f"the article container scrolls sideways "
             f"(scrollWidth {container_scroll} > clientWidth {container_client})"

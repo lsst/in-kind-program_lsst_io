@@ -243,12 +243,10 @@ html[data-theme=dark] {
 .ikp-badge-warning { background: var(--ikp-badge-warning-bg); color: var(--ikp-badge-warning-text); }
 .ikp-badge-danger { background: var(--ikp-badge-danger-bg); color: var(--ikp-badge-danger-text); }
 
-/* Cards' badges (sphinx-design `sd-badge`) default to one unbreakable line, so a
-   long name can run past the card on a phone. Let them wrap inside the card;
-   one-line badges look the same. text-align: left because sphinx-design centres
-   text, which looks odd once a badge wraps. On desktop the one long Datasets
-   badge used to stick out past its card; it now wraps onto two lines. */
-.ikp-card .sd-badge { white-space: normal; max-width: 100%; overflow-wrap: anywhere; text-align: left; }
+/* Cards' badges (sphinx-design `sd-badge`) default to one unbreakable line. A
+   long badge must stay inside its card at any width, so let it wrap. Left-aligned
+   because sphinx-design centres the text, which looks odd on two lines. */
+.ikp-card .sd-badge { white-space: normal; max-width: 100%; overflow-wrap: break-word; text-align: left; }
 
 /* A table row's title, a button styled to look like plain text. */
 .ikp-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }
@@ -385,7 +383,7 @@ html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-o
 /* One column on a phone; side by side, wrapping, from tablet width up. */
 .ikp-teaser-list { display: flex; flex-direction: column; gap: 0.4em 2em; margin: 0; padding: 0; list-style: none; }
 .ikp-teaser { margin: 0; }
-.ikp-teaser-link { color: var(--ikp-teaser-link-text); font-weight: 600; overflow-wrap: anywhere; }
+.ikp-teaser-link { color: var(--ikp-teaser-link-text); font-weight: 600; overflow-wrap: break-word; }
 .ikp-teaser-reason { display: inline-block; padding: 0.1em 0.6em; border-radius: 1em; font-size: 0.8em; background: var(--ikp-teaser-reason-bg); color: var(--ikp-teaser-reason-text); }
 @media (min-width: 40em) {
   .ikp-teaser-list { flex-direction: row; flex-wrap: wrap; }

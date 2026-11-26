@@ -933,3 +933,9 @@ def test_the_css_makes_the_table_wrapper_scroll_and_the_drop_downs_fit():
 def test_the_css_keeps_header_button_focus_rings_inside_the_table_wrapper():
     css = CARDS_CSS.read_text(encoding="utf-8")
     assert re.search(r"\.ikp-table-scroll th button:focus-visible\s*\{[^}]*outline-offset:\s*-3px", css)
+
+
+def test_the_css_pins_the_scroll_margin_and_the_filter_label_shrink_rule():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert re.search(r"\.ikp-table-scroll button\s*\{[^}]*scroll-margin:", css)
+    assert re.search(r"\.ikp-filterbar label\s*\{[^}]*min-width:\s*0", css)

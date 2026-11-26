@@ -467,6 +467,7 @@ def reflow_measurement(**overrides):
     """A measurement of a page that fits a 320 px window; tests change one part."""
     measurement = {
         "document_scroll_width": 320, "window_width": 320,
+        "container_found": True, "elements_checked": 50,
         "container_scroll_width": 320, "container_client_width": 320,
         "offenders": [],
     }
@@ -495,20 +496,30 @@ def test_reflow_fails_on_an_element_outside_a_table_wrapper():
     assert "select" in description and "448" in description
 
 
-def test_reflow_passes_when_only_table_wrapper_content_is_wider():
-    # The page script leaves out everything inside .ikp-table-scroll, so a wide table gives no offenders and,
-    # because the wrapper scrolls, no container overflow.
-    assert a11y.evaluate_reflow(reflow_measurement(offenders=[])) == (False, "")
-
-
 def test_reflow_fails_when_the_document_itself_is_wider():
     overflow, _ = a11y.evaluate_reflow(reflow_measurement(document_scroll_width=400))
     assert overflow
 
 
-def test_reflow_tolerates_a_page_without_an_article_container():
-    measurement = reflow_measurement(container_scroll_width=None, container_client_width=None)
-    assert a11y.evaluate_reflow(measurement) == (False, "")
+def test_reflow_fails_when_the_article_container_is_missing():
+    measurement = reflow_measurement(
+        container_found=False, container_scroll_width=None, container_client_width=None
+    )
+    overflow, description = a11y.evaluate_reflow(measurement)
+    assert overflow
+    assert "article container was not found" in description
+
+
+def test_reflow_fails_when_no_elements_were_examined():
+    overflow, description = a11y.evaluate_reflow(reflow_measurement(elements_checked=0))
+    assert overflow
+    assert "no elements were examined" in description
+
+
+def test_reflow_allows_one_pixel_of_document_rounding():
+    # Content inside .ikp-table-scroll is excluded by the in-page script, not by this helper; the browser run
+    # proves it (the check fails on the old CSS and passes on the new).
+    assert a11y.evaluate_reflow(reflow_measurement(document_scroll_width=321)) == (False, "")
 
 
 def test_reflow_names_only_a_few_offenders():
