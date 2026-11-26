@@ -331,8 +331,8 @@ def test_a_teaser_adds_no_id_and_links_to_an_existing_card(tmp_path, page, folde
     write_highlighted_record(tmp_path, folder, "TST-AAA-S2", "Two", "Widely used")
     rendered = render_page(page, tmp_path)
     teaser = rendered[rendered.index('class="ikp-teasers"'):rendered.index("ikp-filterbar")]
-    # No id attribute inside the row, so no card id (or any other id) is repeated.
-    assert "id=" not in teaser
+    # The only id inside the row is the label's, which names the list. No card id is repeated.
+    assert re.findall(r'\bid="([^"]*)"', teaser) == ["ikp-teasers-heading"]
     # Each link names a card that the page does render.
     anchors = re.findall(r'class="ikp-teaser-link" href="#([^"]+)"', teaser)
     assert anchors == [f"{anchor_prefix}tst-aaa-s1", f"{anchor_prefix}tst-aaa-s2"]
@@ -773,3 +773,116 @@ def test_the_collapsing_css_applies_only_once_the_script_has_run():
     hidden_rules = css_rules_mentioning(css, "display: none")
     for button_class in (".ikp-more-btn", ".ikp-expand-btn"):
         assert any(f"{button_class}[hidden]" in s for s in hidden_rules), f"no [hidden] rule for {button_class}"
+
+
+# ---------------------------------------------------------------------------
+# Headings, banner milestones and teaser lists (structure for screen readers)
+# ---------------------------------------------------------------------------
+
+
+def render_banner(milestones=(), related_ids=(), cid_to_slugs=None):
+    """Render the banner block with one synthetic opportunity."""
+    opportunity = {
+        "slug": "x",
+        "phase": "open",
+        "title": "Call A",
+        "status_line": "",
+        "summary": "Summary",
+        "milestones": list(milestones),
+        "links": [],
+        "related_contribution_ids": list(related_ids),
+    }
+    block = jinja_block(TELESCOPE_PAGE, "contributed_opportunities")
+    return jinja2.Environment().from_string(block).render(
+        opportunities=[opportunity], cid_to_slugs=cid_to_slugs or {}
+    )
+
+
+def milestone(label="Proposal deadline", passed=False, approximate=False):
+    return {"label": label, "date_text": "30 Sep 2026", "passed": passed, "approximate": approximate}
+
+
+def test_a_banner_title_is_a_level_two_heading_not_a_paragraph():
+    rendered = render_banner()
+    assert '<h2 class="ikp-opp-title">Call A</h2>' in rendered
+    assert '<p class="ikp-opp-title"' not in rendered
+
+
+@pytest.mark.parametrize(
+    "passed, approximate, expected_span",
+    [
+        (True, False, '<span class="ikp-milestone-passed">(passed)</span>'),
+        (False, True, '<span class="ikp-milestone-approx"> (approx.)</span>'),
+        (True, True, '<span class="ikp-milestone-passed">(passed)</span>'),  # "(passed)" wins
+        (False, False, None),
+    ],
+    ids=["passed", "approximate", "both", "neither"],
+)
+def test_a_milestone_shows_at_most_one_of_passed_or_approx_as_text_after_its_label(
+    passed, approximate, expected_span
+):
+    rendered = render_banner([milestone(passed=passed, approximate=approximate)])
+    spans = re.findall(r'<span class="ikp-milestone-[a-z]+">[^<]*</span>', rendered)
+    if expected_span is None:
+        assert spans == []
+        assert "Proposal deadline</li>" in rendered
+    else:
+        assert spans == [expected_span]
+        # No whitespace between the label and the span.
+        assert "Proposal deadline" + expected_span + "</li>" in rendered
+
+
+def test_the_milestone_classes_stay_on_the_list_item():
+    rendered = render_banner([milestone(passed=True, approximate=True)])
+    assert '<li class="approx passed">' in rendered
+
+
+def test_the_milestone_text_replaces_the_css_generated_text():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert "::after" not in "".join(css_rules_mentioning(css, "(approx.)") + css_rules_mentioning(css, "(passed)"))
+    assert 'content: " (approx.)"' not in css
+    assert 'content: "(passed)"' not in css
+    assert css_rules_mentioning(css, "var(--ikp-milestone-approx)") == [".ikp-milestone-approx"]
+    passed_rules = css_rules_mentioning(css, "display: inline-block")
+    assert ".ikp-milestone-passed" in passed_rules
+
+
+def test_the_banner_title_reset_makes_the_heading_look_like_a_paragraph():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert "h2.ikp-opp-title" in css_rules_mentioning(css, "font-size: 1em")
+    assert "h2.ikp-opp-title" in css_rules_mentioning(css, "font-family: inherit")
+    assert "h2.ikp-opp-title" in css_rules_mentioning(css, "line-height: inherit")
+
+
+def test_related_facility_is_absent_when_no_id_resolves():
+    assert "Related facility" not in render_banner(related_ids=["T-1"], cid_to_slugs={})
+    assert "ikp-opp-related" not in render_banner(related_ids=[])
+
+
+def test_related_facility_lists_only_the_ids_that_resolve():
+    rendered = render_banner(related_ids=["T-1", "T-2", "T-3"], cid_to_slugs={"T-1": ["slug-a"], "T-3": ["slug-c"]})
+    assert "Related facility:" in rendered
+    assert re.findall(r'<a href="#([^"]+)">([^<]+)</a>', rendered) == [("slug-a", "T-1"), ("slug-c", "T-3")]
+    assert "T-2" not in rendered
+
+
+def test_the_milestone_list_has_an_explicit_list_role():
+    assert '<ul class="ikp-opp-milestones" role="list">' in render_banner([milestone()])
+
+
+@pytest.mark.parametrize("page, folder, anchor_prefix", TEASER_PAGES)
+def test_the_teaser_list_is_named_by_the_visible_label_and_keeps_its_list_role(
+    tmp_path, page, folder, anchor_prefix
+):
+    write_highlighted_record(tmp_path, folder, "X-1", "Shiny", "New")
+    rendered = render_page(page, tmp_path)
+    label_ids = re.findall(r'<p class="ikp-teaser-heading" id="([^"]+)">Highlighted</p>', rendered)
+    assert label_ids == ["ikp-teasers-heading"]
+    assert re.search(r'<ul class="ikp-teaser-list" role="list" aria-labelledby="ikp-teasers-heading">', rendered)
+
+
+def test_the_script_marks_card_titles_as_level_two_headings_inside_our_cards_only():
+    script = CARDS_JS.read_text(encoding="utf-8")
+    assert "'.ikp-card .sd-card-title'" in script  # scoped to our cards, so the IDAC page is left alone
+    assert "setAttribute('role', 'heading')" in script
+    assert "setAttribute('aria-level', '2')" in script

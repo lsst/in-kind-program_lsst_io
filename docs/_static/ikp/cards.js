@@ -1,12 +1,15 @@
 /*
  * cards.js: shared behaviour for the card pages of the In-Kind Program site
  * (Telescope Access, Datasets and Software): filters, search, sorting,
- * jump-to-card highlighting, links to hidden cards and the "Show more" buttons.
+ * jump-to-card highlighting, links to hidden cards, the "Show more" buttons and
+ * card titles as headings.
  *
  * Sphinx adds this file to every page of the site (see conf.py), so it must do
- * nothing on a page that has no cards. Each page's setup below runs only when
- * that page's own table is present. The Computing Resources (IDAC) page has no
- * such table and keeps its own inline script.
+ * nothing on a page that has none of our cards. Each page's setup below runs
+ * only when that page's own table is present. The one step that runs on every
+ * page is marking card titles as headings, and it only matches titles inside
+ * our own `.ikp-card` cards. The Computing Resources (IDAC) page has no such
+ * table or cards and keeps its own inline script.
  *
  * Timing: the file is loaded with `defer`, and `init` also waits for
  * DOMContentLoaded if the page is still loading. The card grid comes after the
@@ -587,13 +590,29 @@
     wireTeaserLinks();
   }
 
+  // Make each card's title a level-2 heading, so a screen-reader user can jump
+  // from card to card. sphinx-design writes the title as a <div>, and the page
+  // source gives us no way to change that, so it is done here. Only titles inside
+  // our own `.ikp-card` cards are touched: this file loads on every page, and the
+  // cards on other pages (such as the IDAC resources page) must stay as they are.
+  // It does not depend on the filters, and running it twice changes nothing.
+  // Without JavaScript the titles stay plain text.
+  function markCardTitlesAsHeadings() {
+    document.querySelectorAll('.ikp-card .sd-card-title').forEach(function (title) {
+      title.setAttribute('role', 'heading');
+      title.setAttribute('aria-level', '2');
+    });
+  }
+
   // -------------------------------------------------------------------------
   // 5. Start-up
   // -------------------------------------------------------------------------
 
   // Each card page is recognised by its table. A page without one (every other
-  // page of the site) is left alone.
+  // page of the site) is left alone, apart from the heading step, which only
+  // matches titles inside `.ikp-card` cards and so changes nothing there.
   function init() {
+    markCardTitlesAsHeadings();
     var telescopesTable = document.getElementById('ikp-telescopes-table');
     if (telescopesTable) { initTelescopes(telescopesTable); }
     var datasetsTable = document.getElementById('ikp-datasets-table');
