@@ -8,7 +8,7 @@ dark page. These tests read the file (no browser) and check that:
   exceptions that each give a reason;
 * every text colour in the dark block reaches 4.5:1 (WCAG AA) against the
   background it is drawn on, and every map marker reaches 3:1 against the map
-  panel and the land.
+  panel and the land; the map key text reaches 4.5:1 on the panel in both themes.
 
 The contrast formula is the WCAG 2 one, written out below so a reviewer can read it.
 """
@@ -209,3 +209,23 @@ def test_the_templates_and_script_hold_no_colour_literals(path):
 def test_dark_map_markers_reach_3_to_1(marker, surface):
     ratio = contrast(dark_rgb(marker), dark_rgb(surface))
     assert ratio >= 3.0, f"{marker} on {surface}: {ratio:.2f}:1"
+
+
+# --- The map key -------------------------------------------------------------------
+
+@pytest.mark.parametrize("theme, variables", [("light", LIGHT), ("dark", {**LIGHT, **DARK})])
+def test_the_map_key_text_reaches_4_5_to_1_on_the_map_panel(theme, variables):
+    text = parse_colour(variables["--ikp-map-legend-text"], variables)
+    panel = parse_colour(variables["--ikp-map-background"], variables)
+    ratio = contrast(text[:3], panel[:3])
+    assert ratio >= 4.5, f"{theme}: legend text on the map panel {ratio:.2f}:1"
+
+
+@pytest.mark.parametrize("marker", [
+    "--ikp-map-marker-available", "--ikp-map-marker-past", "--ikp-map-marker-future",
+])
+@pytest.mark.parametrize("surface", ["--ikp-map-background", "--ikp-map-land"])
+def test_light_map_markers_reach_3_to_1(marker, surface):
+    """The markers sit on the panel and on the land; the legend's symbols use the same colours."""
+    ratio = contrast(parse_colour(LIGHT[marker], LIGHT)[:3], parse_colour(LIGHT[surface], LIGHT)[:3])
+    assert ratio >= 3.0, f"{marker} on {surface} (light): {ratio:.2f}:1"
