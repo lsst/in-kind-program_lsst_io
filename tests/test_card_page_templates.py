@@ -928,3 +928,8 @@ def test_the_css_makes_the_table_wrapper_scroll_and_the_drop_downs_fit():
     assert re.search(r"\.ikp-table-scroll\s*\{[^}]*overflow-x:\s*auto", css), "no overflow-x rule for the wrapper"
     assert re.search(r"\.ikp-filterbar select\s*\{[^}]*max-width:\s*100%", css), "no max-width rule for the drop-downs"
     assert re.search(r"\.ikp-card \.sd-badge\s*\{[^}]*white-space:\s*normal", css), "card badges do not wrap"
+
+
+def test_the_css_keeps_header_button_focus_rings_inside_the_table_wrapper():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert re.search(r"\.ikp-table-scroll th button:focus-visible\s*\{[^}]*outline-offset:\s*-3px", css)
