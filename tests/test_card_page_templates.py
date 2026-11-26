@@ -850,6 +850,8 @@ def test_the_milestone_text_replaces_the_css_generated_text():
 def test_the_banner_title_reset_makes_the_heading_look_like_a_paragraph():
     css = CARDS_CSS.read_text(encoding="utf-8")
     assert "h2.ikp-opp-title" in css_rules_mentioning(css, "font-size: 1em")
+    assert "h2.ikp-opp-title" in css_rules_mentioning(css, "font-family: inherit")
+    assert "h2.ikp-opp-title" in css_rules_mentioning(css, "line-height: inherit")
 
 
 def test_related_facility_is_absent_when_no_id_resolves():

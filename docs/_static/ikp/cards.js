@@ -1,12 +1,15 @@
 /*
  * cards.js: shared behaviour for the card pages of the In-Kind Program site
  * (Telescope Access, Datasets and Software): filters, search, sorting,
- * jump-to-card highlighting, links to hidden cards and the "Show more" buttons.
+ * jump-to-card highlighting, links to hidden cards, the "Show more" buttons and
+ * card titles as headings.
  *
  * Sphinx adds this file to every page of the site (see conf.py), so it must do
- * nothing on a page that has no cards. Each page's setup below runs only when
- * that page's own table is present. The Computing Resources (IDAC) page has no
- * such table and keeps its own inline script.
+ * nothing on a page that has none of our cards. Each page's setup below runs
+ * only when that page's own table is present. The one step that runs on every
+ * page is marking card titles as headings, and it only matches titles inside
+ * our own `.ikp-card` cards. The Computing Resources (IDAC) page has no such
+ * table or cards and keeps its own inline script.
  *
  * Timing: the file is loaded with `defer`, and `init` also waits for
  * DOMContentLoaded if the page is still loading. The card grid comes after the
@@ -606,7 +609,8 @@
   // -------------------------------------------------------------------------
 
   // Each card page is recognised by its table. A page without one (every other
-  // page of the site) is left alone.
+  // page of the site) is left alone, apart from the heading step, which only
+  // matches titles inside `.ikp-card` cards and so changes nothing there.
   function init() {
     markCardTitlesAsHeadings();
     var telescopesTable = document.getElementById('ikp-telescopes-table');
