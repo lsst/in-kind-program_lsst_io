@@ -123,23 +123,29 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% if t.marker_x is not none %}
           {# A marker keeps data-slug as its stable name; data-card is the id the script looks the card up by.
              The status class picks the marker colour in cards.css. The <title> is the tooltip a mouse user
-             sees on hover (the map is one image to a screen reader, so it is not read out). Its status
-             wording matches the table badges. #}
-          {% set status_label = 'Available' if t.status == 'available' else ('Past opportunity' if t.status == 'past_opportunity' else 'Future semester') %}
+             sees on hover (the map is one image to a screen reader, so it is not read out). It names the
+             facility and its site, like the table's Facility and Location columns, then the status, worded
+             like the table badges. #}
           {# One shape per status, so colour is not the only cue: Available is a filled circle, Future semester
-             a ring (circle, no fill, a coloured outline, outer edge the same size as the dot) and Past opportunity
-             a square. All three are centred on the same point (marker_x, marker_y). The status class sets the
-             colour in cards.css; the ring class makes that colour an outline instead of a fill. #}
+             a ring (circle, no fill, a 3-wide coloured outline, so its outer edge is the same size as the dot's)
+             and Past opportunity a square. All three are centred on the same point (marker_x, marker_y). The
+             status class sets the colour in cards.css; the ring class makes that colour an outline instead of a
+             fill. Anything that is not Available or Past opportunity is drawn as the Future semester ring. #}
           {% set marker_attributes %}data-slug="{{ t.slug }}" data-card="{{ t.slug }}"{% for key, tokens in t.filters.items() %} data-filter-{{ key }}="{{ tokens | join(' ') }}"{% endfor %}{% endset %}
           {% if t.status == 'available' %}
+          {% set status_label = 'Available' %}
           <circle class="ikp-map-marker ikp-map-marker-available" {{ marker_attributes }}
-                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"><title>{{ t.facility | e }}: {{ status_label }}</title></circle>
+                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="6"><title>{{ t.facility | e }}{% if t.site %}, {{ t.site | e }}{% endif %}: {{ status_label }}</title></circle>
           {% elif t.status == 'past_opportunity' %}
+          {% set status_label = 'Past opportunity' %}
+          {# Marker positions are already rounded to 1 decimal in ikp_data/derive.py; round(2) only strips the
+             floating-point noise the subtraction adds (444.3 - 5 would print as 439.3 followed by a long tail). #}
           <rect class="ikp-map-marker ikp-map-marker-past" {{ marker_attributes }}
-                x="{{ (t.marker_x - 5) | round(2) }}" y="{{ (t.marker_y - 5) | round(2) }}" width="10" height="10"><title>{{ t.facility | e }}: {{ status_label }}</title></rect>
+                x="{{ (t.marker_x - 5) | round(2) }}" y="{{ (t.marker_y - 5) | round(2) }}" width="10" height="10"><title>{{ t.facility | e }}{% if t.site %}, {{ t.site | e }}{% endif %}: {{ status_label }}</title></rect>
           {% else %}
+          {% set status_label = 'Future semester' %}
           <circle class="ikp-map-marker ikp-map-marker-ring ikp-map-marker-future" {{ marker_attributes }}
-                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="4.75"><title>{{ t.facility | e }}: {{ status_label }}</title></circle>
+                  cx="{{ t.marker_x }}" cy="{{ t.marker_y }}" r="4.5"><title>{{ t.facility | e }}{% if t.site %}, {{ t.site | e }}{% endif %}: {{ status_label }}</title></circle>
           {% endif %}
           {% endif %}
           {% endfor %}
@@ -147,10 +153,11 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
         {# The map key. Its symbols are decoration for the text beside them, so they are hidden from screen
            readers. They carry the status colour classes only: the script treats anything with the
            ikp-map-marker class as a clickable, filterable marker, and these must not be. The key does not
-           change when the filters change. Same order as the Status filter. #}
-        <ul class="ikp-map-legend" aria-label="Map key">
+           change when the filters change. Same order as the Status filter. role="list" is explicit because
+           Safari drops the list semantics (and with them the name) from a list styled list-style: none. #}
+        <ul class="ikp-map-legend" role="list" aria-label="Map key">
           <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-available" cx="6" cy="6" r="6"></circle></svg>Available</li>
-          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-ring ikp-map-marker-future" cx="6" cy="6" r="4.75"></circle></svg>Future semester</li>
+          <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><circle class="ikp-map-marker-ring ikp-map-marker-future" cx="6" cy="6" r="4.5"></circle></svg>Future semester</li>
           <li><svg class="ikp-map-legend-symbol" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><rect class="ikp-map-marker-past" x="1" y="1" width="10" height="10"></rect></svg>Past opportunity</li>
         </ul>
       </div>

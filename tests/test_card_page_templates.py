@@ -407,12 +407,20 @@ def telescopes_with_markers(data_dir):
     return [t for t in context["telescopes"] if t["marker_x"] is not None]
 
 
+def expected_title(record):
+    """The tooltip text: facility, the site when there is one, then the status."""
+    place = record["facility"] + (f", {record['site']}" if record.get("site") else "")
+    return f"{place}: {status_label(record)}"
+
+
 def legend_entries(rendered):
-    """(text, symbol classes, symbol attributes) of each legend item, in order."""
-    legend = re.search(r'<ul class="ikp-map-legend" aria-label="Map key">(.*?)</ul>', rendered, flags=re.S)
-    assert legend, "the map has no legend named 'Map key'"
+    """(text, shape tag, shape attributes, symbol attributes) of each legend item, in order."""
+    legend = re.search(r'<ul class="ikp-map-legend"([^>]*)>(.*?)</ul>', rendered, flags=re.S)
+    assert legend, "the map has no legend"
+    assert 'aria-label="Map key"' in legend.group(1), "the legend is not named 'Map key'"
+    assert 'role="list"' in legend.group(1), "the legend lacks role=list (Safari drops list semantics otherwise)"
     entries = []
-    for item in re.findall(r"<li>(.*?)</li>", legend.group(1), flags=re.S):
+    for item in re.findall(r"<li>(.*?)</li>", legend.group(2), flags=re.S):
         symbol = re.search(r"<svg ([^>]*)>(.*?)</svg>", item, flags=re.S)
         assert symbol, "a legend item has no symbol"
         text = item.replace(symbol.group(0), "").strip()
@@ -430,33 +438,37 @@ def test_the_map_is_one_labelled_image_that_points_to_the_table(data_dir):
 
 
 @pytest.mark.parametrize("data_dir", DATA_DIRS)
-def test_every_marker_has_one_title_naming_its_facility_and_status(data_dir):
+def test_every_marker_has_one_title_naming_its_facility_site_and_status(data_dir):
     markers = read_structure(render_page("contributed-telescope.rst", data_dir)).markers
     records = {t["slug"]: t for t in telescopes_with_markers(data_dir)}
     assert markers and len(markers) == len(records)
     for marker in markers:
-        record = records[marker["data-slug"]]
-        expected = f"{record['facility']}: {status_label(record)}"
-        assert marker["_titles"] == [expected]
+        assert marker["_titles"] == [expected_title(records[marker["data-slug"]])]
 
 
-def test_a_marker_title_escapes_the_facility_name():
-    record = {
-        "slug": "odd", "facility": "A<b> & C", "status": "available", "marker_x": 10, "marker_y": 20,
-        "filters": {}, "site": None, "country": None, "instrumentation": [],
+def synthetic_record(slug, status, facility="Odd", site=None, marker_x=10, marker_y=20):
+    """A minimal telescope record with a marker, for tests that must not depend on the live data."""
+    return {
+        "slug": slug, "facility": facility, "site": site, "status": status, "marker_x": marker_x,
+        "marker_y": marker_y, "filters": {}, "country": None, "instrumentation": [],
     }
+
+
+def test_a_marker_title_escapes_the_facility_name_and_the_site():
+    record = synthetic_record("odd", "available", facility="A<b> & C", site="D<i> & E")
     rendered = render_telescopes([record])
-    assert "<title>A&lt;b&gt; &amp; C: Available</title>" in rendered
-    assert "<b>" not in map_panel(rendered)
-    assert read_structure(rendered).markers[0]["_titles"] == ["A<b> & C: Available"]
+    assert "<title>A&lt;b&gt; &amp; C, D&lt;i&gt; &amp; E: Available</title>" in rendered
+    assert "<b>" not in map_panel(rendered) and "<i>" not in map_panel(rendered)
+    assert read_structure(rendered).markers[0]["_titles"] == ["A<b> & C, D<i> & E: Available"]
+
+
+def test_a_marker_title_without_a_site_has_no_stray_comma():
+    marker = read_structure(render_telescopes([synthetic_record("odd", "available")])).markers[0]
+    assert marker["_titles"] == ["Odd: Available"]
 
 
 def test_an_unknown_status_is_labelled_future_semester():
-    record = {
-        "slug": "odd", "facility": "Odd", "status": "something_new", "marker_x": 10, "marker_y": 20,
-        "filters": {}, "site": None, "country": None, "instrumentation": [],
-    }
-    marker = read_structure(render_telescopes([record])).markers[0]
+    marker = read_structure(render_telescopes([synthetic_record("odd", "something_new")])).markers[0]
     assert marker["_titles"] == ["Odd: Future semester"]
     assert "ikp-map-marker-future" in marker["class"].split()
 
@@ -478,7 +490,7 @@ def test_the_legend_lists_the_statuses_in_the_filter_order_with_matching_colours
 def test_legend_symbols_are_not_markers(data_dir):
     """The script treats `.ikp-map-marker` elements as clickable, filterable markers."""
     rendered = render_page("contributed-telescope.rst", data_dir)
-    legend = re.search(r'<ul class="ikp-map-legend".*?</ul>', rendered, flags=re.S).group(0)
+    legend = re.search(r'<ul class="ikp-map-legend"[^>]*>.*?</ul>', rendered, flags=re.S).group(0)
     assert not re.search(r'ikp-map-marker(?![\w-])|data-slug|data-card', legend)
     # And the reader counts the same markers as there are facilities with a position.
     assert len(read_structure(rendered).markers) == len(telescopes_with_markers(data_dir))
@@ -496,27 +508,60 @@ def shape_of(attributes, tag):
     return "ring" if "ikp-map-marker-ring" in classes else "disc"
 
 
-def test_every_marker_shape_matches_its_status_and_keeps_its_position():
-    data_dir = LIVE_DATA_DIR
+def marker_centre(marker, kind):
+    """The (x, y) a rendered marker is centred on."""
+    if kind == "square":
+        return (float(marker["x"]) + 5, float(marker["y"]) + 5)
+    return (float(marker["cx"]), float(marker["cy"]))
+
+
+RING_RADIUS = 4.5  # with a 3-wide outline, the ring's outer edge is 6, the same as the dot's radius
+
+
+def test_each_status_is_drawn_with_its_own_shape_size_title_and_centre():
+    """Synthetic records, so the test does not depend on which statuses the live data has.
+
+    The fractional position exercises the square's rounding (444.3 - 5 must print as 439.3).
+    """
+    position = {"marker_x": 444.3, "marker_y": 170.1}
+    records = [
+        synthetic_record("a", "available", facility="Alpha", site="Site A", **position),
+        synthetic_record("b", "future_semester", facility="Beta", **position),
+        synthetic_record("c", "past_opportunity", facility="G<a> & D", site="S&T", **position),
+        synthetic_record("d", "something_new", facility="Delta", site="Site D", **position),
+    ]
+    markers = {m["data-slug"]: m for m in read_structure(render_telescopes(records)).markers}
+    # slug -> (tag, ring class present, size attributes, centre, title)
+    expected = {
+        "a": ("circle", False, {"r": "6"}, "Alpha, Site A: Available"),
+        "b": ("circle", True, {"r": str(RING_RADIUS)}, "Beta: Future semester"),
+        "c": ("rect", False, {"width": "10", "height": "10"}, "G<a> & D, S&T: Past opportunity"),
+        "d": ("circle", True, {"r": str(RING_RADIUS)}, "Delta, Site D: Future semester"),
+    }
+    assert set(markers) == set(expected)
+    for slug, (tag, has_ring_class, size, title) in expected.items():
+        marker = markers[slug]
+        assert marker["_tag"] == tag
+        assert ("ikp-map-marker-ring" in marker["class"].split()) is has_ring_class
+        assert {key: marker[key] for key in size} == size
+        assert marker_centre(marker, shape_of(marker, tag)) == pytest.approx((444.3, 170.1), abs=1e-9)
+        assert marker["_titles"] == [title]
+    # The square's corner is printed without float noise.
+    assert (markers["c"]["x"], markers["c"]["y"]) == ("439.3", "165.1")
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_every_rendered_marker_shape_matches_its_status_and_centre(data_dir):
+    """Whatever statuses the data has, each marker's shape and colour match its record."""
     records = {t["slug"]: t for t in telescopes_with_markers(data_dir)}
     markers = read_structure(render_page("contributed-telescope.rst", data_dir)).markers
     expected_shape = {"available": "disc", "future_semester": "ring", "past_opportunity": "square"}
-    seen = set()
     for marker in markers:
         record = records[marker["data-slug"]]
         kind = shape_of(marker, marker["_tag"])
         assert kind == expected_shape.get(record["status"], "ring")
-        seen.add(kind)
-        classes = marker["class"].split()
-        assert STATUS_CLASSES[status_label(record)] in classes
-        if kind == "square":
-            assert (float(marker["width"]), float(marker["height"])) == (10, 10)
-            centre = (float(marker["x"]) + 5, float(marker["y"]) + 5)
-        else:
-            assert float(marker["r"]) == (6 if kind == "disc" else 4.75)
-            centre = (float(marker["cx"]), float(marker["cy"]))
-        assert centre == pytest.approx((record["marker_x"], record["marker_y"]), abs=0.01)
-    assert seen == {"disc", "ring", "square"}, "the live data should exercise all three shapes"
+        assert STATUS_CLASSES[status_label(record)] in marker["class"].split()
+        assert marker_centre(marker, kind) == pytest.approx((record["marker_x"], record["marker_y"]), abs=0.01)
 
 
 @pytest.mark.parametrize("data_dir", DATA_DIRS)
@@ -532,6 +577,10 @@ def test_the_ring_is_an_outline_and_a_hollow_middle_still_takes_the_pointer():
     assert "fill: none" in ring_rule
     assert "stroke: var(--ikp-map-marker-future)" in ring_rule
     assert "pointer-events: all" in ring_rule
+    assert "stroke-width: 3" in ring_rule
+    # The hover rule must exist, or the ring's own stroke would cancel the hover outline.
+    hover_rule = re.search(r"\.ikp-map-marker\.ikp-map-marker-ring:hover\s*\{([^}]*)\}", css).group(1)
+    assert "stroke: var(--ikp-map-marker-hover)" in hover_rule
 
 
 # page file -> (id of the search box, text of its visually hidden label)

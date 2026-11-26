@@ -224,9 +224,8 @@ def test_the_map_key_text_reaches_4_5_to_1_on_the_map_panel(theme, variables):
 @pytest.mark.parametrize("marker", [
     "--ikp-map-marker-available", "--ikp-map-marker-past", "--ikp-map-marker-future",
 ])
-def test_light_map_markers_reach_3_to_1_on_the_map_panel(marker):
-    """The legend's symbols use these same colours (see the dark-mode test above)."""
-    marker_colour = parse_colour(LIGHT[marker], LIGHT)
-    panel = parse_colour(LIGHT["--ikp-map-background"], LIGHT)
-    ratio = contrast(marker_colour[:3], panel[:3])
-    assert ratio >= 3.0, f"{marker} on the light map panel: {ratio:.2f}:1"
+@pytest.mark.parametrize("surface", ["--ikp-map-background", "--ikp-map-land"])
+def test_light_map_markers_reach_3_to_1(marker, surface):
+    """The markers sit on the panel and on the land; the legend's symbols use the same colours."""
+    ratio = contrast(parse_colour(LIGHT[marker], LIGHT)[:3], parse_colour(LIGHT[surface], LIGHT)[:3])
+    assert ratio >= 3.0, f"{marker} on {surface} (light): {ratio:.2f}:1"
