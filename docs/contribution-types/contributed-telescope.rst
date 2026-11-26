@@ -120,7 +120,13 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <p class="ikp-visually-hidden ikp-status" role="status"></p>
 
       <div class="ikp-map-wrap">
-        <svg viewBox="0 0 1000 500" width="100%" height="320" role="img" aria-label="World map of facility locations; the table below lists every facility">
+        {# The image role and the label sit on the ikp-map div, and the SVG inside it is aria-hidden. With
+           role="img" on the <svg> itself, Safari with VoiceOver skipped the map's label and could not move back
+           up from the key; browsers do not reliably treat an SVG image's children (the markers) as presentational.
+           Hiding the SVG makes the ikp-map div a single image. The hover tooltips are drawn by the browser from
+           each marker's <title> whatever the accessibility tree says, and clicks are unaffected. #}
+        <div class="ikp-map" role="img" aria-label="World map of facility locations; the table below lists every facility">
+        <svg viewBox="0 0 1000 500" width="100%" height="320" aria-hidden="true" focusable="false">
           <rect class="ikp-map-bg" x="0" y="0" width="1000" height="500"></rect>
           {% if world_outline_path %}
           <path class="ikp-map-land" d="{{ world_outline_path }}" stroke-width="0.5"></path>
@@ -156,6 +162,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endif %}
           {% endfor %}
         </svg>
+        </div>
         {# The map key. Its symbols are decoration for the text beside them, so they are hidden from screen
            readers. They carry the status colour classes only: the script treats anything with the
            ikp-map-marker class as a clickable, filterable marker, and these must not be. The key does not

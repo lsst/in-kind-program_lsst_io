@@ -432,9 +432,26 @@ def legend_entries(rendered):
 @pytest.mark.parametrize("data_dir", DATA_DIRS)
 def test_the_map_is_one_labelled_image_that_points_to_the_table(data_dir):
     panel = map_panel(render_page("contributed-telescope.rst", data_dir))
+    # The image role and label are on the wrapper div, not on the SVG (WebKit exposes an SVG image's children).
+    wrapper_tag = re.search(r'<div class="ikp-map"[^>]*>', panel).group(0)
+    assert 'role="img"' in wrapper_tag
+    assert f'aria-label="{MAP_LABEL}"' in wrapper_tag
+    # The map SVG is hidden from assistive technology and carries neither the role nor the label.
     svg_tag = re.search(r"<svg [^>]*>", panel).group(0)
-    assert 'role="img"' in svg_tag
-    assert f'aria-label="{MAP_LABEL}"' in svg_tag
+    assert 'aria-hidden="true"' in svg_tag
+    assert 'focusable="false"' in svg_tag
+    assert "role=" not in svg_tag
+    assert "aria-label=" not in svg_tag
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+def test_the_map_key_stays_outside_the_hidden_image(data_dir):
+    panel = map_panel(render_page("contributed-telescope.rst", data_dir))
+    wrapper_start = panel.index('<div class="ikp-map"')
+    svg_end = panel.index("</svg>", wrapper_start)
+    wrapper_end = panel.index("</div>", svg_end)  # the wrapper closes right after the map SVG
+    legend_start = panel.index('<ul class="ikp-map-legend"')
+    assert legend_start > wrapper_end, "the map key is inside the role=img wrapper or the aria-hidden SVG"
 
 
 @pytest.mark.parametrize("data_dir", DATA_DIRS)
