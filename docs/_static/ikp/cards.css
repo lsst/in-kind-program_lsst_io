@@ -383,7 +383,7 @@ html[data-theme=dark] .ikp-expand-btn:hover { background: var(--ikp-pill-hover-o
 /* One column on a phone; side by side, wrapping, from tablet width up. */
 .ikp-teaser-list { display: flex; flex-direction: column; gap: 0.4em 2em; margin: 0; padding: 0; list-style: none; }
 .ikp-teaser { margin: 0; }
-.ikp-teaser-link { color: var(--ikp-teaser-link-text); font-weight: 600; overflow-wrap: break-word; }
+.ikp-teaser-link { color: var(--ikp-teaser-link-text); font-weight: 600; overflow-wrap: anywhere; }
 .ikp-teaser-reason { display: inline-block; padding: 0.1em 0.6em; border-radius: 1em; font-size: 0.8em; background: var(--ikp-teaser-reason-bg); color: var(--ikp-teaser-reason-text); }
 @media (min-width: 40em) {
   .ikp-teaser-list { flex-direction: row; flex-wrap: wrap; }

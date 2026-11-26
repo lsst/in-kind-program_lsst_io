@@ -516,9 +516,12 @@ def test_reflow_fails_when_no_elements_were_examined():
     assert "no elements were examined" in description
 
 
+# Content inside .ikp-table-scroll is excluded by the in-page script, not by this helper; the browser run
+# proves it (the check fails on the old CSS and passes on the new).
+
+
 def test_reflow_allows_one_pixel_of_document_rounding():
-    # Content inside .ikp-table-scroll is excluded by the in-page script, not by this helper; the browser run
-    # proves it (the check fails on the old CSS and passes on the new).
+    # A 1 px difference is sub-pixel rounding, not overflow.
     assert a11y.evaluate_reflow(reflow_measurement(document_scroll_width=321)) == (False, "")
 
 

@@ -53,7 +53,7 @@ To run that full check locally, use `IKP_LINKCHECK_FULL=1 tox run -e linkcheck`.
 
 ## Accessibility check
 
-`scripts/a11y_check.py` opens the Telescope Access, Contributed Datasets and Contributed Software pages from a built site in headless Chromium, in light and dark mode, and runs axe-core (WCAG 2.0 and 2.1, levels A and AA) on each whole page. It also checks reflow at 320 px wide: the document and the article container must not scroll sideways, and nothing outside a table's `ikp-table-scroll` wrapper may reach past the window edge (the tables may scroll in their own box). The check misses content clipped by an `overflow:hidden` ancestor and fixed theme chrome outside the article; it flags any other scroller in the article, and it measures only the loaded and the expanded-and-sorted states.
+`scripts/a11y_check.py` opens the Telescope Access, Contributed Datasets and Contributed Software pages from a built site in headless Chromium, in light and dark mode, and runs axe-core (WCAG 2.0 and 2.1, levels A and AA) on each whole page. It also checks reflow at 320 px wide: the document and the article container must not scroll sideways, and nothing outside a table's `ikp-table-scroll` wrapper may reach past the window edge (the tables may scroll in their own box). The check misses content clipped by an `overflow:hidden` ancestor and fixed theme chrome outside the article; it flags any other scroller in the article whose content is wider than the window, and it measures only the loaded and the expanded-and-sorted states.
 Build the site first, then run the check:
 
 ```bash

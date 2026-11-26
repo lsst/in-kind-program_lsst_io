@@ -28,8 +28,8 @@ which the WCAG exception for data tables allows. If the container is missing
 or no element in the article was examined (the theme's structure changed), the
 check fails rather than passing on nothing.
 
-Limits of the reflow check: through the container signal it catches overflow
-from absolute, fixed or transformed elements and long words. It misses content
+Limits of the reflow check: through the container and element signals it
+catches overflow from absolute, fixed or transformed elements and long words. It misses content
 clipped by an ``overflow:hidden`` ancestor, and fixed theme chrome outside
 ``<article>``. Any other scroller inside the article (a code block, say) is
 flagged, which is the safe direction. Only the loaded state and the
