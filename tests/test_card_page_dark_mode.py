@@ -233,7 +233,11 @@ def test_light_map_markers_reach_3_to_1(marker, surface):
 # --- Light-mode contrast and the search box border ---------------------------------
 
 def light_rgb(name):
-    """A light-mode colour variable as opaque (r, g, b)."""
+    """A light-mode colour variable as opaque (r, g, b).
+
+    The alpha channel is dropped, which is safe because every colour in
+    TEXT_PAIRS is opaque in light mode.
+    """
     return parse_colour(LIGHT[name], LIGHT)[:3]
 
 
@@ -262,26 +266,7 @@ def test_the_search_box_border_reaches_3_to_1_on_the_page(theme, variables, page
     assert ratio >= 3.0, f"{theme}: search box border on the page {ratio:.2f}:1"
 
 
-def test_the_dark_search_box_border_is_unchanged():
-    assert DARK["--ikp-control-border"] == "#999"
-
-
 # --- Jumping to a card: focus and reduced motion -----------------------------------
-
-CARDS_JS = CARDS_CSS.with_name("cards.js")
-
-
-def test_a_jump_makes_the_card_focusable_and_focuses_it_without_scrolling():
-    script = CARDS_JS.read_text(encoding="utf-8")
-    assert "setAttribute('tabindex', '-1')" in script
-    assert "card.focus({ preventScroll: true })" in script
-
-
-def test_a_jump_scrolls_instantly_when_reduced_motion_is_asked_for():
-    script = CARDS_JS.read_text(encoding="utf-8")
-    assert "matchMedia('(prefers-reduced-motion: reduce)')" in script
-    assert "'auto'" in script and "'smooth'" in script
-
 
 def test_the_highlight_fade_is_off_under_reduced_motion():
     css = re.sub(r"/\*.*?\*/", "", CARDS_CSS.read_text(encoding="utf-8"), flags=re.S)

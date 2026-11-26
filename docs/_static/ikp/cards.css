@@ -113,8 +113,7 @@ html[data-theme=dark] {
   --ikp-teaser-reason-bg: rgba(127, 214, 160, 0.18);
   --ikp-teaser-reason-text: #d4f2e0;
 
-  /* The search box border keeps its original mid grey in dark mode (6.25:1 on the
-     dark page); only the light value was darkened. */
+  /* A lighter grey in dark mode: 6.25:1 on the dark page. */
   --ikp-control-border: #999;
 
   /* Opportunity banners: dark background, coloured border, light text. */
