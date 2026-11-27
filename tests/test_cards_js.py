@@ -60,10 +60,35 @@ def test_a_jump_scrolls_instantly_when_reduced_motion_is_asked_for():
     assert "'auto'" in body and "'smooth'" in body
 
 
-def test_descriptions_are_measured_again_when_a_stylesheet_is_added():
+def mutation_callback():
+    """The text of the function passed to `new MutationObserver(...)`, up to the first `observe` call."""
+    body = description_toggles_body()
+    match = re.search(r"new MutationObserver\(function.*?(?=styleObserver\.observe\()", body, flags=re.S)
+    assert match, "MutationObserver callback not found"
+    return match.group(0)
+
+
+def test_a_stylesheet_observer_watches_the_head():
     body = description_toggles_body()
     assert re.search(r"new MutationObserver\(", body)
     assert re.search(r"\.observe\(\s*document\.head\s*,\s*\{\s*childList:\s*true\s*\}\s*\)", body)
+
+
+def test_the_stylesheet_observer_is_only_made_when_the_browser_has_one():
+    body = description_toggles_body()
+    guard = re.search(r"if\s*\(\s*typeof MutationObserver === 'function'\s*\)\s*\{", body)
+    assert guard, "MutationObserver is not guarded"
+    assert guard.start() < body.index("new MutationObserver(")
+
+
+def test_the_stylesheet_filter_matches_only_style_and_stylesheet_links():
+    body = description_toggles_body()
+    match = re.search(r"isStylesheet = function \(node\)\s*\{(.*?)\n\s*\};", body, flags=re.S)
+    assert match, "isStylesheet filter not found"
+    filter_body = match.group(1)
+    assert re.search(r"nodeName === 'STYLE'", filter_body)
+    assert re.search(r"nodeName === 'LINK'\s*&&\s*/stylesheet/i?\.test\(", filter_body)
+    assert "return true" not in filter_body.replace("if (node.nodeName === 'STYLE') { return true; }", "")
 
 
 def test_the_stylesheet_observer_never_watches_the_whole_page():
@@ -74,9 +99,28 @@ def test_the_stylesheet_observer_never_watches_the_whole_page():
         assert "subtree" not in option
 
 
-def test_a_stylesheet_change_reaches_measure_all_through_a_debounced_timeout():
+def test_the_shared_debounce_clears_the_timer_and_sets_a_delayed_measure():
     body = description_toggles_body()
-    callback = re.search(r"new MutationObserver\(function.*?\n      \}\);", body, flags=re.S)
-    assert callback, "MutationObserver callback not found"
-    assert re.search(r"clearTimeout\(\s*styleTimer\s*\)", callback.group(0))
-    assert re.search(r"setTimeout\(\s*measureAll\s*,\s*\d+\s*\)", callback.group(0))
+    assert re.search(r"var REMEASURE_DELAY_MS = \d+;", body)
+    match = re.search(r"scheduleMeasure = function \(\)\s*\{(.*?)\n\s*\};", body, flags=re.S)
+    assert match, "scheduleMeasure not found"
+    assert re.search(r"clearTimeout\(\s*styleTimer\s*\)", match.group(1))
+    assert re.search(r"styleTimer = setTimeout\(\s*measureAll\s*,\s*REMEASURE_DELAY_MS\s*\)", match.group(1))
+
+
+def test_the_observer_callback_uses_the_shared_debounce_not_measure_all():
+    callback = mutation_callback()
+    assert re.search(r"scheduleMeasure\(\)", callback)
+    assert not re.search(r"measureAll", callback)
+    assert not re.search(r"setTimeout", callback)
+
+
+def test_an_added_linked_stylesheet_measures_again_when_it_loads():
+    callback = mutation_callback()
+    assert re.search(r"nodeName === 'LINK'", callback)
+    assert re.search(r"addEventListener\(\s*'load'\s*,\s*scheduleMeasure\b", callback)
+
+
+def test_the_resize_fallback_uses_the_named_delay():
+    body = description_toggles_body()
+    assert re.search(r"timer = setTimeout\(\s*measureAll\s*,\s*REMEASURE_DELAY_MS\s*\)", body)

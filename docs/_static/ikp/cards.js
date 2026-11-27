@@ -530,6 +530,8 @@
   // Software: pair each button with its description, and measure the
   // descriptions at load, after the fonts load, and on size changes.
   function enableDescriptionToggles() {
+    // How long to wait before measuring again, so a burst of changes becomes one pass.
+    var REMEASURE_DELAY_MS = 150;
     var pairs = [];
     // The same pairs, found by the id of the description (for the size observer).
     var pairByRegionId = {};
@@ -569,33 +571,47 @@
       var timer = null;
       window.addEventListener('resize', function () {
         clearTimeout(timer);
-        timer = setTimeout(measureAll, 150);
+        timer = setTimeout(measureAll, REMEASURE_DELAY_MS);
       });
     }
 
     // Measure again when a stylesheet is added or removed. A text-spacing
     // stylesheet (from a bookmarklet or an extension) changes how the text wraps
-    // without changing the size of the clamp box, so the size observer above
-    // does not notice, and a fourth line could be left with no button to reach it.
-    // Only the direct children of <head>, <html> and <body> are watched, not the
-    // whole page, so this stays cheap. Limit: a style change that adds no element
-    // there (CSS injected by the browser itself, a stylesheet nested deeper in the
-    // page, or a style attribute) is not caught. A window resize still measures again.
+    // without changing the size of the clamp box, so the size observer (or the
+    // resize fallback) above does not notice, and a fourth line could be left
+    // with no button to reach it. Only the direct children of <head>, <html> and
+    // <body> are watched, not the whole page, so this stays cheap.
+    // Limit: a style change that adds or removes no element among those children
+    // is not caught: the text of an existing <style> rewritten, a stylesheet
+    // switched on or off through its "disabled" or "media" setting, a stylesheet
+    // nested deeper in the page, a style attribute, or CSS the browser injects
+    // itself. A window resize still measures again.
     if (typeof MutationObserver === 'function') {
       var styleTimer = null;
+      // One shared debounce, so several changes settle into a single pass.
+      var scheduleMeasure = function () {
+        clearTimeout(styleTimer);
+        styleTimer = setTimeout(measureAll, REMEASURE_DELAY_MS);
+      };
       var isStylesheet = function (node) {
         if (node.nodeName === 'STYLE') { return true; }
         return node.nodeName === 'LINK' && /stylesheet/i.test(node.getAttribute('rel') || '');
       };
       var styleObserver = new MutationObserver(function (mutations) {
-        var changed = mutations.some(function (mutation) {
-          return Array.prototype.some.call(mutation.addedNodes, isStylesheet) ||
-            Array.prototype.some.call(mutation.removedNodes, isStylesheet);
+        var changed = false;
+        mutations.forEach(function (mutation) {
+          Array.prototype.forEach.call(mutation.addedNodes, function (node) {
+            if (!isStylesheet(node)) { return; }
+            changed = true;
+            // A <style> applies at once, so the delay below is enough. A linked
+            // stylesheet applies only when it has loaded, which can be later.
+            if (node.nodeName === 'LINK') {
+              node.addEventListener('load', scheduleMeasure, { once: true });
+            }
+          });
+          if (Array.prototype.some.call(mutation.removedNodes, isStylesheet)) { changed = true; }
         });
-        if (!changed) { return; }
-        // Wait for the stylesheet to apply, and for several to settle into one pass.
-        clearTimeout(styleTimer);
-        styleTimer = setTimeout(measureAll, 150);
+        if (changed) { scheduleMeasure(); }
       });
       styleObserver.observe(document.head, { childList: true });
       styleObserver.observe(document.documentElement, { childList: true });
