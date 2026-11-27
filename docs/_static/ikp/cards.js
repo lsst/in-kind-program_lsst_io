@@ -577,10 +577,10 @@
     // stylesheet (from a bookmarklet or an extension) changes how the text wraps
     // without changing the size of the clamp box, so the size observer above
     // does not notice, and a fourth line could be left with no button to reach it.
-    // Only the children of <head> and <html> are watched, not the whole page, so
-    // this stays cheap. Limits: a stylesheet appended to <body> is not seen, and
-    // a style change that adds no element (CSS injected by the browser itself, or
-    // a style attribute) is not caught. A window resize still measures again.
+    // Only the direct children of <head>, <html> and <body> are watched, not the
+    // whole page, so this stays cheap. Limit: a style change that adds no element
+    // there (CSS injected by the browser itself, a stylesheet nested deeper in the
+    // page, or a style attribute) is not caught. A window resize still measures again.
     if (typeof MutationObserver === 'function') {
       var styleTimer = null;
       var isStylesheet = function (node) {
@@ -599,6 +599,7 @@
       });
       styleObserver.observe(document.head, { childList: true });
       styleObserver.observe(document.documentElement, { childList: true });
+      styleObserver.observe(document.body, { childList: true });
     }
   }
 

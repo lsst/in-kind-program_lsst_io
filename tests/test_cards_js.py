@@ -68,8 +68,8 @@ def test_descriptions_are_measured_again_when_a_stylesheet_is_added():
 
 def test_the_stylesheet_observer_never_watches_the_whole_page():
     body = description_toggles_body()
-    options = re.findall(r"\.observe\(\s*document\.(?:head|documentElement)\s*,\s*(\{.*?\})\s*\)", body, flags=re.S)
-    assert options, "no observe call on document.head or document.documentElement"
+    options = re.findall(r"\.observe\(\s*document\.(?:head|documentElement|body)\s*,\s*(\{.*?\})\s*\)", body, flags=re.S)
+    assert len(options) == 3, "expected observe calls on document.head, documentElement and body"
     for option in options:
         assert "subtree" not in option
 
