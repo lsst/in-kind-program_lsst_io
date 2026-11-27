@@ -572,6 +572,34 @@
         timer = setTimeout(measureAll, 150);
       });
     }
+
+    // Measure again when a stylesheet is added or removed. A text-spacing
+    // stylesheet (from a bookmarklet or an extension) changes how the text wraps
+    // without changing the size of the clamp box, so the size observer above
+    // does not notice, and a fourth line could be left with no button to reach it.
+    // Only the children of <head> and <html> are watched, not the whole page, so
+    // this stays cheap. Limits: a stylesheet appended to <body> is not seen, and
+    // a style change that adds no element (CSS injected by the browser itself, or
+    // a style attribute) is not caught. A window resize still measures again.
+    if (typeof MutationObserver === 'function') {
+      var styleTimer = null;
+      var isStylesheet = function (node) {
+        if (node.nodeName === 'STYLE') { return true; }
+        return node.nodeName === 'LINK' && /stylesheet/i.test(node.getAttribute('rel') || '');
+      };
+      var styleObserver = new MutationObserver(function (mutations) {
+        var changed = mutations.some(function (mutation) {
+          return Array.prototype.some.call(mutation.addedNodes, isStylesheet) ||
+            Array.prototype.some.call(mutation.removedNodes, isStylesheet);
+        });
+        if (!changed) { return; }
+        // Wait for the stylesheet to apply, and for several to settle into one pass.
+        clearTimeout(styleTimer);
+        styleTimer = setTimeout(measureAll, 150);
+      });
+      styleObserver.observe(document.head, { childList: true });
+      styleObserver.observe(document.documentElement, { childList: true });
+    }
   }
 
   // -------------------------------------------------------------------------

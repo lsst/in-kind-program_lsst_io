@@ -1,9 +1,13 @@
-"""Source-level checks on how cards.js moves focus when a visitor jumps to a card.
+"""Source-level checks on two behaviours in docs/_static/ikp/cards.js.
 
-These tests read the `highlightCard` function in docs/_static/ikp/cards.js as
-text. They only confirm the pieces are present and in the right order. The
-behaviour itself (focus lands on the card, the scroll is instant under reduced
-motion, the attribute is gone after blur) is checked in a browser, not here.
+These tests read the `highlightCard` and `enableDescriptionToggles` functions
+in cards.js as text. They only confirm the pieces are present and in the right
+order. The behaviour itself is checked in a browser, not here:
+
+- highlightCard: focus lands on the card, the scroll is instant under reduced
+  motion, the attribute is gone after blur.
+- enableDescriptionToggles: a stylesheet added to the page (a text-spacing
+  bookmarklet, say) makes the Software descriptions be measured again.
 """
 
 import re
@@ -17,6 +21,14 @@ def highlight_card_body():
     script = CARDS_JS.read_text(encoding="utf-8")
     match = re.search(r"function highlightCard\(card\)\s*\{(.*?)\n  \}\n", script, flags=re.S)
     assert match, "highlightCard not found in cards.js"
+    return match.group(1)
+
+
+def description_toggles_body():
+    """The text of the `enableDescriptionToggles` function, up to its closing brace."""
+    script = CARDS_JS.read_text(encoding="utf-8")
+    match = re.search(r"function enableDescriptionToggles\(\)\s*\{(.*?)\n  \}\n", script, flags=re.S)
+    assert match, "enableDescriptionToggles not found in cards.js"
     return match.group(1)
 
 
@@ -46,3 +58,25 @@ def test_a_jump_scrolls_instantly_when_reduced_motion_is_asked_for():
     body = highlight_card_body()
     assert re.search(r"matchMedia\(\s*'\(prefers-reduced-motion:\s*reduce\)'\s*\)", body)
     assert "'auto'" in body and "'smooth'" in body
+
+
+def test_descriptions_are_measured_again_when_a_stylesheet_is_added():
+    body = description_toggles_body()
+    assert re.search(r"new MutationObserver\(", body)
+    assert re.search(r"\.observe\(\s*document\.head\s*,\s*\{\s*childList:\s*true\s*\}\s*\)", body)
+
+
+def test_the_stylesheet_observer_never_watches_the_whole_page():
+    body = description_toggles_body()
+    options = re.findall(r"\.observe\(\s*document\.(?:head|documentElement)\s*,\s*(\{.*?\})\s*\)", body, flags=re.S)
+    assert options, "no observe call on document.head or document.documentElement"
+    for option in options:
+        assert "subtree" not in option
+
+
+def test_a_stylesheet_change_reaches_measure_all_through_a_debounced_timeout():
+    body = description_toggles_body()
+    callback = re.search(r"new MutationObserver\(function.*?\n      \}\);", body, flags=re.S)
+    assert callback, "MutationObserver callback not found"
+    assert re.search(r"clearTimeout\(\s*styleTimer\s*\)", callback.group(0))
+    assert re.search(r"setTimeout\(\s*measureAll\s*,\s*\d+\s*\)", callback.group(0))
