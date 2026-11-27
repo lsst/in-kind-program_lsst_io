@@ -339,15 +339,15 @@ def test_report_shows_counts_targets_and_result():
         )
     ]
     reflows = [
-        {"page": "p.html", "state": "load", "overflow": True, "scroll_width": 400,
-         "inner_width": 320, "widest_element": "table.wide"}
+        {"page": "p.html", "state": "load", "overflow": True,
+         "description": "outside a table wrapper, past the window edge: table.wide (right edge 400 px)"}
     ]
     text = a11y.format_report(RUN_INFO, scans, [("r", "sel", "why")], reflows, 1)
     assert "(light mode, load state)" in text
     assert "ours=1 open, sphinx-design=0 open, theme: 0 exempt, 1 not exempt" in text
     assert "VIOLATION color-contrast (serious)" in text
     assert "NEEDS REVIEW aria-x" in text
-    assert "FAIL p.html (load state): scrollWidth 400 > innerWidth 320" in text
+    assert "FAIL p.html (load state): outside a table wrapper" in text
     assert "table.wide" in text
     assert "STALE: (r, 'sel') why" in text
     assert "Result: FAIL (exit 1)" in text
@@ -459,3 +459,74 @@ def test_skipped_expand_buttons_are_reported_not_failed():
     # The report says so, so the log stays honest about what was not clicked.
     text = a11y.format_report(RUN_INFO, [skipped_only], [], OK_REFLOW, 0)
     assert a11y.skipped_expand_text(2) in text
+
+
+# --- reflow decision (pure logic; the browser measurement is not tested here) ---
+
+def reflow_measurement(**overrides):
+    """A measurement of a page that fits a 320 px window; tests change one part."""
+    measurement = {
+        "document_scroll_width": 320, "window_width": 320,
+        "container_found": True, "elements_checked": 50,
+        "container_scroll_width": 320, "container_client_width": 320,
+        "offenders": [],
+    }
+    measurement.update(overrides)
+    return measurement
+
+
+def test_reflow_passes_when_everything_fits():
+    assert a11y.evaluate_reflow(reflow_measurement()) == (False, "")
+
+
+def test_reflow_fails_when_only_the_article_container_scrolls():
+    # The case the old check missed: the container absorbs the overflow, so the document stays 320 px wide.
+    measurement = reflow_measurement(container_scroll_width=649)
+    old_check_overflowed = measurement["document_scroll_width"] > measurement["window_width"]
+    assert not old_check_overflowed
+    overflow, description = a11y.evaluate_reflow(measurement)
+    assert overflow
+    assert "article container" in description and "649" in description
+
+
+def test_reflow_fails_on_an_element_outside_a_table_wrapper():
+    offender = {"tag": "select", "classes": "", "right": 448}
+    overflow, description = a11y.evaluate_reflow(reflow_measurement(offenders=[offender]))
+    assert overflow
+    assert "select" in description and "448" in description
+
+
+def test_reflow_fails_when_the_document_itself_is_wider():
+    overflow, _ = a11y.evaluate_reflow(reflow_measurement(document_scroll_width=400))
+    assert overflow
+
+
+def test_reflow_fails_when_the_article_container_is_missing():
+    measurement = reflow_measurement(
+        container_found=False, container_scroll_width=None, container_client_width=None
+    )
+    overflow, description = a11y.evaluate_reflow(measurement)
+    assert overflow
+    assert "article container was not found" in description
+
+
+def test_reflow_fails_when_no_elements_were_examined():
+    overflow, description = a11y.evaluate_reflow(reflow_measurement(elements_checked=0))
+    assert overflow
+    assert "no elements were examined" in description
+
+
+# Content inside .ikp-table-scroll is excluded by the in-page script, not by this helper; the browser run
+# proves it (the check fails on the old CSS and passes on the new).
+
+
+def test_reflow_allows_one_pixel_of_document_rounding():
+    # A 1 px difference is sub-pixel rounding, not overflow.
+    assert a11y.evaluate_reflow(reflow_measurement(document_scroll_width=321)) == (False, "")
+
+
+def test_reflow_names_only_a_few_offenders():
+    offenders = [{"tag": "span", "classes": "sd-badge", "right": 400 + n} for n in range(8)]
+    _, description = a11y.evaluate_reflow(reflow_measurement(offenders=offenders))
+    assert description.count("span.sd-badge") == a11y.MAX_REPORTED_OFFENDERS
+    assert "and 3 more" in description

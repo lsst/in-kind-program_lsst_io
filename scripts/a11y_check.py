@@ -17,8 +17,23 @@ whole page in light and dark mode, and sorts every finding by who owns it:
                     prev/next footer links and the footer. Reported, and may be
                     exempted with a reason (``EXEMPTIONS``).
 
-It also checks "reflow": at a 320 px wide window the page must not need a
-horizontal scrollbar (WCAG 1.4.10).
+It also checks "reflow" (WCAG 1.4.10): at a 320 px wide window nothing outside
+a data table may need sideways scrolling. The theme's article container
+(``.bd-article-container``) scrolls sideways by itself, so the document width
+alone never shows an overflow. The check therefore fails if the document is
+wider than the window, if the article container scrolls sideways, or if any
+element in the article that is not inside an ``.ikp-table-scroll`` wrapper
+reaches past the right edge of the window. Tables scroll in their wrapper,
+which the WCAG exception for data tables allows. If the container is missing
+or no element in the article was examined (the theme's structure changed), the
+check fails rather than passing on nothing.
+
+Limits of the reflow check: through the container and element signals it
+catches overflow from absolute, fixed or transformed elements and long words. It misses content
+clipped by an ``overflow:hidden`` ancestor, and fixed theme chrome outside
+``<article>``. Any other scroller inside the article (a code block, say) is
+flagged, which is the safe direction. Only the loaded state and the
+expanded-and-sorted state are measured.
 
 Each page is scanned twice per theme: once as loaded, and once "expanded", after
 clicking every "Show more" and "Read full description" button and sorting the
@@ -518,9 +533,7 @@ def format_report(run_info: dict, scans, stale, reflows, exit_code) -> str:
             )
         if result["overflow"]:
             lines.append(
-                f"  FAIL {label}: scrollWidth {result['scroll_width']} > "
-                f"innerWidth {result['inner_width']}; widest element: "
-                f"{result.get('widest_element') or 'unknown'}"
+                f"  FAIL {label}: {result.get('description') or 'overflow'}"
             )
         else:
             lines.append(f"  ok   {label}")
@@ -566,21 +579,95 @@ _ANCESTOR_MARKUP_JS = """
 }
 """
 
-# Runs in the page: the element reaching furthest to the right of the window.
-_WIDEST_ELEMENT_JS = """
+# Runs in the page: measures the three overflow signals the reflow check uses.
+# Elements inside an ``.ikp-table-scroll`` wrapper are skipped (they scroll in
+# their own box), as are zero-size and display:none elements. Only the innermost
+# offenders are listed: an element is dropped when a child also overflows.
+_REFLOW_MEASURE_JS = """
 () => {
-  let widest = null, widestRight = window.innerWidth;
-  for (const element of document.querySelectorAll("body *")) {
-    const right = element.getBoundingClientRect().right;
-    if (right > widestRight) { widest = element; widestRight = right; }
+  const windowWidth = window.innerWidth;
+  const container = document.querySelector(".bd-article-container");
+  const describe = (element) => {
+    const classes = (element.getAttribute("class") || "").trim().split(/\\s+/)
+      .filter(Boolean).join(".");
+    return {
+      tag: element.tagName.toLowerCase(),
+      classes: classes,
+      right: Math.round(element.getBoundingClientRect().right),
+    };
+  };
+  const overflowing = [];
+  let elementsChecked = 0;
+  for (const element of document.querySelectorAll("article *")) {
+    if (element.closest(".ikp-table-scroll")) continue;
+    elementsChecked += 1;
+    const box = element.getBoundingClientRect();
+    if (box.width === 0 || box.height === 0) continue;
+    if (getComputedStyle(element).display === "none") continue;
+    if (box.right > windowWidth + 1) overflowing.push(element);
   }
-  if (!widest) return null;
-  const classes = (widest.getAttribute("class") || "").trim().split(/\\s+/)
-    .filter(Boolean).join(".");
-  return widest.tagName.toLowerCase() + (classes ? "." + classes : "") +
-         " (right edge " + Math.round(widestRight) + " px)";
+  const innermost = overflowing.filter(
+    (element) => !overflowing.some((other) => other !== element && element.contains(other))
+  );
+  return {
+    document_scroll_width: document.documentElement.scrollWidth,
+    window_width: windowWidth,
+    container_found: container !== null,
+    elements_checked: elementsChecked,
+    container_scroll_width: container ? container.scrollWidth : null,
+    container_client_width: container ? container.clientWidth : null,
+    offenders: innermost.map(describe),
+  };
 }
 """
+
+# How many offending elements the report names.
+MAX_REPORTED_OFFENDERS = 5
+
+
+def evaluate_reflow(measurement: dict) -> tuple[bool, str]:
+    """Decide the reflow result from the numbers measured in the page.
+
+    ``measurement`` has the keys of ``_REFLOW_MEASURE_JS``. Returns
+    ``(overflow, description)``: ``overflow`` is True if the page fails, and
+    ``description`` says why (empty when it passes). Pure, so it is unit-tested
+    without a browser.
+    """
+    reasons = []
+    # A theme change that removes the container or the article must fail the
+    # check (not raise a setup error), because a pass would mean nothing.
+    if not measurement["container_found"]:
+        reasons.append(
+            "the theme's article container was not found, so overflow can't be measured"
+        )
+    if measurement["elements_checked"] == 0:
+        reasons.append(
+            "no elements were examined in the article, so overflow can't be measured"
+        )
+    # Same 1 px tolerance as the container and element checks, for sub-pixel rounding.
+    if measurement["document_scroll_width"] > measurement["window_width"] + 1:
+        reasons.append(
+            f"the document is {measurement['document_scroll_width']} px wide "
+            f"in a {measurement['window_width']} px window"
+        )
+    container_scroll = measurement.get("container_scroll_width")
+    container_client = measurement.get("container_client_width")
+    if measurement["container_found"] and container_scroll > container_client + 1:
+        reasons.append(
+            f"the article container scrolls sideways "
+            f"(scrollWidth {container_scroll} > clientWidth {container_client})"
+        )
+    offenders = measurement.get("offenders") or []
+    if offenders:
+        named = ", ".join(
+            f"{o['tag']}{'.' + o['classes'] if o['classes'] else ''} (right edge {o['right']} px)"
+            for o in offenders[:MAX_REPORTED_OFFENDERS]
+        )
+        more = len(offenders) - MAX_REPORTED_OFFENDERS
+        suffix = f" and {more} more" if more > 0 else ""
+        reasons.append(f"outside a table wrapper, past the window edge: {named}{suffix}")
+    return bool(reasons), "; ".join(reasons)
+
 
 _THEME_VERSION_JS = """
 () => { const el = document.querySelector(".theme-version"); return el ? el.textContent : ""; }
@@ -715,17 +802,13 @@ def _simplify_results(page, axe_items: list[dict]) -> list[dict]:
 
 def _reflow_result(page, relative: str, state: str, expand_failures: int = 0) -> dict:
     """Measure horizontal overflow on the already-loaded page."""
-    scroll_width = page.evaluate("document.documentElement.scrollWidth")
-    inner_width = page.evaluate("window.innerWidth")
-    overflow = scroll_width > inner_width
+    overflow, description = evaluate_reflow(page.evaluate(_REFLOW_MEASURE_JS))
     return {
         "page": relative,
         "state": state,
-        "scroll_width": scroll_width,
-        "inner_width": inner_width,
         "overflow": overflow,
+        "description": description,
         "expand_failures": expand_failures,
-        "widest_element": page.evaluate(_WIDEST_ELEMENT_JS) if overflow else None,
     }
 
 

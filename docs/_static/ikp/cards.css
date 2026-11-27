@@ -148,6 +148,11 @@ html[data-theme=dark] {
 /* Row of filter drop-downs above the table. */
 .ikp-filterbar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
 .ikp-filterbar label { font-size: 0.9em; }
+/* On a phone a long option name must not make the drop-down wider than the
+   screen (WCAG 1.4.10 reflow). A flex item will not shrink below its content
+   unless min-width is 0, so the label gets that too. */
+.ikp-filterbar label { max-width: 100%; min-width: 0; }
+.ikp-filterbar select { max-width: 100%; }
 
 /* Row holding the search box. The Telescope Access page adds
    `ikp-actionbar-spaced` for more space below. */
@@ -174,10 +179,27 @@ html[data-theme=dark] {
   border: 0;
 }
 
+/* Wrapper around each card table. On a narrow screen only the table scrolls
+   sideways (WCAG 1.4.10 allows that for data tables), instead of the whole
+   article panning. The wrapper has no tabindex: the table holds focusable
+   buttons, so keyboard users can already reach and scroll it. The 2rem space
+   below the table lives here, because an overflow box keeps its children's
+   margins inside it; this keeps the desktop spacing unchanged. */
+.ikp-table-scroll { overflow-x: auto; margin-bottom: 2rem; }
+
+/* An overflow box clips everything outside it, including focus rings. The theme
+   draws a 3px ring outside the button, which would be cut off at the top of the
+   header row and at the first and last columns. Draw the ring just inside the
+   header button instead (3px matches the theme's ring width). */
+.ikp-table-scroll th button:focus-visible { outline-offset: -3px; }
+/* When focus scrolls a wide table sideways, stop a few pixels short of the button
+   so the ring on a button in a body cell is not cut off at the wrapper's edge. */
+.ikp-table-scroll button { scroll-margin: 4px; }
+
 /* The three card tables share one look; each page has its own class name. */
 .ikp-telescopes-table,
 .ikp-datasets-table,
-.ikp-sw-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+.ikp-sw-table { width: 100%; border-collapse: collapse; }
 .ikp-telescopes-table th, .ikp-telescopes-table td,
 .ikp-datasets-table th, .ikp-datasets-table td,
 .ikp-sw-table th, .ikp-sw-table td { text-align: left; padding: 0.5em 0.75em; border-bottom: 1px solid var(--ikp-table-border); }
@@ -220,6 +242,11 @@ html[data-theme=dark] {
 .ikp-badge-muted { background: var(--ikp-badge-muted-bg); color: var(--ikp-badge-muted-text); }
 .ikp-badge-warning { background: var(--ikp-badge-warning-bg); color: var(--ikp-badge-warning-text); }
 .ikp-badge-danger { background: var(--ikp-badge-danger-bg); color: var(--ikp-badge-danger-text); }
+
+/* Cards' badges (sphinx-design `sd-badge`) default to one unbreakable line. A
+   long badge must stay inside its card at any width, so let it wrap. Left-aligned
+   because sphinx-design centres the text, which looks odd on two lines. */
+.ikp-card .sd-badge { white-space: normal; max-width: 100%; overflow-wrap: break-word; text-align: left; }
 
 /* A table row's title, a button styled to look like plain text. */
 .ikp-title-link { color: inherit; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font: inherit; text-align: left; }

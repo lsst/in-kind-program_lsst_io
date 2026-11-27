@@ -903,3 +903,39 @@ def test_the_script_marks_card_titles_as_level_two_headings_inside_our_cards_onl
     assert "'.ikp-card .sd-card-title'" in script  # scoped to our cards, so the IDAC page is left alone
     assert "setAttribute('role', 'heading')" in script
     assert "setAttribute('aria-level', '2')" in script
+
+
+# Reflow at 320 px: each table scrolls sideways inside its own wrapper, and the drop-downs fit the screen.
+TABLE_IDS = {
+    "contributed-telescope.rst": "ikp-telescopes-table",
+    "contributed-datasets.rst": "ikp-datasets-table",
+    "contributed-software.rst": "ikp-sw-table",
+}
+
+
+@pytest.mark.parametrize("data_dir", DATA_DIRS)
+@pytest.mark.parametrize("page", TABLE_IDS)
+def test_each_table_sits_directly_inside_a_table_scroll_wrapper(page, data_dir):
+    rendered = render_page(page, data_dir)
+    wrapper = re.search(r'<div class="ikp-table-scroll">\s*<table class="[^"]*" id="%s">' % TABLE_IDS[page], rendered)
+    assert wrapper, f"{page}: the table is not directly inside div.ikp-table-scroll"
+    # The wrapper closes right after the table, so nothing else scrolls with it.
+    assert re.search(r"</table>\s*</div>", rendered), f"{page}: the wrapper does not close right after the table"
+
+
+def test_the_css_makes_the_table_wrapper_scroll_and_the_drop_downs_fit():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert re.search(r"\.ikp-table-scroll\s*\{[^}]*overflow-x:\s*auto", css), "no overflow-x rule for the wrapper"
+    assert re.search(r"\.ikp-filterbar select\s*\{[^}]*max-width:\s*100%", css), "no max-width rule for the drop-downs"
+    assert re.search(r"\.ikp-card \.sd-badge\s*\{[^}]*white-space:\s*normal", css), "card badges do not wrap"
+
+
+def test_the_css_keeps_header_button_focus_rings_inside_the_table_wrapper():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert re.search(r"\.ikp-table-scroll th button:focus-visible\s*\{[^}]*outline-offset:\s*-3px", css)
+
+
+def test_the_css_pins_the_scroll_margin_and_the_filter_label_shrink_rule():
+    css = CARDS_CSS.read_text(encoding="utf-8")
+    assert re.search(r"\.ikp-table-scroll button\s*\{[^}]*scroll-margin:", css)
+    assert re.search(r"\.ikp-filterbar label\s*\{[^}]*min-width:\s*0\s*[;}]", css)

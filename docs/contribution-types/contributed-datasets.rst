@@ -64,6 +64,8 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
       <p class="ikp-result-count">Showing {{ datasets | length }} of {{ datasets | length }} datasets</p>
       <p class="ikp-visually-hidden ikp-status" role="status"></p>
 
+      {# Only the table scrolls sideways on a narrow screen (WCAG 1.4.10); see .ikp-table-scroll in cards.css. #}
+      <div class="ikp-table-scroll">
       <table class="ikp-datasets-table" id="ikp-datasets-table">
         <thead>
           <tr>
@@ -94,6 +96,7 @@ Please email the in-kind helpdesk rubin-inkind at noirlab dot edu if you have an
           {% endfor %}
         </tbody>
       </table>
+      </div>
 
       <script type="application/json" data-ikp="search-index">{{ search_index_json }}</script>
 
