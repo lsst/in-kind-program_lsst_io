@@ -719,9 +719,8 @@ def _expand_all(page) -> tuple[int, int, int]:
     description fits in its clamp, so there is nothing to reveal. Only that
     button may be hidden. A hidden "Show more details" button still goes to the
     click and fails, because the page always shows those once its script runs,
-    so a hidden one means the script did not. "Clicked" proves the click
-    landed, not that the content expanded; a later PR will assert
-    ``aria-expanded`` for that.
+    so a hidden one means the script did not. "Clicked" proves only that the
+    click landed, not that the content expanded.
     """
     buttons = page.locator(EXPAND_BUTTON_SELECTOR)
     clicked = failed = skipped = 0
